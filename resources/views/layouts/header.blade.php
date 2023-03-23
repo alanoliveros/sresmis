@@ -10,7 +10,7 @@
                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                 <!-- Dark Logo icon -->
                 <img
-                  src="../assets/images/logo-icon.png"
+                  src="{{asset('backend/assets/images/logo-icon.png')}}"
                   alt="homepage"
                   class="light-logo"
                   width="25"
@@ -21,26 +21,13 @@
               <span class="logo-text ms-2">
                 <!-- dark Logo text -->
                 <img
-                  src="../assets/images/logo-text.png"
+                  src="{{asset('backend/assets/images/logo-text.png')}}"
                   alt="homepage"
                   class="light-logo"
                 />
               </span>
-              <!-- Logo icon -->
-              <!-- <b class="logo-icon"> -->
-              <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-              <!-- Dark Logo icon -->
-              <!-- <img src="../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
-
-              <!-- </b> -->
-              <!--End Logo icon -->
+         
             </a>
-            <!-- ============================================================== -->
-            <!-- End Logo -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Toggle which is visible on mobile only -->
-            <!-- ============================================================== -->
             <a
               class="nav-toggler waves-effect waves-light d-block d-md-none"
               href="javascript:void(0)"
@@ -70,49 +57,11 @@
               <!-- ============================================================== -->
               <!-- create new -->
               <!-- ============================================================== -->
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <span class="d-none d-md-block"
-                    >Create New <i class="fa fa-angle-down"></i
-                  ></span>
-                  <span class="d-block d-md-none"
-                    ><i class="fa fa-plus"></i
-                  ></span>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
+              
               <!-- ============================================================== -->
               <!-- Search -->
               <!-- ============================================================== -->
-              <li class="nav-item search-box">
-                <a
-                  class="nav-link waves-effect waves-dark"
-                  href="javascript:void(0)"
-                  ><i class="mdi mdi-magnify fs-4"></i
-                ></a>
-                <form class="app-search position-absolute">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search &amp; enter"
-                  />
-                  <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
-                </form>
-              </li>
+              
             </ul>
             <!-- ============================================================== -->
             <!-- Right side toggle and nav items -->
@@ -277,12 +226,15 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <img
-                    src="../assets/images/users/1.jpg"
-                    alt="user"
-                    class="rounded-circle"
-                    width="31"
-                  />
+
+                @if(auth()->user()->image == 'avatar.png')
+                <img
+                                    src="{{asset('assets\img\users\avatar.png')}}"
+                                    alt="user"
+                                    class="rounded-circle"
+                                    width="31"
+                                  />
+                @endif
                 </a>
                 <ul
                   class="dropdown-menu dropdown-menu-end user-dd animated"

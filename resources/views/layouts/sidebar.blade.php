@@ -4,15 +4,17 @@
           <!-- Sidebar navigation-->
           <nav class="sidebar-nav">
             <ul id="sidebarnav" class="pt-4">
+@if(auth()->user()->role == 'admin')
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="index.html"
+                  href=""
                   aria-expanded="false"
                   ><i class="mdi mdi-view-dashboard"></i
                   ><span class="hide-menu">Dashboard</span></a
                 >
               </li>
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -72,6 +74,10 @@
                   </li>
                 </ul>
               </li>
+@endif
+
+@if(auth()->user()->role == 'teacher')
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -212,21 +218,7 @@
                   </li>
                 </ul>
               </li>
-              <li class="sidebar-item p-3">
-                <a
-                  href="https://github.com/wrappixel/matrix-admin-bt5"
-                  target="_blank"
-                  class="
-                    w-100
-                    btn btn-cyan
-                    d-flex
-                    align-items-center
-                    text-white
-                  "
-                  ><i class="mdi mdi-cloud-download font-20 me-2"></i>Download
-                  Free</a
-                >
-              </li>
+@endif
             </ul>
           </nav>
           <!-- End Sidebar navigation -->

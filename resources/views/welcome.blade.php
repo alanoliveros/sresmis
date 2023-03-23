@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Company Bootstrap Template - Index</title>
+  <title>SRESMIS</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -36,7 +36,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html"><span>Com</span>pany</a></h1>
+      <h1 class="logo me-auto"><a href="{{url('/')}}"><span>SRES</span>MIS</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -66,6 +66,29 @@
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
+<!-- Login Register -->
+            @if (Route::has('login'))
+            @auth
+            <!-- home -->
+            <li> <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a></li>
+
+            @else
+            <!-- Login -->
+            <li><a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a></li>
+            @if (Route::has('register'))
+
+            <!-- register -->
+            <li>   <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a></li>
+
+            @endif
+            @endauth
+            @endif
+<!-- End Login Register -->
+
+
+
+
+
 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

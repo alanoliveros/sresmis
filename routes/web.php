@@ -28,3 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // AdminController
 Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('sresmis/admin/dashboard');
+
+
+// TeacherController
+Route::get('/sresmis/teacher/dashboard', [App\Http\Controllers\TeacherController::class, 'dashboard'])->name('sresmis.teacher.dashboard');

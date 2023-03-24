@@ -27,12 +27,10 @@
    
   </head>
 
-  <body class="bg-dark ">
-  <div class="container" style="display: flex; justify-content: center; align-items: center; height: 90vh">
-       <div class="main-wrapper " >
-      <!-- ============================================================== -->
-      <!-- Preloader - style you can find in spinners.css -->
-      <!-- ============================================================== -->
+  <body class="bg-dark" >
+  
+       <div class="main-wrapper " style="display: flex; justify-content: center; align-items: center; height: 90vh">
+       
       <div class="preloader ">
         <div class="lds-ripple">
           <div class="lds-pos"></div>
@@ -146,7 +144,6 @@
 
       </div>
       </div>
-    </div>
     <script src="{{asset('backend/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('backend/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>

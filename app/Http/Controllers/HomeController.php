@@ -26,6 +26,9 @@ class HomeController extends Controller
        if(auth()->user()->role == 'admin'){
             return redirect()->route('sresmis/admin/dashboard');
        }
+       else if(auth()->user()->role == 'teacher'){
+            return redirect()->route('sresmis/teacher/dashboard');
+       }
        else{
         abort(404);
        }

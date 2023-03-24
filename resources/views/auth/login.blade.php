@@ -24,12 +24,12 @@
     />
     <!-- Custom CSS -->
     <link href="{{asset('backend/dist/css/style.min.css')}}" rel="stylesheet" />
-   
+
   </head>
 
   <body class="bg-dark ">
-  <div class="container" style="display: flex; justify-content: center; align-items: center; height: 90vh">
-       <div class="main-wrapper " >
+  <div>
+       <div class="main-wrapper" style="display: flex; justify-content: center; align-items: center; height: 90vh">
       <!-- ============================================================== -->
       <!-- Preloader - style you can find in spinners.css -->
       <!-- ============================================================== -->
@@ -69,7 +69,7 @@
                       class="form-control form-control-lg @error('email') is-invalid @enderror"
                       placeholder="Email"
                       aria-label="Email"
-                      value="{{ old('email') }}" 
+                      value="{{ old('email') }}"
 
                       aria-describedby="basic-addon1"
                       name="email"
@@ -98,7 +98,7 @@
                       aria-describedby="basic-addon1"
                       name="password" required autocomplete="current-password"
                     />
-                    
+
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -140,7 +140,7 @@
               </div>
             </form>
           </div>
-          
+
         </div>
       </div>
 

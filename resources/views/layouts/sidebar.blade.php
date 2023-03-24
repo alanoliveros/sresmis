@@ -21,7 +21,7 @@
                   href="charts.html"
                   aria-expanded="false"
                   ><i class="mdi mdi-chart-bar"></i
-                  ><span class="hide-menu">Charts</span></a
+                  ><span class="hide-menu">Key Performance Indicators</span></a
                 >
               </li>
               <li class="sidebar-item">
@@ -30,7 +30,7 @@
                   href="widgets.html"
                   aria-expanded="false"
                   ><i class="mdi mdi-chart-bubble"></i
-                  ><span class="hide-menu">Widgets</span></a
+                  ><span class="hide-menu">Academic Performance Indicators</span></a
                 >
               </li>
               <li class="sidebar-item">

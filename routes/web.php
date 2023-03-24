@@ -34,3 +34,4 @@ Route::get('/sresmis/admin/performance-indicator', [App\Http\Controllers\AdminCo
 
 // TeacherController
 Route::get('/sresmis/teacher/dashboard', [App\Http\Controllers\TeacherController::class, 'dashboard'])->name('sresmis.teacher.dashboard');
+Route::get('/sresmis/teacher/attendance', [App\Http\Controllers\TeacherController::class, 'attendance'])->name('sresmis.teacher.attendance');

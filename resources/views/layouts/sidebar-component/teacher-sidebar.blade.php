@@ -15,9 +15,9 @@
 </li>
 
 <li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-elements.html"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.grades')}}"
        aria-expanded="false">
-        <i class="mdi mdi-pencil"></i>
+        <i class="mdi mdi-table-edit"></i>
         <span class="hide-menu">Grades</span>
     </a>
 </li><li class="sidebar-item">

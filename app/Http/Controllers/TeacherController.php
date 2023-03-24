@@ -15,5 +15,7 @@ class TeacherController extends Controller
           return view('backend.teacher.dashboard.dashboard');
     }public function attendance(){
           return view('backend.teacher.attendance.attendance');
+    }public function grades(){
+          return view('backend.teacher.grades.grades');
     }
 }

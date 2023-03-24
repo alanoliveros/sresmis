@@ -29,6 +29,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // AdminController
 Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('sresmis/admin/dashboard');
 
+Route::get('/sresmis/admin/performance-indicator', [App\Http\Controllers\AdminController::class, 'performance_indicator'])->name('sresmis.admin.performance-indicator');
+// End of AdminController
 
 // TeacherController
 Route::get('/sresmis/teacher/dashboard', [App\Http\Controllers\TeacherController::class, 'dashboard'])->name('sresmis.teacher.dashboard');

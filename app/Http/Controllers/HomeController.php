@@ -24,10 +24,10 @@ class HomeController extends Controller
     public function index()
     {
        if(auth()->user()->role == 'admin'){
-            return redirect()->route('sresmis/admin/dashboard');
+            return redirect()->route('sresmis.admin.dashboard');
        }
        else if(auth()->user()->role == 'teacher'){
-            return redirect()->route('sresmis/teacher/dashboard');
+            return redirect()->route('sresmis.teacher.dashboard');
        }
        else{
         abort(404);

@@ -96,6 +96,15 @@
               </li>
               <li class="sidebar-item">
                 <a
+                  class="sidebar-link waves-effect waves-dark sidebar-link"
+                  href="pages-buttons.html"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-content-paste"></i
+                  ><span class="hide-menu">Students</span></a
+                >
+              </li>
+              <li class="sidebar-item">
+                <a
                   class="sidebar-link has-arrow waves-effect waves-dark"
                   href="javascript:void(0)"
                   aria-expanded="false"

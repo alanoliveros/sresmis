@@ -27,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // AdminController
-Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('sresmis/admin/dashboard');
+Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('sresmis.admin.dashboard');
 
 
 // TeacherController

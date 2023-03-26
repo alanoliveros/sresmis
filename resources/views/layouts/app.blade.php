@@ -104,6 +104,3 @@
     <script src="{{asset('backend/dist/js/pages/chart/chart-page-init.js')}}"></script>
   </body>
 </html>
-
-
-{{asset('backend/')}}

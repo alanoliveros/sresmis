@@ -21,7 +21,7 @@
         <span class="hide-menu">Grades</span>
     </a>
 </li><li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-elements.html"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.students_information')}}"
        aria-expanded="false">
         <i class="mdi mdi-account-multiple-outline"></i>
         <span class="hide-menu">Students Information</span>
@@ -36,7 +36,7 @@
     </a>
     <ul aria-expanded="false" class="collapse first-level">
         <li class="sidebar-item">
-            <a href="icon-material.html" class="sidebar-link">
+            <a href="{{route('sresmis.teacher.sf1')}}" class="sidebar-link">
                 <i class="mdi mdi-file"></i>
                 <span class="hide-menu"> School Form 1 </span>
             </a>

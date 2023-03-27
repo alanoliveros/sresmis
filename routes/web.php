@@ -38,5 +38,5 @@ Route::get('/sresmis/teacher/attendance', [App\Http\Controllers\TeacherControlle
 Route::get('/sresmis/teacher/grades', [App\Http\Controllers\TeacherController::class, 'grades'])->name('sresmis.teacher.grades')->middleware('isTeacher');
 Route::get('/sresmis/teacher/students-information', [App\Http\Controllers\TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information')->middleware('isTeacher');
 
-// // teacher school forms
-// Route::get('/sresmis/teacher/school-form-1', [App\Http\Controllers\TeacherController::class, 'sf1'])->name('sresmis.teacher.sf1');
+ // teacher school forms
+Route::get('/sresmis/teacher/school-form-9', [App\Http\Controllers\TeacherController::class, 'sf9'])->name('sresmis.teacher.sf9')->middleware('isTeacher');

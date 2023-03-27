@@ -36,9 +36,9 @@
     </a>
     <ul aria-expanded="false" class="collapse first-level">
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="{{route('sresmis.teacher.sf9')}}" class="sidebar-link">
                 <i class="mdi mdi-file"></i>
-                <span class="hide-menu"> School Form 1 </span>
+                <span class="hide-menu"> School Form 9 </span>
             </a>
         </li>
         <li class="sidebar-item">

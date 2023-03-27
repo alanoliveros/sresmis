@@ -9,13 +9,18 @@ class TeacherController extends Controller
 
     public function index(){
       return view('backend.teacher.dashboard.dashboard');
-    }public function attendance(){
+    }
+    public function attendance(){
           return view('backend.teacher.attendance.attendance');
-    }public function grades(){
+    }
+    public function grades(){
           return view('backend.teacher.grades.grades');
-    }public function students_information(){
+    }
+    public function students_information(){
           return view('backend.teacher.students_information.students_information');
-    }public function sf1(){
-          return view('backend.teacher.students_information.students_information');
+    }
+    public function sf9()
+    {
+          return view('backend.teacher.school-forms.school-form-9.school-form-9');
     }
 }

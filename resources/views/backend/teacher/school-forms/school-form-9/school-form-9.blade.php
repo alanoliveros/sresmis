@@ -29,15 +29,16 @@
             <!-- ============================================================== -->
             <div class="row">
                 <!-- Column -->
-                <div class="col-12 col-lg-12 col-xlg-12">
+                <div class="col-12 col-md-12 col-lg-12 col-xlg-12">
                     <div class="card bg-light shadow">
                         <div class="box bg-light">
                             <h4 class="text-dark">School Year</h4>
-                            <select name="sessions" id="session_sf9" class="form-select w-25 border border-secondary">
+                            <select name="sessions" id="session_sf9" class="form-select border border-secondary">
                                 @foreach($sessions as $key=>$session)
                                     <option {{($key == 0) ? 'selected' : ''; }} value="{{$session->school_year}}" >{{$session->school_year}}</option>
                                 @endforeach
                             </select>
+                            {{$first_session->school_year}}
                         </div>
                     </div>
                 </div>

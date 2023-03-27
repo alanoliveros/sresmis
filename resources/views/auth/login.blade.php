@@ -47,7 +47,7 @@
           <div id="loginform">
             <div class="text-center pt-3 pb-3">
               <span class="db"
-                ><img src="{{asset('backend/assets/images/logo.png')}}" alt="logo"
+                ><img src="{{asset('backend/assets/images/SRESMIS.svg')}}" alt="logo"
               /></span>
             </div>
             <!-- Form -->

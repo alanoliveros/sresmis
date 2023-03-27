@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Session;
 class TeacherController extends Controller
 {
 
@@ -21,6 +21,11 @@ class TeacherController extends Controller
     }
     public function sf9()
     {
-          return view('backend.teacher.school-forms.school-form-9.school-form-9');
+
+            $session = Session::orderBy('school_year', 'desc')->get();
+          return view('backend.teacher.school-forms.school-form-9.school-form-9')
+                 ->with([
+                        'sessions' => $session
+                       ]);
     }
 }

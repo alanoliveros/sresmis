@@ -34,7 +34,7 @@
             <div class="row">
                 <!-- Column -->
                 <div class="col-md-12 col-lg-12 col-xlg-12">
-                    <div class="card shadow card-hover">
+                    <div class="card shadow card_attendance">
                         <div class="box bg-cyan">
                             <h4 class="text-white">Pick Dates</h4>
                            <div class="row">
@@ -45,7 +45,20 @@
                             <a href="" class="btn btn-light  fw-bold">Filter</a>
                             </div>
                             <div class="col-12  col-sm-2 col-md-2 mb-1 d-flex justify-content-start  justify-content-md-center">
-                           <a href="" class="btn btn-light fw-bold"><i class="mdi mdi-plus fw-bold"></i>Add</a>
+                           <a id="addAttendance" data-bs-toggle="modal" data-bs-target="#add_attendance" class="btn btn-light fw-bold"><i class="mdi mdi-plus fw-bold"></i>Add</a>
+
+                            @include('backend.teacher.attendance.add-attendance')
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                            </div>
                         </div>

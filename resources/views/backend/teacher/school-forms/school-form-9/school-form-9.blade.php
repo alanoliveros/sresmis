@@ -30,9 +30,9 @@
             <div class="row">
                 <!-- Column -->
                 <div class="col-12 col-md-12 col-lg-12 col-xlg-12">
-                    <div class="card bg-light shadow">
-                        <div class="box bg-light">
-                            <h4 class="text-dark">School Year</h4>
+                    <div class="card card-hover bg-light shadow">
+                        <div class="box bg-cyan">
+                            <h4 class="text-light">School Year</h4>
                             <select name="sessions" id="session_sf9" class="form-select border border-secondary">
                                 @foreach($sessions as $key=>$session)
                                     <option {{($key == 0) ? 'selected' : ''; }} value="{{$session->school_year}}" >{{$session->school_year}}</option>

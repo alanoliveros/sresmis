@@ -36,5 +36,8 @@ class isAdmin
                return redirect('/login');
             }
         }
+        else{
+            return redirect('/login');
+        }
     }
 }

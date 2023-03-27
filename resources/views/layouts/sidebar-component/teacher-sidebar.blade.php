@@ -15,13 +15,13 @@
 </li>
 
 <li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.grades')}}"
        aria-expanded="false">
         <i class="mdi mdi-table-edit"></i>
         <span class="hide-menu">Grades</span>
     </a>
 </li><li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.students_information')}}"
        aria-expanded="false">
         <i class="mdi mdi-account-multiple-outline"></i>
         <span class="hide-menu">Students Information</span>

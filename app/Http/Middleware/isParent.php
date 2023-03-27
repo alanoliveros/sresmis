@@ -36,5 +36,9 @@ class isParent
                return redirect('/login');
             }
         }
+        else{
+            return redirect('/login');
+        
+    }
     }
 }

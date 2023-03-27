@@ -8,8 +8,17 @@
 
                     @include('layouts.sidebar-component.admin-sidebar')
 
-                @endif @if(auth()->user()->role == 2)
+                @endif
+                @if(auth()->user()->role == 2)
                     @include('layouts.sidebar-component.teacher-sidebar')
+                @endif
+                
+                @if(auth()->user()->role == 3)
+                    @include('layouts.sidebar-component.student-sidebar')
+                @endif
+
+                @if(auth()->user()->role == 4)
+                    @include('layouts.sidebar-component.parent-sidebar')
                 @endif
             </ul>
         </nav>

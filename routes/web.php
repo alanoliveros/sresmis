@@ -34,7 +34,7 @@ Route::get('/sresmis/parent/dashboard', [App\Http\Controllers\TeacherController:
 
 
 
-// Route::get('/sresmis/teacher/attendance', [App\Http\Controllers\TeacherController::class, 'attendance'])->name('sresmis.teacher.attendance');
+Route::get('/sresmis/teacher/attendance', [App\Http\Controllers\TeacherController::class, 'attendance'])->name('sresmis.teacher.attendance')->middleware('isTeacher');
 // Route::get('/sresmis/teacher/grades', [App\Http\Controllers\TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
 // Route::get('/sresmis/teacher/students-information', [App\Http\Controllers\TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
 

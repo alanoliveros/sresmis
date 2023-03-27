@@ -7,7 +7,7 @@
     </a>
 </li>
 <li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.attendance')}}"
        aria-expanded="false">
         <i class="mdi mdi-content-paste"></i>
         <span class="hide-menu">Attendance</span>
@@ -15,13 +15,13 @@
 </li>
 
 <li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
        aria-expanded="false">
         <i class="mdi mdi-table-edit"></i>
         <span class="hide-menu">Grades</span>
     </a>
 </li><li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href=""
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
        aria-expanded="false">
         <i class="mdi mdi-account-multiple-outline"></i>
         <span class="hide-menu">Students Information</span>
@@ -36,7 +36,7 @@
     </a>
     <ul aria-expanded="false" class="collapse first-level">
         <li class="sidebar-item">
-            <a href="" class="sidebar-link">
+            <a href="#" class="sidebar-link">
                 <i class="mdi mdi-file"></i>
                 <span class="hide-menu"> School Form 1 </span>
             </a>

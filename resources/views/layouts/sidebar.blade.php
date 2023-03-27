@@ -4,11 +4,11 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav" class="pt-4">
-                @if(auth()->user()->role == 'admin')
+                @if(auth()->user()->role == 1)
 
                     @include('layouts.sidebar-component.admin-sidebar')
 
-                @endif @if(auth()->user()->role == 'teacher')
+                @endif @if(auth()->user()->role == 2)
                     @include('layouts.sidebar-component.teacher-sidebar')
                 @endif
             </ul>

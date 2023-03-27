@@ -1,5 +1,5 @@
 <li class="sidebar-item">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.admin.dashboard')}}" aria-expanded="false">
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.student.dashboard')}}" aria-expanded="false">
         <i class="mdi mdi-view-dashboard"></i>
         <span class="hide-menu">Dashboard</span>
     </a>

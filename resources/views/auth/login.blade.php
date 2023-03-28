@@ -14,7 +14,7 @@
       content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
     />
     <meta name="robots" content="noindex,nofollow" />
-    <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
+    <title>Login</title>
     <!-- Favicon icon -->
     <link
       rel="icon"
@@ -24,13 +24,15 @@
     />
     <!-- Custom CSS -->
     <link href="{{asset('backend/dist/css/style.min.css')}}" rel="stylesheet" />
-   
+
   </head>
 
-  <body class="bg-dark" >
-  
-       <div class="main-wrapper " style="display: flex; justify-content: center; align-items: center; height: 90vh">
-       
+  <body class="bg-dark ">
+  <div>
+       <div class="main-wrapper" style="display: flex; justify-content: center; align-items: center; height: 90vh">
+      <!-- ============================================================== -->
+      <!-- Preloader - style you can find in spinners.css -->
+      <!-- ============================================================== -->
       <div class="preloader ">
         <div class="lds-ripple">
           <div class="lds-pos"></div>
@@ -45,7 +47,7 @@
           <div id="loginform">
             <div class="text-center pt-3 pb-3">
               <span class="db"
-                ><img src="{{asset('backend/assets/images/logo.png')}}" alt="logo"
+                ><img src="{{asset('backend/assets/images/SRESMIS.svg')}}" alt="logo"
               /></span>
             </div>
             <!-- Form -->
@@ -67,7 +69,7 @@
                       class="form-control form-control-lg @error('email') is-invalid @enderror"
                       placeholder="Email"
                       aria-label="Email"
-                      value="{{ old('email') }}" 
+                      value="{{ old('email') }}"
 
                       aria-describedby="basic-addon1"
                       name="email"
@@ -96,7 +98,7 @@
                       aria-describedby="basic-addon1"
                       name="password" required autocomplete="current-password"
                     />
-                    
+
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -138,12 +140,13 @@
               </div>
             </form>
           </div>
-          
+
         </div>
       </div>
 
       </div>
       </div>
+    </div>
     <script src="{{asset('backend/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('backend/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>

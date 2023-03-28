@@ -21,7 +21,7 @@
               <span class="logo-text ms-2">
                 <!-- dark Logo text -->
                 <img
-                  src="{{asset('assets\img\icon\sresmis.png')}}"
+                  src="{{asset('backend/assets/images/SRESMIS_Text.svg')}}"
                   alt="homepage"
                   class="light-logo"
                 />

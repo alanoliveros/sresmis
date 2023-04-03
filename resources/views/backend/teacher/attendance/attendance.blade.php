@@ -49,16 +49,7 @@
 
                             @include('backend.teacher.attendance.add-attendance')
 
-
-
-
-
-
-
-
-
-
-
+                            
                             </div>
                            </div>
                         </div>

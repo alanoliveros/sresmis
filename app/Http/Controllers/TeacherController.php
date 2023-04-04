@@ -24,7 +24,7 @@ class TeacherController extends Controller
 
             $session = Session::orderBy('school_year', 'desc')->get();
             $first_session = Session::orderBy('school_year', 'desc')->first();
-            
+
             
           return view('backend.teacher.school-forms.school-form-9.school-form-9')
                  ->with([

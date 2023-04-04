@@ -10,16 +10,18 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|*/
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
 
 // AdminController
-Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('sresmis.admin.dashboard')->middleware('isAdmin');
-Route::get('/sresmis/admin/school-settings', [App\Http\Controllers\AdminController::class, 'school_settings'])->name('sresmis.admin.school-settings')->middleware('isAdmin');
-Route::post('/sresmis/admin/school-settings/update', [App\Http\Controllers\AdminController::class, 'school_settings_update'])->name('sresmis.admin.school-settings.update')->middleware('isAdmin');
+Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('sresmis.admin.dashboard');
 
 
 // TeacherController

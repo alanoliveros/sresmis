@@ -9,6 +9,8 @@
                 @elseif(auth()->user()->role == 2)
                 @include('layouts.sidebar-component.teacher-sidebar')     
                 @endif
+
+                <!-- final here -->
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

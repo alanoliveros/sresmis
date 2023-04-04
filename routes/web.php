@@ -21,7 +21,7 @@ Auth::routes();
 
 
 // AdminController
-Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('sresmis.admin.dashboard');
+Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('sresmis.admin.dashboard')->middleware('isAdmin');
 
 
 // TeacherController

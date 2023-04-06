@@ -10,4 +10,7 @@ class AdminController extends Controller
     public function index(){
       return view('backend.admin.dashboard.dashboard');
     }
+    public function teachers(){
+      return view('backend.admin.teachers.teachers');
+    }
 }

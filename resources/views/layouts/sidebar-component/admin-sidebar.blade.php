@@ -55,3 +55,30 @@
         </li>
     </ul>
 </li>
+<li class="sidebar-item sidebar_hover">
+    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
+       aria-expanded="false">
+        <i class="mdi mdi-account-multiple"></i>
+        <span class="hide-menu">Users</span>
+    </a>
+    <ul aria-expanded="false" class="collapse first-level">
+        <li class="sidebar-item sidebar_hover">
+            <a href="{{route('sresmis.admin.teachers')}}" class="sidebar-link">
+                <i class="mdi mdi-account-circle"></i>
+                <span class="hide-menu">Teachers</span>
+            </a>
+        </li>
+        <li class="sidebar-item sidebar_hover">
+            <a href="form-basic.html" class="sidebar-link">
+                <i class="mdi mdi-account-circle"></i>
+                <span class="hide-menu">Students</span>
+            </a>
+        </li>
+        <li class="sidebar-item sidebar_hover">
+            <a href="form-basic.html" class="sidebar-link">
+                <i class="mdi mdi-account-circle"></i>
+                <span class="hide-menu">Parents</span>
+            </a>
+        </li>
+    </ul>
+</li>

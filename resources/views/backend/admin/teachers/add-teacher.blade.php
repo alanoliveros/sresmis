@@ -14,14 +14,14 @@
                     <input type="email" class="form-control" name="email">
                 </div>
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Password</label>
+                    <label for="validationDefault02" class="form-label">Password <small class="text-danger">(required)</small></label>
                     <input type="password" class="form-control" name="password">
                 </div>
                 {{-- end email password --}}
 
                 {{-- personal information of teacher --}}
                 <div class="col-md-12">
-                  <label for="validationDefault01" class="form-label">First name</label>
+                  <label for="validationDefault01" class="form-label">First name <small class="text-danger">(required)</small></label>
                   <input type="text" class="form-control" name="firstName">
                 </div>
                 <div class="col-md-12">
@@ -29,7 +29,7 @@
                   <input type="text" class="form-control" name="middleName">
                 </div>
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Last name</label>
+                    <label for="validationDefault02" class="form-label">Last name <small class="text-danger">(required)</small></label>
                     <input type="text" class="form-control" name="lastName">
                 </div>
                 <div class="col-md-12">
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Address</label>
+                    <label for="validationDefault02" class="form-label">Address </label>
                     <input type="text" class="form-control" name="purok" placeholder="Strt/Purok">
                 </div>
                 <div class="col-md-12">
@@ -63,7 +63,7 @@
                     <input type="text" class="form-control" name="designation">
                 </div>
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Employee number</label>
+                    <label for="validationDefault02" class="form-label">Employee number </label>
                     <input type="text" class="form-control" name="employeeNumber">
                 </div>
                 <div class="col-md-12">
@@ -87,11 +87,11 @@
                     <input type="text" class="form-control" name="minor">
                 </div>
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Grade Level Taught</label>
+                    <label for="validationDefault02" class="form-label">Grade Level Taught <small class="text-danger">(required)</small></label>
                     <input type="text" class="form-control" name="gradeLevelTaught">
                 </div>
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Subjects Taught</label>
+                    <label for="validationDefault02" class="form-label">Subjects Taught <small class="text-danger">(required)</small></label>
                     <input type="text" class="form-control" name="subjectTaught">
                 </div>
                 <div class="col-md-12">

@@ -2,11 +2,12 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-            <h1 class="modal-title fs-5 text-light" id="exampleModalLabel">Teacher Personal Information</h1>
+            <h1 class="modal-title fs-5 text-light fs-5">Teacher Personal Information</h1>
             <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="">
+            <form action="{{route('sresmis.admin.add-teacher')}}" method="POST">
+                @csrf
             <div class="row g-3">
                 {{-- email password --}}
                 <div class="col-md-12">
@@ -88,15 +89,31 @@
                 </div>
                 <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">Grade Level Taught <small class="text-danger">(required)</small></label>
-                    <input type="text" class="form-control" name="gradeLevelTaught">
+                    <select name="gradeLevelTaught" class="form-select" id="" required>
+                        <option value=""></option>
+                        @foreach ($gradeLevel as $level)
+                            <option value="{{$level->id}}">{{$level->gradeLevelName}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Subjects Taught <small class="text-danger">(required)</small></label>
-                    <input type="text" class="form-control" name="subjectTaught">
+                    <label for="validationDefault02" class="form-label">Subjects Taught <small class="text-danger">(required)</small></label><br>
+
+                    @foreach ($subjects as $key=>$subject)
+                    <input class="form-check-input" type="checkbox" name="subjectTaught[]" value="{{$subject->id}}" {{$subject->subjectName == 'ALL SUBJECTS'? 'checked':''}}>
+                    <label class="form-check-label" for="exampleRadios1">
+                    </label>{{$subject->subjectName}}<br>
+                    @endforeach
+                    
                 </div>
+               
                 <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">Total Actual Teaching Minutes Per Week</label>
-                    <input type="text" class="form-control" name="minPerWeek">
+                    <input type="number" class="form-control" name="minPerWeek">
+                </div>
+                <div class="col-md-12">
+                    <label for="validationDefault02" class="form-label">Number of ancillary</label>
+                    <input type="number" class="form-control" name="ancillary">
                 </div>
 
 

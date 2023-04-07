@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
-            $table->integer('userId')->nullable();
+            $table->integer('adminId')->nullable();
             $table->integer('schoolId')->nullable();
             $table->string('schoolName')->nullable();
             $table->string('schoolRegion')->nullable();

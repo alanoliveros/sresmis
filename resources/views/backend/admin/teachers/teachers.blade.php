@@ -32,6 +32,18 @@
           <!-- Sales Cards  -->
           <!-- ============================================================== -->
           <div class="row">
+
+             <!-- Column -->
+             <div class="col-md-6 col-lg-3 col-xlg-3">
+                <div class="card card-hover">
+                  <div class="box bg-danger text-center">
+                    <h1 class="font-light text-white">
+                      <i class="mdi mdi-border-outside"></i>
+                    </h1>
+                    <h6 class="text-white">All</h6>
+                  </div>
+                </div>
+              </div>
             <!-- Column -->
             <div class="col-md-6 col-lg-3 col-xlg-3">
               <div class="card card-hover">
@@ -50,7 +62,7 @@
                   <h1 class="font-light text-white">
                     <i class="mdi mdi-chart-areaspline"></i>
                   </h1>
-                  <h6 class="text-white">Charts</h6>
+                  <h6 class="text-white">Teachers</h6>
                 </div>
               </div>
             </div>
@@ -61,21 +73,11 @@
                   <h1 class="font-light text-white">
                     <i class="mdi mdi-collage"></i>
                   </h1>
-                  <h6 class="text-white">Widgets</h6>
+                  <h6 class="text-white">Parents</h6>
                 </div>
               </div>
             </div>
-            <!-- Column -->
-            <div class="col-md-6 col-lg-3 col-xlg-3">
-              <div class="card card-hover">
-                <div class="box bg-danger text-center">
-                  <h1 class="font-light text-white">
-                    <i class="mdi mdi-border-outside"></i>
-                  </h1>
-                  <h6 class="text-white">Tables</h6>
-                </div>
-              </div>
-            </div>
+           
            
           </div>
           <!-- ============================================================== -->
@@ -88,39 +90,37 @@
                  
                   <div class="row">
                     <div class="mb-2">
+                        <span class="fs-4">Teacher Personal Information</span>
                         <a href="" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addTeacher">+ Add teacher</a>
                         @include('backend.admin.teachers.add-teacher')
                     </div>
                     <!-- column -->
-                    <table class="table table-bordered table-hover">
+                    <table id="adminTeacherUser" class="table table-dark table-hover"">
                         <thead>
-                            <tr class="text-center">
-                              <th scope="col">#</th>
-                              <th scope="col">First</th>
-                              <th scope="col">Last</th>
-                              <th scope="col">Handle</th>
-                              <th scope="col">Action</th>
+                            <tr class="fs-5">
+                              <th scope="col" class="text-success">#</th>
+                              <th scope="col" class="text-success">Full name</th>
+                              <th scope="col" class="text-success">Designation</th>
+                              <th scope="col" class="text-success">Grade Level Taught</th>
+                              <th scope="col" class="text-success">Section Assigned</th>
+                              <th scope="col" class="text-success">Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td colspan="2">Larry the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
-                          </tbody>
+                           @foreach ($teachers as $key=>$teacher)
+                               <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{
+                                        $teacher->lastname.', '.($teacher->middlename == NULL? '':$teacher->middlename.', ').$teacher->name.($teacher->suffix == NULL? '':', '.$teacher->suffix)
+                                        }}</td>
+                                    <td>{{$teacher->designation}}</td>
+                                    <td>{{$teacher->gradeLevelName}}</td>
+                                    <td>{{$teacher->sectionName}}</td>
+                                    <td>Delete</td>
+                               </tr>
+                           @endforeach   
+                       
+                          
                     </table>
                     <!-- column -->
                   </div>

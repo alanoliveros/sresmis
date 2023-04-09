@@ -60,6 +60,11 @@
                     <input type="text" class="form-control" name="province" placeholder="Province">
                 </div>
                 <div class="col-md-12">
+                    <input type="number" class="form-control" name="zipCode" placeholder="Zip code">
+                </div>
+
+                {{-- end address --}}
+                <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">Designation</label>
                     <input type="text" class="form-control" name="designation">
                 </div>
@@ -89,12 +94,19 @@
                 </div>
                 <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">Grade Level Taught <small class="text-danger">(required)</small></label>
-                    <select name="gradeLevelTaught" class="form-select" id="" required>
+                    <select name="gradeLevelTaught" class="form-select gradeLevelTaught" id="" required>
                         <option value=""></option>
-                        @foreach ($gradeLevel as $level)
+                        @foreach ($gradeLevel as $key=>$level)
                             <option value="{{$level->id}}">{{$level->gradeLevelName}}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="col-md-12">
+                    <label for="validationDefault02" class="form-label">Section Taught<small class="text-danger">(required)</small></label>
+                    <select name="sectionTaught" id="sectionTaught" class="form-select">
+                        <option value="" required></option>
+                    </select>
+                    
                 </div>
                 <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">Subjects Taught <small class="text-danger">(required)</small></label><br>

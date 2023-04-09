@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('sresmis.admin.dashboard')->middleware('isAdmin');
 Route::get('/sresmis/admin/teachers', [App\Http\Controllers\AdminController::class, 'teachers'])->name('sresmis.admin.teachers')->middleware('isAdmin');
 Route::post('/sresmis/admin/add-teacher', [App\Http\Controllers\AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher')->middleware('isAdmin');
+Route::post('/sresmis/admin/getSection', [App\Http\Controllers\AdminController::class, 'getSection'])->middleware('isAdmin');
 
 
 // TeacherController

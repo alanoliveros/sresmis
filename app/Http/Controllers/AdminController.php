@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\GradeLevel;
 use App\Models\Section;
@@ -42,14 +42,26 @@ class AdminController extends Controller
     // ADD TEACHER
     public function addTeacher(Request $request)
     {
+
+
+      
         $email = $request->email;
+        $password = Hash::make($request->password);
         $firstName = $request->firstName;
         $middleName = $request->middleName;
         $lastName = $request->lastName;
         $suffix = $request->suffix;
         $gender = $request->gender;
+
+        // address
+        $purok = $request->purok;
+        $barangay = $request->barangay;
         $city = $request->city;
         $province = $request->province;
+        $zipCode = $request->zipCode;
+
+
+        // end of address
         $designation = $request->designation;
         $employeeNumber = $request->employeeNumber;
         $position = $request->position;
@@ -59,16 +71,82 @@ class AdminController extends Controller
         $minor = $request->minor;
         $gradeLevelTaught = $request->gradeLevelTaught;
         // array subject subjectTaught[] need for each to specify
-        $subjectTaught = $request->subjectTaught;
-        $minPerWeek = $request->subjectTaught;
+        $subjectTaught = implode(', ', $request->subjectTaught);
+        $minPerWeek = $request->minPerWeek;
         $ancillary = $request->ancillary;
-        
-        
+        $sectionTaught = $request->sectionTaught;
+       
+         
 
-         foreach($subjectTaught as $key=>$sub)
-         {
-            // echo $sub.'<br>';
-         }
 
+        $user = new User();
+        $user->name = $firstName;
+        $user->role = 2;
+        $user->middleName = $middleName;
+        $user->lastName = $lastName;
+        $user->suffix = $suffix;
+        $user->gender = $gender;
+        $user->email = $email;
+        $user->password = $password;
+        $user->image = 'avatar.png';
+        $teacherSave = $user->save();
+        $teacherId = $user->id;
+
+        $addressId = 0;
+
+
+        // insert Address
+        if($teacherSave){
+          $address = new Address();
+          $address->userId = $teacherId;
+          $address->purok = $purok;
+          $address->barangay = $barangay;
+          $address->city = $city;
+          $address->province = $province;
+          $address->zipCode = $zipCode;
+          $addressSave = $address->save();
+          $addressId = $address->id;
+
+        }
+
+        // insert Teacher
+        if($teacherSave){
+          $teacher = new Teacher();
+          $teacher->adminId = auth()->user()->id;
+          $teacher->teacherId = $teacherId;
+          $teacher->sectionId = $sectionTaught;
+          $teacher->gradeLevelId = $gradeLevelTaught;
+          $teacher->subjectId = $subjectTaught;
+          $teacher->addressId = $addressId;
+          $teacher->designation = $designation;
+          $teacher->employeeNumber = $employeeNumber;
+          $teacher->position = $position;
+          $teacher->fundSource = $fundSource;
+          $teacher->degree = $degree;
+          $teacher->major = $major;
+          $teacher->minor = $minor;
+          $teacher->minor = $minor;
+          $teacher->totalTeachingTimePerWeek = $minPerWeek;
+          $teacher->numberOfAncillary = $ancillary;
+          $teacherSave = $teacher->save();
+        }
+
+        if($teacherSave || $addressSave || $teacherSave){
+          return redirect()->back()->with('success_added', 'Successfully added new record');   
+        }
+        else{
+          return redirect()->back()->with('error_added', 'Something went wrong, Please try again!');   
+        }
+
+       
+    }
+    public function getSection(Request $request)
+    {
+
+
+      $getGradeLevelById = Section::where('gradeLevelId','=', $request->id)->get();
+      return response()->json([
+        'gradeLevel' => $getGradeLevelById,
+    ]);
     }
 }

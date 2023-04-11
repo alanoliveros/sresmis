@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->integer('adminId');
-            $table->integer('teacherId');
             $table->integer('sectionId');
             $table->integer('gradeLevelId');
             $table->timestamps();

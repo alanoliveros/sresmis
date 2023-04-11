@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('teacherId');
             $table->integer('sectionId');
             $table->integer('gradeLevelId');
-            $table->longText('subjectName');
+            $table->integer('subjectId');
             $table->integer('addressId');
             $table->string('designation');
             $table->integer('employeeNumber');

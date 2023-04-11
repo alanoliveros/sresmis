@@ -116,7 +116,18 @@
                                     <td>{{$teacher->designation}}</td>
                                     <td>{{$teacher->gradeLevelName}}</td>
                                     <td>{{$teacher->sectionName}}</td>
-                                    <td>Delete</td>
+                                    {{-- <td></td> --}}
+                                    <td>
+                                        <div class="dropdown" tabindex="1">
+                                            <i class="db2" tabindex="1"></i>
+                                            <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
+                                             <div class="dropdown-content">
+                                                <a href="#">View</a>
+                                                <a href="#">Edit</a>
+                                                <a href="#" class="text-danger">Delete</a>
+                                             </div>
+                                          </div>
+                                    </td>
                                </tr>
                            @endforeach   
                        

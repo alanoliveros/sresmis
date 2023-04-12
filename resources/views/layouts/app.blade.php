@@ -31,6 +31,7 @@
     
     {{-- Datatable --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
   </head>
 
   <body>
@@ -105,6 +106,7 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     {{-- tables scripts --}}
     <script src="{{asset('assets/js/datatable.js')}}"></script>
+    @include('layouts.messageScript')
     @include('layouts.adminScript')
    
   </body>

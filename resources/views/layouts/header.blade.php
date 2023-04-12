@@ -176,20 +176,26 @@
                         <!-- Message -->
                         <a href="javascript:void(0)" class="link border-top">
                           <div class="d-flex no-block align-items-center p-10">
-                            <span
-                              class="
+                            <span class="
                                 btn btn-danger btn-circle
                                 d-flex
                                 align-items-center
-                                justify-content-center
-                              "
-                              ><i class="mdi mdi-link fs-4"></i
+                                justify-content-center"
+                              >
+                              <i class="mdi mdi-link fs-4"></i
                             ></span>
                             <div class="ms-2">
-                              <h5 class="mb-0">Luanch Admin</h5>
+                              <h5 class="mb-0">Launch Admin</h5>
                               <span class="mail-desc"
                                 >Just see the my new admin!</span
                               >
+                            </div>
+                          </div>
+                        </a>
+                        <a href="javascript:void(0)" class="d-flex justify-content-center link border-top">
+                          <div class="d-flex no-block align-items-center p-10">
+                            <div class="ms-2">
+                             <small class="text-danger fs-5">view all messages</small>
                             </div>
                           </div>
                         </a>

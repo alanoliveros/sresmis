@@ -30,7 +30,7 @@
     </a>
     <ul aria-expanded="false" class="collapse first-level">
         <li class="sidebar-item sidebar_hover">
-            <a href="{{route('sresmis.teacher.students_information')}}}" class="sidebar-link">
+            <a href="{{route('sresmis.teacher.advisory')}}" class="sidebar-link">
                 <i class="mdi mdi-clipboard"></i>
                 <span class="hide-menu">Advisory</span>
             </a>

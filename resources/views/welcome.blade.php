@@ -78,7 +78,7 @@
             @if (Route::has('register'))
 
             <!-- register -->
-            <li>   <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a></li>
+            <li>   <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Online Admission</a></li>
 
             @endif
             @endauth

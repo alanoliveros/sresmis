@@ -96,7 +96,7 @@ class AdminController extends Controller
 
 
         // insert Address
-        if($teacherSave){
+         if($teacherSave){
           $address = new Address();
           $address->userId = $teacherId;
           $address->purok = $purok;
@@ -132,10 +132,10 @@ class AdminController extends Controller
         }
 
         if($teacherSave || $addressSave || $teacherSave){
-          return redirect()->back()->with('success_added', 'Successfully added new record');   
+          return redirect()->back()->with('success', 'Successfully added new record');   
         }
         else{
-          return redirect()->back()->with('error_added', 'Something went wrong, Please try again!');   
+          return redirect()->back()->with('error', 'Something went wrong, Please try again!');   
         }
 
        

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teacher;
+use App\Models\Section;
 use App\Models\Session;
 class TeacherController extends Controller
 {
@@ -19,6 +21,19 @@ class TeacherController extends Controller
     public function students_information(){
           return view('backend.teacher.students_information.students_information');
     }
+    public function advisory(){
+
+      $teacherId = auth()->user()->id;
+      $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
+                              ->where('teachers.teacherId', '=', $teacherId)->first();
+      return view('backend.teacher.advisory.index')->with([
+            'section' =>$sectionName,
+      ]);
+
+    }
+
+
+
     public function sf9()
     {
 

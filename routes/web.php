@@ -29,6 +29,7 @@ Route::post('/sresmis/admin/getSection', [App\Http\Controllers\AdminController::
 
 // TeacherController
 Route::get('/sresmis/teacher/dashboard', [App\Http\Controllers\TeacherController::class, 'index'])->name('sresmis.teacher.dashboard')->middleware('isTeacher');
+Route::get('/sresmis/teacher/advisory', [App\Http\Controllers\TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory')->middleware('isTeacher');
 
 // ParentController
 Route::get('/sresmis/student/dashboard', [App\Http\Controllers\TeacherController::class, 'index'])->name('sresmis.student.dashboard')->middleware('isStudent');

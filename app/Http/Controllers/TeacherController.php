@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Section;
 use App\Models\Session;
+use App\Models\GradeLevel;
 class TeacherController extends Controller
 {
 
@@ -24,10 +25,15 @@ class TeacherController extends Controller
     public function advisory(){
 
       $teacherId = auth()->user()->id;
+    
       $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
                               ->where('teachers.teacherId', '=', $teacherId)->first();
+
+
+      $grades = GradeLevel::where('id','=', $sectionName->gradeLevelId)->first();
       return view('backend.teacher.advisory.index')->with([
             'section' =>$sectionName,
+            'grades' =>$grades,
       ]);
 
     }

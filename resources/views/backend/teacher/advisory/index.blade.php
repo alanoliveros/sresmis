@@ -45,5 +45,41 @@
                 </div>
                 <!-- Column -->
             </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-body">
+                     
+                      <div class="row">
+                        <div class="mb-2">
+                            <span class="fs-4">Teacher Personal Information</span>
+                            <a href="" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addStudent">+ Add student</a>
+                            @include('backend.teacher.student-information.add-student')
+                        </div>
+                        <!-- column -->
+                        <table id="adminTeacherUser" class="table table-dark table-hover">
+                            <thead>
+                                <tr class="fs-5">
+                                  <th scope="col" class="text-success">#</th>
+                                  <th scope="col" class="text-success">Full name</th>
+                                  <th scope="col" class="text-success">Designation</th>
+                                  <th scope="col" class="text-success">Grade Level Taught</th>
+                                  <th scope="col" class="text-success">Section Assigned</th>
+                                  <th scope="col" class="text-success">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                 
+                           
+                              
+                        </table>
+                        <!-- column -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
 @endsection

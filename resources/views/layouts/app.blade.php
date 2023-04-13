@@ -76,7 +76,7 @@
 <div>
   @yield('content')
 </div>
-@include('layouts.footer')
+  @include('layouts.footer')
       </div>
     </div>
     <script src="{{asset('backend/assets/libs/jquery/dist/jquery.min.js')}}"></script>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('adminId');
             $table->integer('teacherId');
             $table->integer('studentId');
+            $table->bigInteger('lrn')->unique();
             $table->string('mothertongue')->nullable();
             $table->string('ethnicgroup')->nullable();
             $table->string('religion')->nullable();

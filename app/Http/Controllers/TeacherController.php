@@ -37,6 +37,31 @@ class TeacherController extends Controller
       ]);
 
     }
+    public function addStudent(Request $request){
+
+      $studentLrn = $request->studentLrn;
+      $firstName = $request->firstName;
+      $middleName = $request->middleName;
+      $lastName = $request->lastName;
+      $suffix = $request->suffix;
+      $gender = $request->gender;
+      $birthdate = $request->birthdate;
+      $age = $request->age;
+      $mothertongue = $request->mothertongue;
+      $ethnicgroup = $request->ethnicgroup;
+      $religion = $request->religion;
+      $barangay = $request->barangay;
+      $city = $request->city;
+      $province = $request->province;
+      $zipCode = $request->zipCode;
+      
+
+      $teacherId = auth()->user()->id;
+      
+
+      
+
+    }
 
 
 

@@ -6,12 +6,12 @@
             <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{{route('sresmis.admin.add-teacher')}}" method="POST">
+            <form action="{{route('sresmis.teacher.add-student')}}" method="POST">
                 @csrf
             <div class="row g-3">
                 <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">LRN <small class="text-danger">(required)</small> </label>
-                    <input type="number" class="form-control" name="studentLrn">
+                    <input type="number" min="1" class="form-control" name="studentLrn">
                 </div>
                 {{-- personal information of student --}}
                 <div class="col-md-12">
@@ -82,65 +82,7 @@
                     <input type="number" class="form-control" name="zipCode" placeholder="Zip code">
                 </div>
 
-                {{-- end address --}}
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Designation</label>
-                    <input type="text" class="form-control" name="designation">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Employee number </label>
-                    <input type="text" class="form-control" name="employeeNumber">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Position</label>
-                    <input type="text" class="form-control" name="position">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Fund source</label>
-                    <input type="text" class="form-control" name="fundSource">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Degree</label>
-                    <input type="text" class="form-control" name="degree">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Major</label>
-                    <input type="text" class="form-control" name="major">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Minor</label>
-                    <input type="text" class="form-control" name="minor">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Grade Level Taught <small class="text-danger">(required)</small></label>
-                    <select name="gradeLevelTaught" class="form-select gradeLevelTaught" id="" required>
-                        <option value=""></option>
-                        
-                    </select>
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Section Taught<small class="text-danger">(required)</small></label>
-                    <select name="sectionTaught" id="sectionTaught" class="form-select">
-                        <option value="" required></option>
-                    </select>
-                    
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Subjects Taught <small class="text-danger">(required)</small></label><br>
-
-                   
-                    
-                </div>
-               
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Total Actual Teaching Minutes Per Week</label>
-                    <input type="number" class="form-control" name="minPerWeek">
-                </div>
-                <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Number of ancillary</label>
-                    <input type="number" class="form-control" name="ancillary">
-                </div>
-
+              
 
                 <div class="col-12">
                   <button class="btn btn-primary" type="submit">Submit form</button>

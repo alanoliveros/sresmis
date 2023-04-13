@@ -65,7 +65,7 @@
                       ></span>
                     </div>
                     <input
-                      type="email"
+                      type="text"
                       class="form-control form-control-lg @error('email') is-invalid @enderror"
                       placeholder="Email"
                       aria-label="Email"

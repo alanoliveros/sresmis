@@ -541,7 +541,6 @@
   <script src="{{asset('theme/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
   <script src="{{asset('theme/assets/vendor/waypoints/noframework.waypoints.js')}}"></script>
   <script src="{{asset('theme/assets/vendor/php-email-form/validate.js')}}"></script>
-  {{asset('theme/')}}
   <!-- Template Main JS File -->
   <script src="{{asset('theme/assets/js/main.js')}}"></script>
 

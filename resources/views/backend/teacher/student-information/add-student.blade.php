@@ -82,8 +82,68 @@
                     <input type="number" class="form-control" name="zipCode" placeholder="Zip code">
                 </div>
 
-              
 
+                <hr>
+
+                <span class="text-center">Parent or Guardian Information <small class="text-danger">(optional)</small></span>
+                <hr>
+
+
+                <!-- Father -->
+                <div class="col-md-12">
+                    <label for="">Father</label>
+                    <input type="text" class="form-control" name="fathersFirstName" placeholder="First name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="fathersMiddleName" placeholder="Middle name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="fathersLastName" placeholder="Last name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="fathersSuffix" placeholder="Suffix">
+                </div>
+                 <!-- end Father -->
+
+                <!-- Mother -->
+                <div class="col-md-12">
+                    <label for="">Mother</label>
+                    <input type="text" class="form-control" name="mothersFirstName" placeholder="First name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="mothersMiddleName" placeholder="Middle name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="mothersLastName" placeholder="Last name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="mothersSuffix" placeholder="Suffix">
+                </div>
+                 <!-- end Mother -->
+
+                <!-- Guardian -->
+                <div class="col-md-12">
+                    <label for="">Guardian</label>
+                    <input type="text" class="form-control" name="gurdiansFirstName" placeholder="First name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="gurdiansMiddleName" placeholder="Middle name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="gurdiansLastName" placeholder="Last name">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="gurdianssuffix" placeholder="Suffix">
+                </div>
+                <div class="col-md-12">
+                    <label for="">Relationship to student</label>
+                    <input type="text" class="form-control" name="relationship">
+                </div>
+                <div class="col-md-12">
+                    <label for="">Contact Number of Parent or Guardian</label>
+                    <input type="number" class="form-control" name="contactNumber">
+                </div>
+                 <!-- end Guardian -->
                 <div class="col-12">
                   <button class="btn btn-primary" type="submit">Submit form</button>
                 </div>  

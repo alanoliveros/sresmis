@@ -30,7 +30,8 @@ class AdminController extends Controller
                           ->get();
       $gradeLevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
       $subjects = Subject::orderBy('subjectName', 'asc')->get();
-      return view('backend.admin.teachers.teachers')->with(
+      return view('backend.admin.teacher
+      s.teachers')->with(
         [
           'gradeLevel' => $gradeLevel,
           'subjects' => $subjects,

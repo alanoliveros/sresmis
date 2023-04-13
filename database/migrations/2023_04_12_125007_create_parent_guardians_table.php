@@ -18,11 +18,23 @@ return new class extends Migration
             $table->integer('adminId');
             $table->integer('teacherId');
             $table->integer('studentId');
-            $table->string('fathersName')->nullable();
-            $table->string('mothersName')->nullable();
-            $table->string('guardianName')->nullable();
+            $table->string('fathersFirstName')->nullable();
+            $table->string('fathersMiddleName')->nullable();
+            $table->string('fathersLastName')->nullable();
+            $table->string('fathersSuffix')->nullable();
+
+            $table->string('mothersFirstName')->nullable();
+            $table->string('mothersMiddleName')->nullable();
+            $table->string('mothersLastName')->nullable();
+            $table->string('mothersSuffix')->nullable();
+
+            $table->string('guardiansFirstName')->nullable();
+            $table->string('guardiansMiddleName')->nullable();
+            $table->string('guardiansLastName')->nullable();
+            $table->string('guardiansSuffix')->nullable();
+
             $table->string('relationshiptoStudent')->nullable();
-            $table->string('contactNumber')->nullable();
+            $table->bigInteger('contactNumber')->nullable();
 
             $table->timestamps();
         });

@@ -54,14 +54,14 @@ class Handler extends ExceptionHandler
      * @return JsonResponse|Response|\Symfony\Component\HttpFoundation\Response
      * @throws Throwable
      */
-    public function render($request, Throwable $e)
-    {
-        if ($this->isHttpException($e)) {
-            return response()->view('errors.404');
-        }
-        else
-        {
-            return response()->view('errors.500');
-        }
-    }
+    // public function render($request, Throwable $e)
+    // {
+    //     if ($this->isHttpException($e)) {
+    //         return response()->view('errors.404');
+    //     }
+    //     else
+    //     {
+    //         return response()->view('errors.500');
+    //     }
+    // }
 }

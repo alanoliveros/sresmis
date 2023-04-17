@@ -32,16 +32,20 @@ class TeacherController extends Controller
       $teacherId = auth()->user()->id;
     
       $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
+                              ->join('grade_levels','teachers.gradeLevelId', '=', 'grade_levels.id')
                               ->where('teachers.teacherId', '=', $teacherId)->first();
 
 
       $grades = GradeLevel::where('id','=', $sectionName->gradeLevelId)->first();
-      $students = Student::all();
+      $students = Student::where('students.teacherId' , '=', $teacherId)
+                        ->join('users', 'students.studentId', '=', 'users.id')
+                        ->get();
 
 
       return view('backend.teacher.advisory.index')->with([
             'section' =>$sectionName,
             'grades' =>$grades,
+            'students' => $students,
       ]);
 
     }
@@ -115,10 +119,8 @@ class TeacherController extends Controller
         $userSave = $user->save();
         $studentId = $user->id;
 
-      
-
       if($userSave){
-            $student = new User();
+            $student = new Student();
             $student->adminId = $adminId->adminId;
             $student->teacherId = $teacherId;
             $student->studentId = $studentId;
@@ -128,7 +130,7 @@ class TeacherController extends Controller
             $student->mothertongue = $mothertongue;
             $student->ethnicgroup = $ethnicgroup;
             $student->religion = $religion;
-            $studentSave = $student->save();
+            $student->save();
 
       }
 
@@ -136,40 +138,53 @@ class TeacherController extends Controller
             $address = new Address();
             $address->userId = $studentId;
             $address->purok = $purok;
-            $address->city = $city;
             $address->barangay = $barangay;
+            $address->city = $city;
             $address->province = $province;
             $address->zipCode = $zipCode;
-            $address->save;
+            $address->save();
+
       }
       if($userSave){
             $parent = new ParentGuardian();
             $parent->adminId = $adminId->adminId;
             $parent->teacherId = $teacherId;
             $parent->studentId = $studentId;
+
             $parent->fathersFirstName = $fathersFirstName;
             $parent->fathersMiddleName = $fathersMiddleName;
             $parent->fathersLastName = $fathersLastName;
             $parent->fathersSuffix = $fathersSuffix;
+
             $parent->mothersFirstName = $mothersFirstName;
             $parent->mothersMiddleName = $mothersMiddleName;
             $parent->mothersLastName = $mothersLastName;
             $parent->mothersSuffix = $mothersSuffix;
+
             $parent->guardiansFirstName = $guardiansFirstName;
             $parent->guardiansMiddleName = $guardiansMiddleName;
             $parent->guardiansLastName = $guardiansLastName;
             $parent->guardiansSuffix = $guardiansSuffix;
+
             $parent->relationshiptoStudent = $relationship;
             $parent->contactNumber = $contactNumber;
-            $parent->save;
+            $parent->save();
       }
 
       if($userSave){
-        return redirect()->back()->with('success', 'Successfully added new record');   
+        return redirect()->back()->with('success_added', 'Successfully added new record');   
       }
       else{
         return redirect()->back()->with('error', 'Something went wrong, Please try again!')->withInput();
       }
+    }
+    public function deleteStudent($id){
+             User::where('id', $id)->delete();
+             Student::where('studentId', $id)->delete();
+             Address::where('userId', $id)->delete();
+
+             return redirect()->back()->with('deleted', 'Successfully deleted');   
+
     }
 
 

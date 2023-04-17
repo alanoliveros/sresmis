@@ -30,8 +30,7 @@ class AdminController extends Controller
                           ->get();
       $gradeLevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
       $subjects = Subject::orderBy('subjectName', 'asc')->get();
-      return view('backend.admin.teacher
-      s.teachers')->with(
+      return view('backend.admin.teachers.teachers')->with(
         [
           'gradeLevel' => $gradeLevel,
           'subjects' => $subjects,
@@ -130,7 +129,7 @@ class AdminController extends Controller
         }
 
         if($teacherSave || $addressSave || $teacherSave){
-          return redirect()->back()->with('success', 'Successfully added new record');   
+          return redirect()->back()->with('success_added', 'Successfully added new record');   
         }
         else{
           return redirect()->back()->with('error', 'Something went wrong, Please try again!');   

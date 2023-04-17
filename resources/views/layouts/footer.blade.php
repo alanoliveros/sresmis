@@ -9,12 +9,6 @@ SRESMIS
             e.preventDefault();
 
             let value = $(this).find(":selected").val();
-
-
-
-            alert(value);
-
-                
         });
         
        

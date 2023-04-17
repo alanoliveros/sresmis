@@ -29,25 +29,6 @@
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Sales Cards  -->
-            <!-- ============================================================== -->
-            <div class="row">
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-cyan text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-view-dashboard"></i>
-                            </h1>
-                            <h6 class="text-white">{{$section->sectionName}}</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-            </div>
-
-
             <div class="row">
                 <div class="col-md-12">
                   <div class="card">
@@ -55,23 +36,46 @@
                      
                       <div class="row">
                         <div class="mb-2">
-                            <span class="fs-4">Teacher Personal Information</span>
+                            <span class="fs-3 fw-bold">{{$section->gradeLevelName.' - '.$section->sectionName}}</span>
                             <a href="" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addStudent">+ Add student</a>
                             @include('backend.teacher.student-information.add-student')
                         </div>
                         <!-- column -->
-                        <table id="adminTeacherUser" class="table table-dark table-hover">
+                        <table id="studentsLists" class="table table-dark table-hover">
                             <thead>
                                 <tr class="fs-5">
                                   <th scope="col" class="text-success">#</th>
-                                  <th scope="col" class="text-success">Full name</th>
-                                  <th scope="col" class="text-success">Designation</th>
-                                  <th scope="col" class="text-success">Grade Level Taught</th>
-                                  <th scope="col" class="text-success">Section Assigned</th>
+                                  <th scope="col" class="text-success">LRN</th>
+                                  <th scope="col" class="text-success">Complete name</th>
+                                  <th scope="col" class="text-success">Age</th>
+                                  <th scope="col" class="text-success">Birthdate</th>
                                   <th scope="col" class="text-success">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
+                                @foreach($students as $key=>$student)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$student->lrn}}</td>
+                                    <td>{{$student->lastname.', '.$student->name. ($student->middlename != NULL? ', '.$student->middlename : ''). ($student->suffix != NULL? ', '.$student->suffix : '') }}</td>
+                                    <td>{{$student->age}}</td>
+
+                                    <td>{{date('F d, Y', strtotime($student->birthdate))}}</td>
+                                    <td>
+                                        <div class="dropdown" tabindex="1">
+                                            <i class="db2" tabindex="1"></i>
+                                            <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
+                                             <div class="dropdown-content">
+                                                <a href="#">View</a>
+                                                <a href="#">Edit</a>
+                                                <a href="{{url('sresmis/teacher/delete-student/'.$student->studentId)}}" class="text-danger">Delete</a>
+                                             </div>
+                                          </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+
                                  
                            
                               

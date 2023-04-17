@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'SRESMIS | Dashboard')
 @section('content')
 <div class="page-wrapper">
         <!-- ============================================================== -->

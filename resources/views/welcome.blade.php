@@ -69,25 +69,21 @@
 <!-- Login Register -->
             @if (Route::has('login'))
             @auth
-            <!-- home -->
+<!-- home -->
             <li> <a href="{{ route('sresmis.admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Return to portal</a></li>
 
             @else
-            <!-- Login -->
+<!-- Login -->
             <li><a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a></li>
             @if (Route::has('register'))
 
-            <!-- register -->
-            <li>   <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Online Admission</a></li>
+<!-- register -->
+{{-- end register --}}
 
             @endif
             @endauth
             @endif
 <!-- End Login Register -->
-
-
-
-
 
 
         </ul>

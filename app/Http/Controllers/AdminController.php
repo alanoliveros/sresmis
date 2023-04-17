@@ -93,9 +93,6 @@ class AdminController extends Controller
         $teacherSave = $user->save();
         $teacherId = $user->id;
 
-        $addressId = 0;
-
-
         // insert Address
          if($teacherSave){
           $address = new Address();

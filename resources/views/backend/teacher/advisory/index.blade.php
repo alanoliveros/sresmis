@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'SRESMIS | Advisory')
 @section('content')
     <div class="page-wrapper">
         <!-- ============================================================== -->

@@ -93,82 +93,83 @@ class TeacherController extends Controller
 
       $passwordFind = str_replace(' ', '',strtolower($lastName));
 
-      $email = Hash::make($studentLrn);
-      $password = $passwordFind.'1234';
+      $email = $studentLrn;
+      $password = Hash::make($passwordFind.'1234');
 
 
-      echo $passwordFind.'@gmail.com';
+      
     
-      // $user = new User();
-      // $user->role = 3;
-      // $user->email = $passwordFind.'@gmail.com';
-      // $user->password = $password;
-      // $user->name = $firstName;
-      // $user->middleName = $middleName;
-      // $user->lastName = $lastName;
-      // $user->suffix = $suffix;
-      // $user->gender = $gender;
-      // $user->birthdate = $birthdate;
-      // $user->age = $age;
-      // $user->image = 'avatar.png';
-      // $userSave = $user->save;
-      // $studentId = $user->id;
+        $user = new User();
+        $user->name = $firstName;
+        $user->role = 3;
+        $user->middleName = $middleName;
+        $user->lastName = $lastName;
+        $user->suffix = $suffix;
+        $user->gender = $gender;
+        $user->email = $email;
+        $user->password = $password;
+        $user->gender = $gender;
+        $user->birthdate = $birthdate;
+        $user->age = $age;
+        $user->image = 'avatar.png';
+        $userSave = $user->save();
+        $studentId = $user->id;
 
       
 
-      // if($userSave){
-      //       $student = new Student();
-      //       $student->adminId = $adminId->adminId;
-      //       $student->teacherId = $teacherId;
-      //       $student->studentId = $studentId;
-      //       $student->lrn = $studentLrn;
-      //       $student->sectionId = $adminId->sectionId;
-      //       $student->gradeLevelId = $adminId->gradeLevelId;
-      //       $student->mothertongue = $mothertongue;
-      //       $student->ethnicgroup = $ethnicgroup;
-      //       $student->religion = $religion;
-      //       $student->save;
+      if($userSave){
+            $student = new User();
+            $student->adminId = $adminId->adminId;
+            $student->teacherId = $teacherId;
+            $student->studentId = $studentId;
+            $student->lrn = $studentLrn;
+            $student->sectionId = $adminId->sectionId;
+            $student->gradeLevelId = $adminId->gradeLevelId;
+            $student->mothertongue = $mothertongue;
+            $student->ethnicgroup = $ethnicgroup;
+            $student->religion = $religion;
+            $studentSave = $student->save();
 
-      // }
+      }
 
-      // if($userSave){
-      //       $address = new Address();
-      //       $address->userId = $studentId;
-      //       $address->purok = $purok;
-      //       $address->city = $city;
-      //       $address->barangay = $barangay;
-      //       $address->province = $province;
-      //       $address->zipCode = $zipCode;
-      //       $address->save;
-      // }
-      // if($userSave){
-      //       $parent = new ParentGuardian();
-      //       $parent->adminId = $adminId->adminId;
-      //       $parent->teacherId = $teacherId;
-      //       $parent->studentId = $studentId;
-      //       $parent->fathersFirstName = $fathersFirstName;
-      //       $parent->fathersMiddleName = $fathersMiddleName;
-      //       $parent->fathersLastName = $fathersLastName;
-      //       $parent->fathersSuffix = $fathersSuffix;
-      //       $parent->mothersFirstName = $mothersFirstName;
-      //       $parent->mothersMiddleName = $mothersMiddleName;
-      //       $parent->mothersLastName = $mothersLastName;
-      //       $parent->mothersSuffix = $mothersSuffix;
-      //       $parent->guardiansFirstName = $guardiansFirstName;
-      //       $parent->guardiansMiddleName = $guardiansMiddleName;
-      //       $parent->guardiansLastName = $guardiansLastName;
-      //       $parent->guardiansSuffix = $guardiansSuffix;
-      //       $parent->relationshiptoStudent = $relationship;
-      //       $parent->contactNumber = $contactNumber;
-      //       $parent->save;
-      // }
+      if($userSave){
+            $address = new Address();
+            $address->userId = $studentId;
+            $address->purok = $purok;
+            $address->city = $city;
+            $address->barangay = $barangay;
+            $address->province = $province;
+            $address->zipCode = $zipCode;
+            $address->save;
+      }
+      if($userSave){
+            $parent = new ParentGuardian();
+            $parent->adminId = $adminId->adminId;
+            $parent->teacherId = $teacherId;
+            $parent->studentId = $studentId;
+            $parent->fathersFirstName = $fathersFirstName;
+            $parent->fathersMiddleName = $fathersMiddleName;
+            $parent->fathersLastName = $fathersLastName;
+            $parent->fathersSuffix = $fathersSuffix;
+            $parent->mothersFirstName = $mothersFirstName;
+            $parent->mothersMiddleName = $mothersMiddleName;
+            $parent->mothersLastName = $mothersLastName;
+            $parent->mothersSuffix = $mothersSuffix;
+            $parent->guardiansFirstName = $guardiansFirstName;
+            $parent->guardiansMiddleName = $guardiansMiddleName;
+            $parent->guardiansLastName = $guardiansLastName;
+            $parent->guardiansSuffix = $guardiansSuffix;
+            $parent->relationshiptoStudent = $relationship;
+            $parent->contactNumber = $contactNumber;
+            $parent->save;
+      }
 
-      // if($userSave){
-      //   return redirect()->back()->with('success', 'Successfully added new record');   
-      // }
-      // else{
-      //   return redirect()->back()->with('error', 'Something went wrong, Please try again!');   
-      // }
+      if($userSave){
+        return redirect()->back()->with('success', 'Successfully added new record');   
+      }
+      else{
+        return redirect()->back()->with('error', 'Something went wrong, Please try again!')->withInput();
+      }
     }
 
 

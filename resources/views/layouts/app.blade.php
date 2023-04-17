@@ -15,7 +15,7 @@
       content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
     />
     <meta name="robots" content="noindex,nofollow" />
-    <title>SRESMIS</title>
+    <title>@yield('title')</title>
     <!-- Favicon icon -->
     <link
       rel="icon"

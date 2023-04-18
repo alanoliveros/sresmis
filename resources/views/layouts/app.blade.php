@@ -36,6 +36,9 @@
       .grading_level{
         cursor: pointer;
       }
+      .breadcrumb-item{
+        cursor: pointer;
+      }
     </style>
   </head>
 
@@ -86,6 +89,8 @@
     <script src="{{asset('assets/js/datatable.js')}}"></script>
     @include('layouts.messageScript')
     @include('layouts.adminScript')
+    @yield('scripts')
+
    
   </body>
 </html>

@@ -30,6 +30,7 @@ Route::post('/sresmis/admin/getSection', [App\Http\Controllers\AdminController::
 // TeacherController
 Route::get('/sresmis/teacher/dashboard', [App\Http\Controllers\TeacherController::class, 'index'])->name('sresmis.teacher.dashboard')->middleware('isTeacher');
 Route::get('/sresmis/teacher/advisory', [App\Http\Controllers\TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory')->middleware('isTeacher');
+Route::get('/sresmis/teacher/grades/filter', [App\Http\Controllers\TeacherController::class, 'filterGrades'])->name('sresmis.teacher.grades.filter')->middleware('isTeacher');
 // add student
 Route::post('/sresmis/teacher/add-student', [App\Http\Controllers\TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student')->middleware('isTeacher');
 Route::get('/sresmis/teacher/delete-student/{id}', [App\Http\Controllers\TeacherController::class, 'deleteStudent'])->middleware('isTeacher');

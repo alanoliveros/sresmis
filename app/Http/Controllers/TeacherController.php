@@ -60,7 +60,8 @@ class TeacherController extends Controller
             'students' => $students,
           ]);
     }
-    public function grades(){
+    public function grades()
+    {
          
           $sectionTaughtBy = Teacher::where('teacherId','=',auth()->user()->id)->first();
 
@@ -70,14 +71,33 @@ class TeacherController extends Controller
 
            $subjects = [];
            foreach($splitSubject as $key=>$data){
-              $subjects = Subject::find($data);
+              $subjects[] = Subject::find($data);
            }
-          
 
+           
+           
+           $teacherId = auth()->user()->id;
+           $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
+                                   ->join('grade_levels','teachers.gradeLevelId', '=', 'grade_levels.id')
+                                   ->where('teachers.teacherId', '=', $teacherId)
+                                   ->first();
+           $adminId = $sectionName->adminId;
+           $schoolYear = Session::where('adminId', '=',$adminId)->orderBy('school_year','desc')->get();
 
           return view('backend.teacher.grades.grades')->with([
             'subjects' => $subjects,
+            'sectionName' => $sectionName,
+            'schoolYear' => $schoolYear,
           ]);
+    }
+    public function filterGrades(Request $request)
+    {
+
+     $year = $request->getYear;
+     $subject = $request->getSubject;
+    
+     return view('backend.teacher.grades.filter-grades');
+
     }
     public function students_information(){
           return view('backend.teacher.students_information.students_information');
@@ -105,6 +125,7 @@ class TeacherController extends Controller
       ]);
 
     }
+ 
     public function addStudent(Request $request){
 
       $studentLrn = $request->studentLrn;

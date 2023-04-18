@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
+            $table->integer('adminId');
             $table->string('school_year');
             $table->timestamps();
         });

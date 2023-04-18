@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Student;
 use App\Models\Address;
 use App\Models\ParentGuardian;
+use Carbon\Carbon;
 class TeacherController extends Controller
 {
 
@@ -19,7 +20,43 @@ class TeacherController extends Controller
       return view('backend.teacher.dashboard.dashboard');
     }
     public function attendance(){
-          return view('backend.teacher.attendance.attendance');
+
+      $user = User::find(auth()->user()->id);
+      
+      $create = $user->created_at;
+      // echo date("F d Y",strtotime($create));
+      $numMonth = date("m", strtotime($create)); //ok ni
+      $year = date("Y", strtotime($create)); //ok ni
+  
+      // echo date("F",strtotime($create));
+
+    
+      // $d=cal_days_in_month(0,$numMonth,$year); mas ok ni
+      // echo "There was $d days in $ 1965.<br>";
+      // $arr = range(1, Carbon::now()->month(12)->daysInMonth);
+
+      // foreach($arr as $k){
+      //       echo $k;
+      // }
+
+      
+      $teacherId = auth()->user()->id;
+    
+      $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
+                              ->join('grade_levels','teachers.gradeLevelId', '=', 'grade_levels.id')
+                              ->where('teachers.teacherId', '=', $teacherId)->first();
+
+
+      $grades = GradeLevel::where('id','=', $sectionName->gradeLevelId)->first();
+      $students = Student::where('students.teacherId' , '=', $teacherId)
+                        ->join('users', 'students.studentId', '=', 'users.id')
+                        ->get();
+
+          return view('backend.teacher.attendance.attendance')->with([
+            'section' =>$sectionName,
+            'grades' =>$grades,
+            'students' => $students,
+          ]);
     }
     public function grades(){
           return view('backend.teacher.grades.grades');
@@ -182,6 +219,7 @@ class TeacherController extends Controller
              User::where('id', $id)->delete();
              Student::where('studentId', $id)->delete();
              Address::where('userId', $id)->delete();
+             ParentGuardian::where('studentId', $id)->delete();
 
              return redirect()->back()->with('deleted', 'Successfully deleted');   
 

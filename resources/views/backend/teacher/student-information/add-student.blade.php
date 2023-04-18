@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">Gender</label>
                     <select name="gender"  class="form-select" id="">
-                        <option value="Male">Male</option>
+                        <option value="Male" selected>Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>

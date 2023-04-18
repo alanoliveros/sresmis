@@ -6,19 +6,19 @@
         <span class="hide-menu">Dashboard</span>
     </a>
 </li>
-<li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.attendance')}}"
-       aria-expanded="false">
-        <i class="mdi mdi-content-paste"></i>
-        <span class="hide-menu">Attendance</span>
-    </a>
-</li>
 
 <li class="sidebar-item sidebar_hover">
     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.grades')}}"
        aria-expanded="false">
         <i class="mdi mdi-table-edit"></i>
         <span class="hide-menu">Grades</span>
+    </a>
+</li>
+<li class="sidebar-item sidebar_hover">
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.attendance')}}"
+       aria-expanded="false">
+        <i class="mdi mdi-content-paste"></i>
+        <span class="hide-menu">Attendance</span>
     </a>
 </li>
 

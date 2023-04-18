@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2023 at 03:45 AM
+-- Generation Time: Apr 18, 2023 at 11:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -45,7 +45,8 @@ CREATE TABLE `addresses` (
 
 INSERT INTO `addresses` (`id`, `userId`, `purok`, `barangay`, `city`, `province`, `zipCode`, `created_at`, `updated_at`) VALUES
 (7, 17, 'P-9, Laligan, Valencia City, Bukidnon', 'Laligan', 'VALENCIA CITY', 'BUKIDNON', 8709, '2023-04-17 17:14:16', '2023-04-17 17:14:16'),
-(8, 18, 'P-9, Laligan, Valencia City, Bukidnon', NULL, 'VALENCIA CITY', 'BUKIDNON', 8709, '2023-04-17 17:15:44', '2023-04-17 17:15:44');
+(8, 18, 'P-9, Laligan, Valencia City, Bukidnon', NULL, 'VALENCIA CITY', 'BUKIDNON', 8709, '2023-04-17 17:15:44', '2023-04-17 17:15:44'),
+(9, 19, 'P-9, Laligan, Valencia City, Bukidnon', NULL, 'VALENCIA CITY', 'BUKIDNON', 8709, '2023-04-17 18:59:43', '2023-04-17 18:59:43');
 
 -- --------------------------------------------------------
 
@@ -257,7 +258,8 @@ CREATE TABLE `sections` (
 --
 
 INSERT INTO `sections` (`id`, `adminId`, `sectionName`, `gradeLevelId`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Daisy', '2', '2023-04-06 22:50:31', '2023-04-06 22:50:31');
+(1, 1, 'Daisy', '2', '2023-04-06 22:50:31', '2023-04-06 22:50:31'),
+(2, 1, 'Mahogani', '6', '2023-04-06 22:50:31', '2023-04-06 22:50:31');
 
 -- --------------------------------------------------------
 
@@ -267,10 +269,22 @@ INSERT INTO `sections` (`id`, `adminId`, `sectionName`, `gradeLevelId`, `created
 
 CREATE TABLE `sessions` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `adminId` int(11) NOT NULL,
   `school_year` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `adminId`, `school_year`, `created_at`, `updated_at`) VALUES
+(1, 1, '2018-2019', '2023-04-18 07:10:04', '2023-04-18 07:10:04'),
+(2, 1, '2019-2020', '2023-04-18 07:10:04', '2023-04-18 07:10:04'),
+(3, 1, '2020-2021', '2023-04-18 07:10:04', '2023-04-18 07:10:04'),
+(4, 1, '2021-2022', '2023-04-18 07:10:04', '2023-04-18 07:10:04'),
+(5, 1, '2022-2023', '2023-04-18 07:10:04', '2023-04-18 07:10:04');
 
 -- --------------------------------------------------------
 
@@ -367,7 +381,8 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `adminId`, `teacherId`, `sectionId`, `gradeLevelId`, `subjectId`, `addressId`, `designation`, `employeeNumber`, `position`, `fundSource`, `degree`, `major`, `minor`, `totalTeachingTimePerWeek`, `numberOfAncillary`, `created_at`, `updated_at`) VALUES
-(3, 1, 7, 1, 2, '1', 4, 'Head Teacher', 123123, 'Teacher II', 'National', 'BEED', 'Software Development', NULL, 1212121, 1, '2023-04-09 04:05:35', '2023-04-09 04:05:35');
+(3, 1, 7, 1, 2, '1', 4, 'Head Teacher', 123123, 'Teacher II', 'National', 'BEED', 'Software Development', NULL, 1212121, 1, '2023-04-09 04:05:35', '2023-04-09 04:05:35'),
+(4, 1, 19, 2, 6, '7, 10, 8, 13, 4, 3, 12, 5, 2, 9, 11, 6', 9, 'Head Teacher', 123123, 'Teacher II', 'National', 'BEED', 'English', NULL, 1212121, 1, '2023-04-17 18:59:43', '2023-04-17 18:59:43');
 
 -- --------------------------------------------------------
 
@@ -402,7 +417,8 @@ INSERT INTO `users` (`id`, `name`, `role`, `middlename`, `lastname`, `suffix`, `
 (1, 'Rico', 1, 'Bregildo', 'Goron', NULL, '', NULL, NULL, 'sresmis@admin', NULL, '$2y$10$VSvcPdxo3SM7cJyUBk.GIOoteMGpHQ2pdW1fI3Y/YM8MWBWeWS146', 'avatar.png', NULL, '2023-04-13 04:09:18', '2023-04-13 04:09:18'),
 (7, 'Rico', 2, 'Bregildo', 'Goron', NULL, 'Male', NULL, NULL, 'sresmis@teacher', NULL, '$2y$10$UDOmiaYoIeYBOa7inINKee3mmYYmFJbPGyMkqIP3hEcjRdVwtrqOW', 'avatar.png', NULL, '2023-04-09 04:05:33', '2023-04-09 04:05:33'),
 (17, 'Alvin Joseph', 3, 'Bregildo', 'Goron', NULL, 'Male', '2023-04-18', 23, '12345678910', NULL, '$2y$10$yGSOai4wCSz/tAuwVjtODu90rm4tDVw8RCDKVye/LG.2WxAC4cy5O', 'avatar.png', NULL, '2023-04-17 17:14:16', '2023-04-17 17:14:16'),
-(18, 'Alan', 3, 'Supla-ag', 'Oliveros', NULL, 'Male', '2023-04-18', 21, '1213141516161717', NULL, '$2y$10$hOT7M5vpdgAuEzJPkgpWp.Eq9JusVFb01ikSoqoqzNimHoNQp4vMK', 'avatar.png', NULL, '2023-04-17 17:15:44', '2023-04-17 17:15:44');
+(18, 'Alan', 3, 'Supla-ag', 'Oliveros', NULL, 'Male', '2023-04-18', 21, '1213141516161717', NULL, '$2y$10$hOT7M5vpdgAuEzJPkgpWp.Eq9JusVFb01ikSoqoqzNimHoNQp4vMK', 'avatar.png', NULL, '2023-04-17 17:15:44', '2023-04-17 17:15:44'),
+(19, 'Alvin Joseph', 2, 'Bregildo', 'Goron', NULL, 'Male', NULL, NULL, 'sresmis@teacher2', NULL, '$2y$10$cE1QQM023xkLnid469fQpeKc/N.RnH2Ej015ED3bYn4SK7uXAEGMq', 'avatar.png', NULL, '2023-04-17 18:59:43', '2023-04-17 18:59:43');
 
 --
 -- Indexes for dumped tables
@@ -511,7 +527,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `attendances`
@@ -559,13 +575,13 @@ ALTER TABLE `schools`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -583,13 +599,13 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

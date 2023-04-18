@@ -93,10 +93,23 @@ class TeacherController extends Controller
     public function filterGrades(Request $request)
     {
 
+      $teacherId = auth()->user()->id;
+    
+      $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
+                              ->join('grade_levels','teachers.gradeLevelId', '=', 'grade_levels.id')
+                              ->where('teachers.teacherId', '=', $teacherId)->first();
+
      $year = $request->getYear;
      $subject = $request->getSubject;
+
+     $subjectselect = Subject::find($subject);
+     $yearselect = Session::find($year);
     
-     return view('backend.teacher.grades.filter-grades');
+     return view('backend.teacher.grades.filter-grades')->with([
+      'sectionName' => $sectionName,
+      'yearselect' => $yearselect,
+      'subjectselect' => $subjectselect,
+     ]);
 
     }
     public function students_information(){

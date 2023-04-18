@@ -12,7 +12,9 @@ use App\Models\User;
 use App\Models\Student;
 use App\Models\Address;
 use App\Models\ParentGuardian;
+use App\Models\Subject;
 use Carbon\Carbon;
+
 class TeacherController extends Controller
 {
 
@@ -59,7 +61,23 @@ class TeacherController extends Controller
           ]);
     }
     public function grades(){
-          return view('backend.teacher.grades.grades');
+         
+          $sectionTaughtBy = Teacher::where('teacherId','=',auth()->user()->id)->first();
+
+          $subjectTaught = $sectionTaughtBy->subjectId;
+
+           $splitSubject = explode (",", $subjectTaught);
+
+           $subjects = [];
+           foreach($splitSubject as $key=>$data){
+              $subjects = Subject::find($data);
+           }
+          
+
+
+          return view('backend.teacher.grades.grades')->with([
+            'subjects' => $subjects,
+          ]);
     }
     public function students_information(){
           return view('backend.teacher.students_information.students_information');

@@ -1,145 +1,42 @@
 @extends('layouts.app')
+@section('title', 'SRESMIS | GRADES')
 @section('content')
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Grades</h4>
+                    {{-- <h4 class="page-title">Grades</h4> --}}
                     <div class="ms-auto text-end">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Grades
-                                </li>
-                            </ol>
-                        </nav>
+                      
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
         <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Sales Cards  -->
-            <!-- ============================================================== -->
             <div class="row">
                 <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="col-md-6 col-lg-12 col-xlg-3">
                     <div class="card card-hover">
-                        <div class="box bg-cyan text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-view-dashboard"></i>
-                            </h1>
-                            <h6 class="text-white">Dashboard</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-4 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-success text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-chart-areaspline"></i>
-                            </h1>
-                            <h6 class="text-white">Charts</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-warning text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-collage"></i>
-                            </h1>
-                            <h6 class="text-white">Widgets</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-danger text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-border-outside"></i>
-                            </h1>
-                            <h6 class="text-white">Tables</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-info text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-arrow-all"></i>
-                            </h1>
-                            <h6 class="text-white">Full Width</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <!-- Column -->
-                <div class="col-md-6 col-lg-4 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-danger text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-receipt"></i>
-                            </h1>
-                            <h6 class="text-white">Forms</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-info text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-relative-scale"></i>
-                            </h1>
-                            <h6 class="text-white">Buttons</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-cyan text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-pencil"></i>
-                            </h1>
-                            <h6 class="text-white">Elements</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-success text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-calendar-check"></i>
-                            </h1>
-                            <h6 class="text-white">Calendar</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="col-md-6 col-lg-2 col-xlg-3">
-                    <div class="card card-hover">
-                        <div class="box bg-warning text-center">
-                            <h1 class="font-light text-white">
-                                <i class="mdi mdi-alert"></i>
-                            </h1>
-                            <h6 class="text-white">Errors</h6>
+                        <div class="box bg-cyan">
+                           <div class="row">
+                            {{-- first Col --}}
+                            <div class="col-8">
+                                <h1 class="font-light text-white">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                </h1>
+                                <h6 class="text-white">Dashboard</h6>
+                            </div>
+                             {{-- end first Col --}}
+
+                             {{-- second Col --}}
+                            <div class="col-4 d-flex align-items-center justify-content-center grading_level">
+                               <span class="text-light bg-dark border border-warning px-2 fs-4">1st Grading</span>
+                               <span class="text-light bg-dark border border-warning px-2 fs-4">1st Grading</span>
+                               <span class="text-light bg-dark border border-warning px-2 fs-4">1st Grading</span>
+                               <span class="text-light bg-dark border border-warning px-2 fs-4">1st Grading</span>
+                            </div>
+                            {{-- end second Col --}}
+                           </div>
                         </div>
                     </div>
                 </div>

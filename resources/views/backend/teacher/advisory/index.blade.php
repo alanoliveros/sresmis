@@ -41,6 +41,7 @@
                             @include('backend.teacher.student-information.add-student')
                         </div>
                         <!-- column -->
+                        <div class="table-responsive">
                         <table id="studentsLists" class="table table-dark table-hover">
                             <thead>
                                 <tr class="fs-5">
@@ -79,7 +80,8 @@
                                  
                            
                               
-                        </table>
+                            </table>
+                          </div>
                         <!-- column -->
                       </div>
                     </div>

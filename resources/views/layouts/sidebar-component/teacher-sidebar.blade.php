@@ -14,14 +14,28 @@
         <span class="hide-menu">Grades</span>
     </a>
 </li>
+
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.teacher.attendance')}}"
+    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
        aria-expanded="false">
-        <i class="mdi mdi-content-paste"></i>
+        <i class="mdi mdi-file-document-box"></i>
         <span class="hide-menu">Attendance</span>
     </a>
+    <ul aria-expanded="false" class="collapse first-level">
+        <li class="sidebar-item sidebar_hover">
+            <a href="{{route('sresmis.teacher.attendance.by-advisory')}}" class="sidebar-link">
+                <i class="mdi mdi-clipboard"></i>
+                <span class="hide-menu">Advisory</span>
+            </a>
+        </li>
+        <li class="sidebar-item sidebar_hover">
+            <a href="icon-fontawesome.html" class="sidebar-link">
+                <i class="mdi mdi-clipboard-text"></i>
+                <span class="hide-menu">Subject</span>
+            </a>
+        </li>
+    </ul>
 </li>
-
 <li class="sidebar-item sidebar_hover">
     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
        aria-expanded="false">

@@ -75,8 +75,9 @@ class TeacherController extends Controller
 
       $grades = GradeLevel::where('id','=', $sectionName->gradeLevelId)->first();
       $students = Student::where('students.teacherId' , '=', $teacherId)
-                        ->join('users', 'students.studentId', '=', 'users.id')
-                        ->get();
+                         ->join('users', 'students.studentId', '=', 'users.id')
+                         ->orderBy('users.lastname', 'asc')
+                         ->get();
 
 
       return view('backend.teacher.advisory.index')->with([

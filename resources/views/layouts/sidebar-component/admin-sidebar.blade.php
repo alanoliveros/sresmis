@@ -28,10 +28,17 @@
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-sections')}}" 
        aria-expanded="false">
         <i class="mdi mdi-blur-linear"></i>
-        <span class="hide-menu">Full Width</span>
+        <span class="hide-menu">Manage Sections</span>
+    </a>
+</li>
+<li class="sidebar-item sidebar_hover">
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-subjects')}}" 
+       aria-expanded="false">
+        <i class="mdi mdi-blur-linear"></i>
+        <span class="hide-menu">Manage Subjects</span>
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">

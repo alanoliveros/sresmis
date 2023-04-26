@@ -137,6 +137,57 @@ class AdminController extends Controller
 
        
     }
+
+    public function manageSubjects()
+    {
+       $sections = Section::where('sections.adminId', '=', auth()->user()->id)->join('grade_levels', 'sections.gradeLevelId', 'grade_levels.id')->orderBy('grade_levels.gradeLevelName' , 'ASC')->get();
+       $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
+       return view('backend.admin.subjects.index')->with([
+        'sections' => $sections,
+        'gradelevel' => $gradelevel,
+       ]);
+    }
+    public function create_subject(Request $request)
+    {
+       $request->validate([
+        'gradeLevel' => 'required',
+        'sectionName' => 'required',
+       ]);
+
+       $section = new Section();
+       $section->adminId = auth()->user()->id;
+       $section->sectionName = $request->sectionName;
+       $section->gradeLevelId = $request->gradeLevel;
+       $section->save();
+
+       return redirect()->back()->with('success_added', 'Successfully added new record');   
+
+    }
+    public function manageSections()
+    {
+       $sections = Section::where('sections.adminId', '=', auth()->user()->id)->join('grade_levels', 'sections.gradeLevelId', 'grade_levels.id')->orderBy('grade_levels.gradeLevelName' , 'ASC')->get();
+       $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
+       return view('backend.admin.sections.index')->with([
+        'sections' => $sections,
+        'gradelevel' => $gradelevel,
+       ]);
+    }
+    public function create_section(Request $request)
+    {
+       $request->validate([
+        'gradeLevel' => 'required',
+        'sectionName' => 'required',
+       ]);
+
+       $section = new Section();
+       $section->adminId = auth()->user()->id;
+       $section->sectionName = $request->sectionName;
+       $section->gradeLevelId = $request->gradeLevel;
+       $section->save();
+
+       return redirect()->back()->with('success_added', 'Successfully added new record');   
+
+    }
     public function getSection(Request $request)
     {
 

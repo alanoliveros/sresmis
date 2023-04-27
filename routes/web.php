@@ -34,6 +34,11 @@ Route::get('/sresmis/admin/manage-sections', [App\Http\Controllers\AdminControll
 Route::post('/sresmis/admin/create-section', [App\Http\Controllers\AdminController::class, 'create_section'])->name('create-section')->middleware('isAdmin');
 // end section
 
+// manage class schedules
+Route::get('/sresmis/admin/manage-class-schedules', [App\Http\Controllers\AdminController::class, 'manage_class_schedules'])->name('manage-class-schedules')->middleware('isAdmin');
+Route::get('/sresmis/admin/schedules/view-by-gradelevel/{name}', [App\Http\Controllers\AdminController::class, 'view_by_gradeLevel'])->middleware('isAdmin');
+Route::get('/sresmis/admin/schedules/view-by-section/{sid}/{gid}', [App\Http\Controllers\AdminController::class, 'view_by_section'])->middleware('isAdmin');
+Route::post('/sresmis/admin/schedules/add-schedule-by-section', [App\Http\Controllers\AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section')->middleware('isAdmin');
 // TeacherController
 Route::get('/sresmis/teacher/dashboard', [App\Http\Controllers\TeacherController::class, 'index'])->name('sresmis.teacher.dashboard')->middleware('isTeacher');
 Route::get('/sresmis/teacher/advisory', [App\Http\Controllers\TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory')->middleware('isTeacher');

@@ -36,41 +36,41 @@
                 </div>    
             </div>    
             <div class="col-md-12 col-lg-12 col-xlg-12">
-            <div class="card">
-                    <div class="box bg-light">
-                        
-                            <table class="table table-hover" id="subjects">
-                                <thead>
-                                        <tr class="fs-5">
-                                            <th>Subject Name</th>
-                                            <th>Subject Description</th>
-                                            <th>Action</th>
-                                        </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($subjects as $subject)
-                                        <tr>
-                                            <td>{{$subject->subjectName}}</td>
-                                            <td>{{$subject->description}}</td>
-                                            <td>
-                                                <div class="dropdown" tabindex="1">
-                                                    <i class="db2" tabindex="1"></i>
-                                                    <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical text-dark"></i></a>
-                                                     <div class="dropdown-content">
-                                                        <a href="#">View</a>
-                                                        <a href="#">Edit</a>
-                                                        <a href="#" class="text-danger">Delete</a>
-                                                     </div>
-                                                </div>
-                                            </td>
-                                           
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                 
+              <div class="card">
+                      <div class="box bg-light">
+                          
+                              <table class="table table-hover" id="subjects">
+                                  <thead>
+                                          <tr class="fs-5">
+                                              <th>Subject Name</th>
+                                              <th>Subject Description</th>
+                                              <th>Action</th>
+                                          </tr>
+                                  </thead>
+                                  <tbody>
+                                      @foreach ($subjects as $subject)
+                                          <tr>
+                                              <td>{{$subject->subjectName}}</td>
+                                              <td>{{$subject->description}}</td>
+                                              <td>
+                                                  <div class="dropdown" tabindex="1">
+                                                      <i class="db2" tabindex="1"></i>
+                                                      <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical text-dark"></i></a>
+                                                      <div class="dropdown-content">
+                                                          <a href="#">View</a>
+                                                          <a href="#">Edit</a>
+                                                          <a href="#" class="text-danger">Delete</a>
+                                                      </div>
+                                                  </div>
+                                              </td>
+                                            
+                                          </tr>
+                                      @endforeach
+                                  </tbody>
+                              </table>
+                  
                       </div>
-                </div>    
+              </div>    
             </div>    
            
           </div>

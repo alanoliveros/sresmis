@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title' , 'SRESMIS | Sections')
+@section('title' , 'SRESMIS | Schedules')
 @section('content')
 <div class="page-wrapper">
         <!-- ============================================================== -->
@@ -29,25 +29,30 @@
                 <div class="card">
                     <div class="box bg-dark ">
                         <span class="font-light text-white fs-3">Sections</span>
-                        <span class="font-light text-white float-end">
-                            <a href="" class="btn btn-light rounded-0" data-bs-toggle="modal" data-bs-target="#add-section">+ Add Section</a>
-                            @include('backend.admin.sections.add-section')
-                        </span>
+                        
                       </div>
                 </div>    
             </div>    
-            @foreach ($sections as $section)
-            <div class="col-md-6 col-lg-2 col-xlg-3">
-                <div class="card card-hover">
-                  <div class="box bg-cyan text-center">
-                    <h1 class="font-light text-white">
-                      <i class="mdi mdi-view-dashboard"></i>
-                    </h1>
-                    <h6 class="text-white">{{$section->sectionName.' - '.$section->gradeLevelName}}</h6>
-                  </div>
-                </div>
+            @if (count($sections) > 0)
+              @foreach ($sections as $section)
+              <div class="col-md-6 col-lg-2 col-xlg-3">
+                  <a href="{{url('sresmis/admin/schedules/view-by-section/'.$section->id.'/'.$gradeLevelId)}}">
+                      <div class="card card-hover">
+                      <div class="box bg-success text-center">
+                          <h1 class="font-light text-white">
+                          <i class="mdi mdi-view-dashboard"></i>
+                          </h1>
+                          <h6 class="text-white">{{$section->sectionName}}</h6>
+                      </div>
+                      </div>
+                  </a>
               </div>
-            @endforeach
+              @endforeach
+            @else
+            <div class="col-md-6 col-lg-12 col-xlg-3 text-center">
+              <span class=" text-danger">No section found</span>
+            </div>
+            @endif
           </div>
         
         </div>

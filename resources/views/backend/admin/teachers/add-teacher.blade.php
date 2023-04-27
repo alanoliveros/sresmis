@@ -109,17 +109,6 @@
                     
                 </div>
                 <div class="col-md-12">
-                    <label for="validationDefault02" class="form-label">Subjects Taught <small class="text-danger">(required)</small></label><br>
-
-                    @foreach ($subjects as $key=>$subject)
-                    <input class="form-check-input" type="checkbox" name="subjectTaught[]" value="{{$subject->id}}" {{$subject->subjectName == 'ALL SUBJECTS'? 'checked':''}}>
-                    <label class="form-check-label" for="exampleRadios1">
-                    </label>{{$subject->subjectName}}<br>
-                    @endforeach
-                    
-                </div>
-               
-                <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">Total Actual Teaching Minutes Per Week</label>
                     <input type="number" class="form-control" name="minPerWeek">
                 </div>

@@ -9,6 +9,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Models\Address;
+use App\Models\ClassSchedule;
 
 class AdminController extends Controller
 {
@@ -71,7 +72,7 @@ class AdminController extends Controller
         $minor = $request->minor;
         $gradeLevelTaught = $request->gradeLevelTaught;
         // array subject subjectTaught[] need for each to specify
-        $subjectTaught = implode(', ', $request->subjectTaught);
+       
         $minPerWeek = $request->minPerWeek;
         $ancillary = $request->ancillary;
         $sectionTaught = $request->sectionTaught;
@@ -111,7 +112,6 @@ class AdminController extends Controller
           $teacher->teacherId = $teacherId;
           $teacher->sectionId = $sectionTaught;
           $teacher->gradeLevelId = $gradeLevelTaught;
-          $teacher->subjectId = $subjectTaught;
           $teacher->addressId = $addressId;
           $teacher->designation = $designation;
           $teacher->employeeNumber = $employeeNumber;
@@ -216,6 +216,68 @@ class AdminController extends Controller
       $getGradeLevelById = Section::where('gradeLevelId','=', $request->id)->get();
       return response()->json([
         'gradeLevel' => $getGradeLevelById,
-    ]);
+      ]);
+    }
+    public function manage_class_schedules(){
+      $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
+      return view('backend.admin.class-schedules.index')->with([
+        'gradelevel' => $gradelevel,
+      ]);
+    }
+
+    public function view_by_gradeLevel($name){
+      $changeName = str_replace('-', ' ', $name);
+      $gradeLevel = GradeLevel::where('gradeLevelName', '=', $changeName)->first();
+      
+      // echo $gradeLevel->gradeLevelName;
+      $sections = Section::where('gradeLevelId', '=', $gradeLevel->id)->get();
+
+      return view('backend.admin.class-schedules.by-section')->with([
+        'sections' => $sections,
+        'gradeLevelId' => $gradeLevel->id,
+
+      ]);
+    }
+
+    public function view_by_section($sid, $gid){
+  
+      $section = Section::find($sid);
+      $classSchedule = ClassSchedule::where('sectionId', '=', $gid)->get();
+      $subjects = Subject::where('gradeLevelId','=', $gid)->get();
+      $teachers = Teacher::where('teachers.adminId' ,'=', auth()->user()->id)->join('users','teachers.teacherId','users.id')->get();
+      
+      
+      return view('backend.admin.class-schedules.section')->with([
+        'section' => $section,
+        'classSchedule' => $classSchedule,
+        'subjects' => $subjects,
+        'teachers' => $teachers,
+      ]);
+
+    }
+    public function add_schedule_by_section(Request $request){
+
+      $request->validate([
+
+        'teacherId' => 'required',
+        'scheduleDay' => 'required',
+
+      ]);
+
+      $days = array();
+      foreach($request->scheduleDay as $day){
+          $days[] = $day;
+      }
+
+      $schedule = new ClassSchedule();
+      $schedule->sectionId = $request->sectionId;
+      $schedule->subjectId = $request->subjectId;
+      $schedule->teacherId = $request->teacherId;
+      $schedule->startTime = $request->startTime;
+      $schedule->endTime =   $request->endTime;
+      $schedule->scheduleDay = implode(',' ,$days);
+      $schedule->save();
+
+      return redirect()->back()->with('success_added', 'Successfully added new record');   
     }
 }

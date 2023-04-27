@@ -42,6 +42,13 @@
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-class-schedules')}}" 
+       aria-expanded="false">
+        <i class="mdi mdi-blur-linear"></i>
+        <span class="hide-menu">Manage Class Schedules</span>
+    </a>
+</li>
+<li class="sidebar-item sidebar_hover">
     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
        aria-expanded="false">
         <i class="mdi mdi-receipt"></i>

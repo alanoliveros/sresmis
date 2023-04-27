@@ -26,10 +26,11 @@
             success:function(response) {
             
               
-              
+              let sectionTaught = '';
               $.each(response.gradeLevel, function(key, level) {
-                  $('#sectionTaught').append('<option value="'+level.id+'">'+level.sectionName+'</option>');
+                sectionTaught = sectionTaught +'<option value="'+level.id+'">'+level.sectionName+'</option>';
               });
+              $('#sectionTaught').html(sectionTaught);
             }
         });
     });
@@ -38,7 +39,7 @@
         $(this).parents('tr').remove();
     });
 
-    $('#select-day').select2({
+    $('#add-day').select2({
        
         placeholder: "Select Day",
         tags: true,

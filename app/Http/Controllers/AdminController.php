@@ -77,8 +77,6 @@ class AdminController extends Controller
         $sectionTaught = $request->sectionTaught;
        
          
-
-
         $user = new User();
         $user->name = $firstName;
         $user->role = 2;
@@ -147,27 +145,52 @@ class AdminController extends Controller
         'gradelevel' => $gradelevel,
        ]);
     }
-    public function create_subject(Request $request)
+
+    public function addsubjectByGradeLevel($name, $id){
+      $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
+      $subject = Subject::where('gradeLevelId','=', $id)->get();
+      
+      return view('backend.admin.subjects.bygradelevel')->with([
+        'name' => $name,
+        'id' => $id,
+        'gradelevel' => $gradelevel,
+        'subjects' => $subject,
+
+      ]);
+    }
+
+    public function add_subjectBygradeLevel(Request $request)
     {
        $request->validate([
-        'gradeLevel' => 'required',
-        'sectionName' => 'required',
+        'subjectname' => 'required',
        ]);
 
-       $section = new Section();
-       $section->adminId = auth()->user()->id;
-       $section->sectionName = $request->sectionName;
-       $section->gradeLevelId = $request->gradeLevel;
-       $section->save();
+       $gradeLevelId = $request->gradeLevelId;
+       $subjectname = $request->subjectname;
+       $description = $request->description;
 
-       return redirect()->back()->with('success_added', 'Successfully added new record');   
+      
+       foreach($subjectname as $key=>$name){
+
+        // echo $name.'<br>';
+          $subject = new Subject();
+          $subject->adminId = auth()->user()->id;
+          $subject->gradeLevelId =  $gradeLevelId;
+          $subject->subjectName =  $name;
+          $subject->description =  $description[$key];
+          $subject->save();
+       }
+        return redirect()->back()->with('success_added', 'Successfully added new record');   
 
     }
     public function manageSections()
     {
        $sections = Section::where('sections.adminId', '=', auth()->user()->id)->join('grade_levels', 'sections.gradeLevelId', 'grade_levels.id')->orderBy('grade_levels.gradeLevelName' , 'ASC')->get();
+       $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
        return view('backend.admin.sections.index')->with([
         'sections' => $sections,
+        'gradelevel' => $gradelevel,
+
        ]);
     }
     public function create_section(Request $request)

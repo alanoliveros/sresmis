@@ -126,7 +126,7 @@
                                                 <a href="#">Edit</a>
                                                 <a href="#" class="text-danger">Delete</a>
                                              </div>
-                                          </div>
+                                        </div>
                                     </td>
                                </tr>
                            @endforeach   

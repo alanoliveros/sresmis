@@ -26,6 +26,8 @@ Route::get('/sresmis/admin/teachers', [App\Http\Controllers\AdminController::cla
 Route::post('/sresmis/admin/add-teacher', [App\Http\Controllers\AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher')->middleware('isAdmin');
 // subjects
 Route::get('/sresmis/admin/manage-subjects', [App\Http\Controllers\AdminController::class, 'manageSubjects'])->name('manage-subjects')->middleware('isAdmin');
+Route::get('/sresmis/admin/{name}/{id}', [App\Http\Controllers\AdminController::class, 'addsubjectByGradeLevel'])->middleware('isAdmin');
+Route::post('/sresmis/admin/add-subjectBygradeLevel', [App\Http\Controllers\AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel')->middleware('isAdmin');
 // section
 Route::post('/sresmis/admin/getSection', [App\Http\Controllers\AdminController::class, 'getSection'])->middleware('isAdmin');
 Route::get('/sresmis/admin/manage-sections', [App\Http\Controllers\AdminController::class, 'manageSections'])->name('manage-sections')->middleware('isAdmin');

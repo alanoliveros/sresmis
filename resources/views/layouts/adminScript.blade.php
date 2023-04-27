@@ -1,15 +1,13 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   $(document).ready(function(){
 
     $('.add_subject').on('click', function(){
       $('.subject_tab').append(
             `<tr>
-           
-            <td><input type="date" class="form-control" value="{{date('Y-m-d')}}" name="game_date[]"></td>
-            <td><input type="time" class="form-control" name="game_time[]"></td>
-            <td><input type="number" class="form-control" name="round_number[]"></td>
-            <td><input type="number" class="form-control" name="match_number[]"></td>
-            <td class="text-center"><button type="button" class="btn btn-danger remove_btn">x</button></td>
+                <td><input type="text" name="subjectname[]" class="form-control"></td>
+                <td><input type="text" name="description[]" class="form-control"></td>
+                <td class="text-center"><button type="button" class="btn btn-danger remove_btn">x</button></td>
             </tr>`
          );
     });
@@ -35,8 +33,16 @@
             }
         });
     });
+    
     $(document).on('click', '.remove_btn', function(){
         $(this).parents('tr').remove();
+    });
+
+    $('#select-day').select2({
+       
+        placeholder: "Select Day",
+        tags: true,
+        tokenSeparators: ['/',',',','," "]
     });
   });
   </script>

@@ -166,10 +166,8 @@ class AdminController extends Controller
     public function manageSections()
     {
        $sections = Section::where('sections.adminId', '=', auth()->user()->id)->join('grade_levels', 'sections.gradeLevelId', 'grade_levels.id')->orderBy('grade_levels.gradeLevelName' , 'ASC')->get();
-       $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
        return view('backend.admin.sections.index')->with([
         'sections' => $sections,
-        'gradelevel' => $gradelevel,
        ]);
     }
     public function create_section(Request $request)

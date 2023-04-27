@@ -21,8 +21,7 @@
               </div>
             </div>
           </div>
-        </div>
-        
+        </div>      
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 col-lg-12 col-xlg-12">
@@ -30,8 +29,8 @@
                     <div class="box bg-dark ">
                         <span class="font-light text-white fs-3">Sections</span>
                         <span class="font-light text-white float-end">
-                            <a href="" class="btn btn-light rounded-0" data-bs-toggle="modal" data-bs-target="#add-section">+ Add Section</a>
-                            @include('backend.admin.sections.add-section')
+                            <a href="" class="btn btn-light rounded-0" data-bs-toggle="modal" data-bs-target="#add-subjects">+ Add Subject</a>
+                            @include('backend.admin.subjects.add-subjects')
                         </span>
                       </div>
                 </div>    

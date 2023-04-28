@@ -245,7 +245,7 @@ class AdminController extends Controller
       $classSchedule = ClassSchedule::where('sectionId', '=', $gid)->get();
       $subjects = Subject::where('gradeLevelId','=', $gid)->get();
       $teachers = Teacher::where('teachers.adminId' ,'=', auth()->user()->id)->join('users','teachers.teacherId','users.id')->get();
-      
+
       
       return view('backend.admin.class-schedules.section')->with([
         'section' => $section,
@@ -253,7 +253,7 @@ class AdminController extends Controller
         'subjects' => $subjects,
         'teachers' => $teachers,
       ]);
-
+// 
     }
     public function add_schedule_by_section(Request $request){
 

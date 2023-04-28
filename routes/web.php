@@ -39,6 +39,26 @@ Route::get('/sresmis/admin/manage-class-schedules', [App\Http\Controllers\AdminC
 Route::get('/sresmis/admin/schedules/view-by-gradelevel/{name}', [App\Http\Controllers\AdminController::class, 'view_by_gradeLevel'])->middleware('isAdmin');
 Route::get('/sresmis/admin/schedules/view-by-section/{sid}/{gid}', [App\Http\Controllers\AdminController::class, 'view_by_section'])->middleware('isAdmin');
 Route::post('/sresmis/admin/schedules/add-schedule-by-section', [App\Http\Controllers\AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section')->middleware('isAdmin');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // TeacherController
 Route::get('/sresmis/teacher/dashboard', [App\Http\Controllers\TeacherController::class, 'index'])->name('sresmis.teacher.dashboard')->middleware('isTeacher');
 Route::get('/sresmis/teacher/advisory', [App\Http\Controllers\TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory')->middleware('isTeacher');
@@ -60,4 +80,11 @@ Route::get('/sresmis/teacher/grades', [App\Http\Controllers\TeacherController::c
 Route::get('/sresmis/teacher/students-information', [App\Http\Controllers\TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information')->middleware('isTeacher');
 
  // teacher school forms
+Route::get('/sresmis/teacher/school-form-1', [App\Http\Controllers\SchoolForm1::class, 'sf1'])->name('sresmis.teacher.sf1')->middleware('isTeacher');
+Route::post('/sresmis/teacher/get-student-sf1-by-school-year', [App\Http\Controllers\SchoolForm1::class, 'get_student_sf1_by_sy'])->middleware('isTeacher');
 Route::get('/sresmis/teacher/school-form-9', [App\Http\Controllers\TeacherController::class, 'sf9'])->name('sresmis.teacher.sf9')->middleware('isTeacher');
+
+
+// manage class Schedules
+Route::get('/sresmis/teacher/class-schedule', [App\Http\Controllers\TeacherController::class, 'class_schedule'])->name('sresmis.teacher.class-schedule')->middleware('isTeacher');
+

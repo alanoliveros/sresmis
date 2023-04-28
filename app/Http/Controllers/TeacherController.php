@@ -13,6 +13,7 @@ use App\Models\Student;
 use App\Models\Address;
 use App\Models\ParentGuardian;
 use App\Models\Subject;
+use App\Models\ClassSchedule;
 use Carbon\Carbon;
 
 class TeacherController extends Controller
@@ -60,20 +61,15 @@ class TeacherController extends Controller
             'students' => $students,
           ]);
     }
-    public function grades()
-    {
+    public function grades(){
          
           $sectionTaughtBy = Teacher::where('teacherId','=',auth()->user()->id)->first();
 
-          $subjectTaught = $sectionTaughtBy->subjectId;
+         
 
-           $splitSubject = explode (",", $subjectTaught);
+           
 
-           $subjects = [];
-           foreach($splitSubject as $key=>$data){
-              $subjects[] = Subject::find($data);
-           }
-
+          $class_schedules = ClassSchedule::where('class_schedules.teacherId','=', auth()->user()->id)->join('subjects','class_schedules.subjectId', 'subjects.id')->get();
            
            
            $teacherId = auth()->user()->id;
@@ -85,13 +81,13 @@ class TeacherController extends Controller
            $schoolYear = Session::where('adminId', '=',$adminId)->orderBy('school_year','desc')->get();
 
           return view('backend.teacher.grades.grades')->with([
-            'subjects' => $subjects,
+            
             'sectionName' => $sectionName,
             'schoolYear' => $schoolYear,
+            'class_schedules' => $class_schedules,
           ]);
     }
-    public function filterGrades(Request $request)
-    {
+    public function filterGrades(Request $request){
 
       $teacherId = auth()->user()->id;
     
@@ -129,18 +125,22 @@ class TeacherController extends Controller
                          ->join('users', 'students.studentId', '=', 'users.id')
                          ->orderBy('users.lastname', 'asc')
                          ->get();
+      $sessions = Session::orderBy('school_year','desc')->get();
 
 
       return view('backend.teacher.advisory.index')->with([
             'section' =>$sectionName,
             'grades' =>$grades,
             'students' => $students,
+            'sessions' => $sessions,
       ]);
 
     }
  
     public function addStudent(Request $request){
 
+
+      $schoolYearId = $request->schoolYearId;
       $studentLrn = $request->studentLrn;
       $firstName = $request->firstName;
       $middleName = $request->middleName;
@@ -192,8 +192,8 @@ class TeacherController extends Controller
 
 
       
-    
-        $user = new User();
+        $user = User::firstOrNew(['email'=>$email]);
+        // $user = new User();
         $user->name = $firstName;
         $user->role = 3;
         $user->middleName = $middleName;
@@ -210,10 +210,11 @@ class TeacherController extends Controller
         $studentId = $user->id;
 
       if($userSave){
-            $student = new Student();
+            $student = Student::firstOrNew(['studentId'=>$studentId,'schoolYearId'=>$schoolYearId]);
             $student->adminId = $adminId->adminId;
             $student->teacherId = $teacherId;
             $student->studentId = $studentId;
+            $student->schoolYearId = $schoolYearId;
             $student->lrn = $studentLrn;
             $student->sectionId = $adminId->sectionId;
             $student->gradeLevelId = $adminId->gradeLevelId;
@@ -225,7 +226,7 @@ class TeacherController extends Controller
       }
 
       if($userSave){
-            $address = new Address();
+            $address = Address::firstOrNew(['userId'=>$studentId]);
             $address->userId = $studentId;
             $address->purok = $purok;
             $address->barangay = $barangay;
@@ -236,7 +237,7 @@ class TeacherController extends Controller
 
       }
       if($userSave){
-            $parent = new ParentGuardian();
+            $parent = ParentGuardian::firstOrNew(['studentId'=>$studentId]);
             $parent->adminId = $adminId->adminId;
             $parent->teacherId = $teacherId;
             $parent->studentId = $studentId;
@@ -278,10 +279,7 @@ class TeacherController extends Controller
 
     }
 
-
-
-    public function sf9()
-    {
+    public function sf9(){
 
             $session = Session::orderBy('school_year', 'desc')->get();
             $first_session = Session::orderBy('school_year', 'desc')->first();
@@ -293,5 +291,9 @@ class TeacherController extends Controller
                         'first_session' => $first_session,
 
                        ]);
+    }
+
+    public function class_schedule(){
+
     }
 }

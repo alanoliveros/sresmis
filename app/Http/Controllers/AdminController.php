@@ -155,7 +155,6 @@ class AdminController extends Controller
         'id' => $id,
         'gradelevel' => $gradelevel,
         'subjects' => $subject,
-
       ]);
     }
 
@@ -245,23 +244,22 @@ class AdminController extends Controller
       $classSchedule = ClassSchedule::where('sectionId', '=', $gid)->get();
       $subjects = Subject::where('gradeLevelId','=', $gid)->get();
       $teachers = Teacher::where('teachers.adminId' ,'=', auth()->user()->id)->join('users','teachers.teacherId','users.id')->get();
-
+      $schedules = ClassSchedule::where('class_schedules.sectionId','=',$sid)->join('subjects', 'class_schedules.subjectId', 'subjects.id')->orderBy('class_schedules.startTime', 'asc')->get();
       
       return view('backend.admin.class-schedules.section')->with([
         'section' => $section,
         'classSchedule' => $classSchedule,
-        'subjects' => $subjects,
-        'teachers' => $teachers,
+        'subjects' =>  $subjects,
+        'teachers' =>  $teachers,
+        'schedules' => $schedules,
       ]);
 // 
     }
     public function add_schedule_by_section(Request $request){
 
       $request->validate([
-
         'teacherId' => 'required',
         'scheduleDay' => 'required',
-
       ]);
 
       $days = array();

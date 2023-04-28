@@ -48,7 +48,7 @@
                                                 <label for="validationDefault04" class="form-label text-light">Select Subject</label>
                                                 <select name="getSubject" required class="form-select getSubject" id="validationDefault04" required>
                                                 <option selected disabled value="">Choose...</option>
-                                                    @foreach($subjects as $key=>$subject)
+                                                    @foreach($class_schedules as $key=>$subject)
                                                         <option value="{{$subject->id}}">{{$subject->subjectName}}</option>
                                                     @endforeach
                                                 </select>
@@ -58,7 +58,7 @@
                                             <div class="col-md-12">
                                                 <label for="validationDefault04" class="form-label text-light">Select School-Year</label>
                                                 <select name="getYear" required class="form-select getYear" id="validationDefault04" required>
-                                                <option selected disabled value="">Choose...</option>
+                                                <option selected disabled>Choose...</option>
                                                     @foreach($schoolYear as $key=>$year)
                                                         <option value="{{$year->id}}">{{$year->school_year}}</option>
                                                     @endforeach

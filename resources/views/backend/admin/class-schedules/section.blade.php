@@ -72,16 +72,20 @@
                                             </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($classSchedule as $sched)
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                        @foreach ($schedules as $sched)
+                                          @php
+                                              $arr =   explode (",", $sched->scheduleDay); 
+                                              
+                                          @endphp
+                                            <tr class="text-center">
+                                                <td class="bg-warning">{{$sched->startTime.' - '.date('h:i:s a', strtotime($sched->endTime))}}</td>
+                                                <td>{{in_array("Monday", $arr)? $sched->subjectName:'----'}}</td>
+                                                <td>{{in_array("Tuesday", $arr)? $sched->subjectName:'----'}}</td>
+                                                <td>{{in_array("Wednesday", $arr)? $sched->subjectName:'----'}}</td>
+                                                <td>{{in_array("Thursday", $arr)? $sched->subjectName:'----'}}</td>
+                                                <td>{{in_array("Friday", $arr)? $sched->subjectName:'----'}}</td>
+                                                <td>{{in_array("Saturday", $arr)? $sched->subjectName:'----'}}</td>
+                                                <td>{{in_array("Sunday", $arr)? $sched->subjectName:'----'}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

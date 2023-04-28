@@ -15,6 +15,28 @@
     </a>
 </li>
 
+
+<li class="sidebar-item sidebar_hover">
+    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
+       aria-expanded="false">
+        <i class="mdi mdi-file-document-box"></i>
+        <span class="hide-menu">Class Schedules</span>
+    </a>
+    <ul aria-expanded="false" class="collapse first-level">
+        <li class="sidebar-item sidebar_hover">
+            <a href="{{route('sresmis.teacher.class-schedule')}}" class="sidebar-link">
+                <i class="mdi mdi-clipboard"></i>
+                <span class="hide-menu">Advisory</span>
+            </a>
+        </li>
+        <li class="sidebar-item sidebar_hover">
+            <a href="icon-fontawesome.html" class="sidebar-link">
+                <i class="mdi mdi-clipboard-text"></i>
+                <span class="hide-menu">Subject</span>
+            </a>
+        </li>
+    </ul>
+</li>
 <li class="sidebar-item sidebar_hover">
     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
        aria-expanded="false">
@@ -65,6 +87,12 @@
         <span class="hide-menu">School Forms</span>
     </a>
     <ul aria-expanded="false" class="collapse first-level">
+        <li class="sidebar-item sidebar_hover">
+            <a href="{{route('sresmis.teacher.sf1')}}" class="sidebar-link">
+                <i class="mdi mdi-file"></i>
+                <span class="hide-menu"> School Form 1</span>
+            </a>
+        </li>
         <li class="sidebar-item sidebar_hover">
             <a href="{{route('sresmis.teacher.sf9')}}" class="sidebar-link">
                 <i class="mdi mdi-file"></i>

@@ -1,5 +1,5 @@
 <div class="modal fade" id="addStudent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-scrollable add-student" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary">
             <h1 class="modal-title fs-5 text-light fs-5">Student Personal Information</h1>
@@ -9,6 +9,14 @@
             <form action="{{route('sresmis.teacher.add-student')}}" method="POST">
                 @csrf
             <div class="row g-3">
+                <div class="col-md-12">
+                    <label for="validationDefault02" class="form-label">School Year <small class="text-danger">(required)</small> </label>
+                    <select name="schoolYearId" id="" class="form-select">
+                        @foreach ($sessions as $key=>$year)
+                            <option {{$key == 0? 'selected': ''}} value="{{$year->id}}">{{$year->school_year}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">LRN <small class="text-danger">(required)</small> </label>
                     <input type="number" min="1" class="form-control" name="studentLrn">

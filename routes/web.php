@@ -1,5 +1,9 @@
 <?php
 
+
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Indicator\PerformanceIndicatorController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +24,43 @@ Route::get('/', function () {
 Auth::routes();
 
 
-// AdminController
-Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('sresmis.admin.dashboard')->middleware('isAdmin');
+
+/** Admin Controller */
+Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
+    Route::get('/teachers', [AdminController::class, 'teachers'])->name('sresmis.admin.teachers');
+    Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
+});
+
+
+/*Route::get('/sresmis/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('sresmis.admin.dashboard')->middleware('isAdmin');
 Route::get('/sresmis/admin/teachers', [App\Http\Controllers\AdminController::class, 'teachers'])->name('sresmis.admin.teachers')->middleware('isAdmin');
-Route::post('/sresmis/admin/add-teacher', [App\Http\Controllers\AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher')->middleware('isAdmin');
+Route::post('/sresmis/admin/add-teacher', [App\Http\Controllers\AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher')->middleware('isAdmin');*/
+
+
+
+
+/** Key Performance Indicator */
+Route::middleware('isAdmin')->resource('key-performance-indicator', PerformanceIndicatorController::class);
+
+/*Route::prefix('key-performance-indicator')->middleware('isAdmin')->group(function () {
+    Route::get('/', [PerformanceIndicatorController::class, 'index'])->name('key-performance-indicator.index');
+    Route::get('/create', [PerformanceIndicatorController::class, 'create'])->name('key-performance-indicator.create');
+    Route::post('/store', [PerformanceIndicatorController::class, 'store'])->name('key-performance-indicator.store');
+    Route::get('/{id}/edit', [PerformanceIndicatorController::class, 'edit'])->name('key-performance-indicator.edit');
+    Route::put('/{id}/update', [PerformanceIndicatorController::class, 'update'])->name('key-performance-indicator.update');
+    Route::delete('/{id}/destroy', [PerformanceIndicatorController::class, 'destroy'])->name('key-performance-indicator.destroy');
+});*/
+
+
+
+
+
+
+
+
+
+
 // subjects
 Route::get('/sresmis/admin/manage-subjects', [App\Http\Controllers\AdminController::class, 'manageSubjects'])->name('manage-subjects')->middleware('isAdmin');
 Route::get('/sresmis/admin/{name}/{id}', [App\Http\Controllers\AdminController::class, 'addsubjectByGradeLevel'])->middleware('isAdmin');

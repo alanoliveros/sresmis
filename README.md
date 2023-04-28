@@ -2,4 +2,4 @@
 
 SRESMIS - San Roque Elementary School Management Information System
 
-- Okay, detailed description here.
+- Okay, detailed description ni siya.

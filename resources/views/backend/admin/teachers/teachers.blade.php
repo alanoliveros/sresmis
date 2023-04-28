@@ -45,6 +45,7 @@
                 </div>
               </div>
             <!-- Column -->
+
             <div class="col-md-6 col-lg-3 col-xlg-3">
               <div class="card card-hover">
                 <div class="box bg-cyan text-center">
@@ -55,6 +56,7 @@
                 </div>
               </div>
             </div>
+
             <!-- Column -->
             <div class="col-md-6 col-lg-3 col-xlg-3">
               <div class="card card-hover">
@@ -77,8 +79,8 @@
                 </div>
               </div>
             </div>
-           
-           
+
+
           </div>
           <!-- ============================================================== -->
           <!-- Sales chart -->
@@ -87,7 +89,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-body">
-                 
+
                   <div class="row">
                     <div class="mb-2">
                         <span class="fs-4">Teacher Personal Information</span>
@@ -129,9 +131,9 @@
                                         </div>
                                     </td>
                                </tr>
-                           @endforeach   
-                       
-                          
+                           @endforeach
+
+
                     </table>
                     <!-- column -->
                   </div>
@@ -139,6 +141,6 @@
               </div>
             </div>
           </div>
-        
+
         </div>
 @endsection

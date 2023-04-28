@@ -6,20 +6,20 @@
 </li>
 
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('key-performance-indicator.index')}}"
        aria-expanded="false">
         <i class="mdi mdi-chart-bar"></i>
-        <span class="hide-menu">Key Performance Indicators</span>
+        <span class="hide-menu">Performance Indicator</span>
     </a>
 </li>
 
-<li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html"
+{{--<li class="sidebar-item sidebar_hover">
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('academic-performance-indicator.index')}}"
        aria-expanded="false">
         <i class="mdi mdi-chart-bubble"></i>
-        <span class="hide-menu">Academic Performance Indicators</span>
+        <span class="hide-menu">API</span>
     </a>
-</li>
+</li>--}}
 <li class="sidebar-item sidebar_hover">
     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html"
        aria-expanded="false">
@@ -28,21 +28,21 @@
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-sections')}}" 
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-sections')}}"
        aria-expanded="false">
         <i class="mdi mdi-blur-linear"></i>
         <span class="hide-menu">Manage Sections</span>
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-subjects')}}" 
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-subjects')}}"
        aria-expanded="false">
         <i class="mdi mdi-blur-linear"></i>
         <span class="hide-menu">Manage Subjects</span>
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-class-schedules')}}" 
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('manage-class-schedules')}}"
        aria-expanded="false">
         <i class="mdi mdi-blur-linear"></i>
         <span class="hide-menu">Manage Class Schedules</span>

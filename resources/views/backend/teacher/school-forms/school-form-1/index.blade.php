@@ -44,7 +44,7 @@
                       </div>    
                   </div>    
                 
-                    <div class="col-md-6 col-lg-3 col-xlg-3 sf1_fetch_data">
+                    {{-- <div class="col-md-6 col-lg-3 col-xlg-3 sf1_fetch_data">
                         <a href="">
                             <div class="card">
                             <div class="box bg-warning text-danger text-center">
@@ -53,9 +53,9 @@
                             </div>
                             </div>
                         </a>
-                    </div>
+                    </div> --}}
 
-                    {{-- <div class="col-12 col-md-6 col-lg-4 col-xlg-3 sf1_fetch_data">
+                    <div class="col-12 col-md-6 col-lg-4 col-xlg-3 sf1_fetch_data">
                         <a href="">
                             <div class="card">
                                 <div class="box bg-dark text-light">
@@ -86,11 +86,24 @@
                                                                 <span class="d-block">50 - Male</span>
                                                                 <span class="d-block">50 - Female</span>
                                                     </div>
+                                                    
+                                                </div>
+                                                <hr>
+                                                <div class="row text-center">
+                                                    <div class="col-12 col-sm-6">
+                                                        <button type="button" class="btn btn-light">CSV</button>
+                                                              
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <button type="button" class="btn btn-light export_sf1_teacher">Excel</button>
+                                                               
+                                                    </div>
+                                                    
                                                 </div>
                                 </div>
                             </div>
                         </a>
-                    </div> --}}
+                    </div>
 
                 
                 

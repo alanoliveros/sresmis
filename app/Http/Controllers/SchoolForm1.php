@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 use App\Models\Session;
@@ -54,18 +55,44 @@ class SchoolForm1 extends Controller
       
       ]);
     }
-    public function export_sf1(){
+    public function export_sf1($id){
 
-      $users = User::all();
+      $students = Student::where([
+        'students.schoolYearId' => $id,
+        'students.teacherId' => auth()->user()->id,
+       ])->join('users','students.studentId', 'users.id')->get();
+
       $spreadsheet = new Spreadsheet();
-      $activeWorksheet = $spreadsheet->getActiveSheet();
+      $sheet = $spreadsheet->getActiveSheet();
 
+      $spreadsheet->getDefaultStyle()
+                  ->getFont()
+                  ->setName('SansSerif')
+                  ->setSize(10);
+
+// header start
+      $sheet->mergeCells('A1:AT1')->setCellValue('A1','School Form 1 (SF 1) School Register');
+      $sheet->getStyle('A1')->getFont()->setSize(21)->setBold(true);
+      $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
       
+      $sheet->mergeCells('A2:AT2')->setCellValue('A2','(This replaces  Form 1, Master List & STS Form 2-Family Background and Profile)');
+      $sheet->getStyle('A2')->getFont()->setSize(7)->setItalic(true);
+      $sheet->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-      foreach($users as $key=>$user){
+      // school header info
+      $sheet->mergeCells('A3:E3')->setCellValue('A3','School ID');
+      $sheet->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+      
+      // end school header info
+
+
+// end header
+
+      foreach($students as $key=>$student){
         $start = $key+4;
-          $activeWorksheet->setCellValue('A'.$start, $user->name);
+          $sheet->setCellValue('A'.$start, $student->name);
       }
+      
       $writer = new Xlsx($spreadsheet);
       header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       header('Content-Disposition: attachment; filename="'. urlencode('helloworld.xlsx').'"');

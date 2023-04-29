@@ -76,7 +76,7 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     /** Teacher School Forms */
     Route::get('/school-form-1', [SchoolForm1::class, 'sf1'])->name('sresmis.teacher.sf1');
     Route::post('/get-student-sf1-by-school-year', [SchoolForm1::class, 'get_student_sf1_by_sy']);
-    Route::get('/export-sf1', [SchoolForm1::class, 'export_sf1']);
+    Route::get('/export-sf1/{id}', [SchoolForm1::class, 'export_sf1']);
 
     Route::get('/school-form-9', [TeacherController::class, 'sf9'])->name('sresmis.teacher.sf9');
 

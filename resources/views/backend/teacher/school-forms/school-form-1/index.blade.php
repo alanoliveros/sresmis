@@ -44,7 +44,7 @@
                       </div>    
                   </div>    
                 
-                    {{-- <div class="col-md-6 col-lg-3 col-xlg-3 sf1_fetch_data">
+                    <div class="col-md-6 col-lg-6 col-xlg-3 sf1_fetch_data">
                         <a href="">
                             <div class="card">
                             <div class="box bg-warning text-danger text-center">
@@ -53,9 +53,9 @@
                             </div>
                             </div>
                         </a>
-                    </div> --}}
+                    </div>
 
-                    <div class="col-12 col-md-6 col-lg-4 col-xlg-3 sf1_fetch_data">
+                    {{-- <div class="col-12 col-md-6 col-lg-4 col-xlg-3 sf1_fetch_data">
                        
                             <div class="card">
                                 <div class="box bg-dark text-light ">
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
          
-                    </div>
+                    </div> --}}
 
                 
                 

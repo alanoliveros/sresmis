@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Section;
+use App\Models\User;
 class SchoolForm1 extends Controller
 {
     public function sf1(){
@@ -49,5 +53,24 @@ class SchoolForm1 extends Controller
         'female' => $female,
       
       ]);
+    }
+    public function export_sf1(){
+
+      $users = User::all();
+      $spreadsheet = new Spreadsheet();
+      $activeWorksheet = $spreadsheet->getActiveSheet();
+
+      
+
+      foreach($users as $key=>$user){
+        $start = $key+4;
+          $activeWorksheet->setCellValue('A'.$start, $user->name);
+      }
+      $writer = new Xlsx($spreadsheet);
+      header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      header('Content-Disposition: attachment; filename="'. urlencode('helloworld.xlsx').'"');
+      $writer->save('php://output');
+
+
     }
 }

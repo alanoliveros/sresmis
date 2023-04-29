@@ -56,9 +56,9 @@
                     </div> --}}
 
                     <div class="col-12 col-md-6 col-lg-4 col-xlg-3 sf1_fetch_data">
-                        <a href="">
+                       
                             <div class="card">
-                                <div class="box bg-dark text-light">
+                                <div class="box bg-dark text-light ">
                                                 <span class="d-block text-center fs-5">Grade 1 - Daisy</span>
                                                 <hr>
                                                 <div class="row ">
@@ -91,18 +91,18 @@
                                                 <hr>
                                                 <div class="row text-center">
                                                     <div class="col-12 col-sm-6">
-                                                        <button type="button" class="btn btn-light">CSV</button>
+                                                        <a href="" class="btn btn-light">CSV</a>
                                                               
                                                     </div>
                                                     <div class="col-12 col-sm-6">
-                                                        <button type="button" class="btn btn-light export_sf1_teacher">Excel</button>
+                                                        <a href="{{url('sresmis/teacher/export-sf1')}}" class="btn btn-light">Excel</a>
                                                                
                                                     </div>
                                                     
                                                 </div>
                                 </div>
                             </div>
-                        </a>
+         
                     </div>
 
                 

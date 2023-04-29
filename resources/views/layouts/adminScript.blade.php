@@ -121,22 +121,22 @@
       });
     });
 
-    $('.export_sf1_teacher').on('click', function(){
+    // $('.export_sf1_teacher').on('click', function(){
      
-      $.ajax({
-            type:"get",
-            url:"/sresmis/teacher/export-sf1",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "sy_id": school_year_sf1
-                  },
-            // dataType: "json",
-            success:function(response) {
-            console.log(response);
+    //   $.ajax({
+    //         type:"get",
+    //         url:"/sresmis/teacher/export-sf1",
+    //         data: {
+    //             "_token": "{{ csrf_token() }}",
+    //             "sy_id": school_year_sf1
+    //               },
+    //         // dataType: "json",
+    //         success:function(response) {
+    //         console.log(response);
 
-            }
-      });
-    });
+    //         }
+    //   });
+    // });
 
 
 

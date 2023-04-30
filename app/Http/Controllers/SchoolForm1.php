@@ -61,13 +61,14 @@ class SchoolForm1 extends Controller
     }
     public function export_sf1($id){
 
-      $students = Student::where(['students.schoolYearId' => $id,'students.teacherId' => auth()->user()->id,])->join('users','students.studentId', 'users.id')->get();
+      $students = Student::where(['students.schoolYearId' => $id,'students.teacherId' => auth()->user()->id,])->join('addresses','students.studentId', 'addresses.userId')->join('users','students.studentId', 'users.id')->get();
 
       $reader = IOFactory::createReader('Xlsx');
       $spreadsheet = $reader->load('school-forms/sf1-header.xlsx');
 
       // $spreadsheet = new Spreadsheet();
-      $sheet = $spreadsheet->getActiveSheet();
+      $sheet = $spreadsheet->getActiveSheet()->setTitle('school_form_1_ver2014.2.1.1');
+      
 
       $spreadsheet->getDefaultStyle()
                   ->getFont()
@@ -97,15 +98,107 @@ class SchoolForm1 extends Controller
         // lrn
           $sheet->mergeCells('A'.$start.':B'.$start)->setCellValue('A'.$start, $student->lrn)->getStyle('A'.$start)->getFont()->setSize(7);
           $sheet->getStyle('A'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('A'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
           $sheet->getStyle('A'.$start.':B'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
           
         // end lrn
 
         // students complete name
-          $sheet->mergeCells('A'.$start.':B'.$start)->setCellValue('A'.$start, $student->lrn)->getStyle('A'.$start)->getFont()->setSize(7);
-          $sheet->getStyle('A'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-          $sheet->getStyle('A'.$start.':B'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->mergeCells('C'.$start.':F'.$start)->setCellValue('C'.$start, $student->lastname.', '.$student->name.($student->name != NULL? ', '.$student->middlename:''))->getStyle('C'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('C'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('C'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('C'.$start.':F'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
         // end students complete name
+
+        // gender
+          $sheet->setCellValue('G'.$start, $student->gender[0])->getStyle('G'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('G'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('G'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('G'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30,'pt');
+        // end gender
+
+        // birthdate
+          $sheet->mergeCells('H'.$start.':I'.$start)->setCellValue('H'.$start, date('m-d-Y', strtotime($student->birthdate)))->getStyle('H'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('H'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('H'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('H'.$start.':I'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end birthdate
+
+        // AGE
+          $sheet->mergeCells('J'.$start.':K'.$start)->setCellValue('J'.$start, $student->age)->getStyle('J'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('J'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('J'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('J'.$start.':K'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end AGE
+
+        // mothertongue
+          $sheet->mergeCells('L'.$start.':M'.$start)->setCellValue('L'.$start, $student->mothertongue)->getStyle('L'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('L'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('L'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('L'.$start.':M'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end mothertongue
+
+        // mothertongue
+          $sheet->mergeCells('L'.$start.':M'.$start)->setCellValue('L'.$start, $student->mothertongue)->getStyle('L'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('L'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('L'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('L'.$start.':M'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end mothertongue
+
+        // ethnic
+          $sheet->setCellValue('N'.$start, $student->ethnicgroup)->getStyle('N'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('N'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('N'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('N'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end ethnic
+
+        // religion 
+          $sheet->setCellValue('O'.$start, $student->religion)->getStyle('O'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('O'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('O'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('O'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end religion 
+
+        // purok strt
+          $sheet->mergeCells('P'.$start.':Q'.$start)->setCellValue('P'.$start, $student->purok)->getStyle('P'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('P'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('P'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('P'.$start.':Q'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end purok strt
+
+        // brngy
+          $sheet->mergeCells('R'.$start.':T'.$start)->setCellValue('R'.$start, strtoupper($student->barangay))->getStyle('R'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('R'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('R'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('R'.$start.':T'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end brngy
+
+        // CIty
+          $sheet->mergeCells('U'.$start.':V'.$start)->setCellValue('U'.$start, strtoupper($student->city))->getStyle('U'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('U'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('U'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('U'.$start.':V'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end city
+
+        // province
+          $sheet->mergeCells('W'.$start.':AA'.$start)->setCellValue('W'.$start, strtoupper($student->province))->getStyle('W'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('W'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('W'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('W'.$start.':AA'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end province
+
 
       }
       

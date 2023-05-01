@@ -26,19 +26,39 @@
                                 </tr>
                                 <tr >
                                 
+                                    <th class="fw-bold">Sr.</th>
                                     <th class="fw-bold">Student Name</th>
-                                    <th class="fw-bold">Status</th>
+                                    <th class="fw-bold text-center">
+                                        Status
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <span class="text-success"><input type="radio">&nbsp;Present All</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <span class="text-danger"><input type="radio">&nbsp;Absent All</span>
+                                            </div>
+                                        </div>
+
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                         <tr>
                                             <th colspan="3" class="fw-bold text-success text-center">MALE</th>
                                         </tr>
+                                        @php
+                                            $maleInc = 1;
+                                        @endphp
                                 @foreach ($students as $key=>$student)
                                     @if ($student->gender == 'Male')
                                         <tr>
-                                        
+                                            
+                                            <td >{{$maleInc}}</td>
                                             <td>{{$student->lastname.', '.$student->name.($student->middlename != NULL? ', '.$student->middlename:'')}}</td>
+                                            <td></td>
+                                            @php
+                                             $maleInc++;
+                                            @endphp
                                         </tr>
                                     @endif
                                     
@@ -46,11 +66,18 @@
                                         <tr>
                                             <th colspan="3" class="fw-bold text-success text-center">FEMALE</th>
                                         </tr>
+                                        @php
+                                            $femaleInc = 1;
+                                        @endphp
                                 @foreach ($students as $key=>$student)
                                     @if ($student->gender == 'Female')
                                         <tr>
-                                        
+                                            <td>{{$femaleInc}}</td>
                                             <td>{{$student->lastname.', '.$student->name.($student->middlename != NULL? ', '.$student->middlename:'')}}</td>
+                                            <td></td>
+                                            @php
+                                                 $femaleInc++;
+                                            @endphp
                                         </tr>
                                     @endif
 

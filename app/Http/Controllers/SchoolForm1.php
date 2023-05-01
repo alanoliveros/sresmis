@@ -74,6 +74,7 @@ class SchoolForm1 extends Controller
 
       // $spreadsheet = new Spreadsheet();
       $sheet = $spreadsheet->getActiveSheet()->setTitle('school_form_1_ver2014.2.1.1');
+               $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
       
 
       $spreadsheet->getDefaultStyle()

@@ -95,6 +95,16 @@
                                                                 <span class="d-block">50 - Female</span>
                                                     </div>
                                                 </div>
+                                                <hr>
+                                                <div class="row text-center">
+                                                    <div class="col-12 col-sm-6">
+                                                        <a href="" class="btn btn-light">CSV</a>
+                                                              
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <a href="{{url('sresmis/teacher/export-sf1/${school_year_sf1}')}}" class="btn btn-light">Excel</a>     
+                                                    </div>
+                                                </div>
                                 </div>
                             </div>
                     </a>
@@ -120,42 +130,6 @@
             }
       });
     });
-
-    // $('.export_sf1_teacher').on('click', function(){
-     
-    //   $.ajax({
-    //         type:"get",
-    //         url:"/sresmis/teacher/export-sf1",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             "sy_id": school_year_sf1
-    //               },
-    //         // dataType: "json",
-    //         success:function(response) {
-    //         console.log(response);
-
-    //         }
-    //   });
-    // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     $(document).on('click', '.remove_btn', function(){
         $(this).parents('tr').remove();

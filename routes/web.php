@@ -4,6 +4,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Indicator\PerformanceIndicatorController;
 use App\Http\Controllers\SchoolForm1;
+use App\Http\Controllers\SchoolForm2;
+use App\Http\Controllers\SchoolForm9;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +77,7 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
 
     /** Teacher School Forms */
     // sf1
+    
     Route::get('/school-form-1', [SchoolForm1::class, 'sf1'])->name('sresmis.teacher.sf1');
     Route::post('/get-student-sf1-by-school-year', [SchoolForm1::class, 'get_student_sf1_by_sy']);
     Route::get('/export-sf1/{id}', [SchoolForm1::class, 'export_sf1']);
@@ -84,7 +87,7 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     Route::get('/school-form-2', [SchoolForm2::class, 'sf2'])->name('sresmis.teacher.sf2');
 
     // sf9
-    Route::get('/school-form-9', [TeacherController::class, 'sf9'])->name('sresmis.teacher.sf9');
+    Route::get('/school-form-9', [SchoolForm9::class, 'sf9'])->name('sresmis.teacher.sf9');
 
 
 

@@ -32,24 +32,13 @@ class TeacherController extends Controller
       $numMonth = date("m", strtotime($create)); //ok ni
       $year = date("Y", strtotime($create)); //ok ni
   
-      // echo date("F",strtotime($create));
-
-    
-      // $d=cal_days_in_month(0,$numMonth,$year); mas ok ni
-      // echo "There was $d days in $ 1965.<br>";
-      // $arr = range(1, Carbon::now()->month(12)->daysInMonth);
-
-      // foreach($arr as $k){
-      //       echo $k;
-      // }
-
       
       $teacherId = auth()->user()->id;
+      $sessions = Session::orderBy('school_year','desc')->get();
     
       $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
-                              ->join('grade_levels','teachers.gradeLevelId', '=', 'grade_levels.id')
-                              ->where('teachers.teacherId', '=', $teacherId)->first();
-
+                            ->join('grade_levels','teachers.gradeLevelId', '=', 'grade_levels.id')
+                            ->where('teachers.teacherId', '=', $teacherId)->first();
 
       $grades = GradeLevel::where('id','=', $sectionName->gradeLevelId)->first();
       $students = Student::where('students.teacherId' , '=', $teacherId)
@@ -60,15 +49,12 @@ class TeacherController extends Controller
             'section' =>$sectionName,
             'grades' =>$grades,
             'students' => $students,
+            'sessions' => $sessions,
           ]);
     }
     public function grades(){
          
           $sectionTaughtBy = Teacher::where('teacherId','=',auth()->user()->id)->first();
-
-         
-
-           
 
           $class_schedules = ClassSchedule::where('class_schedules.teacherId','=', auth()->user()->id)->join('subjects','class_schedules.subjectId', 'subjects.id')->get();
            
@@ -283,19 +269,6 @@ class TeacherController extends Controller
 
     }
 
-    public function sf9(){
-
-            $session = Session::orderBy('school_year', 'desc')->get();
-            $first_session = Session::orderBy('school_year', 'desc')->first();
-
-            
-          return view('backend.teacher.school-forms.school-form-9.school-form-9')
-                 ->with([
-                        'sessions' => $session,
-                        'first_session' => $first_session,
-
-                       ]);
-    }
 
     public function class_schedule(){
 

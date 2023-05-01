@@ -45,7 +45,7 @@
     $('.filter_sf1').on('click', function(e){
       e.preventDefault();
       $.ajax({
-            type:"post",
+            type:"POST",
             url:"/sresmis/teacher/get-student-sf1-by-school-year",
             data: {
                 "_token": "{{ csrf_token() }}",

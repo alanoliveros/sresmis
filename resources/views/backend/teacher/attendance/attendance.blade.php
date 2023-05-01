@@ -34,9 +34,8 @@
                             <a href="" class="btn btn-light  fw-bold">Filter</a>
                             </div>
                             <div class="col-12  col-sm-2 col-md-2 mb-1 d-flex justify-content-start  justify-content-md-center">
-                           <a id="addAttendance" data-bs-toggle="modal" data-bs-target="#add_attendance" class="btn btn-light fw-bold"><i class="mdi mdi-plus fw-bold"></i>Add</a>
-
-                            @include('backend.teacher.attendance.add-attendance')
+                           <a id="addAttendance"  href="{{url('sresmis/teacher/add-attendance-by-advisory')}}" class="btn btn-light fw-bold"><i class="mdi mdi-plus fw-bold"></i>Add</a>
+                           
                             </div>
                            </div>
                         </div>
@@ -45,57 +44,43 @@
                 <div class="col-md-12 col-lg-12 col-xlg-12">
                     <div class="card shadow card_attendance">
                         <div class="box bg-light">
-{{-- attendance table --}}
-                <div class="table-responsive">
-                                <table id="studentAttendance" class="table table-dark table-hover" style="width:100%">
-                                    <thead>
-                                        <tr class="fs-5">
+                            <table id="studentAttendance" class="table table-dark table-hover" style="width:100%">
+                                <thead>
+                                    <tr class="fs-5">
                                         <th scope="col" class="text-success">#</th>
                                         <th scope="col" class="text-success">LRN</th>
                                         <th scope="col" class="text-success">Complete name</th>
                                         <th scope="col" class="text-success">Age</th>
                                         <th scope="col" class="text-success">Birthdate</th>
                                         <th scope="col" class="text-success">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($students as $key=>$student)
-                                        <tr>
-                                            <td>{{$key+1}}</td>
-                                            <td>{{$student->lrn}}</td>
-                                            <td>{{$student->lastname.', '.$student->name. ($student->middlename != NULL? ', '.$student->middlename : ''). ($student->suffix != NULL? ', '.$student->suffix : '') }}</td>
-                                            <td>{{$student->age}}</td>
-
-                                            <td>{{date('F d, Y', strtotime($student->birthdate))}}</td>
-                                            <td>
-                                                <div class="dropdown" tabindex="1">
-                                                    <i class="db2" tabindex="1"></i>
-                                                    <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
-                                                    <div class="dropdown-content">
-                                                        <a href="#">View</a>
-                                                        <a href="#">Edit</a>
-                                                        <a href="{{url('sresmis/teacher/delete-student/'.$student->studentId)}}" class="text-danger">Delete</a>
-                                                    </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($students as $key=>$student)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{$student->lrn}}</td>
+                                        <td>{{$student->lastname.', '.$student->name. ($student->middlename != NULL? ', '.$student->middlename : ''). ($student->suffix != NULL? ', '.$student->suffix : '') }}</td>
+                                        <td>{{$student->age}}</td>
+                                        <td>{{date('F d, Y', strtotime($student->birthdate))}}</td>
+                                        <td>
+                                            <div class="dropdown" tabindex="1">
+                                                <i class="db2" tabindex="1"></i>
+                                                <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a href="#">View</a>
+                                                    <a href="#">Edit</a>
+                                                    <a href="{{url('sresmis/teacher/delete-student/'.$student->studentId)}}" class="text-danger">Delete</a>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-
-                                        
-                                
-                                    
-                                </table>
-                </div>
-{{-- end attendance --}}
-
-
-
-
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 @endsection

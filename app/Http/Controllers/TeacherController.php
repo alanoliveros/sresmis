@@ -26,13 +26,10 @@ class TeacherController extends Controller
     public function attendance(){
 
       $user = User::find(auth()->user()->id);
-      
       $create = $user->created_at;
       // echo date("F d Y",strtotime($create));
       $numMonth = date("m", strtotime($create)); //ok ni
       $year = date("Y", strtotime($create)); //ok ni
-  
-      
       $teacherId = auth()->user()->id;
       $sessions = Session::orderBy('school_year','desc')->get();
     
@@ -41,16 +38,27 @@ class TeacherController extends Controller
                             ->where('teachers.teacherId', '=', $teacherId)->first();
 
       $grades = GradeLevel::where('id','=', $sectionName->gradeLevelId)->first();
+
       $students = Student::where('students.teacherId' , '=', $teacherId)
-                        ->join('users', 'students.studentId', '=', 'users.id')
-                        ->get();
+      ->join('users', 'students.studentId', '=', 'users.id')
+      ->get();
+     
 
           return view('backend.teacher.attendance.attendance')->with([
             'section' =>$sectionName,
             'grades' =>$grades,
-            'students' => $students,
             'sessions' => $sessions,
+            'students' => $students,
           ]);
+    }
+    public function add_attendance_by_advisory(){
+      $teacherId = auth()->user()->id;
+      $students = Student::where('students.teacherId' , '=', $teacherId)
+      ->join('users', 'students.studentId', '=', 'users.id')
+      ->get();
+      return view('backend.teacher.attendance.add-attendance')->with([
+        'students' => $students,
+      ]);
     }
     public function grades(){
          
@@ -102,12 +110,12 @@ class TeacherController extends Controller
 
       $teacherId = auth()->user()->id;
     
-      $sectionName = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
+      $section = Teacher::join('sections','teachers.sectionId', '=', 'sections.id')
                               ->join('grade_levels','teachers.gradeLevelId', '=', 'grade_levels.id')
                               ->where('teachers.teacherId', '=', $teacherId)->first();
 
 
-      $grades = GradeLevel::where('id','=', $sectionName->gradeLevelId)->first();
+      $grades = GradeLevel::where('id','=', $section->gradeLevelId)->first();
       $students = Student::where('students.teacherId' , '=', $teacherId)
                          ->join('users', 'students.studentId', '=', 'users.id')
                          ->orderBy('users.lastname', 'asc')
@@ -117,7 +125,7 @@ class TeacherController extends Controller
 
 
       return view('backend.teacher.advisory.index')->with([
-            'section' =>$sectionName,
+            'section' =>$section,
             'grades' =>$grades,
             'students' => $students,
             'sessions' => $sessions,
@@ -268,8 +276,6 @@ class TeacherController extends Controller
              return redirect()->back()->with('deleted', 'Successfully deleted');   
 
     }
-
-
     public function class_schedule(){
 
     }

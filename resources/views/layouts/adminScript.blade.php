@@ -141,5 +141,15 @@
         tags: true,
         tokenSeparators: ['/',',',','," "]
     });
+
+    $('.status_student_attendance').on('click', function(){
+      if($(this).data('status') == 'Present'){
+        $(this).addClass('status_present');
+      }
+       if($(this).data('status') == 'Absent'){
+        $(this).addClass('status_absent');
+      }
+
+    });
   });
   </script>

@@ -11,6 +11,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
+use App\Models\ParentGuardian;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -61,7 +62,12 @@ class SchoolForm1 extends Controller
     }
     public function export_sf1($id){
 
-      $students = Student::where(['students.schoolYearId' => $id,'students.teacherId' => auth()->user()->id,])->join('addresses','students.studentId', 'addresses.userId')->join('users','students.studentId', 'users.id')->get();
+      $students = Student::where(['students.schoolYearId' => $id,'students.teacherId' => auth()->user()->id,])
+                          ->join('parent_guardians','students.studentId', 'parent_guardians.studentId')
+                          ->join('addresses','students.studentId', 'addresses.userId')
+                          ->join('users','students.studentId', 'users.id')
+                          ->join('learning_modalities','students.learning_modality_id', 'learning_modalities.id')
+                          ->get();
 
       $reader = IOFactory::createReader('Xlsx');
       $spreadsheet = $reader->load('school-forms/sf1-header.xlsx');
@@ -104,7 +110,7 @@ class SchoolForm1 extends Controller
         // end lrn
 
         // students complete name
-          $sheet->mergeCells('C'.$start.':F'.$start)->setCellValue('C'.$start, $student->lastname.', '.$student->name.($student->name != NULL? ', '.$student->middlename:''))->getStyle('C'.$start)->getFont()->setSize(7);
+          $sheet->mergeCells('C'.$start.':F'.$start)->setCellValue('C'.$start, $student->lastname.', '.$student->name.($student->middlename != NULL? ', '.$student->middlename:''))->getStyle('C'.$start)->getFont()->setSize(7);
           $sheet->getStyle('C'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
           $sheet->getStyle('C'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
           $sheet->getStyle('C'.$start.':F'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
@@ -198,6 +204,30 @@ class SchoolForm1 extends Controller
           $sheet->getStyle('W'.$start.':AA'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
           $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
         // end province
+        
+        // fathers complete name
+          $sheet->mergeCells('AB'.$start.':AE'.$start)->setCellValue('AB'.$start, $student->fathersLastName.','.$student->fathersFirstName.($student->fathersMiddleName != NULL? ', '.$student->fathersMiddleName:''))->getStyle('AB'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('AB'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('AB'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('AB'.$start.':AE'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end fathers complete name
+
+        // mothers complete name
+          $sheet->mergeCells('AF'.$start.':AJ'.$start)->setCellValue('AF'.$start, $student->mothersLastName.','.$student->mothersFirstName.($student->mothersMiddleName != NULL? ', '.$student->fathersMiddleName:''))->getStyle('AF'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('AF'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('AF'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('AF'.$start.':AJ'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end mothers complete name
+
+        // mothers complete name
+          $sheet->setCellValue('AR'.$start, $student->mode_name)->getStyle('AR'.$start)->getFont()->setSize(7);
+          $sheet->getStyle('AR'.$start)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+          $sheet->getStyle('AR'.$start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+          $sheet->getStyle('AR'.$start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
+          $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+        // end mothers complete name
 
 
       }
@@ -216,10 +246,6 @@ class SchoolForm1 extends Controller
 
     }
     public function readtemplate(){
-
-
-    
-      
 
     }
 }

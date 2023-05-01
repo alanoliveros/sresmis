@@ -94,6 +94,12 @@
             </a>
         </li>
         <li class="sidebar-item sidebar_hover">
+            <a href="{{route('sresmis.teacher.sf2')}}" class="sidebar-link">
+                <i class="mdi mdi-file"></i>
+                <span class="hide-menu"> School Form 2</span>
+            </a>
+        </li>
+        <li class="sidebar-item sidebar_hover">
             <a href="{{route('sresmis.teacher.sf9')}}" class="sidebar-link">
                 <i class="mdi mdi-file"></i>
                 <span class="hide-menu"> School Form 9 </span>

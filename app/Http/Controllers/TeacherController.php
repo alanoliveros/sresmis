@@ -14,6 +14,7 @@ use App\Models\Address;
 use App\Models\ParentGuardian;
 use App\Models\Subject;
 use App\Models\ClassSchedule;
+use App\Models\LearningModality;
 use Carbon\Carbon;
 
 class TeacherController extends Controller
@@ -126,6 +127,7 @@ class TeacherController extends Controller
                          ->orderBy('users.lastname', 'asc')
                          ->get();
       $sessions = Session::orderBy('school_year','desc')->get();
+      $learnings = LearningModality::orderBy('id','asc')->get();
 
 
       return view('backend.teacher.advisory.index')->with([
@@ -133,6 +135,7 @@ class TeacherController extends Controller
             'grades' =>$grades,
             'students' => $students,
             'sessions' => $sessions,
+            'learnings' => $learnings,
       ]);
 
     }
@@ -221,6 +224,7 @@ class TeacherController extends Controller
             $student->mothertongue = $mothertongue;
             $student->ethnicgroup = $ethnicgroup;
             $student->religion = $religion;
+            $student->learning_modality_id = $request->learning_mode_id;
             $student->save();
 
       }

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('learning_modalities', function (Blueprint $table) {
             $table->id();
-            $table->integer('adminId');
-            $table->string('subjectName');
+            $table->string('mode_name');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('learning_modalities');
     }
 };

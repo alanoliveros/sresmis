@@ -18,6 +18,14 @@
                     </select>
                 </div>
                 <div class="col-md-12">
+                    <label for="validationDefault02" class="form-label">Learning Modality<small class="text-danger">(required)</small> </label>
+                    <select name="learning_mode_id" id="" class="form-select">
+                        @foreach ($learnings as $key=>$learning)
+                            <option {{$key == 0? 'selected': ''}} value="{{$learning->id}}">{{$learning->mode_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-12">
                     <label for="validationDefault02" class="form-label">LRN <small class="text-danger">(required)</small> </label>
                     <input type="number" min="1" class="form-control" name="studentLrn">
                 </div>

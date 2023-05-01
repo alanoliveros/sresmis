@@ -58,13 +58,16 @@ class SchoolForm1 extends Controller
 
       $users = User::all();
       $spreadsheet = new Spreadsheet();
-      $activeWorksheet = $spreadsheet->getActiveSheet();
+      $sheet = $spreadsheet->getActiveSheet();
 
       
-
+      $spreadsheet->getDefaultStyle()->getFont()
+                                     ->setName('Arial')
+                                     ->setSize(10);
+      )
       foreach($users as $key=>$user){
         $start = $key+4;
-          $activeWorksheet->setCellValue('A'.$start, $user->name);
+          $sheet->setCellValue('A'.$start, $user->name);
       }
       $writer = new Xlsx($spreadsheet);
       header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

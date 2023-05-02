@@ -151,5 +151,9 @@
       }
 
     });
+
+    $('.absent_all').on('click', function(){
+        $.each($('.attendance_status_absent').prop("checked",true));
+    });
   });
   </script>

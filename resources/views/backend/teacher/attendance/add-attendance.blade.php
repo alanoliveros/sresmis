@@ -25,6 +25,12 @@
                     </div>
                 </div>
             </div>
+            <div class="row row-cols-1 row-cols-md-12 g-4 mb-2">
+                    <div class="col-12 text-center">
+                            <button class="btn btn-success text-light rounded-0 mx-2 mb-1 present_all">Present All</button>
+                            <button class="btn btn-danger text-light rounded-0 mx-2 mb-1 absent_all">Absent All</button>
+                    </div>
+            </div>
             <div>
                 <span class="fs-4 fw-bold" style="color:blue;"> <i class="mdi mdi-gender-male" ></i>Male</span>
             </div>
@@ -43,12 +49,12 @@
                         </div>
                         <div class="card-body text-center d-flex align-items-end justify-content-center bg-info">
                             <label>
-                                <input type="radio" name="status_student_attendance{{$key}}"/>
+                                <input type="radio" name="status_student_attendance{{$key}}" class="attendance_status_present"/>
                                 <span>P</span>
                             </label>
                               <br/>
                             <label>
-                                <input type="radio" name="status_student_attendance{{$key}}"/>
+                                <input type="radio" name="status_student_attendance{{$key}}" class="attendance_status_absent"/>
                                 <span>A</span>
                             </label>
                         </div>
@@ -76,12 +82,12 @@
                         </div>
                         <div class="card-body text-center d-flex align-items-end justify-content-center" style="background-color: palevioletred">
                             <label>
-                                <input type="radio" name="status_student_attendance{{$key}}"/>
+                                <input type="radio" name="status_student_attendance{{$key}}" class="attendance_status_present"/>
                                 <span>P</span>
                             </label>
                               <br/>
                             <label>
-                                <input type="radio" name="status_student_attendance{{$key}}"/>
+                                <input type="radio" name="status_student_attendance{{$key}}" class="attendance_status_absent"/>
                                 <span>A</span>
                             </label>
                         </div>

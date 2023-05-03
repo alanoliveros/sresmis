@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@push('css')
+
+@endpush
+
 @section('content')
     <div class="page-wrapper">
 
@@ -20,11 +25,13 @@
 
         <div class="container-fluid">
             <div class="row">
-                <h1>Modalities</h1>
+                <h1>Modality</h1>
             </div>
         </div>
 
-
-
-
 @endsection
+
+
+@push('js')
+
+@endpush

@@ -6,14 +6,14 @@
 </li>
 
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('key-performance-indicator.index')}}"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('performance-indicator.index')}}"
        aria-expanded="false">
         <i class="mdi mdi-chart-bar"></i>
         <span class="hide-menu">Performance Indicator</span>
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('modalities.index')}}"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('modality.index')}}"
        aria-expanded="false">
         <i class="mdi mdi-format-list-bulleted-type"></i>
         <span class="hide-menu">Modalities</span>
@@ -21,7 +21,7 @@
 </li>
 
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="##"
        aria-expanded="false">
         <i class="mdi mdi-border-inside"></i>
         <span class="hide-menu">Tables</span>

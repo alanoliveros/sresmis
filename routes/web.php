@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Indicator\PerformanceIndicatorController;
+use App\Http\Controllers\ModalityController;
 use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
@@ -35,7 +36,9 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 });
 
 /** Key Performance Indicator */
-Route::middleware('isAdmin')->resource('key-performance-indicator', PerformanceIndicatorController::class);
+Route::middleware('isAdmin')->resource('performance-indicator', PerformanceIndicatorController::class);
+/** Modality  */
+Route::middleware('isAdmin')->resource('modality', ModalityController::class);
 
 /** Subjects */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
@@ -88,8 +91,6 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
 
     // sf9
     Route::get('/school-form-9', [SchoolForm9::class, 'sf9'])->name('sresmis.teacher.sf9');
-
-
 
 
     /** Manage Class Schedules */

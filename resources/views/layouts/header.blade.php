@@ -9,24 +9,20 @@
               <b class="logo-icon ps-2">
                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                 <!-- Dark Logo icon -->
-                <img
-                  src="{{asset('backend/assets/images/logo-icon.png')}}"
-                  alt="homepage"
-                  class="light-logo"
-                  width="25"
-                />
+                <img src="{{asset('backend/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" width="25"/>
               </b>
               <!--End Logo icon -->
               <!-- Logo text -->
-              <span class="logo-text ms-2">
-                <!-- dark Logo text -->
-                <img
-                  src="{{asset('assets/img/icon/sresmis.png')}}"
-                  alt="homepage"
-                  class="light-logo"
-                />
+                <span class="logo-text ms-2"><!-- dark Logo text -->
+{{--                  <img src="{{asset('assets/img/icon/sresmis.png')}}" alt="homepage"/>--}}
+                <h1 class="logo me-auto" style="margin-top: 14px; font-size: 35px">
+                        <span style="color: #28B779;">SRES</span><span style="color:#ffb848;">MIS</span>
+                </h1>
+
+
+
               </span>
-         
+
             </a>
             <a
               class="nav-toggler waves-effect waves-light d-block d-md-none"
@@ -57,11 +53,11 @@
               <!-- ============================================================== -->
               <!-- create new -->
               <!-- ============================================================== -->
-              
+
               <!-- ============================================================== -->
               <!-- Search -->
               <!-- ============================================================== -->
-              
+
             </ul>
             <!-- ============================================================== -->
             <!-- Right side toggle and nav items -->

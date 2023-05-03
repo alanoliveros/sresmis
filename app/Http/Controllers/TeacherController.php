@@ -15,6 +15,7 @@ use App\Models\ParentGuardian;
 use App\Models\Subject;
 use App\Models\ClassSchedule;
 use App\Models\LearningModality;
+use App\Models\DailyAttendance;
 use Carbon\Carbon;
 
 class TeacherController extends Controller
@@ -45,7 +46,6 @@ class TeacherController extends Controller
       ->join('users', 'students.studentId', '=', 'users.id')
       ->get();
 
-
     return view('backend.teacher.attendance.attendance')->with([
       'section' => $sectionName,
       'grades' => $grades,
@@ -75,7 +75,45 @@ class TeacherController extends Controller
   }
   public function submit_attendance(Request $request)
   {
-    
+    $date = $request->attendance_date;
+    $sessionId = $request->school_year;
+    $female = $request->status_student_attendance_female;
+    $male = $request->status_student_attendance_male;
+    $teacherId = auth()->user()->id;
+    $teacher_detail = Teacher::where('teacherId', $teacherId)->first();
+
+
+
+
+    foreach ($male as $key => $status) {
+      $attendance = new DailyAttendance();
+      $attendance->adminId = $teacher_detail->adminId;
+      $attendance->teacherId = $teacherId;
+      $attendance->gradeLevelId = $teacher_detail->gradeLevelId;
+      $attendance->sectionId = $teacher_detail->sectionId;
+      $attendance->studentId = $key;
+      $attendance->sessionId = $sessionId;
+      $attendance->date = $date;
+      $attendance->status = $status;
+      $attendance->save();
+    }
+
+    // $user = DailyAttendance::firstOrNew(['email' => $email]);
+
+    foreach ($female as $key => $status) {
+      $attendance = new DailyAttendance();
+      $attendance->adminId = $teacher_detail->adminId;
+      $attendance->teacherId = $teacherId;
+      $attendance->gradeLevelId = $teacher_detail->gradeLevelId;
+      $attendance->sectionId = $teacher_detail->sectionId;
+      $attendance->studentId = $key;
+      $attendance->sessionId = $sessionId;
+      $attendance->date = $date;
+      $attendance->status = $status;
+      $attendance->save();
+      // echo $status;
+    }
+    return redirect()->back()->with('success_added', 'Successfully added new record');
   }
   public function grades()
   {

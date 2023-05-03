@@ -74,14 +74,13 @@ class SchoolForm1 extends Controller
 
       // $spreadsheet = new Spreadsheet();
       $sheet = $spreadsheet->getActiveSheet()->setTitle('school_form_1_ver2014.2.1.1');
-               $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+              
       
 
       $spreadsheet->getDefaultStyle()
                   ->getFont()
                   ->setName('SansSerif')
                   ->setSize(10);
-
 // header start
       // $sheet->mergeCells('A1:AT1')->setCellValue('A1','School Form 1 (SF 1) School Register');
       // $sheet->getStyle('A1')->getFont()->setSize(21)->setBold(true);

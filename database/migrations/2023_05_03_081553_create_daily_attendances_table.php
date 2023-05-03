@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('daily_attendances', function (Blueprint $table) {
             $table->id();
             $table->integer('adminId');
             $table->integer('teacherId');
             $table->integer('gradeLevelId');
             $table->integer('sectionId');
             $table->integer('studentId');
+            $table->integer('sessionId');
             $table->date('date');
             $table->string('status');
             $table->timestamps();
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('daily_attendances');
     }
 };

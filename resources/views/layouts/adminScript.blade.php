@@ -154,6 +154,11 @@
 
     $('.absent_all').on('click', function(){
         $.each($('.attendance_status_absent').prop("checked",true));
+        $.each($('.attendance_status_present').prop("checked",false));
+    });
+    $('.present_all').on('click', function(){
+        $.each($('.attendance_status_present').prop("checked",true));
+        $.each($('.attendance_status_absent').prop("checked",false));
     });
   });
   </script>

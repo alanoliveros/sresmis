@@ -72,6 +72,10 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
 
     /** Teacher Attendance */
     Route::get('/attendance/advisory', [TeacherController::class, 'attendance'])->name('sresmis.teacher.attendance.by-advisory');
+    Route::post('/submit-attendance/advisory', [TeacherController::class, 'submit_attendance']);
+
+
+    // 
     Route::get('/add-attendance-by-advisory', [TeacherController::class, 'add_attendance_by_advisory']);
     Route::get('/grades', [TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');

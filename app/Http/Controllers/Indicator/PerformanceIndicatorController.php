@@ -14,7 +14,7 @@ class PerformanceIndicatorController extends Controller
      */
     public function index()
     {
-        return view('indicator.kpi.index');
+        return view('indicator.performance.index');
     }
 
     /**

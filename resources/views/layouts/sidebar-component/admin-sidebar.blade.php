@@ -12,14 +12,14 @@
         <span class="hide-menu">Performance Indicator</span>
     </a>
 </li>
-
-{{--<li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('academic-performance-indicator.index')}}"
+<li class="sidebar-item sidebar_hover">
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('modalities.index')}}"
        aria-expanded="false">
-        <i class="mdi mdi-chart-bubble"></i>
-        <span class="hide-menu">API</span>
+        <i class="mdi mdi-format-list-bulleted-type"></i>
+        <span class="hide-menu">Modalities</span>
     </a>
-</li>--}}
+</li>
+
 <li class="sidebar-item sidebar_hover">
     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html"
        aria-expanded="false">

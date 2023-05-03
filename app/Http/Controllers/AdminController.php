@@ -45,7 +45,7 @@ class AdminController extends Controller
     {
 
 
-      
+
         $email = $request->email;
         $password = Hash::make($request->password);
         $firstName = $request->firstName;
@@ -72,12 +72,12 @@ class AdminController extends Controller
         $minor = $request->minor;
         $gradeLevelTaught = $request->gradeLevelTaught;
         // array subject subjectTaught[] need for each to specify
-       
+
         $minPerWeek = $request->minPerWeek;
         $ancillary = $request->ancillary;
         $sectionTaught = $request->sectionTaught;
-       
-         
+
+
         $user = new User();
         $user->name = $firstName;
         $user->role = 2;
@@ -120,20 +120,19 @@ class AdminController extends Controller
           $teacher->degree = $degree;
           $teacher->major = $major;
           $teacher->minor = $minor;
-          $teacher->minor = $minor;
           $teacher->totalTeachingTimePerWeek = $minPerWeek;
           $teacher->numberOfAncillary = $ancillary;
           $teacherSave = $teacher->save();
         }
 
         if($teacherSave || $addressSave || $teacherSave){
-          return redirect()->back()->with('success_added', 'Successfully added new record');   
+          return redirect()->back()->with('success_added', 'Successfully added new record');
         }
         else{
-          return redirect()->back()->with('error', 'Something went wrong, Please try again!');   
+          return redirect()->back()->with('error', 'Something went wrong, Please try again!');
         }
 
-       
+
     }
 
     public function manageSubjects()
@@ -149,7 +148,7 @@ class AdminController extends Controller
     public function addsubjectByGradeLevel($name, $id){
       $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
       $subject = Subject::where('gradeLevelId','=', $id)->get();
-      
+
       return view('backend.admin.subjects.bygradelevel')->with([
         'name' => $name,
         'id' => $id,
@@ -168,7 +167,7 @@ class AdminController extends Controller
        $subjectname = $request->subjectname;
        $description = $request->description;
 
-      
+
        foreach($subjectname as $key=>$name){
 
         // echo $name.'<br>';
@@ -179,7 +178,7 @@ class AdminController extends Controller
           $subject->description =  $description[$key];
           $subject->save();
        }
-        return redirect()->back()->with('success_added', 'Successfully added new record');   
+        return redirect()->back()->with('success_added', 'Successfully added new record');
 
     }
     public function manageSections()
@@ -205,7 +204,7 @@ class AdminController extends Controller
        $section->gradeLevelId = $request->gradeLevel;
        $section->save();
 
-       return redirect()->back()->with('success_added', 'Successfully added new record');   
+       return redirect()->back()->with('success_added', 'Successfully added new record');
 
     }
     public function getSection(Request $request)
@@ -227,7 +226,7 @@ class AdminController extends Controller
     public function view_by_gradeLevel($name){
       $changeName = str_replace('-', ' ', $name);
       $gradeLevel = GradeLevel::where('gradeLevelName', '=', $changeName)->first();
-      
+
       // echo $gradeLevel->gradeLevelName;
       $sections = Section::where('gradeLevelId', '=', $gradeLevel->id)->get();
 
@@ -239,13 +238,13 @@ class AdminController extends Controller
     }
 
     public function view_by_section($sid, $gid){
-  
+
       $section = Section::find($sid);
       $classSchedule = ClassSchedule::where('sectionId', '=', $gid)->get();
       $subjects = Subject::where('gradeLevelId','=', $gid)->get();
       $teachers = Teacher::where('teachers.adminId' ,'=', auth()->user()->id)->join('users','teachers.teacherId','users.id')->get();
       $schedules = ClassSchedule::where('class_schedules.sectionId','=',$sid)->join('subjects', 'class_schedules.subjectId', 'subjects.id')->orderBy('class_schedules.startTime', 'asc')->get();
-      
+
       return view('backend.admin.class-schedules.section')->with([
         'section' => $section,
         'classSchedule' => $classSchedule,
@@ -253,7 +252,7 @@ class AdminController extends Controller
         'teachers' =>  $teachers,
         'schedules' => $schedules,
       ]);
-// 
+//
     }
     public function add_schedule_by_section(Request $request){
 
@@ -276,6 +275,6 @@ class AdminController extends Controller
       $schedule->scheduleDay = implode(',' ,$days);
       $schedule->save();
 
-      return redirect()->back()->with('success_added', 'Successfully added new record');   
+      return redirect()->back()->with('success_added', 'Successfully added new record');
     }
 }

@@ -17,18 +17,13 @@
     <meta name="robots" content="noindex,nofollow" />
     <title>@yield('title')</title>
     <!-- Favicon icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../assets/images/favicon.png"
-    />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png"/>
     <!-- Custom CSS -->
     <link href="{{asset('backend/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="{{asset('backend/dist/css/style.min.css')}}" rel="stylesheet" />
     <link href="{{asset('backend/dist/css/customize.css')}}" rel="stylesheet" />
-    
+
     {{-- Datatable --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,7 +35,7 @@
         cursor: pointer;
       }
 
-  
+
     </style>
   </head>
 
@@ -84,7 +79,7 @@
     <script src="{{asset('backend//assets/libs/flot/jquery.flot.crosshair.js')}}"></script>
     <script src="{{asset('backend/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
     <script src="{{asset('backend/dist/js/pages/chart/chart-page-init.js')}}"></script>
-    
+
     {{-- datatable --}}
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     {{-- tables scripts --}}
@@ -93,6 +88,6 @@
     @include('layouts.adminScript')
     @yield('scripts')
 
-   
+
   </body>
 </html>

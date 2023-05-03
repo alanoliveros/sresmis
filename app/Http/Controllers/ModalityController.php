@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Indicator;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PerformanceIndicatorController extends Controller
+class ModalityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class PerformanceIndicatorController extends Controller
      */
     public function index()
     {
-        return view('indicator.performance.index');
+        return view('modality.index');
     }
 
     /**

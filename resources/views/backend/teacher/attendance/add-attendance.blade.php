@@ -18,9 +18,9 @@
                                     <div class="col-12 col-md-4">
                                         <label for="validationCustom01" class="form-label text-light fs-5">Select School
                                             Year</label>
-                                        <select name="" id="" class="form-select">
+                                        <select name="school_year" id="" class="form-select">
                                             @foreach ($schoolYear as $key => $year)
-                                                <option value="{{ $year->id }}" {{ $key == 0 ? 'selected' : '' }}>
+                                                <option value="{{$year->id}}" {{ $key == 0 ? 'selected' : '' }}>
                                                     {{ $year->school_year }}</option>
                                             @endforeach
                                         </select>
@@ -75,15 +75,20 @@
                                     <div
                                         class="card-body text-center d-flex align-items-end justify-content-center bg-info">
                                         <label>
-                                            <input type="radio" name="status_student_attendance{{ $key }}"
-                                                class="attendance_status_present" />
+                                            <input type="radio" name="status_student_attendance_male[{{$student->studentId}}]"
+                                                class="attendance_status_present" checked value="Present"/>
                                             <span>P</span>
                                         </label>
                                         <br />
                                         <label>
-                                            <input type="radio" name="status_student_attendance{{ $key }}"
-                                                class="attendance_status_absent" />
+                                            <input type="radio" name="status_student_attendance_male[{{$student->studentId}}]"
+                                                class="attendance_status_absent" value="Absent"/>
                                             <span>A</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="status_student_attendance_male[{{$student->studentId}}]"
+                                                class="attendance_status_tardy" value="Tardy"/>
+                                            <span>T</span>
                                         </label>
                                     </div>
                                 </div>
@@ -114,15 +119,20 @@
                                     <div class="card-body text-center d-flex align-items-end justify-content-center"
                                         style="background-color: palevioletred">
                                         <label>
-                                            <input type="radio" name="status_student_attendance{{ $key }}"
-                                                class="attendance_status_present" />
+                                            <input type="radio" name="status_student_attendance_female[{{$student->studentId}}]"
+                                                class="attendance_status_present" checked value="Present"/>
                                             <span>P</span>
                                         </label>
                                         <br />
                                         <label>
-                                            <input type="radio" name="status_student_attendance{{ $key }}"
-                                                class="attendance_status_absent" />
+                                            <input type="radio" name="status_student_attendance_female[{{$student->studentId}}]"
+                                                class="attendance_status_absent" value="Absent"/>
                                             <span>A</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="status_student_attendance_female[{{$student->studentId}}]"
+                                                class="attendance_status_tardy" value="Tardy"/>
+                                            <span>T</span>
                                         </label>
                                     </div>
                                 </div>

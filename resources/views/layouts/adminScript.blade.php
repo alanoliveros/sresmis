@@ -1,69 +1,71 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    let school_year_sf1 = 0;
+    $(document).ready(function() {
 
-  let school_year_sf1 = 0;
-  $(document).ready(function(){
-
-    $('.add_subject').on('click', function(){
-      $('.subject_tab').append(
-            `<tr>
+        $('.add_subject').on('click', function() {
+            $('.subject_tab').append(
+                `<tr>
                 <td><input type="text" name="subjectname[]" class="form-control"></td>
                 <td><input type="text" name="description[]" class="form-control"></td>
                 <td class="text-center"><button type="button" class="btn btn-danger remove_btn">x</button></td>
             </tr>`
-         );
-    });
-    
-    $('.gradeLevelTaught').on('change', function() {
-
-        let gradeLevelTaughtId = $(this).val();
-        $.ajax({
-            type:"post",
-            url:"/sresmis/admin/getSection",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "id": gradeLevelTaughtId
-                },
-            // dataType: "json",
-            success:function(response) {
-            
-              
-              let sectionTaught = '';
-              $.each(response.gradeLevel, function(key, level) {
-                sectionTaught = sectionTaught +'<option value="'+level.id+'">'+level.sectionName+'</option>';
-              });
-              $('#sectionTaught').html(sectionTaught);
-            }
+            );
         });
-    });
 
-    $('.schoolYear_sf1').on('change', function(e){
-      e.preventDefault();
-      school_year_sf1 = $(this).val();
-    });
+        $('.gradeLevelTaught').on('change', function() {
 
-    $('.filter_sf1').on('click', function(e){
-      e.preventDefault();
-      $.ajax({
-            type:"POST",
-            url:"/sresmis/teacher/get-student-sf1-by-school-year",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "sy_id": school_year_sf1
+            let gradeLevelTaughtId = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/sresmis/admin/getSection",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": gradeLevelTaughtId
                 },
-            // dataType: "json",
-            success:function(response) {
-            console.log(response);
-           
-              
-              let students_sf1 = '';
-              let male = (response.male).length;
-              let female = (response.female).length;
-              let totalStudents = male+female;
-              let checkEnrolled = totalStudents <= 1?'student':'students';
+                // dataType: "json",
+                success: function(response) {
 
-              // $.each(response.students, function(key, student) {
-                students_sf1 = students_sf1 +`
+
+                    let sectionTaught = '';
+                    $.each(response.gradeLevel, function(key, level) {
+                        sectionTaught = sectionTaught + '<option value="' + level
+                            .id + '">' + level.sectionName + '</option>';
+                    });
+                    $('#sectionTaught').html(sectionTaught);
+                }
+            });
+        });
+
+        $('.schoolYear_sf1').on('change', function(e) {
+            e.preventDefault();
+            school_year_sf1 = $(this).val();
+        });
+
+        $('.filter_sf1').on('click', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/sresmis/teacher/get-student-sf1-by-school-year",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "sy_id": school_year_sf1
+                },
+                // dataType: "json",
+                success: function(response) {
+                    console.log(response);
+
+
+                    let students_sf1 = '';
+                    let male = (response.male).length;
+                    let female = (response.female).length;
+                    let totalStudents = male + female;
+                    let checkEnrolled = totalStudents <= 1 ? 'student' : 'students';
+
+                    // $.each(response.students, function(key, student) {
+                    students_sf1 = students_sf1 + `
                       <a href="">
                             <div class="card">
                                 <div class="box bg-dark text-light">
@@ -102,19 +104,18 @@
                                                               
                                                     </div>
                                                     <div class="col-12 col-sm-6">
-                                                        <a href="{{url('sresmis/teacher/export-sf1/${school_year_sf1}')}}" class="btn btn-light">Excel</a>     
+                                                        <a href="{{ url('sresmis/teacher/export-sf1/${school_year_sf1}') }}" class="btn btn-light">Excel</a>     
                                                     </div>
                                                 </div>
                                 </div>
                             </div>
                     </a>
                 `;
-              // });
-              if((response.students).length > 0){
-                $('.sf1_fetch_data').html(students_sf1);
-              }
-              else{
-                $('.sf1_fetch_data').html(`
+                    // });
+                    if ((response.students).length > 0) {
+                        $('.sf1_fetch_data').html(students_sf1);
+                    } else {
+                        $('.sf1_fetch_data').html(`
                                           
                                     <a href="">
                                         <div class="card">
@@ -126,39 +127,30 @@
                                     </a>
                                               
                 `);
-              }
-            }
-      });
-    });
-    
-    $(document).on('click', '.remove_btn', function(){
-        $(this).parents('tr').remove();
-    });
+                    }
+                }
+            });
+        });
 
-    $('#add-day').select2({
-       
-        placeholder: "Select Day",
-        tags: true,
-        tokenSeparators: ['/',',',','," "]
-    });
+        $(document).on('click', '.remove_btn', function() {
+            $(this).parents('tr').remove();
+        });
 
-    $('.status_student_attendance').on('click', function(){
-      if($(this).data('status') == 'Present'){
-        $(this).addClass('status_present');
-      }
-       if($(this).data('status') == 'Absent'){
-        $(this).addClass('status_absent');
-      }
+        $('#add-day').select2({
 
-    });
+            placeholder: "Select Day",
+            tags: true,
+            tokenSeparators: ['/', ',', ',', " "]
+        });
 
-    $('.absent_all').on('click', function(){
-        $.each($('.attendance_status_absent').prop("checked",true));
-        $.each($('.attendance_status_present').prop("checked",false));
+        $('.absent_all').on('click', function() {
+            $('.attendance_status_absent').prop("checked", true);
+            $('.attendance_status_present').prop("checked", false);
+           
+        });
+        $('.present_all').on('click', function() {
+            $('.attendance_status_absent').prop("checked", false);
+            $('.attendance_status_present').prop("checked", true);
+        });
     });
-    $('.present_all').on('click', function(){
-        $.each($('.attendance_status_present').prop("checked",true));
-        $.each($('.attendance_status_absent').prop("checked",false));
-    });
-  });
-  </script>
+</script>

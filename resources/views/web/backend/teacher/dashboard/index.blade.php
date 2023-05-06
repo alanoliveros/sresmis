@@ -1,4 +1,5 @@
 @extends('web.backend.layouts.app')
+@section('title', 'Teacher | Dashboard')  
 @section('content')
     <main id="main" class="main">
 

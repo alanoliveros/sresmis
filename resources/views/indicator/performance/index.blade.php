@@ -1,7 +1,7 @@
 @extends('layouts.app')
+@section('title' , 'SRESMIS | Performance')
 @section('content')
     <div class="page-wrapper">
-
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
@@ -23,8 +23,5 @@
                 <h1>Key Performance Indicator</h1>
             </div>
         </div>
-
-
-
 
 @endsection

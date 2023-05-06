@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Indicator\PerformanceIndicatorController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ModalityController;
 use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
@@ -30,6 +31,7 @@ Auth::routes();
 
 /** Admin Controller */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
+
     Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('sresmis.admin.teachers');
     Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
@@ -37,8 +39,11 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
 /** Key Performance Indicator */
 Route::middleware('isAdmin')->resource('performance-indicator', PerformanceIndicatorController::class);
-/** Modality  */
+/** Modality */
 Route::middleware('isAdmin')->resource('modality', ModalityController::class);
+
+/** Inventory */
+Route::middleware('isAdmin')->resource('inventory', InventoryController::class);
 
 /** Subjects */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
@@ -78,7 +83,7 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     Route::post('/submit-attendance/advisory', [TeacherController::class, 'submit_attendance']);
 
 
-    // 
+    //
     Route::get('/add-attendance-by-advisory', [TeacherController::class, 'add_attendance_by_advisory']);
     Route::get('/grades', [TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
@@ -107,4 +112,6 @@ Route::get('/sresmis/student/dashboard', [TeacherController::class, 'index'])->n
 
 /** Parent Dashboard */
 Route::get('/sresmis/parent/dashboard', [TeacherController::class, 'index'])->name('sresmis.parent.dashboard')->middleware('isParent');
+
+
 

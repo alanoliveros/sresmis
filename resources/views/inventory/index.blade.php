@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@push('css')
+@push('layout.css')
 
 @endpush
-
-@section('title' , 'SRESMIS | Modality')
+@section('title' , 'SRESMIS | Inventory')
 @section('content')
-    <div class="page-wrapper">
 
+
+    <div class="page-wrapper">
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
@@ -26,9 +26,15 @@
 
         <div class="container-fluid">
             <div class="row">
-                <h1>Modality</h1>
+                <h1>Inventory</h1>
             </div>
         </div>
+
+
+
+
+
+
 
 @endsection
 

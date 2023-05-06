@@ -5,9 +5,9 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav" class="pt-4">
                 @if(auth()->user()->role == 1)
-                 @include('layouts.sidebar-component.admin-sidebar')  
+                    @include('layouts.sidebar-component.admin-sidebar')
                 @elseif(auth()->user()->role == 2)
-                 @include('layouts.sidebar-component.teacher-sidebar')  
+                    @include('layouts.sidebar-component.teacher-sidebar')
                 @endif
             </ul>
         </nav>

@@ -1,5 +1,6 @@
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.admin.dashboard')}}" aria-expanded="false">
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sresmis.admin.dashboard')}}"
+       aria-expanded="false">
         <i class="mdi mdi-view-dashboard"></i>
         <span class="hide-menu">Dashboard</span>
     </a>
@@ -9,7 +10,7 @@
     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('performance-indicator.index')}}"
        aria-expanded="false">
         <i class="mdi mdi-chart-bar"></i>
-        <span class="hide-menu">Performance Indicator</span>
+        <span class="hide-menu">Analytic</span>
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">
@@ -19,12 +20,11 @@
         <span class="hide-menu">Modalities</span>
     </a>
 </li>
-
 <li class="sidebar-item sidebar_hover">
-    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="##"
+    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('inventory.index')}}"
        aria-expanded="false">
-        <i class="mdi mdi-border-inside"></i>
-        <span class="hide-menu">Tables</span>
+        <i class="mdi mdi-store"></i>
+        <span class="hide-menu">Inventory</span>
     </a>
 </li>
 <li class="sidebar-item sidebar_hover">

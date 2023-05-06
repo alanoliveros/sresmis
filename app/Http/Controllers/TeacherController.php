@@ -23,7 +23,7 @@ class TeacherController extends Controller
 
     public function index()
     {
-        return view('backend.teacher.dashboard.dashboard');
+        return view('web.backend.teacher.dashboard.index');
     }
 
     public function attendance()

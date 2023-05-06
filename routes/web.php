@@ -9,6 +9,8 @@ use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -107,11 +109,12 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
 });
 
 
-/** Student Dashboard */
-Route::get('/sresmis/student/dashboard', [TeacherController::class, 'index'])->name('sresmis.student.dashboard')->middleware('isStudent');
 
 /** Parent Dashboard */
 Route::get('/sresmis/parent/dashboard', [TeacherController::class, 'index'])->name('sresmis.parent.dashboard')->middleware('isParent');
 
 
-
+/** Student Dashboard */
+Route::prefix('sresmis/student')->middleware('isStudent')->group(function () {
+    Route::get('/dashboard', [StudentController::class, 'index'])->name('sresmis.student.dashboard');
+});

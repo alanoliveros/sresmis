@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index(){
-        return view('backend.student.dashboard.dashboard');
-      }
+  public function index()
+  {
+    return view('web.backend.student.dashboard.index');
+  }
 }

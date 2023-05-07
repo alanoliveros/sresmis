@@ -9,3 +9,4 @@
 
 <!-- Template Main CSS File -->
 <link href="{{asset('storage/backend/assets/css/style.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('storage/backend/assets/css/customize.css')}}">

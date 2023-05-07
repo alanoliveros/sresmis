@@ -1,184 +1,93 @@
 <li class="nav-item">
-    <a class="nav-link " href="{{route('sresmis.admin.dashboard')}}">
+    <a class="nav-link collapsed" href="{{route('sresmis.admin.dashboard')}}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
     </a>
 </li>
+
 <!-- End Dashboard Nav -->
+
+
+<li class="nav-heading">Template</li>
+
+
+
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="components-alerts.html">
-                <i class="bi bi-circle"></i><span>Alerts</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-accordion.html">
-                <i class="bi bi-circle"></i><span>Accordion</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-badges.html">
-                <i class="bi bi-circle"></i><span>Badges</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-breadcrumbs.html">
-                <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-buttons.html">
-                <i class="bi bi-circle"></i><span>Buttons</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-cards.html">
-                <i class="bi bi-circle"></i><span>Cards</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-carousel.html">
-                <i class="bi bi-circle"></i><span>Carousel</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-list-group.html">
-                <i class="bi bi-circle"></i><span>List group</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-modal.html">
-                <i class="bi bi-circle"></i><span>Modal</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-tabs.html">
-                <i class="bi bi-circle"></i><span>Tabs</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-pagination.html">
-                <i class="bi bi-circle"></i><span>Pagination</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-progress.html">
-                <i class="bi bi-circle"></i><span>Progress</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-spinners.html">
-                <i class="bi bi-circle"></i><span>Spinners</span>
-            </a>
-        </li>
-        <li>
-            <a href="components-tooltips.html">
-                <i class="bi bi-circle"></i><span>Tooltips</span>
-            </a>
-        </li>
+    {{--<ul id="components-nav"
+        class="nav-content collapse {{
+        Request::routeIs('sresmis.admin.components-alerts') ||
+        Request::routeIs('sresmis.admin.components-accordion') ||
+        Request::routeIs('sresmis.admin.components-badges') ||
+        Request::routeIs('sresmis.admin.components-breadcrumbs') ||
+        Request::routeIs('sresmis.admin.components-buttons') ||
+        Request::routeIs('sresmis.admin.components-cards') ||
+        Request::routeIs('sresmis.admin.components-carousel') ||
+        Request::routeIs('sresmis.admin.components-list-group') ||
+        Request::routeIs('sresmis.admin.components-modal') ||
+        Request::routeIs('sresmis.admin.components-tabs') ||
+        Request::routeIs('sresmis.admin.components-pagination') ||
+        Request::routeIs('sresmis.admin.components-progress') ||
+        Request::routeIs('sresmis.admin.components-spinners') ||
+        Request::routeIs('sresmis.admin.components-tooltips') ? 'show' : '' }}"
+        data-bs-parent="#sidebar-nav">
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-alerts') ? 'active' : '' }}" href="{{route('sresmis.admin.components-alerts')}}"><i class="bi bi-circle"></i><span>Alerts</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-accordion') ? 'active' : '' }}" href="{{route('sresmis.admin.components-accordion')}}"><i class="bi bi-circle"></i><span>Accordion</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-badges') ? 'active' : '' }}" href="{{route('sresmis.admin.components-badges')}}"><i class="bi bi-circle"></i><span>Badges</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-breadcrumbs') ? 'active' : '' }}" href="{{route('sresmis.admin.components-breadcrumbs')}}"><i class="bi bi-circle"></i><span>Breadcrumbs</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-buttons') ? 'active' : '' }}" href="{{route('sresmis.admin.components-buttons')}}"><i class="bi bi-circle"></i><span>Buttons</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-cards') ? 'active' : '' }}" href="{{route('sresmis.admin.components-cards')}}"><i class="bi bi-circle"></i><span>Cards</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-carousel') ? 'active' : '' }}" href="{{route('sresmis.admin.components-carousel')}}"><i class="bi bi-circle"></i><span>Carousel</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-list-group') ? 'active' : '' }}" href="{{route('sresmis.admin.components-list-group')}}"><i class="bi bi-circle"></i><span>List group</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-modal') ? 'active' : '' }}" href="{{route('sresmis.admin.components-modal')}}"><i class="bi bi-circle"></i><span>Modal</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-tabs') ? 'active' : '' }}" href="{{route('sresmis.admin.components-tabs')}}"><i class="bi bi-circle"></i><span>Tabs</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-pagination') ? 'active' : '' }}" href="{{route('sresmis.admin.components-pagination')}}"><i class="bi bi-circle"></i><span>Pagination</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-progress') ? 'active' : '' }}" href="{{route('sresmis.admin.components-progress')}}"><i class="bi bi-circle"></i><span>Progress</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-spinners') ? 'active' : '' }}" href="{{route('sresmis.admin.components-spinners')}}"><i class="bi bi-circle"></i><span>Spinners</span></a></li>
+        <li><a class="{{ Request::routeIs('sresmis.admin.components-tooltips') ? 'active' : '' }}" href="{{route('sresmis.admin.components-tooltips')}}"><i class="bi bi-circle"></i><span>Tooltips</span></a></li>
+    </ul>--}}
+
+    @php
+        $components = [
+            ['name' => 'Alerts', 'route' => 'admin.components-alerts'],
+            ['name' => 'Accordion', 'route' => 'admin.components-accordion'],
+            ['name' => 'Badges', 'route' => 'admin.components-badges'],
+            ['name' => 'Breadcrumbs', 'route' => 'admin.components-breadcrumbs'],
+            ['name' => 'Buttons', 'route' => 'admin.components-buttons'],
+            ['name' => 'Cards', 'route' => 'admin.components-cards'],
+            ['name' => 'Carousel', 'route' => 'admin.components-carousel'],
+            ['name' => 'List group', 'route' => 'admin.components-list-group'],
+            ['name' => 'Modal', 'route' => 'admin.components-modal'],
+            ['name' => 'Tabs', 'route' => 'admin.components-tabs'],
+            ['name' => 'Pagination', 'route' => 'admin.components-pagination'],
+            ['name' => 'Progress', 'route' => 'admin.components-progress'],
+            ['name' => 'Spinners', 'route' => 'admin.components-spinners'],
+            ['name' => 'Tooltips', 'route' => 'admin.components-tooltips'],
+        ];
+    @endphp
+
+    <ul id="components-nav" class="nav-content collapse {{ in_array(request()->route()->getName(), array_column($components, 'route')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+        @foreach ($components as $component)
+            <li>
+                <a class="{{ request()->routeIs($component['route']) ? 'active' : '' }}" href="{{ route($component['route']) }}">
+                    <i class="bi bi-circle"></i><span>{{ $component['name'] }}</span>
+                </a>
+            </li>
+        @endforeach
     </ul>
+
+
+
+
+
 </li><!-- End Components Nav -->
-
-<li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="forms-elements.html">
-                <i class="bi bi-circle"></i><span>Form Elements</span>
-            </a>
-        </li>
-        <li>
-            <a href="forms-layouts.html">
-                <i class="bi bi-circle"></i><span>Form Layouts</span>
-            </a>
-        </li>
-        <li>
-            <a href="forms-editors.html">
-                <i class="bi bi-circle"></i><span>Form Editors</span>
-            </a>
-        </li>
-        <li>
-            <a href="forms-validation.html">
-                <i class="bi bi-circle"></i><span>Form Validation</span>
-            </a>
-        </li>
-    </ul>
-</li><!-- End Forms Nav -->
-
-<li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="tables-general.html">
-                <i class="bi bi-circle"></i><span>General Tables</span>
-            </a>
-        </li>
-        <li>
-            <a href="tables-data.html">
-                <i class="bi bi-circle"></i><span>Data Tables</span>
-            </a>
-        </li>
-    </ul>
-</li><!-- End Tables Nav -->
-
-<li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="charts-chartjs.html">
-                <i class="bi bi-circle"></i><span>Chart.js</span>
-            </a>
-        </li>
-        <li>
-            <a href="charts-apexcharts.html">
-                <i class="bi bi-circle"></i><span>ApexCharts</span>
-            </a>
-        </li>
-        <li>
-            <a href="charts-echarts.html">
-                <i class="bi bi-circle"></i><span>ECharts</span>
-            </a>
-        </li>
-    </ul>
-</li><!-- End Charts Nav -->
-
-<li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="icons-bootstrap.html">
-                <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-            </a>
-        </li>
-        <li>
-            <a href="icons-remix.html">
-                <i class="bi bi-circle"></i><span>Remix Icons</span>
-            </a>
-        </li>
-        <li>
-            <a href="icons-boxicons.html">
-                <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-        </li>
-    </ul>
-</li><!-- End Icons Nav -->
 
 <li class="nav-heading">Pages</li>
 
 <li class="nav-item">
-    <a class="nav-link collapsed" href="users-profile.html">
+    <a class="nav-link collapsed" href="{{route('admin.users-profile')}}">
         <i class="bi bi-person"></i>
         <span>Profile</span>
     </a>

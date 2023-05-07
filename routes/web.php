@@ -36,7 +36,7 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
     Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('sresmis.admin.teachers');
-    Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
+Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
 });
 
 /** Key Performance Indicator */

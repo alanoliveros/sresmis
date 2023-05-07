@@ -106,6 +106,11 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
 
     /** Manage Class Schedules */
     Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('sresmis.teacher.class-schedule');
+    
+    // Student Information
+    // By Subject
+    Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
+
 });
 
 

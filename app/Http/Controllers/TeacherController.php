@@ -195,7 +195,10 @@ class TeacherController extends Controller
       'learnings' => $learnings,
     ]);
   }
-
+  public function info_by_subject()
+  {
+    return view('web.backend.teacher.students.admission-subject.index');
+  }
   public function addStudent(Request $request)
   {
     $schoolYearId = $request->schoolYearId;
@@ -335,4 +338,5 @@ class TeacherController extends Controller
   public function class_schedule()
   {
   }
+
 }

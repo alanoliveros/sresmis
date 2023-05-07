@@ -178,15 +178,14 @@
                     <li class="dropdown-header">
                         <h6>{{auth()->user()->name}}</h6>
                         <span>{{(auth()->user()->role == 1)? 'Admin': (auth()->user()->role == 2? 'Teacher':(auth()->user()->role == 3? 'Student':''))}}</span>
-                      
+
                     </li>
                     <li>
-
                         <hr class="dropdown-divider">
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="{{route('admin.users-profile')}}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>

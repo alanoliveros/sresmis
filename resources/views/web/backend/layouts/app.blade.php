@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-@include('web.backend.layouts.head')
-
+<!-- ======= Head ======= -->
+@include('web.backend.layouts.head')<!-- End Head -->
 
 <body>
-@include('web.backend.layouts.header')
+<!-- ======= Header ======= -->
+@include('web.backend.layouts.header')<!-- End Header -->
 
+<!-- ======= Sidebar ======= -->
+@include('web.backend.layouts.sidebar')<!-- End Sidebar-->
 
-@include('web.backend.layouts.sidebar')
+<!-- ======= Main ======= -->
+@yield('content')<!-- Main-->
 
+<!-- ======= Footer ======= -->
+@include('web.backend.layouts.footer')<!-- End Footer -->
 
-@yield('content')
-
-
-@include('web.backend.layouts.footer')
-
-
-
-@include('web.backend.layouts.script')
-
-
+<!-- Vendor JS Files -->
+<!-- Template Main JS File -->
+@include('web.backend.layouts.script')<!-- End -->
 </body>
 
 </html>

@@ -195,6 +195,22 @@ class TeacherController extends Controller
       'learnings' => $learnings,
     ]);
   }
+  public function student_advisory_by_school_year(Request $request)
+  {
+    $teacher_id = auth()->user()->id;
+    $year = $request->year;
+    $students = Student::where([
+                                'students.teacherId' => $teacher_id,
+                                'students.schoolYearId' => $year,
+                                ])
+                        ->join('users', 'students.studentId' ,'users.id')
+                        ->get();
+    
+    return response()->json([
+      'year' => $year,
+      'students' => $students,
+    ]);
+  }
   public function info_by_subject()
   {
     return view('web.backend.teacher.students.admission-subject.index');
@@ -338,5 +354,4 @@ class TeacherController extends Controller
   public function class_schedule()
   {
   }
-
 }

@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('sresmis.admin.dashboard')}}">
+    <a class="nav-link collapsed" href="{{ route('sresmis.admin.dashboard') }}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
     </a>
@@ -16,7 +16,7 @@
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
-    {{--<ul id="components-nav"
+    {{-- <ul id="components-nav"
         class="nav-content collapse {{
         Request::routeIs('sresmis.admin.components-alerts') ||
         Request::routeIs('sresmis.admin.components-accordion') ||
@@ -47,47 +47,32 @@
         <li><a class="{{ Request::routeIs('sresmis.admin.components-progress') ? 'active' : '' }}" href="{{route('sresmis.admin.components-progress')}}"><i class="bi bi-circle"></i><span>Progress</span></a></li>
         <li><a class="{{ Request::routeIs('sresmis.admin.components-spinners') ? 'active' : '' }}" href="{{route('sresmis.admin.components-spinners')}}"><i class="bi bi-circle"></i><span>Spinners</span></a></li>
         <li><a class="{{ Request::routeIs('sresmis.admin.components-tooltips') ? 'active' : '' }}" href="{{route('sresmis.admin.components-tooltips')}}"><i class="bi bi-circle"></i><span>Tooltips</span></a></li>
-    </ul>--}}
-
+    </ul> --}}
     @php
-        $components = [
-            ['name' => 'Alerts', 'route' => 'admin.components-alerts'],
-            ['name' => 'Accordion', 'route' => 'admin.components-accordion'],
-            ['name' => 'Badges', 'route' => 'admin.components-badges'],
-            ['name' => 'Breadcrumbs', 'route' => 'admin.components-breadcrumbs'],
-            ['name' => 'Buttons', 'route' => 'admin.components-buttons'],
-            ['name' => 'Cards', 'route' => 'admin.components-cards'],
-            ['name' => 'Carousel', 'route' => 'admin.components-carousel'],
-            ['name' => 'List group', 'route' => 'admin.components-list-group'],
-            ['name' => 'Modal', 'route' => 'admin.components-modal'],
-            ['name' => 'Tabs', 'route' => 'admin.components-tabs'],
-            ['name' => 'Pagination', 'route' => 'admin.components-pagination'],
-            ['name' => 'Progress', 'route' => 'admin.components-progress'],
-            ['name' => 'Spinners', 'route' => 'admin.components-spinners'],
-            ['name' => 'Tooltips', 'route' => 'admin.components-tooltips'],
-        ];
+        $components =   [
+                            ['name' => 'Alerts', 'route' => 'admin.components-alerts'],
+                            ['name' => 'Accordion', 'route' => 'admin.components-accordion'],
+                        ];
     @endphp
 
-    <ul id="components-nav" class="nav-content collapse {{ in_array(request()->route()->getName(), array_column($components, 'route')) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+    <ul id="components-nav"
+        class="nav-content collapse {{ in_array(request()->route()->getName(),array_column($components, 'route'))? 'show': '' }}"
+        data-bs-parent="#sidebar-nav">
         @foreach ($components as $component)
             <li>
-                <a class="{{ request()->routeIs($component['route']) ? 'active' : '' }}" href="{{ route($component['route']) }}">
+                <a class="{{ request()->routeIs($component['route']) ? 'active' : '' }}"
+                    href="{{ route($component['route']) }}">
                     <i class="bi bi-circle"></i><span>{{ $component['name'] }}</span>
                 </a>
             </li>
         @endforeach
     </ul>
-
-
-
-
-
-</li><!-- End Components Nav -->
+</li>
 
 <li class="nav-heading">Pages</li>
 
 <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('admin.users-profile')}}">
+    <a class="nav-link collapsed" href="{{ route('admin.users-profile') }}">
         <i class="bi bi-person"></i>
         <span>Profile</span>
     </a>

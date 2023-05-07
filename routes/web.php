@@ -10,6 +10,7 @@ use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TemplateController;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,11 +34,35 @@ Auth::routes();
 
 /** Admin Controller */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-
     Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('sresmis.admin.teachers');
-Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
+    Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
+
+    /** Template Controller
+     * This is for the route of the sidebar menu
+     */
+    Route::get('/components-alerts', [TemplateController::class, 'componentAlerts'])->name('admin.components-alerts');
+    Route::get('/components-accordion', [TemplateController::class, 'componentAccordion'])->name('admin.components-accordion');
+    Route::get('/components-badges', [TemplateController::class, 'componentBadges'])->name('admin.components-badges');
+    Route::get('/components-breadcrumbs', [TemplateController::class, 'componentBreadcrumbs'])->name('admin.components-breadcrumbs');
+    Route::get('/components-buttons', [TemplateController::class, 'componentButtons'])->name('admin.components-buttons');
+    Route::get('/components-cards', [TemplateController::class, 'componentCards'])->name('admin.components-cards');
+    Route::get('/components-carousel', [TemplateController::class, 'componentCarousel'])->name('admin.components-carousel');
+    Route::get('/components-list-group', [TemplateController::class, 'componentListGroup'])->name('admin.components-list-group');
+    Route::get('/components-modal', [TemplateController::class, 'componentModal'])->name('admin.components-modal');
+    Route::get('/components-tabs', [TemplateController::class, 'componentTabs'])->name('admin.components-tabs');
+    Route::get('/components-pagination', [TemplateController::class, 'componentPagination'])->name('admin.components-pagination');
+    Route::get('/components-progress', [TemplateController::class, 'componentProgress'])->name('admin.components-progress');
+    Route::get('/components-spinners', [TemplateController::class, 'componentSpinners'])->name('admin.components-spinners');
+    Route::get('/components-tooltips', [TemplateController::class, 'componentTooltips'])->name('admin.components-tooltips');
+
+    /** User Profile */
+    Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
+
+
+
 });
+
 
 /** Key Performance Indicator */
 Route::middleware('isAdmin')->resource('performance-indicator', PerformanceIndicatorController::class);
@@ -106,14 +131,12 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
 
     /** Manage Class Schedules */
     Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('sresmis.teacher.class-schedule');
-    
+
     // Student Information
     // By Subject
     Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
 
 });
-
-
 
 /** Parent Dashboard */
 Route::get('/sresmis/parent/dashboard', [TeacherController::class, 'index'])->name('sresmis.parent.dashboard')->middleware('isParent');

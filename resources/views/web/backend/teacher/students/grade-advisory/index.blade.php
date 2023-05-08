@@ -1,5 +1,5 @@
 @extends('web.backend.layouts.app')
-@section('title', 'Teacher | Advisory')
+@section('title', 'Teacher | Subject')
 @section('content')
     <main id="main" class="main">
 
@@ -24,18 +24,18 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <form action="{{ route('sresmis.teacher.advisory.by-school-year') }}" method="POST">
+                            <form action="{{ route('sresmis.teacher.advisory.grades-by-school-year') }}" method="POST">
                                 @csrf
                                 <div class="row my-3 ">
                                     <div class="col-12 col-md-4">
                                         <div class="mb-3">
                                             <select class="form-select school_year_by_advisory" required
                                                 aria-label="select example" name="school_year">
-                                                <option selected disabled>Select Year</option>
+                                                <option selected disabled>Select School Year</option>
                                                 @foreach ($sessions as $key => $session)
-                                                    <option value="{{ $session->id }}">
-                                                        {{ $session->school_year }}</option>
-                                                @endforeach
+                                                <option value="{{ $session->id }}">
+                                                    {{ $session->school_year }}</option>
+                                            @endforeach
                                             </select>
                                         </div>
                                     </div>

@@ -198,22 +198,50 @@ class TeacherController extends Controller
   public function student_advisory_by_school_year(Request $request)
   {
     $teacher_id = auth()->user()->id;
-    $year = $request->year;
-    $students = Student::where([
-                                'students.teacherId' => $teacher_id,
-                                'students.schoolYearId' => $year,
-                                ])
-                        ->join('users', 'students.studentId' ,'users.id')
-                        ->get();
-    
-    return response()->json([
-      'year' => $year,
-      'students' => $students,
+    $request->validate([
+      'school_year' => 'required',
+    ]);
+
+    $male = Student::where([
+      'students.teacherId' => $teacher_id,
+      'students.schoolYearId' => $request->school_year,
+      'users.gender' => 'Male',])
+      ->join('users', 'students.studentId', 'users.id')
+      ->get();
+      
+    $female = Student::where([
+      'students.teacherId' => $teacher_id,
+      'students.schoolYearId' => $request->school_year,
+      'users.gender' => 'Female',])
+      ->join('users', 'students.studentId', 'users.id')
+      ->get();
+    return view('web.backend.teacher.students.admission-advisory.student-data')->with([
+      'male' => $male,
+      'female' => $female
     ]);
   }
   public function info_by_subject()
   {
-    return view('web.backend.teacher.students.admission-subject.index');
+    $teacher_id = auth()->user()->id;
+    $subjects = ClassSchedule::where([
+      'class_schedules.teacherId' => $teacher_id,
+    ])->join('users', 'class_schedules.teacherId', 'users.id')
+      ->join('subjects', 'class_schedules.subjectId', 'subjects.id')
+      ->get();
+    return view('web.backend.teacher.students.admission-subject.index')->with([
+      'subjects' => $subjects
+    ]);
+  }
+  public function grades_advisory()
+  {
+    $sessions = Session::orderBy('school_year', 'desc')->get();
+    return view('web.backend.teacher.students.grade-advisory.index')->with([
+      'sessions' => $sessions
+    ]);
+  }
+  public function grades_advisory_by_school_year()
+  {
+    return view('web.backend.teacher.students.grade-advisory.grades-by-school-year');
   }
   public function addStudent(Request $request)
   {

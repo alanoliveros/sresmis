@@ -195,30 +195,16 @@ class TeacherController extends Controller
       'learnings' => $learnings,
     ]);
   }
-  public function student_advisory_by_school_year(Request $request)
+  public function student_advisory_by_school_year($id)
   {
-    $teacher_id = auth()->user()->id;
-    $request->validate([
-      'school_year' => 'required',
-    ]);
-
-    $male = Student::where([
-      'students.teacherId' => $teacher_id,
-      'students.schoolYearId' => $request->school_year,
-      'users.gender' => 'Male',])
-      ->join('users', 'students.studentId', 'users.id')
-      ->get();
-      
-    $female = Student::where([
-      'students.teacherId' => $teacher_id,
-      'students.schoolYearId' => $request->school_year,
-      'users.gender' => 'Female',])
-      ->join('users', 'students.studentId', 'users.id')
-      ->get();
-    return view('web.backend.teacher.students.admission-advisory.student-data')->with([
-      'male' => $male,
-      'female' => $female
-    ]);
+    $students = Student::where([
+      'students.schoolYearId' => $id,
+      'students.teacherId' => auth()->user()->id,
+    ])
+    ->join('users', 'students.studentId', 'users.id')
+    ->get();
+    return response()->json(['students'=> $students]);
+    
   }
   public function info_by_subject()
   {

@@ -24,32 +24,33 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <form action="{{ route('sresmis.teacher.advisory.by-school-year') }}" method="POST">
-                                @csrf
-                                <div class="row my-3 ">
-                                    <div class="col-12 col-md-4">
-                                        <div class="mb-3">
-                                            <select class="form-select school_year_by_advisory" required
-                                                aria-label="select example" name="school_year">
-                                                <option selected disabled>Select Year</option>
-                                                @foreach ($sessions as $key => $session)
-                                                    <option value="{{ $session->id }}">
-                                                        {{ $session->school_year }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="mb-3">
-                                            <button type="submit"
-                                                class="btn btn-secondary rounded-0 filter_student">Filter</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4 d-none add_new_record">
 
+                            <div class="row my-3 ">
+                                <div class="col-12 col-md-4">
+                                    <div class="mb-3">
+                                        <select class="form-select school_year_by_advisory" required
+                                            aria-label="select example" name="school_year">
+                                            <option selected disabled>Select Year</option>
+                                            @foreach ($sessions as $key => $session)
+                                                <option value="{{ $session->id }}">
+                                                    {{ $session->school_year }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col-12 col-md-4">
+                                    <div class="mb-3">
+                                        <button type="button"
+                                            class="btn btn-secondary rounded-0 filter_student">Filter</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 d-none add_new_record">
+
+                                </div>
+                            </div>
+                            <div class="students_table">
+
+                            </div>
                         </div>
 
                     </div>

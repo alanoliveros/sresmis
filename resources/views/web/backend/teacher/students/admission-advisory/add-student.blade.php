@@ -1,4 +1,4 @@
-<div class="modal fade" id="addStudent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+<div class="modal fade" id="addstudent_click" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-dialog-scrollable add-student" role="document">
         <div class="modal-content">
             <div class="modal-header bg-light text-dark">
@@ -188,6 +188,4 @@
             </div>
         </div>
     </div>
-
-</div>
 </div>

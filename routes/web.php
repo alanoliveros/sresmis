@@ -58,9 +58,6 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
     /** User Profile */
     Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
-
-
-
 });
 
 
@@ -96,9 +93,15 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
 
 Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
+    // Student Information
     // filter student by school year | advisory
-    // Route::post('/student-advisory-by-school-year', [TeacherController::class, 'student_advisory_by_school_year'])->name('sresmis.teacher.advisory.by-school-year');
     Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
+
+
+    // By Subject
+    Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
+    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject']);
+    
 
     /** Teacher Controller */
     Route::get('/dashboard', [TeacherController::class, 'index'])->name('sresmis.teacher.dashboard');
@@ -136,18 +139,13 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     /** Manage Class Schedules */
     Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('sresmis.teacher.class-schedule');
 
-    // Student Information
-    // By Subject
-    Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
-    
-    
+
+
     // Student Grades
     // By Advisory
-    Route::get('/grades-advisory', [TeacherController::class, 'grades_advisory'])->name('sresmis.teacher.grades.advisory');
+    Route::get('/student-grades', [TeacherController::class, 'student_grades'])->name('sresmis.teacher.student-grades');
     // Filter By School Year
     Route::get('/grades-by-school-year', [TeacherController::class, 'grades_advisory_by_school_year'])->name('sresmis.teacher.advisory.grades-by-school-year');
-
-
 });
 
 /** Parent Dashboard */

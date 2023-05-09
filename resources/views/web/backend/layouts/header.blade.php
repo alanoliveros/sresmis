@@ -8,12 +8,13 @@
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
+    {{-- <div class="search-bar ms-auto fs-4 fw-bold d-none d-md-block">
+        <span class="" style="font-family: Georgia, 'Times New Roman', Times, serif">SAN ROQUE ELEMENTARY SCHOOL MANAGEMENT INFORMATION SYSTEM</span>
+      </div><!-- End Search Bar -->
+   --}}
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-
-           
-
             <li class="nav-item dropdown">
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">

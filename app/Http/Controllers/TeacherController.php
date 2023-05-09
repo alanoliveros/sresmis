@@ -201,6 +201,7 @@ class TeacherController extends Controller
       'students.schoolYearId' => $id,
       'students.teacherId' => auth()->user()->id,
     ])
+    ->orderBy('users.lastname', 'asc')
     ->join('users', 'students.studentId', 'users.id')
     ->get();
     return response()->json(['students'=> $students]);
@@ -214,16 +215,51 @@ class TeacherController extends Controller
     ])->join('users', 'class_schedules.teacherId', 'users.id')
       ->join('subjects', 'class_schedules.subjectId', 'subjects.id')
       ->get();
+    $sessions = Session::orderBy('school_year', 'desc')->get();
     return view('web.backend.teacher.students.admission-subject.index')->with([
-      'subjects' => $subjects
+      'subjects' => $subjects,
+      'sessions' => $sessions,
     ]);
   }
-  public function grades_advisory()
+  public function filter_info_by_subject(Request $request)
+  {
+    $subject_id = $request->sub_id;
+    $sy_id = $request->sy_id;
+    $class_sched = ClassSchedule::where([
+      'subjectId' => $subject_id,
+      'teacherId' => auth()->user()->id,
+    ])->first();
+    $section_id = $class_sched->sectionId;
+
+
+
+    $students = Student::where([
+      'sectionId' => $section_id,
+      'teacherId' => auth()->user()->id,
+      'schoolYearId' => $sy_id,
+    ])
+    ->join('users', 'students.studentId', 'users.id')
+    ->get();
+
+
+
+    return response()->json([
+      'students'=> $students,
+    ]);
+  }
+  public function student_grades()
   {
     $sessions = Session::orderBy('school_year', 'desc')->get();
-    return view('web.backend.teacher.students.grade-advisory.index')->with([
-      'sessions' => $sessions
+    $subjects = ClassSchedule::where([
+      'class_schedules.teacherId' => auth()->user()->id,
+      ])->join('subjects', 'class_schedules.subjectId', 'subjects.id')
+      ->get();
+    return view('web.backend.teacher.students.student-grades.index')->with([
+      'sessions' => $sessions,
+      'subjects' => $subjects
     ]);
+
+
   }
   public function grades_advisory_by_school_year()
   {

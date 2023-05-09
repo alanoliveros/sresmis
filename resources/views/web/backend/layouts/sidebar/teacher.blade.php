@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link " href="{{ route('sresmis.teacher.dashboard') }}">
+    <a class="nav-link {{ Request::routeIs('sresmis.teacher.dashboard') ? 'active' : '' }}" href="{{ route('sresmis.teacher.dashboard') }}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
     </a>
@@ -11,9 +11,7 @@
         <i class="bi bi-person-video2"></i><span>Students Information</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     @php
-        $informations = [['name' => 'Advisory', 'route' => 'sresmis.teacher.advisory'], 
-                         ['name' => 'Subject', 'route' => 'sresmis.teacher.by-subject'],
-                        ];
+        $informations = [['name' => 'Advisory', 'route' => 'sresmis.teacher.advisory'], ['name' => 'Subject', 'route' => 'sresmis.teacher.by-subject']];
     @endphp
     <ul id="components-nav"
         class="nav-content collapse {{ in_array(request()->route()->getName(),array_column($informations, 'route'))? 'show': '' }}"
@@ -54,23 +52,11 @@
 </li><!-- End Charts Nav -->
 
 <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Student Grades</span><i
-            class="bi bi-chevron-down ms-auto"></i>
+    <a class="nav-link {{ Request::routeIs('sresmis.teacher.student-grades') ? 'active' : '' }}" href="{{route('sresmis.teacher.student-grades')}}">
+        <i class="bi bi-award fs-5"></i>
+        <span>Student Grades</span>
     </a>
-    <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="{{route('sresmis.teacher.grades.advisory')}}">
-                <i class="bi bi-circle"></i><span>Advisory</span>
-            </a>
-        </li>
-        <li>
-            <a href="tables-data.html">
-                <i class="bi bi-circle"></i><span>Subject</span>
-            </a>
-        </li>
-    </ul>
-</li><!-- End Tables Nav -->
+</li><!-- End Profile Page Nav -->
 
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

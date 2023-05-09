@@ -1,9 +1,9 @@
 <!-- ======= Sidebar ======= -->
-<aside id="sidebar" class="sidebar">
 
+<aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
 
-        @if(auth()->user()->role == 1)
+        @if (auth()->user()->role == 1)
             @include('web.backend.layouts.sidebar.admin')
         @elseif(auth()->user()->role == 2)
             @include('web.backend.layouts.sidebar.teacher')

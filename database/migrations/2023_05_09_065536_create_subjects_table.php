@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('gradeLevelId');
             $table->string('subjectName');
             $table->string('description')->nullable();
+            $table->integer('written_work_percentage')->nullable();
+            $table->integer('performance_tasks_percentage')->nullable();
             $table->timestamps();
         });
     }

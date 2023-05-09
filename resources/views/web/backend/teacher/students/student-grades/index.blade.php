@@ -1,17 +1,17 @@
 @extends('web.backend.layouts.app')
-@section('title', 'Teacher | Subject')
+@section('title', 'SRESMIS | Grades')
 @section('content')
     <main id="main" class="main">
 
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h5 class="page-title my-2"><i class="bi bi-person-lines-fill"></i> Subject</h5>
+                <h5 class="page-title my-2"><i class="bi bi-person-lines-fill"></i> Grades</h5>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-dark"><i
                                         class="bi bi-house-door"></i></a></li>
-                            <li class="breadcrumb-item" aria-current="page"><a href="">Subject</a>
+                            <li class="breadcrumb-item" aria-current="page"><a href="">Grades</a>
                             </li>
                         </ol>
                     </nav>
@@ -52,15 +52,9 @@
                                 <div class="col-12 col-md-3">
                                     <div class="mb-3">
                                         <button type="button" disabled
-                                            class="btn btn-secondary rounded-0 filter_by">Filter</button>
+                                            class="btn btn-secondary rounded-0 filter_grades">Filter</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="mb-3">
-                                        <a href="" class="float-md-end btn btn-light rounded-0 border-dark"
-                                            data-bs-toggle="modal" data-bs-target="#addstudent_click">+ Add student</a>
-                                        {{-- @include('web.backend.teacher.students.admission-advisory.add-student') --}}
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +83,7 @@
                     $('.filter_by').prop('disabled', false);
                 }
             });
-            $(".filter_by").on('click', function(e) {
+            $(".filter_grades").on('click', function(e) {
                 e.preventDefault();
                 $.ajax({
                     method: "POST",

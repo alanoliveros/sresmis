@@ -2,16 +2,13 @@
 
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Indicator\PerformanceIndicatorController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\ModalityController;
 use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
-use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TemplateController;
-use App\Models\Student;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,21 +23,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
 
 Auth::routes();
 
+/** ======================================= Alan start routing ======================================= */
 /** Admin Controller */
-Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
+Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('sresmis.admin.teachers');
     Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
 
-    /** Template Controller
-     * This is for the route of the sidebar menu
-     */
+    /** Template Controller */
     Route::get('/components-alerts', [TemplateController::class, 'componentAlerts'])->name('admin.components-alerts');
     Route::get('/components-accordion', [TemplateController::class, 'componentAccordion'])->name('admin.components-accordion');
     Route::get('/components-badges', [TemplateController::class, 'componentBadges'])->name('admin.components-badges');
@@ -57,20 +51,11 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
     Route::get('/components-tooltips', [TemplateController::class, 'componentTooltips'])->name('admin.components-tooltips');
 
     /** User Profile */
-    Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
-
+    Route::get('/profile', [UserController::class, 'index'])->name('users-profile');
 
 
 });
-
-
-/** Key Performance Indicator */
-Route::middleware('isAdmin')->resource('performance-indicator', PerformanceIndicatorController::class);
-/** Modality */
-Route::middleware('isAdmin')->resource('modality', ModalityController::class);
-
-/** Inventory */
-Route::middleware('isAdmin')->resource('inventory', InventoryController::class);
+/** ======================================= Alan end routing ======================================= */
 
 /** Subjects */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
@@ -139,8 +124,8 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     // Student Information
     // By Subject
     Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
-    
-    
+
+
     // Student Grades
     // By Advisory
     Route::get('/grades-advisory', [TeacherController::class, 'grades_advisory'])->name('sresmis.teacher.grades.advisory');

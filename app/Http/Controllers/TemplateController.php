@@ -77,9 +77,9 @@ class TemplateController extends Controller
     }
 
     /** Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('sresmis.admin.users-profile')*/
-
+/*
     public function usersProfile()
     {
         return view('web.backend.admin.usersProfile');
-    }
+    }*/
 }

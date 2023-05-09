@@ -24,7 +24,7 @@
             ['name' => 'Completion Rate', 'route' => 'admin.components-accordion'],
             ['name' => 'Achievement Rate', 'route' => 'admin.components-accordion'],
             ['name' => 'Transition Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Cohort Survival Rate', 'route' => 'admin.components-accordion'],
+            ['name' => 'Participation Rate', 'route' => 'admin.components-accordion'],
         ];
     @endphp
     <ul id="analytics-nav"

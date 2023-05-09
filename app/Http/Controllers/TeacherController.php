@@ -249,10 +249,10 @@ class TeacherController extends Controller
   }
   public function student_grades()
   {
+    $teacher_detail = Teacher::where('teacherId', auth()->user()->id)->first();
     $sessions = Session::orderBy('school_year', 'desc')->get();
-    $subjects = ClassSchedule::where([
-      'class_schedules.teacherId' => auth()->user()->id,
-      ])->join('subjects', 'class_schedules.subjectId', 'subjects.id')
+    $subjects = Subject::where([
+      'subjects.gradeLevelId' => $teacher_detail->gradeLevelId])
       ->get();
     return view('web.backend.teacher.students.student-grades.index')->with([
       'sessions' => $sessions,

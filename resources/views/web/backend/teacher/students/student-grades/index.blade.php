@@ -55,6 +55,42 @@
                                             class="btn btn-secondary rounded-0 filter_grades">Filter</button>
                                     </div>
                                 </div>
+                                <div class="col-12 border border-dark">
+                                   <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="6" class="text-center fs-4">Written Works ( <u class="text-success"><small class="">40</small><small>%</small></u> )</th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-center">1</th>
+                                                <th class="text-center">Total</th>
+                                                <th class="text-center">PS</th>
+                                                <th class="text-center">WA</th>
+                                                <th class="text-center">Action</th>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th>Highest Possible Score</th>
+                                                <th><input type="number" name="score[1]" min="1" class="form-control" ></th>
+                                                <th class="text-center text-success"><span class="highest_total_written total_score"></span></th>
+                                                <th class="text-center text-success"><span class="percentage_score_written">100</span></th>
+                                                <th class="text-center text-success"><span class="weighted_score_written">40%</span></th>
+                                                <th class="text-center"><button type="button" class="btn btn-success">+</button></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select name="" id="" class="form-control">
+                                                        <option selected disabled>Select Student</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="number" min="1" class="form-control fs-6" placeholder="Enter Score"></td>
+                                            </tr>
+                                        </tbody>
+                                   </table>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -70,17 +106,26 @@
     <script>
         let sy_id = 0;
         let sub_id = 0;
+        let grade_component = 0;
+        let first_score = 0;
+        function gradeComponent(val){
+           
+            console.log(val);
+        }
+        
         $(document).ready(function() {
+            grade_component = $('.grade_component').text();
+            gradeComponent(grade_component);
             $(".select_sy").on('change', function() {
                 sy_id = $(".select_sy :selected").val();
                 if (sy_id != 0 && sub_id != 0) {
-                    $('.filter_by').prop('disabled', false);
+                    $('.filter_grades').prop('disabled', false);
                 }
             });
             $(".school_year_by_subject").on('change', function() {
                 sub_id = $(".school_year_by_subject :selected").val();
                 if (sy_id != 0 && sub_id != 0) {
-                    $('.filter_by').prop('disabled', false);
+                    $('.filter_grades').prop('disabled', false);
                 }
             });
             $(".filter_grades").on('click', function(e) {
@@ -97,7 +142,14 @@
                     }
                 });
             });
+            $("input[name='score[1]']").on('change', function(e){
+                first_score = $(this).val();
+                $('.total_score').text(first_score);
+            });
 
+            
+
+           
         });
     </script>
 @endsection

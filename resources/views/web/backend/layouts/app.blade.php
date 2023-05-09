@@ -20,8 +20,6 @@
 
 
 @include('web.backend.layouts.script')
-@include('web.backend.layouts.messageScript')
-
 
 
 </body>

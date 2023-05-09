@@ -1,45 +1,52 @@
 <!DOCTYPE html>
-<html dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="keywords"
-      content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template"
-    />
-    <meta
-      name="description"
-      content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
-    />
-    <meta name="robots" content="noindex,nofollow" />
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
     <title>@yield('title')</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('backend/assets/images/favicon.png')}}"
-    />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    <link href="{{asset('backend/dist/css/style.min.css')}}" rel="stylesheet" />
+    @include('web.backend.layouts.head.links')
 
-  </head>
+    @include('web.backend.layouts.head.css')
 
-  <body class="bg-dark ">
-  @yield('content')
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Updated: Mar 09 2023 with Bootstrap v5.2.3
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
 
-  
-    <script src="{{asset('backend/assets/libs/jquery/dist/jquery.min.js')}}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{asset('backend/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-    <script>
-      $(".preloader").fadeOut();
-      $("#to-recover").on("click", function () {
-        $("#loginform").slideUp();
-        $("#recoverform").fadeIn();
-      });
-      $("#to-login").click(function () {
-        $("#recoverform").hide();
-        $("#loginform").fadeIn();
-      });
-    </script>
-  </body>
+<body>
+
+@yield('content')
+
+<!-- End #main -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('storage/backend/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('storage/backend/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('storage/backend/assets/vendor/chart.js/chart.umd.js') }}"></script>
+<script src="{{ asset('storage/backend/assets/vendor/echarts/echarts.min.js') }}"></script>
+<script src="{{ asset('storage/backend/assets/vendor/quill/quill.min.js') }}"></script>
+<script src="{{ asset('storage/backend/assets/vendor/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('storage/backend/assets/vendor/php-email-form/validate.js') }}"></script>
+
+
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" defer></script>
+
+</body>
+
 </html>

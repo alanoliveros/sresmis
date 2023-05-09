@@ -24,11 +24,12 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
+
                             <div class="row my-3 ">
                                 <div class="col-12 col-md-4">
                                     <div class="mb-3">
                                         <select class="form-select school_year_by_advisory" required
-                                            aria-label="select example">
+                                            aria-label="select example" name="school_year">
                                             <option selected disabled>Select Year</option>
                                             @foreach ($sessions as $key => $session)
                                                 <option value="{{ $session->id }}">
@@ -36,12 +37,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-
-
-                                    {{-- <a class="float-md-end btn btn-light border-dark rounded-0" data-bs-toggle="modal"
-                                        data-bs-target="#addStudent">+ Add Student
-                                    </a>
-                                    @include('web.backend.teacher.students.admission-advisory.add-student') --}}
                                 </div>
                                 <div class="col-12 col-md-4">
                                     <div class="mb-3">
@@ -49,8 +44,11 @@
                                             class="btn btn-secondary rounded-0 filter_student">Filter</button>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-4 d-none add_new_record">
+
+                                </div>
                             </div>
-                            <div class="student_data">
+                            <div class="students_table">
 
                             </div>
                         </div>
@@ -61,73 +59,4 @@
             </div>
         </section>
     </main>
-@endsection
-@section('scripts')
-    <script>
-        let optionSelected = 0;
-
-
-
-        async function load_student_by_year(year) {
-            await $.ajax({
-                type: "POST",
-                url: "/sresmis/teacher/student-advisory-by-school-year",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "year": year,
-                },
-                success: function(response) {
-                    // console.log(response.students);
-
-                    let tbody = "";
-
-
-
-                    $.each(response.students, function(key, student) {
-
-                        tbody +=
-                            `<tr>
-                                        <td>${student.name}</td>
-                                        <td>${student.name}</td>
-                                        <td>${student.name}</td>
-                                        <td>${student.name}</td>
-                                        <td>${student.name}</td>
-                                        <td>${student.name}</td>
-                                     
-                        </tr>`
-                    });
-
-                   $('.student_data').html(`<table class="table table-striped table-hover" id="table_head">
-                                <thead>
-                                    <tr class="fs-5">
-                                        <th scope="col" class="text-success">#</th>
-                                        <th scope="col" class="text-success">LRN</th>
-                                        <th scope="col" class="text-success">Complete name</th>
-                                        <th scope="col" class="text-success">Age</th>
-                                        <th scope="col" class="text-success">Birthdate</th>
-                                        <th scope="col" class="text-success">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="student_data">
-                                    ${tbody}
-                                </tbody>
-                            </table>`);
-                    $('#table_head').DataTable();
-                
-
-
-                    
-                }
-            });
-        }
-        $(document).ready(function(e) {
-            $('.school_year_by_advisory').on('change', function() {
-                optionSelected = $(".school_year_by_advisory option:selected").val();
-            });
-            $('.filter_student').on('click', function(e) {
-                e.preventDefault();
-                load_student_by_year(optionSelected);
-            });
-        });
-    </script>
 @endsection

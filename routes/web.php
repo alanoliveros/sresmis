@@ -97,7 +97,8 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
 Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     // filter student by school year | advisory
-    Route::post('/student-advisory-by-school-year', [TeacherController::class, 'student_advisory_by_school_year']);
+    // Route::post('/student-advisory-by-school-year', [TeacherController::class, 'student_advisory_by_school_year'])->name('sresmis.teacher.advisory.by-school-year');
+    Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
 
     /** Teacher Controller */
     Route::get('/dashboard', [TeacherController::class, 'index'])->name('sresmis.teacher.dashboard');
@@ -138,6 +139,14 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     // Student Information
     // By Subject
     Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
+    
+    
+    // Student Grades
+    // By Advisory
+    Route::get('/grades-advisory', [TeacherController::class, 'grades_advisory'])->name('sresmis.teacher.grades.advisory');
+    // Filter By School Year
+    Route::get('/grades-by-school-year', [TeacherController::class, 'grades_advisory_by_school_year'])->name('sresmis.teacher.advisory.grades-by-school-year');
+
 
 });
 

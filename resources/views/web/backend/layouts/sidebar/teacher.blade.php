@@ -60,13 +60,13 @@
     </a>
     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-            <a href="tables-general.html">
-                <i class="bi bi-circle"></i><span>General Tables</span>
+            <a href="{{route('sresmis.teacher.grades.advisory')}}">
+                <i class="bi bi-circle"></i><span>Advisory</span>
             </a>
         </li>
         <li>
             <a href="tables-data.html">
-                <i class="bi bi-circle"></i><span>Data Tables</span>
+                <i class="bi bi-circle"></i><span>Subject</span>
             </a>
         </li>
     </ul>

@@ -2,13 +2,14 @@
 
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Analytics\IndicatorController;
 use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TemplateController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
@@ -52,8 +55,35 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
     /** User Profile */
     Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
-    Route::get('/profile', [UserController::class, 'index'])->name('users-profile');
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
 
+    /** KPI Controller */
+    Route::prefix('analytics')  ->group(function () {
+        /**
+         * public function promotionIndex() { return view('web.backend.admin.analytics.promotion.index'); }
+         * public function retentionIndex() { return view('web.backend.admin.analytics.retention.index'); }
+         * public function cohortIndex() { return view('web.backend.admin.analytics.cohort.index'); }
+         * public function graduationIndex() { return view('web.backend.admin.analytics.graduation.index'); }
+         * public function dropoutIndex() { return view('web.backend.admin.analytics.dropout.index'); }
+         * public function failureIndex() { return view('web.backend.admin.analytics.failure.index'); }
+         * public function completionIndex() { return view('web.backend.admin.analytics.completion.index'); }
+         * public function achievementIndex() { return view('web.backend.admin.analytics.achievement.index'); }
+         * public function transitionIndex() { return view('web.backend.admin.analytics.transition.index'); }
+         * public function participationIndex() { return view('web.backend.admin.analytics.participation.index'); }
+         */
+
+        Route::get('/promotion-rate', [IndicatorController::class, 'promotionIndex'])->name('admin.analytics');
+        Route::get('/retention-rate', [IndicatorController::class, 'retentionIndex'])->name('admin.retention');
+        Route::get('/cohort-survival-rate', [IndicatorController::class, 'cohortIndex'])->name('admin.cohort');
+        Route::get('/graduation-rate', [IndicatorController::class, 'graduationIndex'])->name('admin.graduation');
+        Route::get('/dropout-rate', [IndicatorController::class, 'dropoutIndex'])->name('admin.dropout');
+        Route::get('/failure-rate', [IndicatorController::class, 'failureIndex'])->name('admin.failure');
+        Route::get('/completion-rate', [IndicatorController::class, 'completionIndex'])->name('admin.completion');
+        Route::get('/achievement-rate', [IndicatorController::class, 'achievementIndex'])->name('admin.achievement');
+        Route::get('/transition-rate', [IndicatorController::class, 'transitionIndex'])->name('admin.transition');
+        Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
+
+    });
 
 });
 /** ======================================= Alan end routing ======================================= */
@@ -90,7 +120,7 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     // By Subject
     Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
     Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject']);
-    
+
 
     /** Teacher Controller */
     Route::get('/dashboard', [TeacherController::class, 'index'])->name('sresmis.teacher.dashboard');

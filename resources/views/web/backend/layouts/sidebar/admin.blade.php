@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('sresmis.admin.dashboard')}}">
+    <a class="nav-link collapsed" href="{{route('admin.dashboard')}}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
     </a>
@@ -43,7 +43,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('sresmis.admin.dashboard')}}">
+    <a class="nav-link collapsed" href="{{route('admin.dashboard')}}">
         <i class="bi bi-person-lines-fill"></i>
         <span>Enrolment Profile</span>
     </a>
@@ -55,9 +55,8 @@
     </a>
     @php
         $components = [
-            ['name' => 'Admin', 'route' => 'admin.components-alerts'],
-            ['name' => 'Student', 'route' => 'admin.components-accordion'],
             ['name' => 'Teacher', 'route' => 'admin.components-accordion'],
+            ['name' => 'Student', 'route' => 'admin.components-accordion'],
         ];
     @endphp
     <ul id="users-nav"
@@ -81,10 +80,10 @@
     </a>
     @php
         $components = [
-            ['name' => 'Daily Attendance', 'route' => 'admin.components-alerts'],
-            ['name' => 'Subject', 'route' => 'admin.components-accordion'],
-            ['name' => 'Class', 'route' => 'admin.components-accordion'],
-            ['name' => 'Class room', 'route' => 'admin.components-accordion'],
+            ['name' => 'Daily Attendance', 'route' => 'admin.daily-attendance'],
+            ['name' => 'Subject', 'route' => 'admin.subject'],
+            ['name' => 'Class', 'route' => 'admin.class'],
+            ['name' => 'Class room', 'route' => 'admin.class-room'],
         ];
     @endphp
     <ul id="academic-nav"
@@ -109,9 +108,9 @@
 
     @php
         $components = [
-            ['name' => 'Library', 'route' => 'admin.components-alerts'],
-            ['name' => 'Session', 'route' => 'admin.components-accordion'],
-            ['name' => 'Noticeboard', 'route' => 'admin.components-accordion'],
+            ['name' => 'Library', 'route' => 'admin.library'],
+            ['name' => 'Session', 'route' => 'admin.session'],
+            ['name' => 'Noticeboard', 'route' => 'admin.noticeboard'],
         ];
     @endphp
     <ul id="back-office-nav"
@@ -137,10 +136,10 @@
 
     @php
         $components = [
-            ['name' => 'System settings', 'route' => 'admin.components-alerts'],
-            ['name' => 'Website settings', 'route' => 'admin.components-alerts'],
-            ['name' => 'School settings', 'route' => 'admin.components-accordion'],
-            ['name' => 'About', 'route' => 'admin.components-accordion'],
+            ['name' => 'System settings', 'route' => 'admin.system-settings'],
+            ['name' => 'Website settings', 'route' => 'admin.website-settings'],
+            ['name' => 'School settings', 'route' => 'admin.school-settings'],
+            ['name' => 'About', 'route' => 'admin.about'],
         ];
     @endphp
     <ul id="settings-nav"
@@ -160,9 +159,9 @@
 
 
 
-<li class="nav-heading">Template</li>
+{{--<li class="nav-heading">Template</li>--}}
 
-<li class="nav-item">
+{{--<li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
@@ -200,4 +199,4 @@
     </ul>
 
 
-</li><!-- End Components Nav -->
+</li>--}}<!-- End Components Nav -->

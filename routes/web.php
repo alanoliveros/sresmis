@@ -1,11 +1,22 @@
 <?php
 
 
+use App\Http\Controllers\Academic\ClassController;
+use App\Http\Controllers\Academic\ClassRoomController;
+use App\Http\Controllers\Academic\DailyAttendanceController;
+use App\Http\Controllers\Academic\SubjectController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Analytics\IndicatorController;
+use App\Http\Controllers\Analytic\IndicatorController;
+use App\Http\Controllers\BackOffice\LibraryController;
+use App\Http\Controllers\BackOffice\NoticeboardController;
+use App\Http\Controllers\BackOffice\SessionController;
 use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
+use App\Http\Controllers\Setting\AboutCountroller;
+use App\Http\Controllers\Setting\SchoolController;
+use App\Http\Controllers\Setting\SystemController;
+use App\Http\Controllers\Setting\WebsiteCountroller;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TemplateController;
@@ -31,47 +42,16 @@ Route::get('/', function () {
 Auth::routes();
 
 /** ======================================= Alan start routing ======================================= */
-/** Admin Controller */
+/** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
-    Route::get('/teachers', [AdminController::class, 'teachers'])->name('sresmis.admin.teachers');
-    Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('sresmis.admin.add-teacher');
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
-    /** Template Controller */
-    Route::get('/components-alerts', [TemplateController::class, 'componentAlerts'])->name('admin.components-alerts');
-    Route::get('/components-accordion', [TemplateController::class, 'componentAccordion'])->name('admin.components-accordion');
-    Route::get('/components-badges', [TemplateController::class, 'componentBadges'])->name('admin.components-badges');
-    Route::get('/components-breadcrumbs', [TemplateController::class, 'componentBreadcrumbs'])->name('admin.components-breadcrumbs');
-    Route::get('/components-buttons', [TemplateController::class, 'componentButtons'])->name('admin.components-buttons');
-    Route::get('/components-cards', [TemplateController::class, 'componentCards'])->name('admin.components-cards');
-    Route::get('/components-carousel', [TemplateController::class, 'componentCarousel'])->name('admin.components-carousel');
-    Route::get('/components-list-group', [TemplateController::class, 'componentListGroup'])->name('admin.components-list-group');
-    Route::get('/components-modal', [TemplateController::class, 'componentModal'])->name('admin.components-modal');
-    Route::get('/components-tabs', [TemplateController::class, 'componentTabs'])->name('admin.components-tabs');
-    Route::get('/components-pagination', [TemplateController::class, 'componentPagination'])->name('admin.components-pagination');
-    Route::get('/components-progress', [TemplateController::class, 'componentProgress'])->name('admin.components-progress');
-    Route::get('/components-spinners', [TemplateController::class, 'componentSpinners'])->name('admin.components-spinners');
-    Route::get('/components-tooltips', [TemplateController::class, 'componentTooltips'])->name('admin.components-tooltips');
-
-    /** User Profile */
+    /** ================== User Profile ================== */
     Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
     Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
 
-    /** KPI Controller */
-    Route::prefix('analytics')  ->group(function () {
-        /**
-         * public function promotionIndex() { return view('web.backend.admin.analytics.promotion.index'); }
-         * public function retentionIndex() { return view('web.backend.admin.analytics.retention.index'); }
-         * public function cohortIndex() { return view('web.backend.admin.analytics.cohort.index'); }
-         * public function graduationIndex() { return view('web.backend.admin.analytics.graduation.index'); }
-         * public function dropoutIndex() { return view('web.backend.admin.analytics.dropout.index'); }
-         * public function failureIndex() { return view('web.backend.admin.analytics.failure.index'); }
-         * public function completionIndex() { return view('web.backend.admin.analytics.completion.index'); }
-         * public function achievementIndex() { return view('web.backend.admin.analytics.achievement.index'); }
-         * public function transitionIndex() { return view('web.backend.admin.analytics.transition.index'); }
-         * public function participationIndex() { return view('web.backend.admin.analytics.participation.index'); }
-         */
-
+    /** ================== KPI Controller ================== */
+    Route::prefix('analytics')->group(function () {
         Route::get('/promotion-rate', [IndicatorController::class, 'promotionIndex'])->name('admin.analytics');
         Route::get('/retention-rate', [IndicatorController::class, 'retentionIndex'])->name('admin.retention');
         Route::get('/cohort-survival-rate', [IndicatorController::class, 'cohortIndex'])->name('admin.cohort');
@@ -82,8 +62,41 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/achievement-rate', [IndicatorController::class, 'achievementIndex'])->name('admin.achievement');
         Route::get('/transition-rate', [IndicatorController::class, 'transitionIndex'])->name('admin.transition');
         Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
-
     });
+
+
+    Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
+    Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
+
+    /** ================== Users ================== */
+    Route::prefix('users')->group(function () {
+        Route::get('/teacher', [AdminController::class, 'usersTeacher'])->name('admin.users-teacher');
+        Route::get('/student', [AdminController::class, 'usersStudent'])->name('admin.users-student');
+    });
+
+    /** ================== Settings ================== */
+    Route::prefix('settings')->group(function () {
+        Route::get('/system-settings', [SystemController::class, 'index'])->name('admin.system-settings');
+        Route::get('/website-settings', [WebsiteCountroller::class, 'index'])->name('admin.website-settings');
+        Route::get('/school-settings', [SchoolController::class, 'index'])->name('admin.school-settings');
+        Route::get('/about', [AboutCountroller::class, 'index'])->name('admin.about');
+    });
+
+    /** ================== Back office ================== */
+    Route::prefix('back-office')->group(function () {
+        Route::get('/library', [LibraryController::class, 'index'])->name('admin.library');
+        Route::get('/session', [SessionController::class, 'index'])->name('admin.session');
+        Route::get('/noticeboard', [NoticeboardController::class, 'index'])->name('admin.noticeboard');
+    });
+
+    /** ================== Academic ================== */
+    Route::prefix('academic')->group(function () {
+        Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
+        Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
+        Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
+        Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
+    });
+
 
 });
 /** ======================================= Alan end routing ======================================= */

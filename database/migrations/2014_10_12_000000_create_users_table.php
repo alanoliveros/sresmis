@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('role')->default(0); 
-            // 0 = pending, 1=admin, 2=teacher, 3=student, 4=parent;
+            $table->integer('role')->default(0);
             $table->string('middlename')->nullable();
             $table->string('lastname')->nullable();
             $table->string('suffix')->nullable();

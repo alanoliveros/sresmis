@@ -15,16 +15,16 @@
     </a>
     @php
         $components = [
-            ['name' => 'Promotion Rate', 'route' => 'admin.components-alerts'],
-            ['name' => 'Retention Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Cohort Survival Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Graduation Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Drop-out Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Failure Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Completion Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Achievement Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Transition Rate', 'route' => 'admin.components-accordion'],
-            ['name' => 'Participation Rate', 'route' => 'admin.components-accordion'],
+            ['name' => 'Promotion Rate', 'route' => 'admin.analytics'],
+            ['name' => 'Retention Rate', 'route' => 'admin.retention'],
+            ['name' => 'Cohort Survival Rate', 'route' => 'admin.cohort'],
+            ['name' => 'Graduation Rate', 'route' => 'admin.graduation'],
+            ['name' => 'Drop-out Rate', 'route' => 'admin.dropout'],
+            ['name' => 'Failure Rate', 'route' => 'admin.failure'],
+            ['name' => 'Completion Rate', 'route' => 'admin.completion'],
+            ['name' => 'Achievement Rate', 'route' => 'admin.achievement'],
+            ['name' => 'Transition Rate', 'route' => 'admin.transition'],
+            ['name' => 'Participation Rate', 'route' => 'admin.participation'],
         ];
     @endphp
     <ul id="analytics-nav"

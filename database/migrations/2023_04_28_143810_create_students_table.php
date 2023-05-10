@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('adminId');
             $table->integer('teacherId');
             $table->integer('studentId');
-            $table->integer('schoolYearId');
+            $table->string('school_year');
             $table->bigInteger('lrn');
             $table->integer('sectionId');
             $table->integer('gradeLevelId');

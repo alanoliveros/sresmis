@@ -77,7 +77,7 @@
                 e.preventDefault();
                 $.ajax({
                     method: "POST",
-                    url: '/sresmis/teacher/student-information/advisory/' + id,
+                    url: '/teacher/student-information/advisory/' + id,
                     success: function(data) {
                         let lists = data.students;
                         let info = '';

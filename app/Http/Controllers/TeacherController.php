@@ -254,12 +254,12 @@ class TeacherController extends Controller
     $subjects = Subject::where([
       'subjects.gradeLevelId' => $teacher_detail->gradeLevelId])
       ->get();
+    
     return view('web.backend.teacher.students.student-grades.index')->with([
       'sessions' => $sessions,
       'subjects' => $subjects
     ]);
-
-
+    
   }
   public function grades_advisory_by_school_year()
   {

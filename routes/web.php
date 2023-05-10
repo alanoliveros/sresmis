@@ -10,6 +10,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\Teacher\StudentGradeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -89,7 +90,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 /** ======================================= Alan end routing ======================================= */
 
 /** Subjects */
-Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
+Route::prefix('/admin')->middleware('isAdmin')->group(function () {
     Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');
     Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
     Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
@@ -111,7 +112,7 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 });
 
 
-Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
+Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // Student Information
     // filter student by school year | advisory
     Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
@@ -167,7 +168,15 @@ Route::prefix('sresmis/teacher')->middleware('isTeacher')->group(function () {
     // By Advisory
     Route::get('/student-grades', [TeacherController::class, 'student_grades'])->name('sresmis.teacher.student-grades');
     // Filter By School Year
-    Route::get('/grades-by-school-year', [TeacherController::class, 'grades_advisory_by_school_year'])->name('sresmis.teacher.advisory.grades-by-school-year');
+    
+    // Grading
+    // filter by school year
+    Route::post('/student-grades/filter-school-year', [StudentGradeController::class, 'filter_school_year']);
+    // filter by subject
+    Route::post('/student-grades/filter-subject', [StudentGradeController::class, 'filter_by_subject']);
+    // filter by students
+    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
+
 });
 
 /** Parent Dashboard */

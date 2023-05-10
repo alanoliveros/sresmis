@@ -27,11 +27,11 @@
                             <div class="row my-3 ">
                                 <div class="col-12 col-md-3">
                                     <div class="mb-3">
-                                        <select class="form-select select_sy" required aria-label="select example"
-                                            name="school_year">
+                                        <select class="form-select select_sy filter_for" required
+                                            aria-label="select example" name="school_year">
                                             <option selected disabled>Select School Year</option>
                                             @foreach ($sessions as $key => $session)
-                                                <option value="{{ $session->id }}">
+                                                <option value="{{ $session->school_year }}">
                                                     {{ $session->school_year }}</option>
                                             @endforeach
                                         </select>
@@ -39,33 +39,59 @@
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <div class="mb-3">
-                                        <select class="form-select school_year_by_subject" required
+                                        <select class="form-select school_year_by_subject filter_for" required
                                             aria-label="select example" name="school_year">
                                             <option selected disabled>Select Subject</option>
-                                            @foreach ($subjects as $key => $subject)
-                                                <option value="{{ $subject->id }}">
-                                                    {{ $subject->subjectName }}</option>
-                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="mb-3">
+                                        <select class="form-select section_select filter_for" required
+                                            aria-label="select example" name="school_year">
+                                            <option selected disabled>Select Section</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <div class="mb-3">
                                         <button type="button" disabled
-                                            class="btn btn-secondary rounded-0 filter_grades">Filter</button>
+                                            class="btn btn-secondary  rounded-0 filter_grades">Filter</button>
                                     </div>
                                 </div>
+
+                                <div class="wrapper">
+                                    <div class="row">
+                                        <div class="col-4 students_lists_container">
+                                            
+
+                                        </div>
+                                        <div class="col grade_component_container">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
                                 <div class="col-12 border border-dark mb-4">
-                                    <table class="table table-hover">
+                                    <p class="text-center fs-4 fw-bold">Written Work (<small class="text-success">
+                                            40%</small> )</p>
+                                    <hr>
+                                    <table class="table table-hover written_work">
                                         <thead>
                                             <tr>
-                                                <th colspan="6" class="text-center fs-4">Written Work ( <u
-                                                        class="text-success"><small
-                                                            class="">40</small><small>%</small></u> )</th>
-                                            </tr>
-                                            <tr>
                                                 <th></th>
-                                                <th class="text-center fw-bold">1</th>
+                                                <th class="text-center fw-bold col_index">1</th>
                                                 <th class="text-center between_count">Total</th>
                                                 <th class="text-center">PS</th>
                                                 <th class="text-center">WA</th>
@@ -74,7 +100,7 @@
                                             </tr>
                                             <tr>
                                                 <th>Highest Possible Score</th>
-                                                <th><input type="number" name="score[]" min="1" 
+                                                <th><input type="number" name="score[]" min="1"
                                                         class="form-control written_output_score"></th>
                                                 <th class="text-center text-success between_highest_score"><span
                                                         class="total_score">0</span></th>
@@ -83,7 +109,8 @@
                                                 <th class="text-center text-success"><span
                                                         class="weighted_score_written">40%</span></th>
                                                 <th class="text-center"><button type="button"
-                                                        class="btn btn-success add_score">+</button></th>
+                                                        class="btn btn-success add_score"
+                                                        data-gcomponent="written_work">+</button></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -106,21 +133,19 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
 
-                                {{-- perforamnce Tasks --}}
+
+                                </div>
                                 <div class="col-12 border border-dark mb-4">
-                                    <table class="table table-hover">
+                                    <p class="text-center fs-4 fw-bold">Performance Task (<small class="text-success">
+                                            40%</small> )</p>
+                                    <hr>
+                                    <table class="table table-hover performance_task">
                                         <thead>
                                             <tr>
-                                                <th colspan="6" class="text-center fs-4">Performance Task ( <u
-                                                        class="text-success"><small
-                                                            class="">40</small><small>%</small></u> )</th>
-                                            </tr>
-                                            <tr>
                                                 <th></th>
-                                                <th class="text-center fw-bold">1</th>
-                                                <th class="text-center between_count">Total</th>
+                                                <th class="text-center fw-bold col_index">1</th>
+                                                <th class="text-center between_count PERFORMANCE">Total</th>
                                                 <th class="text-center">PS</th>
                                                 <th class="text-center">WA</th>
                                                 <th class="text-center">Action</th>
@@ -128,16 +153,17 @@
                                             </tr>
                                             <tr>
                                                 <th>Highest Possible Score</th>
-                                                <th><input type="number" name="score[]" min="1" 
-                                                        class="form-control written_output_score"></th>
-                                                <th class="text-center text-success between_highest_score"><span
-                                                        class="total_score">0</span></th>
+                                                <th><input type="number" name="score_performance[]" min="1"
+                                                        class="form-control written_output_score PERFORMANCE"></th>
+                                                <th class="text-center text-success between_highest_score PERFORMANCE"><span
+                                                        class="total_score PERFORMANCE">0</span></th>
                                                 <th class="text-center text-success"><span
-                                                        class="percentage_score_written">100</span></th>
+                                                        class="percentage_score_written PERFORMANCE">100</span></th>
                                                 <th class="text-center text-success"><span
-                                                        class="weighted_score_written">40%</span></th>
+                                                        class="weighted_score_written PERFORMANCE">40%</span></th>
                                                 <th class="text-center"><button type="button"
-                                                        class="btn btn-success add_score">+</button></th>
+                                                        class="btn btn-success add_score PERFORMANCE"
+                                                        data-gcomponent="performance_task">+</button></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -147,20 +173,28 @@
                                                         <option selected disabled>Select Student</option>
                                                     </select>
                                                 </td>
-                                                <td><input type="number" min="1" name="student_score[]"
-                                                        class="form-control fs-6 quizzes_exams" placeholder="Enter Score">
+                                                <td><input type="number" min="1"
+                                                        name="student_score_performance[]"
+                                                        class="form-control fs-6 quizzes_exams PERFORMANCE"
+                                                        placeholder="Enter Score">
                                                 </td>
-                                                <td class="total_score_by_learner text-center"><span
-                                                        class="put_total_score_by_student">0</span></td>
-                                                <td class="text-center"><span class="percentage_score_by_student"></span>
+                                                <td class="total_score_by_learner PERFORMANCE text-center"><span
+                                                        class="put_total_score_by_student PERFORMANCE"></span></td>
+                                                <td class="text-center"><span
+                                                        class="percentage_score_by_student PERFORMANCE"></span>
                                                 </td>
                                                 <td class="text-center"><span
-                                                        class="weighted_score_written_by_student"></span></td>
+                                                        class="weighted_score_written_by_student PERFORMANCE"></span></td>
                                                 <td></td>
                                             </tr>
                                         </tbody>
                                     </table>
+
+
                                 </div>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -174,109 +208,81 @@
 @endsection
 @section('scripts')
     <script>
-        let sy_id = 0;
-        let sub_id = 0;
-        let grade_component = 0;
-        let first_score = 0;
-        let score_count = 1;
-        let total_score = [];
-        let sum = 0;
-        let total = 0;
-
-
-        function gradeComponent() {
-            let activity = $('.written_output_score').length;
-            if (activity == 1) {
-                first_score = $('.written_output_score').val();
-                $('.total_score').text(first_score);
-            } else {
-
-            }
-        }
-
-        function totalHighestScore() {
-            sum = 0;
-            $.each($(".written_output_score"), function(key, val) {
-                sum += parseInt($(val).val());
-
-            });
-            $('.total_score').text(sum);
-        }
-
-        function student_score() {
-            total = 0;
-            $.each($(".quizzes_exams"), function(key, val) {
-                total += parseInt($(val).val());
-
-            });
-            $('.put_total_score_by_student').text(total);
-            let ps = parseInt(total / sum * 100);
-            $('.percentage_score_by_student').text(ps);
-            let ws = 0.5;
-            $('.weighted_score_written_by_student').text(ps * ws + '%');
-
-
-
-
-        }
-
+        let sy = '';
+        let subject = 0;
+        let section = 0;
         $(document).ready(function() {
-            gradeComponent();
-            $('.add_score').on('click', function() {
+            $('.select_sy').on('change', function() {
+                sy = $(".select_sy :selected").val();
 
-                $(`<th class="text-center">${++score_count}</th>`).insertBefore('.between_count');
-                $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"  name="score[]" min="1" class="form-control written_output_score"></th>`)
-                    .insertBefore('.between_highest_score');
-                $(`<td><input type="number"  min="1" name="student_score[]" class="form-control fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
-                    .insertBefore('.total_score_by_learner');
-
-
-            });
-
-            grade_component = $('.grade_component').text();
-
-            $(".select_sy").on('change', function() {
-                sy_id = $(".select_sy :selected").val();
-                if (sy_id != 0 && sub_id != 0) {
-                    $('.filter_grades').prop('disabled', false);
-                }
-            });
-            $(".school_year_by_subject").on('change', function() {
-                sub_id = $(".school_year_by_subject :selected").val();
-                if (sy_id != 0 && sub_id != 0) {
-                    $('.filter_grades').prop('disabled', false);
-                }
-            });
-
-            $(".filter_grades").on('click', function(e) {
-                e.preventDefault();
                 $.ajax({
                     method: "POST",
-                    url: '/sresmis/teacher/student-information/by-subject/filter',
+                    url: '/teacher/student-grades/filter-school-year',
                     data: {
-                        "sy_id": sy_id,
-                        "sub_id": sub_id,
+                        "sy": sy,
                     },
                     success: function(data) {
-                        console.log(data.students);
+                        console.log(data.subjects);
+                        let sub = '<option selected disabled>Select Subject</option>';
+                        $.each(data.subjects, function(key, subject) {
+                            sub +=
+                                `<option value="${key}">${subject}</option>`;
+                        });
+                        $('.school_year_by_subject').html(sub);
                     }
                 });
             });
 
-            $("body").on('input', "input[name='score[]']", function(e) {
+            $('.school_year_by_subject').on('change', function() {
+                subject = $(".school_year_by_subject :selected").val();
+                $.ajax({
+                    method: "POST",
+                    url: '/teacher/student-grades/filter-subject',
+                    data: {
+                        "subject": subject,
+                        "sy": sy,
+                    },
+                    success: function(data) {
 
-                totalHighestScore();
-                let val = $(this).val();
-                $(this).attr('data-info', val);
+                        console.log(data.sections);
+                        let sec = '<option selected disabled>Select Section</option>';
+                        $.each(data.sections, function(key, section) {
+                            sec +=
+                                `<option value="${section.sectionId}">${section.sectionName}</option>`;
+                        });
+                        $('.section_select').html(sec);
+                    }
+                });
 
             });
-            $("body").on('input', "input[name='student_score[]']", function(e) {
 
-                student_score();
-                let val = $(this).val();
-                $(this).attr('data-info', val);
+            $('.section_select').on('change', function() {
+                section = $(".section_select :selected").val();
+                $(".filter_grades").prop("disabled", false);
 
             });
-        });
+
+            $('.filter_grades').on('click', function() {
+                $.ajax({
+                    method: "POST",
+                    url: '/teacher/student-grades/filter-students',
+                    data: {
+                        "section": section,
+                        "sy": sy,
+                    },
+                    success: function(data) {
+
+
+                        console.log(data.students);
+                        // let sec = '<option selected disabled>Select Section</option>';
+                        // $.each(data.sections, function(key, section) {
+                        //     sec +=
+                        //         `<option value="${section.sectionId}">${section.sectionName}</option>`;
+                        // });
+                        // $('.section_select').html(sec);
+                    }
+                });
+            });
+        })
     </script>
 @endsection

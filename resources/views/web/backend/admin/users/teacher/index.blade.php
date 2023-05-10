@@ -2,107 +2,60 @@
 @section('title' , 'Teacher')
 @section('content')
     <main id="main" class="main">
+
         <div class="pagetitle">
-            <h1>Dashboard</h1>
+            <h1>Data Tables</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">Data</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
 
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
 
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@yield('title')</h5>
+                            {{--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>--}}
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="mb-2">
-                                <span class="fs-4">Teacher Personal Information</span>
-                                <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addTeacher">+ Add teacher</a>
-                                @include('backend.admin.teachers.add-teacher')
-                            </div>
-                            <!-- column -->
-                            <table id="adminTeacherUser" class="table table-dark table-hover"
-                            ">
-                            <thead>
-                            <tr class="fs-5">
-                                <th scope="col" class="text-success">#</th>
-                                <th scope="col" class="text-success">Full name</th>
-                                <th scope="col" class="text-success">Designation</th>
-                                <th scope="col" class="text-success">Grade Level Taught</th>
-                                <th scope="col" class="text-success">Section Assigned</th>
-                                <th scope="col" class="text-success">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($teachers as $key=>$teacher)
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable" id="teacherDaw">
+                                <thead>
                                 <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$teacher->lastname.', '.($teacher->middlename == NULL? '':$teacher->middlename.', ').$teacher->name.($teacher->suffix == NULL? '':', '.$teacher->suffix)}}</td>
-                                    <td>{{$teacher->designation}}</td>
-                                    <td>{{$teacher->gradeLevelName}}</td>
-                                    <td>{{$teacher->sectionName}}</td>
-                                    {{-- <td></td> --}}
-                                    <td>
-                                        <div class="dropdown" tabindex="1">
-                                            <i class="db2" tabindex="1"></i>
-                                            <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
-                                            <div class="dropdown-content">
-                                                <a href="#">View</a>
-                                                <a href="#">Edit</a>
-                                                <a href="#" class="text-danger">Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Start Date</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Brandon Jacob</td>
+                                    <td>Designer</td>
+                                    <td>28</td>
+                                    <td>2016-05-25</td>
+                                </tr>
 
-
+                                </tbody>
                             </table>
+                            <!-- End Table with stripped rows -->
 
-                            <!-- column -->
                         </div>
                     </div>
+
                 </div>
             </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </section>
 
     </main><!-- End #main -->
 
 @endsection
+<x-datatable/>
+

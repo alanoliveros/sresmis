@@ -10,6 +10,8 @@ use App\Http\Controllers\Analytic\IndicatorController;
 use App\Http\Controllers\BackOffice\LibraryController;
 use App\Http\Controllers\BackOffice\NoticeboardController;
 use App\Http\Controllers\BackOffice\SessionController;
+use App\Http\Controllers\Manage\AdminStudentController;
+use App\Http\Controllers\Manage\AdminTeacherController;
 use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
@@ -42,6 +44,7 @@ Route::get('/', function () {
 Auth::routes();
 
 /** ======================================= Alan start routing ======================================= */
+
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -65,14 +68,60 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
     Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
 
+
     /** ================== Users ================== */
-    Route::prefix('users')->group(function () {
-        Route::get('/teacher', [AdminController::class, 'usersTeacher'])->name('admin.users-teacher');
-        Route::get('/student', [AdminController::class, 'usersStudent'])->name('admin.users-student');
+    Route::prefix('manage-users')->group(function () {
+        Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
+        Route::get('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');
+
+
+        Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /** ================== Settings ================== */
     Route::prefix('settings')->group(function () {

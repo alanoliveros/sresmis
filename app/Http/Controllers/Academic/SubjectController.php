@@ -14,7 +14,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        return view('web.backend.admin.academics.subject.index');
     }
 
     /**

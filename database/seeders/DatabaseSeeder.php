@@ -69,5 +69,43 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
+
+        DB::table('grade_levels')->insert([
+            [
+                'gradeLevelName' => 'KINDERGARTEN',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'gradeLevelName' => 'GRADE I',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'gradeLevelName' => 'GRADE II',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'gradeLevelName' => 'GRADE III',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'gradeLevelName' => 'GRADE IV',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'gradeLevelName' => 'GRADE V',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'gradeLevelName' => 'GRADE VI',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }

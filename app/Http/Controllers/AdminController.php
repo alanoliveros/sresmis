@@ -20,7 +20,7 @@ class AdminController extends Controller
         return view('web.backend.admin.dashboard.index');
     }
 
-    public function teachers()
+/*    public function teachers()
     {
 
         $adminId = auth()->user()->id;
@@ -42,10 +42,10 @@ class AdminController extends Controller
                 'teachers' => $teachers,
             ]
         );
-    }
+    }*/
 
     // ADD TEACHER
-    public function addTeacher(Request $request)
+    /*public function addTeacher(Request $request)
     {
         $email = $request->email;
         $password = Hash::make($request->password);
@@ -55,14 +55,12 @@ class AdminController extends Controller
         $suffix = $request->suffix;
         $gender = $request->gender;
 
-        /** Address */
         $purok = $request->purok;
         $barangay = $request->barangay;
         $city = $request->city;
         $province = $request->province;
         $zipCode = $request->zipCode;
 
-        /** End of address */
         $designation = $request->designation;
         $employeeNumber = $request->employeeNumber;
         $position = $request->position;
@@ -72,7 +70,6 @@ class AdminController extends Controller
         $minor = $request->minor;
         $gradeLevelTaught = $request->gradeLevelTaught;
 
-        /** array subject subjectTaught[] need for each to specify */
         $minPerWeek = $request->minPerWeek;
         $ancillary = $request->ancillary;
         $sectionTaught = $request->sectionTaught;
@@ -91,7 +88,6 @@ class AdminController extends Controller
         $teacherSave = $user->save();
         $teacherId = $user->id;
 
-        /** Insert Address */
         if ($teacherSave) {
             $address = new Address();
             $address->userId = $teacherId;
@@ -105,7 +101,6 @@ class AdminController extends Controller
 
         }
 
-        /** insert Teacher */
         if ($teacherSave) {
             $teacher = new Teacher();
             $teacher->adminId = auth()->user()->id;
@@ -132,7 +127,7 @@ class AdminController extends Controller
         }
 
 
-    }
+    }*/
 
     public function manageSubjects()
     {
@@ -179,8 +174,15 @@ class AdminController extends Controller
             $subject->save();
         }
         return redirect()->back()->with('success_added', 'Successfully added new record');
-
     }
+
+
+
+
+
+
+
+
 
     public function manageSections()
     {
@@ -201,24 +203,46 @@ class AdminController extends Controller
         ]);
 
         $section = new Section();
-        $section->adminId = auth()->user()->id;
-        $section->sectionName = $request->sectionName;
-        $section->gradeLevelId = $request->gradeLevel;
+        $section->admin_id = auth()->user()->id;
+        $section->section_name = $request->sectionName;
+        $section->grade_level_id = $request->gradeLevel;
         $section->save();
 
         return redirect()->back()->with('success_added', 'Successfully added new record');
-
     }
 
     public function getSection(Request $request)
     {
-
-
         $getGradeLevelById = Section::where('gradeLevelId', '=', $request->id)->get();
         return response()->json([
             'gradeLevel' => $getGradeLevelById,
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function manage_class_schedules()
     {

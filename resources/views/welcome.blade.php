@@ -70,7 +70,7 @@
             @if (Route::has('login'))
             @auth
 <!-- home -->
-            <li> <a href="{{ route('sresmis.admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Return to portal</a></li>
+            <li> <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Return to portal</a></li>
 
             @else
 <!-- Login -->

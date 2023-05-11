@@ -26,7 +26,7 @@
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addTeacher">+ Add teacher</a>
+                                   data-bs-target="#addTeacher">+ Add @yield('title')</a>
 
                                 {{--@include('backend.admin.teachers.add-teacher')--}}
                             </div>

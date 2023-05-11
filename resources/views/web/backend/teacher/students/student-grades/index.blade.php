@@ -25,7 +25,7 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body ">
                             <div class="row my-3 ">
-                                <div class="col-12  bg-info col-md-2">
+                                <div class="col-12 col-md-2">
                                     <div class="mb-3">
                                         <select class="form-select select_sy filter_for" required
                                             aria-label="select example" name="school_year">
@@ -37,7 +37,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12  bg-info col-md-2">
+                                <div class="col-12 col-md-2">
                                     <div class="mb-3">
                                         <select class="form-select school_year_by_subject filter_for" required
                                             aria-label="select example" name="school_year">
@@ -45,7 +45,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12  bg-info col-md-2">
+                                <div class="col-12 col-md-2">
                                     <div class="mb-3">
                                         <select class="form-select section_select filter_for" required
                                             aria-label="select example" name="school_year">
@@ -53,15 +53,19 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12  bg-info col-md-2">
+                                <div class="col-12 col-md-2">
                                     <div class="mb-3">
                                         <button type="button" disabled
                                             class="btn btn-secondary  rounded-0 filter_grades">Filter</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4">
-                                    
-                                    <section class="section bg-light text-center ">
+
+                                    <section class="section bg-light text-center"
+                                        style="
+                                        border-top:    1px solid  black;
+                                        border-right:  1px solid black;
+                                        border-left:   1px solid  black;">
                                         <p class="text-center">GRADING</p>
                                         <hr>
                                         <div class="row ">
@@ -97,10 +101,12 @@
                                     </section>
                                 </div>
 
-                                {{-- <div class="wrapper">
+
+                                <hr>
+                                <div class="wrapper">
                                     <div class="row">
-                                        <div class="col-3 h-100 gx-0 students_lists_container">
-                                            <table class="table table-dark">
+                                        {{-- <div class="col-3 h-100 gx-0 students_lists_container">
+                                            <table class="table ">
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th>-----------</th>
@@ -116,10 +122,10 @@
 
                                                 </tbody>
                                             </table>
-                                        </div>
-                                        <div class="col h-100 gx-0 grade_component_container">
+                                        </div> --}}
+                                        {{-- <div class="col h-100 gx-0 grade_component_container">
                                             <div class="written_work_container">
-                                                <table class="table table-dark">
+                                                <table class="table">
                                                     <thead>
                                                         <tr>
                                                             <th>----------</th>
@@ -141,98 +147,84 @@
                                                     </thead>
                                                 </table>
                                             </div>
-
-                                            <div class="performance_task_container">
-                                                <table class="table table-dark">
+                                        </div> --}}
+                                        {{-- <div class="col h-100 gx-0 grade_component_container">
+                                            <div class="written_work_container">
+                                                <table class="table written_works">
                                                     <thead>
                                                         <tr>
-                                                            <th>----------</th>
+                                                            <th></th>
                                                             <th class="text-center">1</th>
-                                                            <th>Total</th>
+                                                            <th class="between_count_num">Total</th>
                                                             <th>PS</th>
                                                             <th>WA</th>
                                                             <th>Action</th>
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="text-success">
                                                             <th>Highest Possible Score</th>
-                                                            <th><input type="number" min="1"></th>
-                                                            <th>Total</th>
+                                                            <th><input type="number" class="form-control" min="1">
+                                                            </th>
+                                                            <th class="between_highest_score">Total</th>
                                                             <th>PS</th>
                                                             <th>WA</th>
-                                                            <th><button type="button" class="btn btn-success">+</button>
+                                                            <th><button type="button" disabled
+                                                                    class="btn btn-success add_score"
+                                                                    data-gcomponent="written_works">+</button>
                                                             </th>
                                                         </tr>
+                                                    <tbody class="display_student_data">
+                                                    </tbody>
                                                     </thead>
                                                 </table>
                                             </div>
-
-
-                                        </div>
+                                        </div> --}}
                                     </div>
 
-                                </div> --}}
+                                </div>
 
 
 
 
 
-                                <div class="col-12">
+                                <div class="col-12 ">
                                     <div class="tab-content pt-2" id="myTabContent">
                                         <div class="tab-pane fade show active" id="home" role="tabpanel"
                                             aria-labelledby="home-tab">
-
-                                            <hr>
-                                            <p class="text-center fs-4 fw-bold">Written Work (<small class="text-success">
-                                                    40%</small> )</p>
-                                            <hr>
-                                            <table class="table table-hover written_work">
-                                                <thead>
-                                                    <tr class="">
-                                                        <th></th>
-                                                        <th class="text-center fw-bold col_index">1</th>
-                                                        <th class="text-center between_count">Total</th>
-                                                        <th class="text-center">PS</th>
-                                                        <th class="text-center">WA</th>
-                                                        <th class="text-center">Action</th>
-
-                                                    </tr>
-                                                    <tr>
+                                            <div class="written_work_container">
+                                                <table class="table written_works">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th class="text-center">1</th>
+                                                            <th class="between_count_num">Total</th>
+                                                            <th>PS</th>
+                                                            <th>WA</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tr class="text-success">
                                                         <th>Highest Possible Score</th>
-                                                        <th><input type="number" name="score[]" min="1"
-                                                                class="form-control written_output_score"></th>
-                                                        <th class="text-center text-success between_highest_score"><span
-                                                                class="total_score">0</span></th>
-                                                        <th class="text-center text-success"><span
-                                                                class="percentage_score_written">100</span></th>
-                                                        <th class="text-center text-success"><span
-                                                                class="weighted_score_written">40%</span></th>
-                                                        <th class="text-center"><button type="button"
+                                                        <th><input type="number" name="written_score[]"
+                                                                class="form-control written_score" min="1">
+                                                        </th>
+                                                        <th class="between_highest_score total_high_score">Total</th>
+                                                        <th>PS</th>
+                                                        <th>WA</th>
+                                                        <th><button type="button" disabled
                                                                 class="btn btn-success add_score"
-                                                                data-gcomponent="written_work">+</button></th>
+                                                                data-gcomponent="written_works">+</button>
+                                                        </th>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <select name="" id="" class="form-control">
-                                                                <option selected disabled>Select Student</option>
-                                                            </select>
-                                                        </td>
-                                                        <td><input type="number" min="1" name="student_score[]"
-                                                                class="form-control fs-6 quizzes_exams"
-                                                                placeholder="Enter Score">
-                                                        </td>
-                                                        <td class="total_score_by_learner text-center"><span
-                                                                class="put_total_score_by_student"></span></td>
-                                                        <td class="text-center"><span
-                                                                class="percentage_score_by_student"></span>
-                                                        </td>
-                                                        <td class="text-center"><span
-                                                                class="weighted_score_written_by_student"></span></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                    <tbody class="display_student_data">
+                                                    </tbody>
+
+                                                </table>
+
+                                                <div class="float-md-end ">
+                                                    <button class="btn btn-success rounded-0">Save</button>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="tab-pane fade" id="profile" role="tabpanel"
                                             aria-labelledby="profile-tab">
@@ -253,7 +245,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 border border-dark mb-4">
+                                {{-- <div class="col-12 border border-dark mb-4">
                                     <p class="text-center fs-4 fw-bold">Performance Task (<small class="text-success">
                                             40%</small> )</p>
                                     <hr>
@@ -287,9 +279,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <select name="" id="" class="form-control">
-                                                        <option selected disabled>Select Student</option>
-                                                    </select>
+                                                    <span class="student_click_paste"></span>
                                                 </td>
                                                 <td><input type="number" min="1"
                                                         name="student_score_performance[]"
@@ -309,7 +299,7 @@
                                     </table>
 
 
-                                </div>
+                                </div> --}}
 
 
 
@@ -389,15 +379,34 @@
                         "sy": sy,
                     },
                     success: function(data) {
-
-
-                        console.log(data.students);
-                        // let sec = '<option selected disabled>Select Section</option>';
-                        // $.each(data.sections, function(key, section) {
-                        //     sec +=
-                        //         `<option value="${section.sectionId}">${section.sectionName}</option>`;
+                        // console.log(data.students);
+                        // let students_lists = '<option selected disabled>Select Student</option>';
+                        // $.each(data.students, function(key, student) {
+                        //     students_lists +=
+                        //         `<option value="${student.studentId}">${student.name}</option>`;
                         // });
-                        // $('.section_select').html(sec);
+                        // $('.select_student_by').html(students_lists);
+                        console.log(data.students);
+                        if (data.students.length > 0) {
+                            let students_lists = '';
+                            $.each(data.students, function(key, student) {
+                                students_lists +=
+                                    `
+                                <tr class="student_score_${key+1}">
+                                    <td >${student.name}</td>
+                                    <td ><input type="number" name="student_written_score[]" class="form-control student_score_columnn" min="1" placeholder="Enter Score"></td>
+                                    <td class="total_score_by_learner"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                `;
+                            });
+                            $('.display_student_data').html(students_lists);
+                            $('.add_score').prop('disabled', false);
+                        } else {
+                            return false;
+                        }
+
                     }
                 });
             });
@@ -410,61 +419,66 @@
         let first_score = 0;
         let score_count = 1;
         let total_score = [];
-        let sum = 0;
         let total = 0;
 
-
-        // function gradeComponent() {
-        //     let activity = $('.written_output_score').length;
-        //     if (activity == 1) {
-        //         first_score = $('.written_output_score').val();
-        //         $('.total_score').text(first_score);
-        //     } else {
-
-        //     }
-        // }
-
         function createScoreColumn(gradeComponent) {
-            let between_col_count = $(`.${gradeComponent}`).find('.between_count');
+            let between_count_num = $(`.${gradeComponent}`).find('.between_count_num');
             let between_col_highest_score = $(`.${gradeComponent}`).find('.between_highest_score');
-            let between_col_scores = $(`.${gradeComponent}`).find('.total_score_by_learner');
+            let between_total_score_by_learner = $(`.${gradeComponent}`).find('.total_score_by_learner');
 
-            let col_index = $(`.${gradeComponent}`).find('.col_index').length;
+            let col_index = $(`.${gradeComponent}`).find('.col_index').length + 1;
 
-            $(`<th class="text-center col_index">${++col_index}</th>`).insertBefore(between_col_count);
+            $(`<th class="text-center col_index">${++col_index}</th>`).insertBefore(between_count_num);
 
-            $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"  name="score[]" min="1" class="form-control written_output_score"></th>`)
+            $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"  name="written_score[]" min="1" class="form-control written_score"></th>`)
                 .insertBefore(between_col_highest_score);
 
-            $(`<td><input type="number"  min="1" name="student_score[]" class="form-control fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
-                .insertBefore(between_col_scores);
+            $(`<td><input type="number"  min="1" name="student_written_score[]" class="form-control fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
+                .insertBefore(between_total_score_by_learner);
         }
 
         function totalHighestScore() {
-            sum = 0;
-            $.each($(".written_output_score"), function(key, val) {
-                sum += parseInt($(val).val());
+            let total_highest_score = 0;
+            $.each($(".written_score"), function(key, val) {
+                total_highest_score += parseInt($(val).val());
 
             });
-            return sum;
+            return total_highest_score;
         }
 
-        function student_score() {
-            total = 0;
-            $.each($(".quizzes_exams"), function(key, val) {
-                total += parseInt($(val).val());
+        function student_score(cname) {
+            let total_student_score = 0;
+            let student_score = '';
 
+
+            $.each(cname, function(key, val) {
+                total_student_score += parseInt($(val).val());
             });
-            $('.put_total_score_by_student').text(total);
-            let ps = parseInt(total / sum * 100);
-            $('.percentage_score_by_student').text(ps);
-            let ws = 0.5;
-            $('.weighted_score_written_by_student').text(ps * ws + '%');
+          
+            console.log(total_student_score);
+            // $('.put_total_score_by_student').text(total_student_score);
+            // let ps = parseInt(total / sum * 100);
+            // $('.percentage_score_by_student').text(ps);
+            // let ws = 0.5;
+            // $('.weighted_score_written_by_student').text(ps * ws + '%'); 
         }
 
         $(document).ready(function() {
-            // gradeComponent();
+            $("body").on('input', "input[name='student_written_score[]']", function(e) {
 
+                let name = $(this).parent('td').parent('tr').attr('class');
+
+                let getInput = $(`.${name}`).find('input');
+
+                // let data_name = $(this).data('name');
+                console.log(getInput);
+                student_score(getInput);
+                // let findData = $(this).attr('data');
+                // alert(findData);
+                // let val = $(this).val();
+                // $(this).attr('data-info', val);
+
+            });
             $('.add_score').on('click', function() {
                 createScoreColumn($(this).data('gcomponent'));
             });
@@ -484,6 +498,13 @@
                 }
             });
 
+            $(".select_student_by").on('change', function(e) {
+
+                let student_click = $(".select_student_by :selected").text();
+
+                $('.student_click_paste').text(student_click);
+
+            });
             $(".filter_grades").on('click', function(e) {
                 e.preventDefault();
                 $.ajax({
@@ -499,20 +520,22 @@
                 });
             });
 
-            $("body").on('input', "input[name='score[]']", function(e) {
-
+            $("body").on('input', "input[name='written_score[]']", function(e) {
+                e.preventDefault();
                 let total_score = totalHighestScore();
-                let val = $(this).val();
-                $(this).attr('data-info', val);
+                let total = $(this).val();
+                // $(this).attr('data-info', total);
+                $('.total_high_score').text(total_score);
 
             });
-            $("body").on('input', "input[name='student_score[]']", function(e) {
 
-                student_score();
-                let val = $(this).val();
-                $(this).attr('data-info', val);
+            // $("body").on('input', "input[name='student_written_score[]']", function(e) {
 
-            });
+            //     student_score();
+            //     let val = $(this).val();
+            //     $(this).attr('data-info', val);
+
+            // });
         });
     </script>
 @endsection

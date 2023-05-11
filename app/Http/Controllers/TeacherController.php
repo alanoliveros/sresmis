@@ -198,7 +198,7 @@ class TeacherController extends Controller
   public function student_advisory_by_school_year($id)
   {
     $students = Student::where([
-      'students.schoolYearId' => $id,
+      'students.school_year' => $id,
       'students.teacherId' => auth()->user()->id,
     ])
     ->orderBy('users.lastname', 'asc')

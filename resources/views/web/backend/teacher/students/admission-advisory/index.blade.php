@@ -18,7 +18,6 @@
                 </div>
             </div>
         </div>
-
         <section class="section">
             <div class="row">
                 <div class="col-12">
@@ -32,7 +31,7 @@
                                             aria-label="select example" name="school_year">
                                             <option selected disabled>Select Year</option>
                                             @foreach ($sessions as $key => $session)
-                                                <option value="{{ $session->id }}">
+                                                <option value="{{ $session->school_year }}">
                                                     {{ $session->school_year }}</option>
                                             @endforeach
                                         </select>

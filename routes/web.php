@@ -48,7 +48,7 @@ Auth::routes();
 
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
 
     /** ================== User Profile ================== */
     Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
@@ -67,19 +67,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/transition-rate', [IndicatorController::class, 'transitionIndex'])->name('admin.transition');
         Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');

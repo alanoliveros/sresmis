@@ -201,11 +201,10 @@ class TeacherController extends Controller
       'students.school_year' => $id,
       'students.teacherId' => auth()->user()->id,
     ])
-    ->orderBy('users.lastname', 'asc')
-    ->join('users', 'students.studentId', 'users.id')
-    ->get();
-    return response()->json(['students'=> $students]);
-    
+      ->orderBy('users.lastname', 'asc')
+      ->join('users', 'students.studentId', 'users.id')
+      ->get();
+    return response()->json(['students' => $students]);
   }
   public function info_by_subject()
   {
@@ -238,13 +237,13 @@ class TeacherController extends Controller
       'teacherId' => auth()->user()->id,
       'schoolYearId' => $sy_id,
     ])
-    ->join('users', 'students.studentId', 'users.id')
-    ->get();
+      ->join('users', 'students.studentId', 'users.id')
+      ->get();
 
 
 
     return response()->json([
-      'students'=> $students,
+      'students' => $students,
     ]);
   }
   public function student_grades()
@@ -252,14 +251,14 @@ class TeacherController extends Controller
     $teacher_detail = Teacher::where('teacherId', auth()->user()->id)->first();
     $sessions = Session::orderBy('school_year', 'desc')->get();
     $subjects = Subject::where([
-      'subjects.gradeLevelId' => $teacher_detail->gradeLevelId])
+      'subjects.gradeLevelId' => $teacher_detail->gradeLevelId
+    ])
       ->get();
-    
+
     return view('web.backend.teacher.students.student-grades.index')->with([
       'sessions' => $sessions,
       'subjects' => $subjects
     ]);
-    
   }
   public function grades_advisory_by_school_year()
   {

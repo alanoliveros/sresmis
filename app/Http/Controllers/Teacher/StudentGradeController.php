@@ -61,6 +61,9 @@ class StudentGradeController extends Controller
             'students.sectionId' => $section,
         ])
         ->join('users', 'students.studentId', 'users.id')
+        ->orderBy('users.gender','desc')
+        ->orderBy('users.lastname','asc')
+       
         ->get();
         return response()->json([
             'students' => $students,

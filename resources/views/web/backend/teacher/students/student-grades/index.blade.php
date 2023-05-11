@@ -59,49 +59,57 @@
                                             class="btn btn-secondary  rounded-0 filter_grades">Filter</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4">
+                                <div class="col-md-4">
 
-                                    <section class="section bg-light text-center"
-                                        style="
-                                        border-top:    1px solid  black;
-                                        border-right:  1px solid black;
-                                        border-left:   1px solid  black;">
-                                        <p class="text-center">GRADING</p>
-                                        <hr>
-                                        <div class="row ">
-                                            <div class="col-lg-12 d-flex justify-content-center">
-                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                                            data-bs-target="#home" type="button" role="tab"
-                                                            aria-controls="home" aria-selected="true">1st</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                                            data-bs-target="#profile" type="button" role="tab"
-                                                            aria-controls="profile" aria-selected="false">2nd</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                                            data-bs-target="#contact" type="button" role="tab"
-                                                            aria-controls="contact" aria-selected="false">3rd</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                                            data-bs-target="#home" type="button" role="tab"
-                                                            aria-controls="contact" aria-selected="false">4th</button>
-                                                    </li>
-                                                </ul>
-
-
-                                            </div>
-
-
-                                        </div>
-                                    </section>
                                 </div>
+                                <hr>
+                                <div class="col d-flex justify-content-end">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                data-bs-target="#written_works" type="button" role="tab"
+                                                aria-controls="home" aria-selected="true">Written Works</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                data-bs-target="#performance_tasks" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">Performance Tasks</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                data-bs-target="#contact" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">Transmuted Grade</button>
+                                        </li>
+                                    </ul>
 
 
+                                </div>
+                                {{-- <div class="col-lg-5 d-flex justify-content-center">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                                aria-selected="true">1st</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                                data-bs-target="#profile" type="button" role="tab"
+                                                aria-controls="profile" aria-selected="false">2nd</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                data-bs-target="#contact" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">3rd</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                data-bs-target="#home" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">4th</button>
+                                        </li>
+                                    </ul>
+
+
+                                </div> --}}
                                 <hr>
                                 <div class="wrapper">
                                     <div class="row">
@@ -162,7 +170,7 @@
                                                         </tr>
                                                         <tr class="text-success">
                                                             <th>Highest Possible Score</th>
-                                                            <th><input type="number" class="form-control" min="1">
+                                                            <th><input type="number" class="" min="1">
                                                             </th>
                                                             <th class="between_highest_score">Total</th>
                                                             <th>PS</th>
@@ -182,16 +190,12 @@
 
                                 </div>
 
-
-
-
-
-                                <div class="col-12 ">
+                                <div class="col-12">
                                     <div class="tab-content pt-2" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                        <div class="tab-pane fade show active" id="written_works" role="tabpanel"
                                             aria-labelledby="home-tab">
-                                            <div class="written_work_container">
-                                                <table class="table written_works">
+                                            <div class="written_work_container table-responsive">
+                                                <table class="table table-stripped written_works">
                                                     <thead>
                                                         <tr>
                                                             <th></th>
@@ -203,13 +207,13 @@
                                                         </tr>
                                                     </thead>
                                                     <tr class="text-success">
-                                                        <th>Highest Possible Score</th>
+                                                        <th class="text-center">HIGHEST POSSIBLE SCORE</th>
                                                         <th><input type="number" name="written_score[]"
-                                                                class="form-control written_score" min="1">
+                                                                class=" written_score" min="1">
                                                         </th>
                                                         <th class="between_highest_score total_high_score">Total</th>
-                                                        <th>PS</th>
-                                                        <th>WA</th>
+                                                        <th>100%</th>
+                                                        <th>50%</th>
                                                         <th><button type="button" disabled
                                                                 class="btn btn-success add_score"
                                                                 data-gcomponent="written_works">+</button>
@@ -217,22 +221,41 @@
                                                     </tr>
                                                     <tbody class="display_student_data">
                                                     </tbody>
-
                                                 </table>
-
-                                                <div class="float-md-end ">
-                                                    <button class="btn btn-success rounded-0">Save</button>
-                                                </div>
                                             </div>
 
                                         </div>
-                                        <div class="tab-pane fade" id="profile" role="tabpanel"
+                                        <div class="tab-pane fade" id="performance_tasks" role="tabpanel"
                                             aria-labelledby="profile-tab">
-                                            Nesciunt totam et. Consequuntur magnam aliquid eos nulla
-                                            dolor iure eos quia. Accusantium distinctio omnis et atque
-                                            fugiat. Itaque doloremque aliquid sint quasi quia distinctio
-                                            similique. Voluptate nihil recusandae mollitia dolores. Ut
-                                            laboriosam voluptatum dicta.
+                                            <div class="written_work_container table-responsive">
+                                                <table class="table table-stripped written_works">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th class="text-center">1</th>
+                                                            <th class="between_count_num">Total</th>
+                                                            <th>PS</th>
+                                                            <th>WA</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tr class="text-success">
+                                                        <th class="text-center">HIGHEST POSSIBLE SCORE</th>
+                                                        <th><input type="number" name="written_score[]"
+                                                                class=" written_score" min="1">
+                                                        </th>
+                                                        <th class="between_highest_score total_high_score">Total</th>
+                                                        <th>100%</th>
+                                                        <th>50%</th>
+                                                        <th><button type="button" disabled
+                                                                class="btn btn-success add_score"
+                                                                data-gcomponent="written_works">+</button>
+                                                        </th>
+                                                    </tr>
+                                                    <tbody class="display_student_data">
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                         <div class="tab-pane fade" id="contact" role="tabpanel"
                                             aria-labelledby="contact-tab">
@@ -263,7 +286,7 @@
                                             <tr>
                                                 <th>Highest Possible Score</th>
                                                 <th><input type="number" name="score_performance[]" min="1"
-                                                        class="form-control written_output_score PERFORMANCE"></th>
+                                                        class=" written_output_score PERFORMANCE"></th>
                                                 <th class="text-center text-success between_highest_score PERFORMANCE">
                                                     <span class="total_score PERFORMANCE">0</span>
                                                 </th>
@@ -283,7 +306,7 @@
                                                 </td>
                                                 <td><input type="number" min="1"
                                                         name="student_score_performance[]"
-                                                        class="form-control fs-6 quizzes_exams PERFORMANCE"
+                                                        class=" fs-6 quizzes_exams PERFORMANCE"
                                                         placeholder="Enter Score">
                                                 </td>
                                                 <td class="total_score_by_learner PERFORMANCE text-center"><span
@@ -390,14 +413,16 @@
                         if (data.students.length > 0) {
                             let students_lists = '';
                             $.each(data.students, function(key, student) {
+                                let gender = student.gender == 'Male' ? 'text-primary' :
+                                    'text-danger';
                                 students_lists +=
                                     `
                                 <tr class="student_score_${key+1}">
-                                    <td >${student.name}</td>
-                                    <td ><input type="number" name="student_written_score[]" class="form-control student_score_columnn" min="1" placeholder="Enter Score"></td>
+                                    <td  class="${gender}">${key+1}${'. '+student.lastname+', '+student.name+', '+student.middlename}</td>
+                                    <td ><input type="number" name="student_written_score[]" class=" student_score_columnn" min="1" placeholder="Enter Score"></td>
                                     <td class="total_score_by_learner"></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td class="ps_by_learner"></td>
+                                    <td class="wa_by_learner"></td>
                                 </tr>
                                 `;
                             });
@@ -430,37 +455,43 @@
 
             $(`<th class="text-center col_index">${++col_index}</th>`).insertBefore(between_count_num);
 
-            $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"  name="written_score[]" min="1" class="form-control written_score"></th>`)
+            $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"  name="written_score[]" min="1" class=" written_score"></th>`)
                 .insertBefore(between_col_highest_score);
 
-            $(`<td><input type="number"  min="1" name="student_written_score[]" class="form-control fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
+            $(`<td><input type="number"  min="1" name="student_written_score[]" class=" fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
                 .insertBefore(between_total_score_by_learner);
         }
 
         function totalHighestScore() {
             let total_highest_score = 0;
             $.each($(".written_score"), function(key, val) {
-                total_highest_score += parseInt($(val).val());
+                total_highest_score += parseFloat($(val).val());
 
             });
             return total_highest_score;
         }
 
         function student_score(cname) {
+
             let total_student_score = 0;
+            let sum = totalHighestScore();
             let student_score = '';
 
 
-            $.each(cname, function(key, val) {
-                total_student_score += parseInt($(val).val());
+            $.each($(cname).find('input'), function(key, val) {
+                total_student_score += parseFloat($(val).val());
             });
-          
+
+
+
+
             console.log(total_student_score);
-            // $('.put_total_score_by_student').text(total_student_score);
-            // let ps = parseInt(total / sum * 100);
-            // $('.percentage_score_by_student').text(ps);
-            // let ws = 0.5;
-            // $('.weighted_score_written_by_student').text(ps * ws + '%'); 
+            $(cname).find('.total_score_by_learner').text(isNaN(total_student_score) ? 'Pending' : total_student_score);
+            let ps = parseFloat(total_student_score / sum * 100);
+            $(cname).find('.ps_by_learner').text(isNaN(ps.toFixed(2)) ? 'Pending' : ps.toFixed(0) + '%');
+            let ws = 0.5;
+            let ww = ps * ws;
+            $(cname).find('.wa_by_learner').text(isNaN(ww.toFixed(2)) ? 'Pending' : ww.toFixed(2) + '%');
         }
 
         $(document).ready(function() {
@@ -468,7 +499,7 @@
 
                 let name = $(this).parent('td').parent('tr').attr('class');
 
-                let getInput = $(`.${name}`).find('input');
+                let getInput = $(`.${name}`);
 
                 // let data_name = $(this).data('name');
                 console.log(getInput);
@@ -525,7 +556,7 @@
                 let total_score = totalHighestScore();
                 let total = $(this).val();
                 // $(this).attr('data-info', total);
-                $('.total_high_score').text(total_score);
+                $('.total_high_score').text(isNaN(total_score) ? 'Pending' : total_score);
 
             });
 

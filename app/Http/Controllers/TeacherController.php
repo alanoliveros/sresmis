@@ -266,7 +266,7 @@ class TeacherController extends Controller
   }
   public function addStudent(Request $request)
   {
-    $schoolYearId = $request->schoolYearId;
+    $school_year = $request->schoolYearId;
     $studentLrn = $request->studentLrn;
     $firstName = $request->firstName;
     $middleName = $request->middleName;
@@ -332,11 +332,11 @@ class TeacherController extends Controller
     $studentId = $user->id;
 
     if ($userSave) {
-      $student = Student::firstOrNew(['studentId' => $studentId, 'schoolYearId' => $schoolYearId]);
+      $student = Student::firstOrNew(['studentId' => $studentId, 'school_year' => $school_year]);
       $student->adminId = $adminId->adminId;
       $student->teacherId = $teacherId;
       $student->studentId = $studentId;
-      $student->schoolYearId = $schoolYearId;
+      $student->school_year = $school_year;
       $student->lrn = $studentLrn;
       $student->sectionId = $adminId->sectionId;
       $student->gradeLevelId = $adminId->gradeLevelId;

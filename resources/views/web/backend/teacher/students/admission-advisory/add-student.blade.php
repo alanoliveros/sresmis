@@ -14,7 +14,7 @@
                                     class="text-danger">(required)</small> </label>
                             <select name="schoolYearId" id="" class="form-select">
                                 @foreach ($sessions as $key => $year)
-                                    <option {{ $key == 0 ? 'selected' : '' }} value="{{ $year->id }}">
+                                    <option {{ $key == 0 ? 'selected' : '' }} value="{{ $year->school_year }}">
                                         {{ $year->school_year }}</option>
                                 @endforeach
                             </select>

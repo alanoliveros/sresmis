@@ -3,238 +3,93 @@
 
 @section('content')
 
-
     @yield('title')
 
 
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>@yield('title')</h1>
+            <h1>Data Tables</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">Data</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
 
-        <section class="section dashboard">
+        <section class="section">
             <div class="row">
-
-                <!-- Left side columns -->
-                <div class="col-lg-8">
-                    <div class="row">
-
-                        <!-- Student Card -->
-                        <div class="col-xxl-6 col-md-6">
-                            <div class="card info-card sales-card">
-
-                                <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
-                                        </li>
-
-                                        <li><a class="dropdown-item" href="#">Today</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Student <span>| Today</span></h5>
-
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-people"></i>
-                                        </div>
-                                        <div class="ps-3">
-                                            <h6>145</h6>
-                                            {{-- <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                                 class="text-muted small pt-2 ps-1">increase</span>--}}
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div><!-- End Student Card -->
-
-                        <!-- Teacher Card -->
-                        <div class="col-xxl-6 col-md-6">
-                            <div class="card info-card revenue-card">
-
-                                <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
-                                        </li>
-
-                                        <li><a class="dropdown-item" href="#">Today</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Teacher <span>| Today</span></h5>
-
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-people"></i>
-                                        </div>
-                                        <div class="ps-3">
-                                            <h6>20</h6>
-                                            {{--   <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                                   class="text-muted small pt-2 ps-1">increase</span>--}}
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div><!-- End Teacher Card -->
-
-                    </div>
-                </div><!-- End Left side columns -->
-
-                <!-- Right side columns -->
-                <div class="col-lg-4">
-
-                    <!-- Recent Activity -->
-
-                    <!-- Budget Report -->
-
-                    <!-- Website Traffic -->
-                    <div class="card info-card revenue-card">
-
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="card-body">
-                            <h5 class="card-title">Teacher-pupil ratio <span>| Today</span></h5>
-
-                            <div class="d-flex align-items-center">
-                                <div
-                                    class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-hr"></i>
-                                </div>
-                                <div class="ps-3">
-                                    <h6>1:41</h6>
-                                    {{--   <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                           class="text-muted small pt-2 ps-1">increase</span>--}}
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
+                <div class="col-lg-12">
 
                     <div class="card">
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
+                        <div class="card-body">
+                            <h5 class="card-title">Datatables</h5>
+                            <p>Add lightweight datatables to your project with using the <a
+                                    href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple
+                                    DataTables</a> library. Just add <code>.datatable</code> class name to any table you
+                                wish to conver to a datatable</p>
 
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="card-body pb-0">
-                            <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-                            <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-                            <script>
-                                document.addEventListener("DOMContentLoaded", () => {
-                                    echarts.init(document.querySelector("#trafficChart")).setOption({
-                                        tooltip: {
-                                            trigger: 'item'
-                                        },
-                                        legend: {
-                                            top: '5%',
-                                            left: 'center'
-                                        },
-                                        series: [{
-                                            name: 'Access From',
-                                            type: 'pie',
-                                            radius: ['40%', '70%'],
-                                            avoidLabelOverlap: false,
-                                            label: {
-                                                show: false,
-                                                position: 'center'
-                                            },
-                                            emphasis: {
-                                                label: {
-                                                    show: true,
-                                                    fontSize: '18',
-                                                    fontWeight: 'bold'
-                                                }
-                                            },
-                                            labelLine: {
-                                                show: false
-                                            },
-                                            data: [{
-                                                value: 1048,
-                                                name: 'Search Engine'
-                                            },
-                                                {
-                                                    value: 735,
-                                                    name: 'Direct'
-                                                },
-                                                {
-                                                    value: 580,
-                                                    name: 'Email'
-                                                },
-                                                {
-                                                    value: 484,
-                                                    name: 'Union Ads'
-                                                },
-                                                {
-                                                    value: 300,
-                                                    name: 'Video Ads'
-                                                }
-                                            ]
-                                        }]
-                                    });
-                                });
-                            </script>
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Start Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Brandon Jacob</td>
+                                    <td>Designer</td>
+                                    <td>28</td>
+                                    <td>2016-05-25</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bridie Kessler</td>
+                                    <td>Developer</td>
+                                    <td>35</td>
+                                    <td>2014-12-05</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Ashleigh Langosh</td>
+                                    <td>Finance</td>
+                                    <td>45</td>
+                                    <td>2011-08-12</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Angus Grady</td>
+                                    <td>HR</td>
+                                    <td>34</td>
+                                    <td>2012-06-11</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>Raheem Lehner</td>
+                                    <td>Dynamic Division Officer</td>
+                                    <td>47</td>
+                                    <td>2011-04-19</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
 
                         </div>
-                    </div><!-- End Website Traffic -->
+                    </div>
 
-                    <!-- News & Updates Traffic -->
-
-                </div><!-- End Right side columns -->
-
-
-
-
-
+                </div>
             </div>
         </section>
 
     </main><!-- End #main -->
 
-
 @endsection
+<x-datatable/>

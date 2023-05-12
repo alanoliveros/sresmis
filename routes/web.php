@@ -4,6 +4,8 @@
 use App\Http\Controllers\Academic\ClassController;
 use App\Http\Controllers\Academic\ClassRoomController;
 use App\Http\Controllers\Academic\DailyAttendanceController;
+use App\Http\Controllers\Academic\GradeLevelController;
+use App\Http\Controllers\Academic\SectionController;
 use App\Http\Controllers\Academic\SubjectController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Analytic\IndicatorController;
@@ -48,7 +50,7 @@ Auth::routes();
 
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('sresmis.admin.dashboard');
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     /** ================== User Profile ================== */
     Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
@@ -67,6 +69,19 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/transition-rate', [IndicatorController::class, 'transitionIndex'])->name('admin.transition');
         Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
@@ -217,7 +232,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // By Advisory
     Route::get('/student-grades', [TeacherController::class, 'student_grades'])->name('sresmis.teacher.student-grades');
     // Filter By School Year
-    
+
     // Grading
     // filter by school year
     Route::post('/student-grades/filter-school-year', [StudentGradeController::class, 'filter_school_year']);

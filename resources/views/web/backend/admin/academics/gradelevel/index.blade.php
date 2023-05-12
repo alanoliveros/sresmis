@@ -1,5 +1,5 @@
 @extends('web.backend.layouts.app')
-@section('title' , 'Subject')
+@section('title' , 'Grade Level')
 
 @section('content')
 

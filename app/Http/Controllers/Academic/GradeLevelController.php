@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Academic;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DailyAttendanceController extends Controller
+class GradeLevelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class DailyAttendanceController extends Controller
      */
     public function index()
     {
-        return view('web.backend.admin.academics.attendance.index');
+        /*resources/views/web/backend/admin/academics/gradelevel/index.blade.php*/
+        return view('web.backend.admin.academics.gradelevel.index');
     }
 
     /**

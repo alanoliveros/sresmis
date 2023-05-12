@@ -9,7 +9,6 @@
                 <form action="{{route('admin.add.users-teacher')}}" method="POST">
                     @csrf
                     <div class="row g-3">
-                        {{-- email password --}}
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Email <small class="text-danger">(required)</small>
                             </label>
@@ -19,9 +18,6 @@
                             <label for="validationDefault02" class="form-label">Password <small class="text-danger">(required)</small></label>
                             <input type="password" class="form-control" name="password">
                         </div>
-                        {{-- end email password --}}
-
-                        {{-- personal information of teacher --}}
                         <div class="col-md-12">
                             <label for="validationDefault01" class="form-label">First name <small class="text-danger">(required)</small></label>
                             <input type="text" class="form-control" name="firstName">
@@ -94,8 +90,7 @@
                             <input type="text" class="form-control" name="minor">
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Grade Level Taught <small
-                                    class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label">Grade Level Taught <small class="text-danger">(required)</small></label>
                             <select name="gradeLevelTaught" class="form-select gradeLevelTaught" id="" required>
                                 <option value=""></option>
                                 @foreach ($gradeLevel as $key=>$level)
@@ -104,16 +99,14 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Section Taught<small
-                                    class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label">Section Taught<small class="text-danger">(required)</small></label>
                             <select name="sectionTaught" id="sectionTaught" class="form-select">
                                 <option value="" required></option>
                             </select>
 
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Total Actual Teaching Minutes Per
-                                Week</label>
+                            <label for="validationDefault02" class="form-label">Total Actual Teaching Minutes Per Week</label>
                             <input type="number" class="form-control" name="minPerWeek">
                         </div>
                         <div class="col-md-12">
@@ -130,6 +123,36 @@
             </div>
         </div>
     </div>
+</div>
 
-</div>
-</div>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.gradeLevelTaught').on('change', function() {
+
+                let gradeLevelTaughtId = $(this).val();
+
+
+                // alert(gradeLevelTaughtId);
+                $.ajax({
+                    method: "post",
+                    url: "/admin/academic/getSection",
+                    data: {
+                        "id": gradeLevelTaughtId
+                    },
+                    // dataType: "json",
+                    success: function(response) {
+
+
+                        let sectionTaught = `<option selected disabled>Select Section</option>`;
+                        $.each(response.gradeLevel, function(key, level) {
+                            sectionTaught = sectionTaught + '<option value="' + level
+                                .id + '">' + level.section_name + '</option>';
+                        });
+                        $('#sectionTaught').html(sectionTaught);
+                    }
+                });
+            })
+        });
+    </script>
+@endsection

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('teacherId');
             $table->integer('sectionId');
             $table->integer('gradeLevelId');
-            $table->integer('subjectId');
             $table->integer('addressId');
+            $table->string('school_year');
             $table->string('designation');
             $table->integer('employeeNumber');
             $table->string('position');
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('minor')->nullable();
             $table->integer('totalTeachingTimePerWeek');
             $table->integer('numberOfAncillary');
+            $table->integer('status')->default(1); // 1 = alive, 2 = dead;
             $table->timestamps();
         });
     }

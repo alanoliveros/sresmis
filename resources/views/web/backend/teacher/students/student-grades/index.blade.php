@@ -91,7 +91,7 @@
                                         <div class="tab-pane fade show active" id="written_works" role="tabpanel"
                                             aria-labelledby="home-tab">
                                             <div class="written_work_container table-responsive">
-                                                <table class="table table-stripped written_works">
+                                                <table data-grade_component="Written Works" class="table table-stripped written_works">
                                                     <thead>
                                                         <tr>
                                                             <th></th>
@@ -99,7 +99,7 @@
                                                             <th class="between_count_num">Total</th>
                                                             <th>PS</th>
                                                             <th>WA</th>
-                                                            <th>Action</th>
+                                                            <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tr class="text-success written_tasks_possible_score">
@@ -111,8 +111,8 @@
                                                         <th class="between_highest_score total_high_score">Total</th>
                                                         <th>100%</th>
                                                         <th class="tasks_average written_works_average"></th>
-                                                        <th><button type="button" disabled
-                                                                class="btn btn-success add_score"
+                                                        <th class="text-center"><button type="button" disabled
+                                                                class="btn btn-success rounded-0  add_score"
                                                                 data-gcomponent="written_works">+</button>
                                                         </th>
                                                     </tr>
@@ -125,16 +125,16 @@
                                         {{-- performance tasks --}}
                                         <div class="tab-pane fade" id="performance_tasks" role="tabpanel"
                                             aria-labelledby="profile-tab">
-                                            <div class="written_work_container table-responsive">
-                                                <table class="table table-stripped performance_tasks">
+                                            <div class="table-responsive">
+                                                <table data-grade_component="Performance Tasks" class="table table-stripped performance_tasks">
                                                     <thead>
                                                         <tr>
                                                             <th></th>
-                                                            <th class="text-center">1</th>
+                                                            <th>1</th>
                                                             <th class="between_count_num">Total</th>
                                                             <th>PS</th>
                                                             <th>WA</th>
-                                                            <th>Action</th>
+                                                            <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tr class="text-success performance_tasks_possible_score">
@@ -148,8 +148,8 @@
                                                         <th>100%</th>
                                                         <th class="tasks_average performance_tasks_average"></th>
 
-                                                        <th><button type="button" disabled
-                                                                class="btn btn-success add_score"
+                                                        <th class="text-center"><button type="button" disabled
+                                                                class="btn btn-success rounded-0  add_score"
                                                                 data-gcomponent="performance_tasks">+</button>
                                                         </th>
                                                     </tr>
@@ -161,8 +161,8 @@
                                         {{-- performance tasks --}}
                                         <div class="tab-pane fade" id="contact" role="tabpanel"
                                             aria-labelledby="contact-tab">
-                                            <div class="written_work_container table-responsive">
-                                                <table class="table table-stripped quarterly_grade">
+                                            <div class=" table-responsive">
+                                                <table data-grade_component="Quarterly Grades"  class="table table-stripped quarterly_grade">
                                                     <thead>
                                                         <tr>
 
@@ -212,12 +212,12 @@
             let data_this = gradeComponent == 'written_works' ? 'written_tasks_possible_score' :
                 'performance_tasks_possible_score';
 
-            $(`<th class="text-center col_index">${++col_index}</th>`).insertBefore(between_count_num);
+            $(`<th class="text-center col_index col_num_${++col_index}">${col_index} <button data-column="col_num_${col_index}" class="bg-danger remove_col">x</button></th>`).insertBefore(between_count_num);
 
-            $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"   name="written_score[]" data-total_possible_score="${data_this}" min="1" class=" written_score"></th>`)
+            $(`<th class="score_append fw-bold col_num_${col_index}" data-rows="score_append_${score_count}"><input type="number"   name="written_score[]" data-total_possible_score="${data_this}" min="1" class=" written_score"></th>`)
                 .insertBefore(between_col_highest_score);
 
-            $(`<td><input type="number"  min="1" name="student_output_score[]" class=" fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
+            $(`<td class="col_num_${col_index}"><input type="number"  min="1" name="student_output_score[]" class=" fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
                 .insertBefore(between_total_score_by_learner);
         }
 
@@ -289,7 +289,20 @@
             return retVal;
         }
 
+        function saveStudentGrade(cparent, cname) {
+
+            
+            let inputs = $(`.${cparent}`).find(`.${cname} :input`);
+            $.each(inputs, function(key, cont) {
+                console.log($(cont).val());
+            });
+        }
         $(document).ready(function() {
+            $("body").on('click', ".save_student_tasks", function(e) {
+                let parent = $(this).parents('table').attr('class').split(' ')[2];
+                let data_save = $(this).data('save_button');
+                saveStudentGrade(parent, data_save);
+            });
             $('.get_final_grade').on('click', function() {
 
                 let written = JSON.parse($(this).attr('data-students_final_grade'))[0];
@@ -402,7 +415,7 @@
                                         <td class="total_score_by_learner"></td>
                                         <td class="ps_by_learner"></td>
                                         <td class="wa_by_learner"></td>
-                                        <td class="save_action"><button type="button" class="btn btn-primary text-light text-sm rounded-0"><i class="bi bi-folder2-open"></i> Save</td>
+                                        <td class="save_action text-center"><button type="button" data-save_button="student_score_${key+1}" class="save_student_tasks btn btn-primary text-light text-sm rounded-0"><i class="bi bi-folder2-open"></i> Save</td>
                                     </tr>
                                 `;
                             });
@@ -434,6 +447,11 @@
 
                     }
                 });
+            });
+            $('body').on('click','.remove_col',function(){
+                let parent =  $(this).parents('table').attr('class').split(' ')[2];
+                let col = $(this).data('column');
+                $(`.${parent}`).find(`.${col}`).remove();
             });
 
             $(".select_sy").on('change', function() {

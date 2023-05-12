@@ -283,6 +283,7 @@
                 async: false,
                 success: function(data) {
                     retVal = parseInt(data.transmuted);
+                    console.log(data.grade);
                 }
             });
             return retVal;
@@ -395,13 +396,13 @@
                                     'text-danger';
                                 students_lists +=
                                     `
-                                    <tr id="${student.studentId}" class="student_score_${key+1}">
+                                    <tr data-id="${student.studentId}" class="student_score_${key+1}">
                                         <td  class="${gender}">${key+1}${'. '+student.lastname+', '+student.name+', '+student.middlename}</td>
                                         <td><input type="number" name="student_output_score[]" class=" student_score_columnn" min="1" placeholder="Enter Score"></td>
                                         <td class="total_score_by_learner"></td>
                                         <td class="ps_by_learner"></td>
                                         <td class="wa_by_learner"></td>
-                                        <td class="save_action"><button type="button" class="btn btn-info text-light text-sm rounded-0">Save</td>
+                                        <td class="save_action"><button type="button" class="btn btn-primary text-light text-sm rounded-0"><i class="bi bi-folder2-open"></i> Save</td>
                                     </tr>
                                 `;
                             });
@@ -411,7 +412,7 @@
                                 let gender = student.gender == 'Male' ? 'text-primary' :
                                     'text-danger';
                                 student_names += `
-                                    <tr id="${student.studentId}" class="student_score_${key+1}">
+                                    <tr data-id="${student.studentId}" class="student_score_${key+1}">
                                         <td class="${gender}">${key+1}${'. '+student.lastname+', '+student.name+', '+student.middlename}</td>
                                         <td class="student_initial_grade_${key+1}"></td>
                                         <td class="student_final_grade_${key+1}"></td>

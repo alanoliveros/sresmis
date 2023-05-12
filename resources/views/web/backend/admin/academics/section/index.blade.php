@@ -1,11 +1,6 @@
 @extends('web.backend.layouts.app')
 @section('title' , 'Section')
-
 @section('content')
-
-    @yield('title')
-
-
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -25,6 +20,7 @@
 
                     <div class="card">
                         <div class="card-body">
+
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
@@ -32,30 +28,32 @@
                                 @include('web.backend.admin.academics.section.create')
                             </div>
 
-
                             <!-- Table with stripped rows -->
-                            <table class="table" id="sectionstable">
+
+                            <table class="table" id="components-datatable">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Grade Level Name</th>
                                     <th scope="col">Section Name</th>
                                     <th scope="col">Action</th>
+
+
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($sections as $key=>$section)
-                                <tr>
-                                    <th scope="row">{{$key+1}}</th>
-                                    <td>{{$section->gradeLevelName}}</td>
-                                    <td>{{$section->section_name}}</td>
-                                    <td>EDIT | DELETE</td>
-                                </tr>
+                                @foreach($sections as $key=>$section)
+                                    <tr>
+                                        <th scope="row">{{$key+1}}</th>
+                                        <td>{{$section->gradeLevelName}}</td>
+                                        <td>{{$section->section_name}}</td>
+                                        <td></td>
+                                    </tr>
                                 @endforeach
 
                                 </tbody>
                             </table>
-
+                            <!-- End Table with stripped rows -->
 
                         </div>
                     </div>
@@ -68,3 +66,4 @@
 
 @endsection
 <x-datatable/>
+

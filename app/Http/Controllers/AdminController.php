@@ -129,7 +129,7 @@ class AdminController extends Controller
 
     }*/
 
-    public function manageSubjects()
+    /*public function manageSubjects()
     {
         $sections = Section::where('sections.adminId', '=', auth()->user()->id)->join('grade_levels', 'sections.gradeLevelId', 'grade_levels.id')->orderBy('grade_levels.gradeLevelName', 'ASC')->get();
         $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
@@ -150,7 +150,7 @@ class AdminController extends Controller
             'gradelevel' => $gradelevel,
             'subjects' => $subject,
         ]);
-    }
+    }*/
 
     public function add_subjectBygradeLevel(Request $request)
     {

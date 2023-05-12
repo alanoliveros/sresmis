@@ -8,7 +8,7 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              
+
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
@@ -21,17 +21,20 @@
               </div>
             </div>
           </div>
-        </div>      
+        </div>
+
+
+
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 col-lg-12 col-xlg-12">
                 <div class="card">
                     <div class="box bg-dark ">
                         <span class="font-light text-white fs-3">Subjects</span>
-                        
+
                       </div>
-                </div>    
-            </div>    
+                </div>
+            </div>
             @foreach ($gradelevel as $level)
             <div class="col-md-6 col-lg-2 col-xlg-3">
               <a href="{{url('sresmis/admin/'.str_replace(' ', '-',$level->gradeLevelName).'/'.$level->id)}}">

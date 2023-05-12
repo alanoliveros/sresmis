@@ -1,8 +1,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#teacherDaw').DataTable();
-            $('#sectionstable').DataTable();
+            $('#components-datatable').DataTable();
         } );
     </script>
 @endsection

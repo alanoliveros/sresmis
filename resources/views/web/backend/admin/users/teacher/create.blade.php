@@ -60,7 +60,6 @@
                             <input type="number" class="form-control" name="zipCode" placeholder="Zip code">
                         </div>
 
-                        {{-- end address --}}
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Designation</label>
                             <input type="text" class="form-control" name="designation">
@@ -90,7 +89,8 @@
                             <input type="text" class="form-control" name="minor">
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Grade Level Taught <small class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label">Grade Level Taught <small
+                                    class="text-danger">(required)</small></label>
                             <select name="gradeLevelTaught" class="form-select gradeLevelTaught" id="" required>
                                 <option value=""></option>
                                 @foreach ($gradeLevel as $key=>$level)
@@ -99,14 +99,16 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Section Taught<small class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label">Section Taught <small
+                                    class="text-danger">(required)</small></label>
                             <select name="sectionTaught" id="sectionTaught" class="form-select">
                                 <option value="" required></option>
                             </select>
 
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Total Actual Teaching Minutes Per Week</label>
+                            <label for="validationDefault02" class="form-label">Total Actual Teaching Minutes Per
+                                Week</label>
                             <input type="number" class="form-control" name="minPerWeek">
                         </div>
                         <div class="col-md-12">
@@ -124,11 +126,11 @@
         </div>
     </div>
 </div>
-
+<x-datatable/>
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            $('.gradeLevelTaught').on('change', function() {
+        $(document).ready(function () {
+            $('.gradeLevelTaught').on('change', function () {
 
                 let gradeLevelTaughtId = $(this).val();
 
@@ -141,11 +143,11 @@
                         "id": gradeLevelTaughtId
                     },
                     // dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
 
 
                         let sectionTaught = `<option selected disabled>Select Section</option>`;
-                        $.each(response.gradeLevel, function(key, level) {
+                        $.each(response.gradeLevel, function (key, level) {
                             sectionTaught = sectionTaught + '<option value="' + level
                                 .id + '">' + level.section_name + '</option>';
                         });

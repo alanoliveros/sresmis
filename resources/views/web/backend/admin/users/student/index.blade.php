@@ -26,7 +26,7 @@
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addTeacher">+ Add @yield('title')</a>
+                                   data-bs-target="#addStudent">+ Add @yield('title')</a>
 
                                 {{--@include('backend.admin.teachers.add-teacher')--}}
                             </div>
@@ -35,7 +35,7 @@
                             {{--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>--}}
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable" id="teacherDaw">
+                            <table class="table" id="components-datatable">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>

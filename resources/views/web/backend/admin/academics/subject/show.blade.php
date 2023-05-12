@@ -1,8 +1,7 @@
 @extends('web.backend.layouts.app')
-@section('title' , 'Teacher')
+@section('title' , 'Subject')
 @section('content')
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Data Tables</h1>
             <nav>
@@ -24,37 +23,29 @@
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addTeacher">+ Add @yield('title')</a>
-                                @include('web.backend.admin.users.teacher.create')
+                                   data-bs-target="#addSection">+ Add @yield('title')</a>
+                                {{--@include('admin.create-subjects')--}}
                             </div>
-                            {{--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>--}}
 
                             <!-- Table with stripped rows -->
-                            <table class="table" id="components-datatable">
+
+                            <table class="table table-hover" id="subjects">
                                 <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Full name</th>
-                                    <th scope="col">Designation</th>
-                                    <th scope="col">Grade Level Taught</th>
-                                    <th scope="col">Section Assigned</th>
-                                    <th scope="col">Action</th>
-
-
+                                <tr class="fs-5">
+                                    <th>Subject Name</th>
+                                    <th>Subject Description</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($teachers as $key=>$teacher)
+                                @foreach ($subjects as $subject)
                                     <tr>
-                                        <th scope="row">{{$key+1}}</th>
-                                        <td>{{$teacher->lastname.', '.($teacher->middlename == NULL? '':$teacher->middlename.', ').$teacher->name.($teacher->suffix == NULL? '':', '.$teacher->suffix)}}</td>
-                                        <td>{{$teacher->designation}}</td>
-                                        <td>{{$teacher->gradeLevelName}}</td>
-                                        <td>{{$teacher->sectionName}}</td>
+                                        <td>{{$subject->subjectName}}</td>
+                                        <td>{{$subject->description}}</td>
                                         <td>
                                             <div class="dropdown" tabindex="1">
                                                 <i class="db2" tabindex="1"></i>
-                                                <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
+                                                <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical text-dark"></i></a>
                                                 <div class="dropdown-content">
                                                     <a href="#">View</a>
                                                     <a href="#">Edit</a>
@@ -62,9 +53,9 @@
                                                 </div>
                                             </div>
                                         </td>
+
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->

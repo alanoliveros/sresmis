@@ -1,13 +1,7 @@
 @extends('web.backend.layouts.app')
 @section('title' , 'Subject')
-
 @section('content')
-
-    @yield('title')
-
-
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Data Tables</h1>
             <nav>
@@ -25,61 +19,38 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
-                            <p>Add lightweight datatables to your project with using the <a
-                                    href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple
-                                    DataTables</a> library. Just add <code>.datatable</code> class name to any table you
-                                wish to conver to a datatable</p>
+
+                            <div class="card-title" style="text-align: center">
+                                <span class="fs-4">@yield('title')</span>
+                                <p class="">Select grade level to add subject</p>
+                                {{--<a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
+                                   data-bs-target="#addSection">+ Add @yield('title')</a>--}}
+                                {{--@include('web.backend.admin.academics.section.create')--}}
+                            </div>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Position</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Start Date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                </tr>
-                                </tbody>
-                            </table>
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <hr class="mb-5">
+
+                                    @foreach ($gradelevel as $level)
+                                        <div class="col col-lg-4 col-md-12">
+                                                <a href="{{ route('admin.show.subject', ['gradeLevelName' => str_replace(' ', '-', $level->gradeLevelName), 'id' => $level->id]) }}">
+
+                                                <div class="card card-hover">
+                                                    <div class="box bg-cyan text-center">
+                                                        <h1 class="font-light text-white">
+                                                            <i class="mdi mdi-view-dashboard"></i>
+                                                        </h1>
+                                                        <h6 class="text-black">{{$level->gradeLevelName}}</h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                             <!-- End Table with stripped rows -->
 
                         </div>
@@ -93,3 +64,4 @@
 
 @endsection
 <x-datatable/>
+

@@ -10,13 +10,9 @@
                     <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-
                     <div class="row g-3">
-                        {{-- email password --}}
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label text-dark">Grade Level <small
-                                    class="text-danger">(required)</small> </label>
+                            <label for="validationDefault02" class="form-label text-dark">Grade Level <small class="text-danger">(required)</small></label>
                             <select name="gradeLevel" class="form-select">
                                 <option selected disabled>Please select grade level</option>
                                 @foreach ($gradelevel as $level)
@@ -25,8 +21,7 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label text-dark">Section Name <small
-                                    class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label text-dark">Section Name <small class="text-danger">(required)</small></label>
                             <input type="text" class="form-control" name="sectionName">
                         </div>
                         <div class="col-12">
@@ -35,7 +30,7 @@
                     </div>
                 </div>
 
+            </div>
         </form>
     </div>
-
 </div>

@@ -45,14 +45,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-/** ======================================= Alan start routing ======================================= */
+/** ======================================= Admin start routing ======================================= */
 
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     /** ================== User Profile ================== */
-    Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
     Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
 
     /** ================== KPI Controller ================== */
@@ -143,32 +142,49 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     /** ================== Academic ================== */
     Route::prefix('academic')->group(function () {
         Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
-        Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
         Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
+
+
+
+
         Route::get('/section', [SectionController::class, 'index'])->name('admin.section');
+        Route::post('/getSection', [SectionController::class, 'create'])->name('admin.add-section');
+
+
+
+
+        Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
+        Route::get('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
+
+        Route::get('{gradeLevelName}/{id}', [SubjectController::class, 'show'])->name('admin.show.subject');
 
 
     });
 
 
 });
-/** ======================================= Alan end routing ======================================= */
+/** ======================================= Admin end routing ======================================= */
+
+
+/** Section */
+Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
+    /*Route::post('/getSection', [AdminController::class, 'getSection']);*/ // -- not used
+    Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
+    Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
+});
+
+
 
 /** Subjects */
 Route::prefix('/admin')->middleware('isAdmin')->group(function () {
-    Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');
+  /*  Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');*/
     Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
     Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
 });
 
-/** Section */
-Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-    Route::post('/getSection', [AdminController::class, 'getSection']);
-    Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
-    Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
-});
+
 
 /** Manage Class Schedules */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {

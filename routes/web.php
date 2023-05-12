@@ -52,16 +52,8 @@ Auth::routes();
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
-    /** ================== Users ================== */
-    Route::prefix('manage-users')->group(function () {
-        Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
-        Route::get('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');
-
-
-        Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');
-    });
-
     /** ================== User Profile ================== */
+    Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
     Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
 
     /** ================== KPI Controller ================== */
@@ -77,6 +69,59 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/transition-rate', [IndicatorController::class, 'transitionIndex'])->name('admin.transition');
         Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
+    Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
+
+
+    /** ================== Users ================== */
+    Route::prefix('manage-users')->group(function () {
+        Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
+        Route::get('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');
+
+
+        Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -102,11 +147,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
         Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
-        Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
-
-        Route::get('/section', [SectionController::class, 'index'])->name('admin.section');
-        Route::post('/section/create', [SectionController::class, 'create'])->name('admin.add-section');
-        Route::post('/getSection', [SectionController::class, 'getSection']);
     });
 
 
@@ -122,7 +162,7 @@ Route::prefix('/admin')->middleware('isAdmin')->group(function () {
 
 /** Section */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-
+    Route::post('/getSection', [AdminController::class, 'getSection']);
     Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
     Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
 });

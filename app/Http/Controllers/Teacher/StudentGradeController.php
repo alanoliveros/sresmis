@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\ClassSchedule;
 use App\Models\Student;
+use App\Models\Subject;
+
 
 class StudentGradeController extends Controller
 {
@@ -55,15 +57,23 @@ class StudentGradeController extends Controller
 
         $section = $request->section;
         $sy = $request->sy;
+        $subject = Subject::find($request->subject);
+
+        
+
+
         $students = Student::where([
             'students.teacherId' => auth()->user()->id,
             'students.school_year' => $sy,
             'students.sectionId' => $section,
         ])
         ->join('users', 'students.studentId', 'users.id')
+        ->orderBy('users.gender','desc')
+        ->orderBy('users.lastname','asc')
         ->get();
         return response()->json([
             'students' => $students,
+            'subject' => $subject,
         ]);
     }
 }

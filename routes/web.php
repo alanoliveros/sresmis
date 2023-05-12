@@ -23,7 +23,6 @@ use App\Http\Controllers\Setting\SystemController;
 use App\Http\Controllers\Setting\WebsiteCountroller;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Teacher\StudentGradeController;
 use Illuminate\Support\Facades\Auth;
@@ -147,6 +146,10 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
         Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
+        Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
+        Route::get('/section', [SectionController::class, 'index'])->name('admin.section');
+
+
     });
 
 
@@ -242,7 +245,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
     Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
     Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
-   
+
 });
 
 /** Parent Dashboard */

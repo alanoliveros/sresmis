@@ -21,8 +21,6 @@
                     <div class="card">
                         <div class="card-body">
 
-                            {{--<h5 class="card-title">@yield('title')</h5>--}}
-
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"

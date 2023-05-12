@@ -23,7 +23,6 @@ use App\Http\Controllers\Setting\SystemController;
 use App\Http\Controllers\Setting\WebsiteCountroller;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Teacher\StudentGradeController;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +52,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     /** ================== User Profile ================== */
-    Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
     Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
 
     /** ================== KPI Controller ================== */
@@ -70,20 +68,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
     Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
 
@@ -96,30 +80,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
         Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -147,11 +107,15 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
         Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
+        Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
+        Route::get('/section', [SectionController::class, 'index'])->name('admin.section');
     });
-
-
 });
 /** ======================================= Alan end routing ======================================= */
+
+
+
+
 
 /** Subjects */
 Route::prefix('/admin')->middleware('isAdmin')->group(function () {
@@ -242,7 +206,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
     Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
     Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
-   
+
 });
 
 /** Parent Dashboard */

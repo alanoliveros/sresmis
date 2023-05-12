@@ -120,27 +120,39 @@
                                     <script>
                                         document.addEventListener("DOMContentLoaded", () => {
                                             new ApexCharts(document.querySelector("#performanceIndicator"), {
-                                                series: [{
-                                                    name: 'Promotion Rate', data: [12, 40, 28, 51, 42, 82, 56],
-                                                }, {
-                                                    name: 'Retention Rate', data: [11, 32, 45, 32, 34, 52, 11]
-                                                }, {
-                                                    name: 'Cohort Survival Rate', data: [11, 32, 25, 12, 14, 32, 21]
-                                                }, {
-                                                    name: 'Graduation Rate', data: [11, 32, 45, 32, 34, 2, 41]
-                                                }, {
-                                                    name: 'Drop-out Rate', data: [1, 12, 15, 72, 34, 12, 11]
-                                                }, {
-                                                    name: 'Failure Rate', data: [5, 11, 62, 18, 9, 54, 41]
-                                                }, {
-                                                    name: 'Completion Rate', data: [5, 11, 62, 18, 9, 54, 41]
-                                                }, {
-                                                    name: 'Achievement Rate NAT', data: [5, 11, 62, 18, 9, 54, 41]
-                                                }, {
-                                                    name: 'Transition Rate', data: [5, 11, 62, 18, 9, 54, 41]
-                                                }, {
-                                                    name: 'Participation Rate', data: [5, 11, 62, 18, 9, 54, 41]
-                                                }],
+                                                series: [
+                                                    {
+                                                        name: 'Promotion Rate',
+                                                        data: [12, 40, 28, 51, 42, 82, 56],
+                                                    }, {
+                                                        name: 'Retention Rate',
+                                                        data: [11, 32, 45, 32, 34, 52, 11]
+                                                    }, {
+                                                        name: 'Cohort Survival Rate',
+                                                        data: [11, 32, 25, 12, 14, 32, 21]
+                                                    }, {
+                                                        name: 'Graduation Rate',
+                                                        data: [11, 32, 45, 32, 34, 2, 41]
+                                                    }, {
+                                                        name: 'Drop-out Rate',
+                                                        data: [1, 12, 15, 10, 34, 12, 11]
+                                                    }, /*{
+                                                        name: 'Failure Rate',
+                                                        data: [5, 11, 62, 18, 9, 54, 41]
+                                                    }, {
+                                                        name: 'Completion Rate',
+                                                        data: [5, 11, 62, 18, 9, 54, 41]
+                                                    }, {
+                                                        name: 'Achievement Rate NAT',
+                                                        data: [5, 11, 62, 18, 9, 54, 41]
+                                                    }, {
+                                                        name: 'Transition Rate',
+                                                        data: [5, 11, 62, 18, 9, 54, 41]
+                                                    }, {
+                                                        name: 'Participation Rate',
+                                                        data: [5, 11, 62, 18, 9, 54, 41]
+                                                    }*/
+                                                ],
                                                 chart: {
                                                     height: 365,
                                                     type: 'area',
@@ -152,11 +164,11 @@
                                                     size: 4
                                                 },
                                                 colors: [
-                                                    '#828bd0',
+                                                    /*'#828bd0',
                                                     '#7acc9a',
                                                     '#c76bb4',
                                                     '#d7bd85',
-                                                    '#1c590c',
+                                                    '#1c590c',*/
                                                     '#493a19',
                                                     '#5b1729',
                                                     '#9ad785',

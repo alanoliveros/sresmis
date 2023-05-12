@@ -10,8 +10,6 @@
                     <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-
                     <div class="row g-3">
                         {{-- email password --}}
                         <div class="col-md-12">
@@ -25,7 +23,7 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label text-dark">Section Name <small
+                            <label class="form-label text-dark" for="validationDefault02">Section Name <small
                                     class="text-danger">(required)</small></label>
                             <input type="text" class="form-control" name="sectionName">
                         </div>

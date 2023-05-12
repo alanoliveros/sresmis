@@ -56,7 +56,7 @@ class LoginController extends Controller
                     return redirect('/login');
                     break;
                 case 1:
-                    return to_route('sresmis.admin.dashboard');
+                    return to_route('admin.dashboard');
                     break;
                 case 2:
                     return to_route('sresmis.teacher.dashboard');
@@ -67,7 +67,7 @@ class LoginController extends Controller
                 case 4:
                     return to_route('sresmis.parent.dashboard');
                     break;
-                
+
                 default:
                         Auth::logout();
                         return redirect('/login');

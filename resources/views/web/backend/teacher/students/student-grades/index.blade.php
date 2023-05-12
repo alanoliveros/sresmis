@@ -206,14 +206,14 @@
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tr class="text-success">
+                                                    <tr class="text-success written_tasks_possible_score">
                                                         <th class="text-center">HIGHEST POSSIBLE SCORE</th>
-                                                        <th><input type="number" name="written_score[]"
-                                                                class=" written_score" min="1">
+                                                        <th><input type="number" name="written_score[]" data-total_possible_score="written_tasks_possible_score"
+                                                                class="written_score" min="1">
                                                         </th>
                                                         <th class="between_highest_score total_high_score">Total</th>
                                                         <th>100%</th>
-                                                        <th>50%</th>
+                                                        <th class="written_works_average"></th>
                                                         <th><button type="button" disabled
                                                                 class="btn btn-success add_score"
                                                                 data-gcomponent="written_works">+</button>
@@ -225,10 +225,11 @@
                                             </div>
 
                                         </div>
+                                        {{-- performance tasks --}}
                                         <div class="tab-pane fade" id="performance_tasks" role="tabpanel"
                                             aria-labelledby="profile-tab">
                                             <div class="written_work_container table-responsive">
-                                                <table class="table table-stripped written_works">
+                                                <table class="table table-stripped performance_tasks">
                                                     <thead>
                                                         <tr>
                                                             <th></th>
@@ -239,17 +240,17 @@
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tr class="text-success">
+                                                    <tr class="text-success performance_tasks_possible_score">
                                                         <th class="text-center">HIGHEST POSSIBLE SCORE</th>
-                                                        <th><input type="number" name="written_score[]"
+                                                        <th><input data-total_possible_score="performance_tasks_possible_score" type="number" name="written_score[]"
                                                                 class=" written_score" min="1">
                                                         </th>
                                                         <th class="between_highest_score total_high_score">Total</th>
                                                         <th>100%</th>
-                                                        <th>50%</th>
+                                                        <th class=""></th>
                                                         <th><button type="button" disabled
                                                                 class="btn btn-success add_score"
-                                                                data-gcomponent="written_works">+</button>
+                                                                data-gcomponent="performance_tasks">+</button>
                                                         </th>
                                                     </tr>
                                                     <tbody class="display_student_data">
@@ -257,6 +258,7 @@
                                                 </table>
                                             </div>
                                         </div>
+                                        {{-- performance tasks --}}
                                         <div class="tab-pane fade" id="contact" role="tabpanel"
                                             aria-labelledby="contact-tab">
                                             Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis
@@ -267,7 +269,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 {{-- <div class="col-12 border border-dark mb-4">
                                     <p class="text-center fs-4 fw-bold">Performance Task (<small class="text-success">
                                             40%</small> )</p>
@@ -323,26 +324,79 @@
 
 
                                 </div> --}}
-
-
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div><!-- End Recent Sales -->
-
             </div>
         </section>
     </main>
 @endsection
 @section('scripts')
     <script>
+        let sy_id = 0;
+        let sub_id = 0;
+        let grade_component = 0;
+        let first_score = 0;
+        let score_count = 1;
+        let total_score = [];
+        let total = 0;
+
         let sy = '';
         let subject = 0;
         let section = 0;
+
+        function createScoreColumn(gradeComponent) {
+            let between_count_num = $(`.${gradeComponent}`).find('.between_count_num');
+            let between_col_highest_score = $(`.${gradeComponent}`).find('.between_highest_score');
+            let between_total_score_by_learner = $(`.${gradeComponent}`).find('.total_score_by_learner');
+
+            let col_index = $(`.${gradeComponent}`).find('.col_index').length + 1;
+            let data_this = gradeComponent == 'written_works'? 'written_tasks_possible_score': 'performance_tasks_possible_score';
+
+            $(`<th class="text-center col_index">${++col_index}</th>`).insertBefore(between_count_num);
+
+            $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"   name="written_score[]" data-total_possible_score="${data_this}" min="1" class=" written_score"></th>`)
+                .insertBefore(between_col_highest_score);
+
+            $(`<td><input type="number"  min="1" name="student_output_score[]" class=" fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
+                .insertBefore(between_total_score_by_learner);
+        }
+
+        function totalHighestScore(className, sub) {
+            
+            let total_highest_score = 0;
+            let loop = $(`.${className}`).find(".written_score");
+
+            console.log($(loop.length));
+            $.each(loop, function(key, val) {
+                
+                total_highest_score += parseFloat($(val).val());
+            });
+            $(`.${className}`).find('.total_high_score').text(isNaN(total_highest_score) ? 'Pending' : total_highest_score);
+            // return total_highest_score;
+        }
+
+        function student_score(cname) {
+            let total_student_score = 0;
+            $.each($(cname).find('input'), function(key, val) {
+                total_student_score += parseFloat($(val).val());
+            });
+            console.log(total_student_score);
+            $(cname).find('.total_score_by_learner').text(isNaN(total_student_score) ? 'Pending' : total_student_score);
+            let ps = parseFloat(total_student_score / sum * 100);
+            $(cname).find('.ps_by_learner').text(isNaN(ps.toFixed(2)) ? 'Pending' : ps.toFixed(0) + '%');
+            let ww_valued = parseInt($('.written_works_average').text());
+            let ws = ww_valued / 100;
+
+            let ww = ps * ws;
+            $(cname).find('.wa_by_learner').text(isNaN(ww.toFixed(2)) ? 'Pending' : ww.toFixed(0) + '%');
+        }
         $(document).ready(function() {
+            $('.add_score').on('click', function() {
+                createScoreColumn($(this).data('gcomponent'));
+            });
             $('.select_sy').on('change', function() {
                 sy = $(".select_sy :selected").val();
 
@@ -356,6 +410,7 @@
                         console.log(data.subjects);
                         let sub = '<option selected disabled>Select Subject</option>';
                         $.each(data.subjects, function(key, subject) {
+                            console.log(key);
                             sub +=
                                 `<option value="${key}">${subject}</option>`;
                         });
@@ -400,6 +455,7 @@
                     data: {
                         "section": section,
                         "sy": sy,
+                        "subject": subject,
                     },
                     success: function(data) {
                         // console.log(data.students);
@@ -419,7 +475,7 @@
                                     `
                                 <tr class="student_score_${key+1}">
                                     <td  class="${gender}">${key+1}${'. '+student.lastname+', '+student.name+', '+student.middlename}</td>
-                                    <td ><input type="number" name="student_written_score[]" class=" student_score_columnn" min="1" placeholder="Enter Score"></td>
+                                    <td ><input type="number" name="student_output_score[]" class=" student_score_columnn" min="1" placeholder="Enter Score"></td>
                                     <td class="total_score_by_learner"></td>
                                     <td class="ps_by_learner"></td>
                                     <td class="wa_by_learner"></td>
@@ -428,6 +484,9 @@
                             });
                             $('.display_student_data').html(students_lists);
                             $('.add_score').prop('disabled', false);
+                            $('.written_works_average').text(data
+                                .subject.written_work_percentage + '%');
+
                         } else {
                             return false;
                         }
@@ -435,70 +494,10 @@
                     }
                 });
             });
-        })
-    </script>
-    <script>
-        let sy_id = 0;
-        let sub_id = 0;
-        let grade_component = 0;
-        let first_score = 0;
-        let score_count = 1;
-        let total_score = [];
-        let total = 0;
 
-        function createScoreColumn(gradeComponent) {
-            let between_count_num = $(`.${gradeComponent}`).find('.between_count_num');
-            let between_col_highest_score = $(`.${gradeComponent}`).find('.between_highest_score');
-            let between_total_score_by_learner = $(`.${gradeComponent}`).find('.total_score_by_learner');
-
-            let col_index = $(`.${gradeComponent}`).find('.col_index').length + 1;
-
-            $(`<th class="text-center col_index">${++col_index}</th>`).insertBefore(between_count_num);
-
-            $(`<th class="score_append fw-bold" data-rows="score_append_${score_count}"><input type="number"  name="written_score[]" min="1" class=" written_score"></th>`)
-                .insertBefore(between_col_highest_score);
-
-            $(`<td><input type="number"  min="1" name="student_written_score[]" class=" fs-6 quizzes_exams" placeholder="Enter Score"></td>`)
-                .insertBefore(between_total_score_by_learner);
-        }
-
-        function totalHighestScore() {
-            let total_highest_score = 0;
-            $.each($(".written_score"), function(key, val) {
-                total_highest_score += parseFloat($(val).val());
-
-            });
-            return total_highest_score;
-        }
-
-        function student_score(cname) {
-
-            let total_student_score = 0;
-            let sum = totalHighestScore();
-            let student_score = '';
-
-
-            $.each($(cname).find('input'), function(key, val) {
-                total_student_score += parseFloat($(val).val());
-            });
-
-
-
-
-            console.log(total_student_score);
-            $(cname).find('.total_score_by_learner').text(isNaN(total_student_score) ? 'Pending' : total_student_score);
-            let ps = parseFloat(total_student_score / sum * 100);
-            $(cname).find('.ps_by_learner').text(isNaN(ps.toFixed(2)) ? 'Pending' : ps.toFixed(0) + '%');
-            let ws = 0.5;
-            let ww = ps * ws;
-            $(cname).find('.wa_by_learner').text(isNaN(ww.toFixed(2)) ? 'Pending' : ww.toFixed(2) + '%');
-        }
-
-        $(document).ready(function() {
-            $("body").on('input', "input[name='student_written_score[]']", function(e) {
+            $("body").on('input', "input[name='student_output_score[]']", function(e) {
 
                 let name = $(this).parent('td').parent('tr').attr('class');
-
                 let getInput = $(`.${name}`);
 
                 // let data_name = $(this).data('name');
@@ -509,9 +508,6 @@
                 // let val = $(this).val();
                 // $(this).attr('data-info', val);
 
-            });
-            $('.add_score').on('click', function() {
-                createScoreColumn($(this).data('gcomponent'));
             });
 
             grade_component = $('.grade_component').text();
@@ -532,9 +528,7 @@
             $(".select_student_by").on('change', function(e) {
 
                 let student_click = $(".select_student_by :selected").text();
-
                 $('.student_click_paste').text(student_click);
-
             });
             $(".filter_grades").on('click', function(e) {
                 e.preventDefault();
@@ -553,20 +547,11 @@
 
             $("body").on('input', "input[name='written_score[]']", function(e) {
                 e.preventDefault();
-                let total_score = totalHighestScore();
-                let total = $(this).val();
-                // $(this).attr('data-info', total);
-                $('.total_high_score').text(isNaN(total_score) ? 'Pending' : total_score);
-
+                // let total_score = totalHighestScore();
+                let data_this = $(this).data('total_possible_score');
+                let subtotal = $(this).val();
+                totalHighestScore(data_this, subtotal);
             });
-
-            // $("body").on('input', "input[name='student_written_score[]']", function(e) {
-
-            //     student_score();
-            //     let val = $(this).val();
-            //     $(this).attr('data-info', val);
-
-            // });
         });
     </script>
 @endsection

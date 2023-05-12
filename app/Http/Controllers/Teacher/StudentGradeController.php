@@ -77,16 +77,32 @@ class StudentGradeController extends Controller
         ]);
     }
     public function transmuted_grade(Request $request) {
-        $grade = $request->initialGrade;
 
+        // return response()->json([
+        //     'transmuted' => $request->initialGrade,
+        // ]);
+
+      
+            $grade = $request->initialGrade;
+            
+            $transmuted = 0;
+
+            if($grade >= 16.00 || $grade <= 19.99){
+                $transmuted = 64;
+            }else if($grade >= 12.00 || $grade <= 15.99){
+                $transmuted = 63;
+            }
+            else if($grade >= 8.00 || $grade <= 11.99){
+                $transmuted = 62;
+            }else if($grade >= 4.00  || $grade <= 7.99){
+                $transmuted = 61;
+            }else if($grade <= 0  || $grade <= 3.99){
+                $transmuted = 60;
+            }
+            return response()->json([
+                'transmuted' => $transmuted,
+            ]);
         
-        $transmuted = 0;
-        if($grade >= 0 &&  $grade <= 3.99){
-            $transmuted = 60;
-        }
-
-        return response()->json([
-            'grade' => $transmuted,
-        ]);
+       
     }
 }

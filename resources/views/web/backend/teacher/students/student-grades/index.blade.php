@@ -273,17 +273,19 @@
         }
 
         function studentTransmutedGrade(initialGrade) {
-
+            var retVal;
             $.ajax({
                 method: "POST",
                 url: '/teacher/student-grades/transmuted-grade',
                 data: {
                     "initialGrade": parseInt(initialGrade),
                 },
+                async: false,
                 success: function(data) {
-                    console.log('alan bayot'+ data.grade);
+                    retVal = parseInt(data.transmuted);
                 }
             });
+            return retVal;
         }
 
         $(document).ready(function() {
@@ -301,11 +303,8 @@
                     let zz = parseInt($(xx).text());
                     let total = xy + zz;
 
-
-
                     $(`.student_initial_grade_${key+1}`).text(isNaN(total) ? 'Pending' : total);
-                    $(`.student_final_grade${key+1}`).text(studentTransmutedGrade(total));
-
+                    $(`.student_final_grade_${key+1}`).text(studentTransmutedGrade(total));
                 });
                 // console.log($(`.${written}`).find('.wa_by_learner').length);
 
@@ -415,7 +414,7 @@
                                     <tr id="${student.studentId}" class="student_score_${key+1}">
                                         <td class="${gender}">${key+1}${'. '+student.lastname+', '+student.name+', '+student.middlename}</td>
                                         <td class="student_initial_grade_${key+1}"></td>
-                                        <td class="student_final_grade"></td>
+                                        <td class="student_final_grade_${key+1}"></td>
                                     </tr>
                                 `;
                             });

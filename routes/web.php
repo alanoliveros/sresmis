@@ -240,7 +240,9 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/filter-subject', [StudentGradeController::class, 'filter_by_subject']);
     // filter by students
     Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
-
+    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
+    Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
+   
 });
 
 /** Parent Dashboard */

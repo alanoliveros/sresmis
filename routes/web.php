@@ -46,10 +46,11 @@ Route::get('/', function () {
 Auth::routes();
 
 /** ======================================= Alan start routing ======================================= */
-
+Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard');
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+    
 
     /** ================== User Profile ================== */
     Route::get('/users-profile', [TemplateController::class, 'usersProfile'])->name('admin.users-profile');
@@ -187,11 +188,11 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 
     // By Subject
     Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
-    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject']);
+    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject'])->name('teacher.student-information.by-subject.filter');
 
 
     /** Teacher Controller */
-    Route::get('/dashboard', [TeacherController::class, 'index'])->name('sresmis.teacher.dashboard');
+    Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
     Route::get('/advisory', [TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory');
     Route::get('/grades/filter', [TeacherController::class, 'filterGrades'])->name('sresmis.teacher.grades.filter');
 
@@ -242,8 +243,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // filter by subject
     Route::post('/student-grades/filter-subject', [StudentGradeController::class, 'filter_by_subject']);
     // filter by students
-    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
-    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
+    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students'])->name('teacher.student-grades.filter-students');
     Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
 
 });

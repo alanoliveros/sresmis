@@ -71,10 +71,13 @@ class StudentGradeController extends Controller
             ->orderBy('users.gender', 'desc')
             ->orderBy('users.lastname', 'asc')
             ->get();
-        return response()->json([
-            'students' => $students,
-            'subject' => $subject,
-        ]);
+        if($students){
+            return response()->json([
+                'students' => $students,
+                'subject' => $subject,
+            ]);
+        }
+        
     }
     public function transmuted_grade(Request $request)
     {

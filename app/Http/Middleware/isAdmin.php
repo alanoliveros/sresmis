@@ -23,13 +23,13 @@ class isAdmin
                 return $next($request);
             }
             if(auth()->user()->role == 2){
-                return to_route('sresmis.teacher.dashboard');
+                return to_route('teacher.dashboard');
             }
             if(auth()->user()->role == 3){
-                return to_route('sresmis.student.dashboard');
+                return to_route('student.dashboard');
             }
             if(auth()->user()->role == 4){
-                return to_route('sresmis.parent.dashboard');
+                return to_route('parent.dashboard');
             }
             if(auth()->user()->role == 0){
                Auth::logout();

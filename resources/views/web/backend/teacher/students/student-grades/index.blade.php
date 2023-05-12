@@ -63,7 +63,7 @@
 
                                 </div>
                                 <hr>
-                                <div class="col d-flex justify-content-end">
+                                <div class="col d-flex justify-content-end gradeComponents">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
@@ -86,99 +86,8 @@
 
                                 </div>
 
-                                <div class="col-12">
-                                    <div class="tab-content pt-2" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="written_works" role="tabpanel"
-                                            aria-labelledby="home-tab">
-                                            <div class="written_work_container table-responsive">
-                                                <table data-grade_component="Written Works" class="table table-stripped written_works">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th class="text-center">1</th>
-                                                            <th class="between_count_num">Total</th>
-                                                            <th>PS</th>
-                                                            <th>WA</th>
-                                                            <th class="text-center">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tr class="text-success written_tasks_possible_score">
-                                                        <th class="text-center">HIGHEST POSSIBLE SCORE</th>
-                                                        <th><input type="number" name="written_score[]"
-                                                                data-total_possible_score="written_tasks_possible_score"
-                                                                class="written_score" min="1">
-                                                        </th>
-                                                        <th class="between_highest_score total_high_score">Total</th>
-                                                        <th>100%</th>
-                                                        <th class="tasks_average written_works_average"></th>
-                                                        <th class="text-center"><button type="button" disabled
-                                                                class="btn btn-success rounded-0  add_score"
-                                                                data-gcomponent="written_works">+</button>
-                                                        </th>
-                                                    </tr>
-                                                    <tbody class="display_student_data">
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                <div class="col-12 studentGradingSystemContainer">
 
-                                        </div>
-                                        {{-- performance tasks --}}
-                                        <div class="tab-pane fade" id="performance_tasks" role="tabpanel"
-                                            aria-labelledby="profile-tab">
-                                            <div class="table-responsive">
-                                                <table data-grade_component="Performance Tasks" class="table table-stripped performance_tasks">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>1</th>
-                                                            <th class="between_count_num">Total</th>
-                                                            <th>PS</th>
-                                                            <th>WA</th>
-                                                            <th class="text-center">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tr class="text-success performance_tasks_possible_score">
-                                                        <th class="text-center">HIGHEST POSSIBLE SCORE</th>
-                                                        <th><input
-                                                                data-total_possible_score="performance_tasks_possible_score"
-                                                                type="number" name="written_score[]"
-                                                                class="written_score" min="1">
-                                                        </th>
-                                                        <th class="between_highest_score total_high_score">Total</th>
-                                                        <th>100%</th>
-                                                        <th class="tasks_average performance_tasks_average"></th>
-
-                                                        <th class="text-center"><button type="button" disabled
-                                                                class="btn btn-success rounded-0  add_score"
-                                                                data-gcomponent="performance_tasks">+</button>
-                                                        </th>
-                                                    </tr>
-                                                    <tbody class="display_student_data">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        {{-- performance tasks --}}
-                                        <div class="tab-pane fade" id="contact" role="tabpanel"
-                                            aria-labelledby="contact-tab">
-                                            <div class=" table-responsive">
-                                                <table data-grade_component="Quarterly Grades"  class="table table-stripped quarterly_grade">
-                                                    <thead>
-                                                        <tr>
-
-                                                            <th class="text-center">Student Name</th>
-                                                            <th class="initial_grade">Initial Grade</th>
-                                                            <th class="transumted_grade">Transmuted Grade</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody class="display_student_grade">
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -190,6 +99,7 @@
     </main>
 @endsection
 @section('scripts')
+    <script></script>
     <script>
         let sy_id = 0;
         let sub_id = 0;
@@ -212,7 +122,8 @@
             let data_this = gradeComponent == 'written_works' ? 'written_tasks_possible_score' :
                 'performance_tasks_possible_score';
 
-            $(`<th class="text-center col_index col_num_${++col_index}">${col_index} <button data-column="col_num_${col_index}" class="bg-danger remove_col">x</button></th>`).insertBefore(between_count_num);
+            $(`<th class="text-center col_index col_num_${++col_index}">${col_index} <button data-column="col_num_${col_index}" class="bg-danger remove_col">x</button></th>`)
+                .insertBefore(between_count_num);
 
             $(`<th class="score_append fw-bold col_num_${col_index}" data-rows="score_append_${score_count}"><input type="number"   name="written_score[]" data-total_possible_score="${data_this}" min="1" class=" written_score"></th>`)
                 .insertBefore(between_col_highest_score);
@@ -279,6 +190,7 @@
                 url: '/teacher/student-grades/transmuted-grade',
                 data: {
                     "initialGrade": parseInt(initialGrade),
+                    "_token": "{{ csrf_token() }}",
                 },
                 async: false,
                 success: function(data) {
@@ -289,19 +201,62 @@
             return retVal;
         }
 
-        function saveStudentGrade(cparent, cname) {
+        function saveStudentGrade(cparent, cname, uid) {
 
-            
-            let inputs = $(`.${cparent}`).find(`.${cname} :input`);
+            let quizzes = [];
+            let inputs = $(`.${cparent}`).find(`.${cname}`).find(`input[name='student_output_score[]']`);
+            let total_quizzes = $(`.${cparent}`).find(`.total_score_by_learner`).text();
+            let ps_by_learner = $(`.${cparent}`).find(`.ps_by_learner`).text();
+            let wa_by_learner = $(`.${cparent}`).find(`.wa_by_learner`).text();
+            let com_type = cparent == 'written_works' ? 'written' : 'performance'
+            console.log(com_type);
+            // console.log(total_quizzes);
             $.each(inputs, function(key, cont) {
-                console.log($(cont).val());
+                quizzes.push($(cont).val());
+
             });
+            // console.log(quizzes);
+            let studentOutputs = {
+                'st_id': uid,
+                'com_type': com_type,
+                'quizzes': quizzes,
+                'total_quizzes': total_quizzes,
+                'ps_by_learner': ps_by_learner,
+                'wa_by_learner': wa_by_learner,
+                'subject': subject,
+                'section': $(".section_select :selected").val(),
+            };
+            // console.log(studentOutputs);
+            console.log(studentOutputs);
+
+
+            // $.ajax({
+            //     method: "POST",
+            //     url: '/teacher/student-grades/save-grades',
+            //     data: {
+            //         "subject": subject,
+            //         "sy": sy,
+            //     },
+            //     success: function(data) {
+
+            //         console.log(data.sections);
+            //         let sec = '<option selected disabled>Select Section</option>';
+            //         $.each(data.sections, function(key, section) {
+            //             sec +=
+            //                 `<option value="${section.sectionId}">${section.sectionName}</option>`;
+            //         });
+            //         $('.section_select').html(sec);
+            //     }
+            // });
+
         }
         $(document).ready(function() {
             $("body").on('click', ".save_student_tasks", function(e) {
                 let parent = $(this).parents('table').attr('class').split(' ')[2];
                 let data_save = $(this).data('save_button');
-                saveStudentGrade(parent, data_save);
+                let user_id = $(this).parents('tr').data('id');
+                // console.log(user_id);
+                saveStudentGrade(parent, data_save, user_id);
             });
             $('.get_final_grade').on('click', function() {
 
@@ -330,7 +285,7 @@
                 let name = $(this).parents('tr').attr('class');
                 student_score(parent_, name, $(this));
             });
-            $('.add_score').on('click', function() {
+            $('body').on('click', '.add_score', function() {
                 createScoreColumn($(this).data('gcomponent'));
             });
             $('.select_sy').on('change', function() {
@@ -341,6 +296,7 @@
                     url: '/teacher/student-grades/filter-school-year',
                     data: {
                         "sy": sy,
+                        "_token": "{{ csrf_token() }}",
                     },
                     success: function(data) {
                         console.log(data.subjects);
@@ -363,9 +319,9 @@
                     data: {
                         "subject": subject,
                         "sy": sy,
+                        "_token": "{{ csrf_token() }}",
                     },
                     success: function(data) {
-
                         console.log(data.sections);
                         let sec = '<option selected disabled>Select Section</option>';
                         $.each(data.sections, function(key, section) {
@@ -387,23 +343,117 @@
             $('.filter_grades').on('click', function() {
                 $.ajax({
                     method: "POST",
-                    url: '/teacher/student-grades/filter-students',
+                    url: "{{ route('teacher.student-grades.filter-students') }}",
                     data: {
-                        "section": section,
-                        "sy": sy,
-                        "subject": subject,
+                        "section": $(".section_select :selected").val(),
+                        "sy": $(".select_sy :selected").val(),
+                        "subject": $(".school_year_by_subject :selected").val(),
+                        "_token": "{{ csrf_token() }}",
                     },
                     success: function(data) {
-                        // console.log(data.students);
-                        // let students_lists = '<option selected disabled>Select Student</option>';
-                        // $.each(data.students, function(key, student) {
-                        //     students_lists +=
-                        //         `<option value="${student.studentId}">${student.name}</option>`;
-                        // });
-                        // $('.select_student_by').html(students_lists);
                         console.log(data.students);
-                        if (data.students.length > 0) {
+
+                        if (data.length != 0) {
                             let students_lists = '';
+
+                            $('.studentGradingSystemContainer').html(`
+                                 <div class="tab-content pt-2" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="written_works" role="tabpanel"
+                                            aria-labelledby="home-tab">
+                                            <div class="written_work_container table-responsive">
+                                                <table data-grade_component="Written Works"
+                                                    class="table table-stripped written_works">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th class="text-center">1</th>
+                                                            <th class="between_count_num">Total</th>
+                                                            <th>PS</th>
+                                                            <th>WA</th>
+                                                            <th class="text-center">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tr class="text-success written_tasks_possible_score">
+                                                        <th class="text-center">HIGHEST POSSIBLE SCORE</th>
+                                                        <th><input type="number" name="written_score[]"
+                                                                data-total_possible_score="written_tasks_possible_score"
+                                                                class="written_score" min="1">
+                                                        </th>
+                                                        <th class="between_highest_score total_high_score">Total</th>
+                                                        <th>100%</th>
+                                                        <th class="tasks_average written_works_average"></th>
+                                                        <th class="text-center"><button type="button" disabled
+                                                                class="btn btn-light border-success text-success rounded-0  add_score"
+                                                                data-gcomponent="written_works">+</button>
+                                                        </th>
+                                                    </tr>
+                                                    <tbody class="display_student_data">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        {{-- performance tasks --}}
+                                        <div class="tab-pane fade" id="performance_tasks" role="tabpanel"
+                                            aria-labelledby="profile-tab">
+                                            <div class="table-responsive">
+                                                <table data-grade_component="Performance Tasks"
+                                                    class="table table-stripped performance_tasks">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>1</th>
+                                                            <th class="between_count_num">Total</th>
+                                                            <th>PS</th>
+                                                            <th>WA</th>
+                                                            <th class="text-center">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tr class="text-success performance_tasks_possible_score">
+                                                        <th class="text-center">HIGHEST POSSIBLE SCORE</th>
+                                                        <th><input
+                                                                data-total_possible_score="performance_tasks_possible_score"
+                                                                type="number" name="written_score[]"
+                                                                class="written_score" min="1">
+                                                        </th>
+                                                        <th class="between_highest_score total_high_score">Total</th>
+                                                        <th>100%</th>
+                                                        <th class="tasks_average performance_tasks_average"></th>
+
+                                                        <th class="text-center"><button type="button" disabled
+                                                                class="btn btn-success rounded-0  add_score"
+                                                                data-gcomponent="performance_tasks">+</button>
+                                                        </th>
+                                                    </tr>
+                                                    <tbody class="display_student_data">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        {{-- performance tasks --}}
+                                        <div class="tab-pane fade" id="contact" role="tabpanel"
+                                            aria-labelledby="contact-tab">
+                                            <div class=" table-responsive">
+                                                <table data-grade_component="Quarterly Grades"
+                                                    class="table table-stripped quarterly_grade">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th class="text-center">Student Name</th>
+                                                            <th class="initial_grade">Initial Grade</th>
+                                                            <th class="transumted_grade">Transmuted Grade</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody class="display_student_grade">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                            `);
+
                             $.each(data.students, function(key, student) {
                                 let gender = student.gender == 'Male' ? 'text-primary' :
                                     'text-danger';
@@ -411,11 +461,11 @@
                                     `
                                     <tr data-id="${student.studentId}" class="student_score_${key+1}">
                                         <td  class="${gender}">${key+1}${'. '+student.lastname+', '+student.name+', '+student.middlename}</td>
-                                        <td><input type="number" name="student_output_score[]" class=" student_score_columnn" min="1" placeholder="Enter Score"></td>
+                                        <td><input type="number" disabled name="student_output_score[]" class=" student_score_columnn" min="1" placeholder="Enter Score"></td>
                                         <td class="total_score_by_learner"></td>
                                         <td class="ps_by_learner"></td>
                                         <td class="wa_by_learner"></td>
-                                        <td class="save_action text-center"><button type="button" data-save_button="student_score_${key+1}" class="save_student_tasks btn btn-primary text-light text-sm rounded-0"><i class="bi bi-folder2-open"></i> Save</td>
+                                        <td class="save_action text-center"><button type="button" data-save_button="student_score_${key+1}" class="save_student_tasks btn btn-light border-dark text-dark text-sm rounded-0"><i class="bi bi-folder2-open"></i> Save</td>
                                     </tr>
                                 `;
                             });
@@ -441,15 +491,12 @@
                             $('.performance_tasks_average').text(data.subject
                                 .performance_tasks_percentage + '%');
 
-                        } else {
-                            return false;
                         }
-
                     }
                 });
             });
-            $('body').on('click','.remove_col',function(){
-                let parent =  $(this).parents('table').attr('class').split(' ')[2];
+            $('body').on('click', '.remove_col', function() {
+                let parent = $(this).parents('table').attr('class').split(' ')[2];
                 let col = $(this).data('column');
                 $(`.${parent}`).find(`.${col}`).remove();
             });
@@ -462,9 +509,6 @@
             });
             $(".school_year_by_subject").on('change', function() {
                 sub_id = $(".school_year_by_subject :selected").val();
-                if (sy_id != 0 && sub_id != 0) {
-                    $('.filter_grades').prop('disabled', false);
-                }
             });
 
             $(".select_student_by").on('change', function(e) {
@@ -476,10 +520,10 @@
                 e.preventDefault();
                 $.ajax({
                     method: "POST",
-                    url: '/sresmis/teacher/student-information/by-subject/filter',
+                    url: "{{ route('teacher.student-information.by-subject.filter') }}",
                     data: {
-                        "sy_id": sy_id,
-                        "sub_id": sub_id,
+                        sy_id: sy_id,
+                        sub_id: sub_id,
                     },
                     success: function(data) {
                         console.log(data.students);
@@ -489,7 +533,21 @@
 
             $("body").on('input', "input[name='written_score[]']", function(e) {
                 e.preventDefault();
-                // let total_score = totalHighestScore();
+                let parent = $(this).parents('table').attr('class').split(' ')[2];
+                $(`.${parent}`).find('tbody :input');
+                let tbod = $(`.${parent}`).find(".display_student_data").attr('class');
+
+              let par = $(`.${parent}`).find('.display_student_data').attr('class');
+
+
+
+                if($(this).val == 1){
+                    $(`.${par}`).find('td :input').prop('disabled', false);
+                }
+                else{
+                    $(`.${par}`).find('td :input').prop('disabled', true);
+                }
+                let total_score = totalHighestScore();
                 let data_this = $(this).data('total_possible_score');
                 let subtotal = $(this).val();
                 totalHighestScore(data_this, subtotal);

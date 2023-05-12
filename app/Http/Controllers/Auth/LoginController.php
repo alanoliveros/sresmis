@@ -56,16 +56,16 @@ class LoginController extends Controller
                     return redirect('/login');
                     break;
                 case 1:
-                    return to_route('sresmis.admin.dashboard');
+                    return to_route('admin.dashboard');
                     break;
                 case 2:
-                    return to_route('sresmis.teacher.dashboard');
+                    return to_route('teacher.dashboard');
                     break;
                 case 3:
-                    return to_route('sresmis.student.dashboard');
+                    return to_route('student.dashboard');
                     break;
                 case 4:
-                    return to_route('sresmis.parent.dashboard');
+                    return to_route('parent.dashboard');
                     break;
                 
                 default:

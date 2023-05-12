@@ -235,7 +235,7 @@ class TeacherController extends Controller
     $students = Student::where([
       'sectionId' => $section_id,
       'teacherId' => auth()->user()->id,
-      'schoolYearId' => $sy_id,
+      'school_year' => $sy_id,
     ])
       ->join('users', 'students.studentId', 'users.id')
       ->get();

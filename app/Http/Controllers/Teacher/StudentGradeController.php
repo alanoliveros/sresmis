@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ClassSchedule;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\QuarterlyGrading;
 
 
 class StudentGradeController extends Controller
@@ -57,11 +58,9 @@ class StudentGradeController extends Controller
 
         $section = $request->section;
         $sy = $request->sy;
+        $quarter = $request->quarter;
         $subject = Subject::find($request->subject);
-
-
-
-
+        
         $students = Student::where([
             'students.teacherId' => auth()->user()->id,
             'students.school_year' => $sy,
@@ -71,11 +70,42 @@ class StudentGradeController extends Controller
             ->orderBy('users.gender', 'desc')
             ->orderBy('users.lastname', 'asc')
             ->get();
-        return response()->json([
-            'students' => $students,
-            'subject' => $subject,
-        ]);
+    
+            return response()->json([
+                'students' => $students,
+                'subject' => $subject,
+            ]);
+         
+        
     }
+    public function create_grade($sy, $sub, $sec, $qtr){
+       $quarter = str_replace('-', ' ', $qtr);
+       
+       $data = array(
+        'sy' => $sy,
+        'sub' => $sub,
+        'sec' => $sec,
+        'qtr' => $quarter,
+       );
+       
+       $students = Student::where([
+        'students.teacherId' => auth()->user()->id,
+        'students.school_year' => $sy,
+        'students.sectionId' => $sec,
+    ])
+        ->join('users', 'students.studentId', 'users.id')
+        ->orderBy('users.gender', 'desc')
+        ->orderBy('users.lastname', 'asc')
+        ->get();
+        $subject = Subject::find($sub);
+
+       return view('web.backend.teacher.students.student-grades.create',[
+        'students' => $students,
+        'data' => $data,
+        'subject' => $subject,
+       ]);
+    }
+
     public function transmuted_grade(Request $request)
     {
 

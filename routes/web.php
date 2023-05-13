@@ -70,18 +70,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
     Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
 
@@ -142,6 +130,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     /** ================== Academic ================== */
     Route::prefix('academic')->group(function () {
         Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
+        Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
         Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
@@ -172,7 +161,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 /** Section */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-    /*Route::post('/getSection', [AdminController::class, 'getSection']);*/ // -- not used
+    Route::post('/getSection', [AdminController::class, 'getSection']);
     Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
     Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
 });
@@ -205,11 +194,11 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 
     // By Subject
     Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
-    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject']);
+    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject'])->name('teacher.student-information.by-subject.filter');
 
 
     /** Teacher Controller */
-    Route::get('/dashboard', [TeacherController::class, 'index'])->name('sresmis.teacher.dashboard');
+    Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
     Route::get('/advisory', [TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory');
     Route::get('/grades/filter', [TeacherController::class, 'filterGrades'])->name('sresmis.teacher.grades.filter');
 
@@ -260,9 +249,11 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // filter by subject
     Route::post('/student-grades/filter-subject', [StudentGradeController::class, 'filter_by_subject']);
     // filter by students
-    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
-    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students']);
+    Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students'])->name('teacher.student-grades.filter-students');
     Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
+    // create grade
+    Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
+
 
 });
 

@@ -21,13 +21,13 @@ class isStudent
                 return $next($request);  
             }
             if(auth()->user()->role == 1){
-                return to_route('sresmis.admin.dashboard');
+                return to_route('admin.dashboard');
             }
             if(auth()->user()->role == 2){
-                return to_route('sresmis.teacher.dashboard');
+                return to_route('teacher.dashboard');
             }
             if(auth()->user()->role == 4){
-                return to_route('sresmis.parent.dashboard');
+                return to_route('parent.dashboard');
             }
             if(auth()->user()->role == 0){
                Auth::logout();

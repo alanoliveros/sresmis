@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link {{ Request::routeIs('sresmis.teacher.dashboard') ? 'active' : '' }}" href="{{ route('sresmis.teacher.dashboard') }}">
+    <a class="nav-link {{ Request::routeIs('teacher.dashboard') ? 'active' : '' }}" href="{{ route('teacher.dashboard') }}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
     </a>

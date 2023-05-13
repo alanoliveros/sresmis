@@ -16,6 +16,7 @@ use App\Models\Subject;
 use App\Models\ClassSchedule;
 use App\Models\LearningModality;
 use App\Models\DailyAttendance;
+use App\Models\QuarterlyGrading;
 use Carbon\Carbon;
 
 class TeacherController extends Controller
@@ -235,7 +236,7 @@ class TeacherController extends Controller
     $students = Student::where([
       'sectionId' => $section_id,
       'teacherId' => auth()->user()->id,
-      'schoolYearId' => $sy_id,
+      'school_year' => $sy_id,
     ])
       ->join('users', 'students.studentId', 'users.id')
       ->get();
@@ -254,10 +255,12 @@ class TeacherController extends Controller
       'subjects.gradeLevelId' => $teacher_detail->gradeLevelId
     ])
       ->get();
+    $quarterlygrading = QuarterlyGrading::orderBy('quarter_name', 'asc')->get();
 
     return view('web.backend.teacher.students.student-grades.index')->with([
       'sessions' => $sessions,
-      'subjects' => $subjects
+      'subjects' => $subjects,
+      'quarterlygrading' => $quarterlygrading
     ]);
   }
   public function grades_advisory_by_school_year()

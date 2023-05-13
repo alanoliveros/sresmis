@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Manage;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\GradeLevel;
+use App\Models\Session;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,44 +17,46 @@ class AdminTeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * Teacher::orderby('users.lastname', 'asc')
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
         $adminId = auth()->user()->id;
 
-        $teachers = Teacher::orderby('users.lastname', 'asc')
-            ->where([
+        $teachers = Teacher::join('users', 'teachers.teacherId', '=', 'users.id')
+            ->join('grade_levels', 'teachers.gradeLevelId', '=', 'grade_levels.id')
+            ->join('sections', 'teachers.sectionId', '=', 'sections.id')
+            ->orderBy('users.lastname', 'asc')->where([
                 'teachers.adminId' => $adminId,
                 'users.role' => 2
             ])
-            ->join('users', 'teachers.teacherId', '=', 'users.id')
-            ->join('grade_levels', 'teachers.gradeLevelId', '=', 'grade_levels.id')
-            ->join('sections', 'teachers.sectionId', '=', 'sections.id')
             ->get();
         $gradeLevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
         $subjects = Subject::orderBy('subjectName', 'asc')->get();
+        $sessions = Session::orderBy('school_year', 'asc')->get();
 
         return view('web.backend.admin.users.teacher.index')
             ->with([
                 'gradeLevel' => $gradeLevel,
                 'subjects' => $subjects,
                 'teachers' => $teachers,
-                ]);
+                'sessions' => $sessions,
+            ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
 
 
     public function create(Request $request)
     {
         /** Insert User */
-        $user = new User();
+//        $user = new User();
+        $user = User::firstOrNew(['email' => $request->email]);
         $user->name = $request->firstName;
         $user->role = 2;
         $user->middleName = $request->middleName;
@@ -66,7 +70,7 @@ class AdminTeacherController extends Controller
         $teacherId = $user->id;
 
         /** Insert Address */
-        $address = new Address();
+        $address = Address::firstOrNew(['userId' => $teacherId]);
         $address->userId = $teacherId;
         $address->purok = $request->purok;
         $address->barangay = $request->barangay;
@@ -80,6 +84,7 @@ class AdminTeacherController extends Controller
         $teacher = new Teacher();
         $teacher->adminId = auth()->user()->id;
         $teacher->teacherId = $teacherId;
+        $teacher->school_year = $request->schoolYear;
         $teacher->sectionId = $request->sectionTaught;
         $teacher->gradeLevelId = $request->gradeLevelTaught;
         $teacher->addressId = $addressId;
@@ -93,6 +98,9 @@ class AdminTeacherController extends Controller
         $teacher->totalTeachingTimePerWeek = $request->minPerWeek;;
         $teacher->numberOfAncillary = $request->ancillary;
         $teacher->save();
+
+
+
 
         return redirect()->back()->with('success_added', 'Successfully added new record');
     }

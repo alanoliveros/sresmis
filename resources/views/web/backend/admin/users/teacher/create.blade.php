@@ -10,6 +10,17 @@
                     @csrf
                     <div class="row g-3">
                         <div class="col-md-12">
+                            <label for="validationDefault02" class="form-label">School Year <small class="text-danger">(required)</small>
+                            </label>
+                            <select name="schoolYear" class="form-select" id="">
+                                @foreach ($sessions as  $key=>$schoolYear)
+                                    <option
+                                        {{$key == 0? 'selected':''}} value="{{$schoolYear->school_year}}">{{$schoolYear->school_year}}</option>
+                            @endforeach
+                            </select>
+
+                        </div>
+                        <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Email <small class="text-danger">(required)</small>
                             </label>
                             <input type="email" class="form-control" name="email">

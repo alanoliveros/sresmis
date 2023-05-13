@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
 
 
-        <form action="{{route('admin.add-section')}}" method="POST">
+        <form action="{{route('admin.section.create')}}" method="POST">
             @csrf
             <div class="modal-content">
                 <div class="modal-header bg-primary">

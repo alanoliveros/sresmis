@@ -89,7 +89,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     /** ================== Users ================== */
     Route::prefix('manage-users')->group(function () {
         Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
-        Route::get('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');
+        Route::post('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');
 
 
         Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');
@@ -151,6 +151,8 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
         Route::get('/section', [SectionController::class, 'index'])->name('admin.section');
         Route::post('/getSection', [SectionController::class, 'getSection']);
+
+        Route::post('/create', [SectionController::class, 'create'])->name('admin.section.create');
 
 
 

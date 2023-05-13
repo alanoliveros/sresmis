@@ -21,8 +21,7 @@
 
                         let sectionTaught = `<option selected disabled>Select Section</option>`;
                         $.each(response.gradeLevel, function (key, level) {
-                            sectionTaught = sectionTaught + '<option value="' + level
-                                .id + '">' + level.section_name + '</option>';
+                            sectionTaught+=`<option value="${level.id}">'${level.section_name}'</option>`;
                         });
                         $('#sectionTaught').html(sectionTaught);
                     }

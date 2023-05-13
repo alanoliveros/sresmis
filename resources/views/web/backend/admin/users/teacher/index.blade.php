@@ -50,7 +50,7 @@
                                         <td>{{$teacher->lastname.', '.($teacher->middlename == NULL? '':$teacher->middlename.', ').$teacher->name.($teacher->suffix == NULL? '':', '.$teacher->suffix)}}</td>
                                         <td>{{$teacher->designation}}</td>
                                         <td>{{$teacher->gradeLevelName}}</td>
-                                        <td>{{$teacher->sectionName}}</td>
+                                        <td>{{$teacher->section_name}}</td>
                                         <td>
                                             <a href="" class="bi bi-eye" style="margin-right: 6px"></a>
                                             <a href="" class="bi bi-pencil-square" style="margin-right: 6px"></a>

@@ -72,18 +72,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
     Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
 
@@ -245,6 +233,9 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // filter by students
     Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students'])->name('teacher.student-grades.filter-students');
     Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
+    // create grade
+    Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
+    
 
 });
 

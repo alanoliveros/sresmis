@@ -106,6 +106,17 @@ class StudentGradeController extends Controller
        ]);
     }
 
+    public function save_grade(Request $request){
+         $outputs = json_decode($request->input('outputs'));
+         $form = array();
+            foreach($outputs->outputs->student_written->quizzes as $key=>$val){
+                $form[] = $val;
+            }
+
+         return response()->json([
+            'id' => $form,
+        ]);
+    }
     public function transmuted_grade(Request $request)
     {
 

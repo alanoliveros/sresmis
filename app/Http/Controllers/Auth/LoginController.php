@@ -55,13 +55,13 @@ class LoginController extends Controller
                     return redirect()->route('admin.dashboard');
                     break;
                 case 2:
-                    return redirect()->route('sresmis.teacher.dashboard');
+                    return redirect()->route('teacher.dashboard');
                     break;
                 case 3:
-                    return redirect()->route('sresmis.student.dashboard');
+                    return redirect()->route('student.dashboard');
                     break;
                 case 4:
-                    return redirect()->route('sresmis.parent.dashboard');
+                    return redirect()->route('parent.dashboard');
                     break;
                 default:
                     Auth::logout();

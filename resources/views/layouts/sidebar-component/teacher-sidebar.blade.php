@@ -1,6 +1,6 @@
 <li class="sidebar-item sidebar_hover">
     <a class="sidebar-link waves-effect waves-dark sidebar-link"
-       href="{{route('sresmis.teacher.dashboard')}}"
+       href=""
        aria-expanded="false">
         <i class="mdi mdi-view-dashboard"></i>
         <span class="hide-menu">Dashboard</span>

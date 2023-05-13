@@ -25,6 +25,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Teacher\StudentGradeController;
+use App\Http\Controllers\Notifications\MailboxController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +47,7 @@ Route::get('/', function () {
 Auth::routes();
 
 /** ======================================= Admin start routing ======================================= */
-Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('isAdmin');
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -253,6 +254,22 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
     // create grade
     Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
+    // save grades
+    Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
+    
+    
+
+
+
+
+
+
+
+    Route::get('/mailbox', [MailboxController::class, 'teacher_index'])->name('teacher.mailbox');
+    Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
+
+
+
 
 
 });

@@ -205,3 +205,6 @@ tr .datatable-empty {
 .table td {
   white-space: nowrap;
 }
+.span_text{
+  cursor: pointer;
+}

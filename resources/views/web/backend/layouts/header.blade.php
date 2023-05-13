@@ -3,7 +3,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="{{ asset('storage/backend/assets/img/logo.png') }}" alt="">
+            <img src="{{ asset('sto
+            rage/backend/assets/img/logo.png') }}" alt="">
             <span class="d-none d-lg-block">SRESMIS</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -114,7 +115,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                     <li class="dropdown-header">
                         You have 3 new messages
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        <a href=""><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

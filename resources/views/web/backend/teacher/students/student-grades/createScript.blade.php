@@ -70,8 +70,8 @@
             student_names += `
                                 <tr data-id="${student.studentId}" class="student_score_${key+1}">
                                     <td class="${gender}">${key+1}${'. '+student.lastname+', '+student.name+', '+student.middlename}</td>
-                                    <td class="student_initial_grade_${key+1}"></td>
-                                    <td class="student_final_grade_${key+1}"></td>
+                                    <td class="initial_grade student_initial_grade_${key+1}"></td>
+                                    <td class="final_grade student_final_grade_${key+1}"></td>
                                 </tr>
                             `;
         });
@@ -156,23 +156,11 @@
         $.each($(performanceHead), function(key, val){
             possiblePerformanceScores.push($(val).val());
         });
-        
-        // console.log(possibleScoreWrittenTotal);
-        // console.log(possibleWrittenPercentageScore);
-        // console.log(possibleWrittenWeightedAverage);
 
         let total_quizzes = $(`.${cparent}`).find(`.total_score_by_learner`).text();
         let ps_by_learner = $(`.${cparent}`).find(`.ps_by_learner`).text();
         let wa_by_learner = $(`.${cparent}`).find(`.wa_by_learner`).text();
-        let com_type = cparent == 'written_works' ? 'written' : 'performance'
-
-        // console.log(uid);
-        // console.log(total_quizzes);
-        // $.each(inputs, function(key, cont) {
-        //     // quizzes.push($(cont).val());
-        //     console.log(cont);
-        // });
-        // console.log($(inputs)[0]);
+        let com_type = cparent == 'written_works' ? 'written' : 'performance';
         let written = $(inputs)[0];
         let writtArrQuizzes = [];
         let writtenTotalScore = $(written).find('.total_score_by_learner').text();
@@ -209,57 +197,48 @@
             'subject': data_by.sub,
             'school_year': data_by.sy,
             'quarter': data_by.qtr,
-            'outputs': [{
-                "name": {
-                    'performance_tasks': [{
+            'outputs': {
+                    'performance_tasks': {
                         "quizzes": possiblePerformanceScores,
                         "totalscore": possibleScorePerformanceTotal,
                         "ps": possiblePerformancePercentageScore,
                         "ww": possiblePerformanceWeightedAverage,
-                    }],
-                    'written_works': [{
+                    },
+                    'written_works': {
                         "quizzes": possibleWrittenScores,
                         "totalscore": possibleScoreWrittenTotal,
                         "ps": possibleWrittenPercentageScore,
                         "ww": possibleWrittenWeightedAverage,
-                    }],
-                    'student_written': [{
+                    },
+                    'student_written': {
                         "quizzes": writtArrQuizzes,
                         "totalscore": writtenTotalScore,
                         "ps": writtenPSAverage,
                         "ww": writtenWeightedAverage,
-                    }],
-                    'student_performance': [{
+                    },
+                    'student_performance': {
                         "quizzes": writtArrQuizzes,
                         "totalscore": writtenTotalScore,
                         "ps": writtenPSAverage,
                         "ww": writtenWeightedAverage,
-                    }],
-                }
-            }],
+                    },
+            },
         };
 
+        
         console.log(studentOutputs);
 
 
-        // $.ajax({
-        //     method: "POST",
-        //     url: '/teacher/student-grades/save-grades',
-        //     data: {
-        //         "subject": subject,
-        //         "sy": sy,
-        //     },
-        //     success: function(data) {
-
-        //         console.log(data.sections);
-        //         let sec = '<option selected disabled>Select Section</option>';
-        //         $.each(data.sections, function(key, section) {
-        //             sec +=
-        //                 `<option value="${section.sectionId}">${section.sectionName}</option>`;
-        //         });
-        //         $('.section_select').html(sec);
-        //     }
-        // });
+        $.ajax({
+            method: "POST",
+            url: '/teacher/student-grades/save-grades',
+            data: {
+                "outputs" : JSON.stringify(studentOutputs),
+            },
+            success: function(data) {
+                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            }
+        });
 
     }
 

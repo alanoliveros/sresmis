@@ -108,3 +108,9 @@
         </li>
     </ul>
 </li><!-- End Icons Nav -->
+<li class="nav-item">
+    <a class="nav-link {{ Request::routeIs('sresmis.teacher.student-grades') ? 'active' : '' }}" href="{{route('teacher.mailbox')}}">
+        <i class="bi bi-chat-left-dots"></i>
+        <span>Mailbox</span>
+    </a>
+</li><!-- End Profile Page Nav -->

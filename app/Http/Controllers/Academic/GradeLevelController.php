@@ -10,11 +10,10 @@ class GradeLevelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        /*resources/views/web/backend/admin/academics/gradelevel/index.blade.php*/
         return view('web.backend.admin.academics.gradelevel.index');
     }
 

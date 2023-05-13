@@ -27,7 +27,6 @@ class AdminTeacherController extends Controller
                 'teachers.adminId' => $adminId,
                 'users.role' => 2
             ])
-//            ->where('users.role', 2)
             ->join('users', 'teachers.teacherId', '=', 'users.id')
             ->join('grade_levels', 'teachers.gradeLevelId', '=', 'grade_levels.id')
             ->join('sections', 'teachers.sectionId', '=', 'sections.id')
@@ -36,7 +35,11 @@ class AdminTeacherController extends Controller
         $subjects = Subject::orderBy('subjectName', 'asc')->get();
 
         return view('web.backend.admin.users.teacher.index')
-            ->with(['gradeLevel' => $gradeLevel, 'subjects' => $subjects, 'teachers' => $teachers,]);
+            ->with([
+                'gradeLevel' => $gradeLevel,
+                'subjects' => $subjects,
+                'teachers' => $teachers,
+                ]);
     }
 
     /**

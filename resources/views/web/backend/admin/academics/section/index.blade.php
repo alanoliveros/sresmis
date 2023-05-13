@@ -34,11 +34,9 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Grade Level Name</th>
-                                    <th scope="col">Section Name</th>
+                                    <th scope="col">Grade Level</th>
+                                    <th scope="col">Section</th>
                                     <th scope="col">Action</th>
-
-
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,7 +45,11 @@
                                         <th scope="row">{{$key+1}}</th>
                                         <td>{{$section->gradeLevelName}}</td>
                                         <td>{{$section->section_name}}</td>
-                                        <td></td>
+                                        <td>
+                                            <a href=""><i class="bi bi-eye-fill"></i></a>
+                                            <a href=""><i class="bi bi-pencil-square"></i></a>
+                                            <a href=""><i class="bi bi-trash"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
 

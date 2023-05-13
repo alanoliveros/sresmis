@@ -46,7 +46,7 @@ Route::get('/', function () {
 Auth::routes();
 
 /** ======================================= Admin start routing ======================================= */
-
+Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard');
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -150,13 +150,13 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 
         Route::get('/section', [SectionController::class, 'index'])->name('admin.section');
-        Route::post('/getSection', [SectionController::class, 'create'])->name('admin.add-section');
+        Route::post('/getSection', [SectionController::class, 'getSection']);
 
 
 
 
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
-        Route::get('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
+        Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
 
         Route::get('{gradeLevelName}/{id}', [SubjectController::class, 'show'])->name('admin.show.subject');
 

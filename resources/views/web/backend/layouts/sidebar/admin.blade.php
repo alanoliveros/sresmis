@@ -89,8 +89,8 @@
     @php
         $components = [
             ['name' => 'Daily Attendance', 'route' => 'admin.daily-attendance'],
-            ['name' => 'Section', 'route' => 'admin.section'],
             ['name' => 'Grade Level', 'route' => 'admin.grade-level'],
+            ['name' => 'Section', 'route' => 'admin.section'],
             ['name' => 'Subject', 'route' => 'admin.subject'],
             ['name' => 'Class', 'route' => 'admin.class'],
             ['name' => 'Class room', 'route' => 'admin.class-room'],

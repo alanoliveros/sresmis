@@ -1,11 +1,6 @@
 @extends('web.backend.layouts.app')
 @section('title' , 'Grade Level')
-
 @section('content')
-
-    @yield('title')
-
-
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -25,59 +20,37 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
-                            <p>Add lightweight datatables to your project with using the <a
-                                    href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple
-                                    DataTables</a> library. Just add <code>.datatable</code> class name to any table you
-                                wish to conver to a datatable</p>
+
+                            <div class="card-title">
+                                <span class="fs-4">@yield('title')</span>
+                                <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
+                                   data-bs-target="#addSection">+ Add @yield('title')</a>
+                                {{--@include('web.backend.admin.academics.section.create')--}}
+                            </div>
 
                             <!-- Table with stripped rows -->
-                            <table class="table datatable">
+
+                            <table class="table" id="components-datatable">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Position</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Grade Level</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                </tr>
+                               {{-- @foreach($sections as $key=>$section)
+                                    <tr>
+                                        <th scope="row">{{$key+1}}</th>
+                                        <td>{{$section->gradeLevelName}}</td>
+                                        <td>
+                                            <a href=""><i class="bi bi-eye-fill"></i></a>
+                                            <a href=""><i class="bi bi-pencil-square"></i></a>
+                                            <a href=""><i class="bi bi-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach--}}
+
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
@@ -93,3 +66,4 @@
 
 @endsection
 <x-datatable/>
+

@@ -7,7 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -40,44 +41,35 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function login(Request $request){
-        $credentials = $request->validate(
-            [
-                'email'=>'required',
-                'password'=>'required',
-            ]
-            );
-            if(Auth::attempt($credentials)){
+    protected function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-                $user_role = Auth::user()->role;
-               switch ($user_role) {
-                case 0:
+        if (Auth::attempt($credentials)) {
+            $user_role = Auth::user()->role;
+            switch ($user_role) {
+                case 1:
+                    return redirect()->route('admin.dashboard');
+                    break;
+                case 2:
+                    return redirect()->route('sresmis.teacher.dashboard');
+                    break;
+                case 3:
+                    return redirect()->route('sresmis.student.dashboard');
+                    break;
+                case 4:
+                    return redirect()->route('sresmis.parent.dashboard');
+                    break;
+                default:
                     Auth::logout();
                     return redirect('/login');
                     break;
-                case 1:
-                    return to_route('sresmis.admin.dashboard');
-                    break;
-                case 2:
-                    return to_route('sresmis.teacher.dashboard');
-                    break;
-                case 3:
-                    return to_route('sresmis.student.dashboard');
-                    break;
-                case 4:
-                    return to_route('sresmis.parent.dashboard');
-                    break;
-                
-                default:
-                        Auth::logout();
-                        return redirect('/login');
-                        break;
-               }
-
-            }else{
-                return redirect('/login');
             }
-
-
+        } else {
+            return redirect('/login')->with('error', 'Invalid credentials');
+        }
     }
 }

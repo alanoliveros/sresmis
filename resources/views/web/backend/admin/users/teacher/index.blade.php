@@ -52,15 +52,9 @@
                                         <td>{{$teacher->gradeLevelName}}</td>
                                         <td>{{$teacher->sectionName}}</td>
                                         <td>
-                                            <div class="dropdown" tabindex="1">
-                                                <i class="db2" tabindex="1"></i>
-                                                <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
-                                                <div class="dropdown-content">
-                                                    <a href="#">View</a>
-                                                    <a href="#">Edit</a>
-                                                    <a href="#" class="text-danger">Delete</a>
-                                                </div>
-                                            </div>
+                                            <a href="" class="bi bi-eye" style="margin-right: 6px"></a>
+                                            <a href="" class="bi bi-pencil-square" style="margin-right: 6px"></a>
+                                            <a href="" class="bi bi-trash"></a>
                                         </td>
                                     </tr>
                                 @endforeach

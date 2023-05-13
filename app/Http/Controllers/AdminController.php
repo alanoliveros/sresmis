@@ -152,7 +152,7 @@ class AdminController extends Controller
         ]);
     }*/
 
-    public function add_subjectBygradeLevel(Request $request)
+    /*public function add_subjectBygradeLevel(Request $request)
     {
         $request->validate([
             'subjectname' => 'required',
@@ -174,7 +174,7 @@ class AdminController extends Controller
             $subject->save();
         }
         return redirect()->back()->with('success_added', 'Successfully added new record');
-    }
+    }*/
 
 
 

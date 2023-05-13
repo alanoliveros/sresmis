@@ -79,7 +79,7 @@
         $('.display_student_grade').html(student_names);
         let subject = <?php echo json_encode($subject); ?>;
         $('.written_works_average').text(subject.written_work_percentage + '%').attr("data-val",subject.written_work_percentage);
-        $('.performance_tasks_average').text(subject.performance_tasks_percentage + '%');
+        $('.performance_tasks_average').text(subject.performance_tasks_percentage + '%').attr("data-val",subject.performance_tasks_percentage);
     }
 
     function student_score(parent, pname, input) {
@@ -141,24 +141,31 @@
         let quizzes = [];
         let inputs = $(`.${cname}`);
         let highestScore = $(`.${cname}`).parents('table')[2];
-        let inputHead = $(highestScore).find('.written_tasks_possible_score').find('input');
-        let possibleScores = [];
-        $.each($(inputHead), function(key, val){
-            possibleScores.push($(val).val());
+        let highestScorePerformance = $(`.${cname}`).parents('table')[1];
+        // console.log(highestScorePerformance)
+        let writtenHead = $(highestScore).find('.written_tasks_possible_score').find('input');
+        let performanceHead = $(highestScorePerformance).find('.performance_tasks_possible_score').find('input');
+        let possibleWrittenScores = [];
+
+       
+        $.each($(writtenHead), function(key, val){
+            possibleWrittenScores.push($(val).val());
+        });
+
+        let possiblePerformanceScores = [];
+        $.each($(performanceHead), function(key, val){
+            possiblePerformanceScores.push($(val).val());
         });
         
-        
-        
-
-        // console.log(possibleScoreTotal);
-        // console.log(possiblePercentageScore);
-        // console.log(possibleWeightedAverage);
+        // console.log(possibleScoreWrittenTotal);
+        // console.log(possibleWrittenPercentageScore);
+        // console.log(possibleWrittenWeightedAverage);
 
         let total_quizzes = $(`.${cparent}`).find(`.total_score_by_learner`).text();
         let ps_by_learner = $(`.${cparent}`).find(`.ps_by_learner`).text();
         let wa_by_learner = $(`.${cparent}`).find(`.wa_by_learner`).text();
         let com_type = cparent == 'written_works' ? 'written' : 'performance'
-        
+
         // console.log(uid);
         // console.log(total_quizzes);
         // $.each(inputs, function(key, cont) {
@@ -178,9 +185,13 @@
         let perFormancePSAverage = $(performance).find('.ps_by_learner').text();
         let perFormanceWeightedAverage = $(performance).find('.wa_by_learner').text();
 
-        let possibleScoreTotal = $(highestScore).find('.written_tasks_possible_score').find('.total_high_score').text();
-        let possiblePercentageScore = $(highestScore).find('.written_tasks_possible_score').find('.percentage').attr('data-val');
-        let possibleWeightedAverage = $(highestScore).find('.written_tasks_possible_score').find('.written_works_average').attr('data-val');
+        let possibleScoreWrittenTotal = $(highestScore).find('.written_tasks_possible_score').find('.total_high_score').text();
+        let possibleWrittenPercentageScore = $(highestScore).find('.written_tasks_possible_score').find('.percentage').attr('data-val');
+        let possibleWrittenWeightedAverage = $(highestScore).find('.written_tasks_possible_score').find('.written_works_average').attr('data-val');
+        
+        let possibleScorePerformanceTotal = $(highestScorePerformance).find('.performance_tasks_possible_score').find('.total_high_score').text();
+        let possiblePerformancePercentageScore = $(highestScorePerformance).find('.performance_tasks_possible_score').find('.percentage').attr('data-val');
+        let possiblePerformanceWeightedAverage = $(highestScorePerformance).find('.performance_tasks_possible_score').find('.performance_tasks_average').attr('data-val');
 
 
         $.each($(performance).find('input'), function(key, val) {
@@ -200,24 +211,27 @@
             'quarter': data_by.qtr,
             'outputs': [{
                 "name": {
+                    'performance_tasks': [{
+                        "quizzes": possiblePerformanceScores,
+                        "totalscore": possibleScorePerformanceTotal,
+                        "ps": possiblePerformancePercentageScore,
+                        "ww": possiblePerformanceWeightedAverage,
+                    }],
                     'written_works': [{
-                        "quizzes": possibleScores,
-                        "totalscore": possibleScoreTotal,
-                        "ps": possiblePercentageScore,
-                        "ps": writtenPSAverage,
-                        "ww": possibleWeightedAverage,
+                        "quizzes": possibleWrittenScores,
+                        "totalscore": possibleScoreWrittenTotal,
+                        "ps": possibleWrittenPercentageScore,
+                        "ww": possibleWrittenWeightedAverage,
                     }],
                     'student_written': [{
                         "quizzes": writtArrQuizzes,
                         "totalscore": writtenTotalScore,
-                        "ps": writtenPSAverage,
                         "ps": writtenPSAverage,
                         "ww": writtenWeightedAverage,
                     }],
                     'student_performance': [{
                         "quizzes": writtArrQuizzes,
                         "totalscore": writtenTotalScore,
-                        "ps": writtenPSAverage,
                         "ps": writtenPSAverage,
                         "ww": writtenWeightedAverage,
                     }],

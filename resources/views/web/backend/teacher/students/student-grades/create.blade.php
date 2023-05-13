@@ -108,7 +108,7 @@
                                                                 class="written_score" min="1">
                                                         </th>
                                                         <th class="between_highest_score total_high_score">Total</th>
-                                                        <th>100%</th>
+                                                        <th data-val="100" class="percentage">100%</th>
                                                         <th class="tasks_average performance_tasks_average"></th>
     
                                                         <th class="text-center"><button type="button"

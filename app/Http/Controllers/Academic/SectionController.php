@@ -25,7 +25,7 @@ class SectionController extends Controller
         $sections = Section::join('grade_levels', 'sections.grade_lvl_id', 'grade_levels.id')
             ->orderBy('grade_levels.id', 'asc')
             ->get();
-        return view('web.backend.admin.academics.section.index',[
+        return view('web.backend.admin.academics.section.index', [
             'sections' => $sections,
             'gradelevel' => $gradelevel,
         ]);
@@ -37,6 +37,23 @@ class SectionController extends Controller
      * @return RedirectResponse
      */
 
+
+    public function create(Request $request)
+    {
+      /*  $request->validate([
+            'gradeLevel' => 'required',
+            'sectionName' => 'required',
+        ]);
+
+        $section = new Section();
+        $section->admin_id = auth()->user()->id;
+        $section->section_name = ucfirst($request->sectionName);
+        $section->grade_lvl_id = $request->gradeLevel;
+        $section->save();
+
+        return redirect()->back()->with('success_added', 'Successfully added new record');*/
+    }
+
     public function getSection(Request $request)
     {
         $getGradeLevelById = Section::where('grade_lvl_id', '=', $request->id)->get();
@@ -45,7 +62,13 @@ class SectionController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request)
     {
         $request->validate([
             'gradeLevel' => 'required',
@@ -62,20 +85,9 @@ class SectionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
@@ -86,7 +98,7 @@ class SectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -98,7 +110,7 @@ class SectionController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -109,7 +121,7 @@ class SectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)

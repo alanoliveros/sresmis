@@ -104,7 +104,7 @@
                                     class="text-danger">*</small></label>
                             <select name="gradeLevelTaught" class="form-select gradeLevelTaught" id="" required>
 
-                                <option value="">Select Grade Level</option>
+                                <option selected disabled>Select Grade Level</option>
                                 @foreach ($gradeLevel as $key=>$level)
                                     <option value="{{$level->id}}">{{$level->gradeLevelName}}</option>
                                 @endforeach

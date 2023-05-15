@@ -121,7 +121,7 @@
                                         document.addEventListener("DOMContentLoaded", () => {
                                             new ApexCharts(document.querySelector("#performanceIndicator"), {
                                                 series: [{
-                                                    name: 'Promotion Rate', data: [12, 40, 28, 51, 42, 82, 56],
+                                                    /*name: 'Promotion Rate', data: [12, 40, 28, 51, 42, 82, 56],
                                                 }, {
                                                     name: 'Retention Rate', data: [11, 32, 45, 32, 34, 52, 11]
                                                 }, {
@@ -132,14 +132,14 @@
                                                     name: 'Drop-out Rate', data: [1, 12, 15, 72, 34, 12, 11]
                                                 }, {
                                                     name: 'Failure Rate', data: [5, 11, 62, 18, 9, 54, 41]
+                                                }, {*/
+                                                    name: 'Completion Rate', data: [54, 41, 5, 62, 9, 11, 18]
                                                 }, {
-                                                    name: 'Completion Rate', data: [5, 11, 62, 18, 9, 54, 41]
+                                                    name: 'Achievement Rate NAT', data: [18, 5, 11, 54, 9, 62, 41]
                                                 }, {
-                                                    name: 'Achievement Rate NAT', data: [5, 11, 62, 18, 9, 54, 41]
+                                                    name: 'Transition Rate', data: [9, 54, 5, 62, 18, 41, 11]
                                                 }, {
-                                                    name: 'Transition Rate', data: [5, 11, 62, 18, 9, 54, 41]
-                                                }, {
-                                                    name: 'Participation Rate', data: [5, 11, 62, 18, 9, 54, 41]
+                                                    name: 'Participation Rate', data: [62, 18, 5, 41, 11, 54, 9]
                                                 }],
                                                 chart: {
                                                     height: 365,
@@ -155,13 +155,14 @@
                                                     '#828bd0',
                                                     '#7acc9a',
                                                     '#c76bb4',
-                                                    '#d7bd85',
+                                                   /* '#d7bd85',
                                                     '#1c590c',
                                                     '#493a19',
                                                     '#5b1729',
                                                     '#9ad785',
-                                                    '#cc6f93',
-                                                    '#71d5ba'],
+                                                    '#cc6f93',*/
+                                                    '#71d5ba'
+                                                ],
                                                 fill: {
                                                     type: "gradient",
                                                     gradient: {

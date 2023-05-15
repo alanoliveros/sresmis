@@ -24,4 +24,3 @@
 </script>
 <script src="{{asset('storage/backend/assets/js/ckeditor.js')}}"></script>
 @yield('scripts')
-

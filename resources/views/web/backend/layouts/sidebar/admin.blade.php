@@ -26,14 +26,14 @@
         $components = [
             ['name' => 'Promotion Rate', 'route' => 'admin.analytics'],
             ['name' => 'Retention Rate', 'route' => 'admin.retention'],
-            ['name' => 'Cohort Survival Rate', 'route' => 'admin.cohort'],
+            /*['name' => 'Cohort Survival Rate', 'route' => 'admin.cohort'],
             ['name' => 'Graduation Rate', 'route' => 'admin.graduation'],
             ['name' => 'Drop-out Rate', 'route' => 'admin.dropout'],
             ['name' => 'Failure Rate', 'route' => 'admin.failure'],
             ['name' => 'Completion Rate', 'route' => 'admin.completion'],
             ['name' => 'Achievement Rate', 'route' => 'admin.achievement'],
             ['name' => 'Transition Rate', 'route' => 'admin.transition'],
-            ['name' => 'Participation Rate', 'route' => 'admin.participation'],
+            ['name' => 'Participation Rate', 'route' => 'admin.participation'],*/
         ];
     @endphp
     <ul id="analytics-nav"
@@ -88,11 +88,12 @@
     </a>
     @php
         $components = [
-            ['name' => 'Daily Attendance', 'route' => 'admin.daily-attendance'],
+            /*['name' => 'Daily Attendance', 'route' => 'admin.daily-attendance'],*/
             ['name' => 'Grade Level', 'route' => 'admin.grade-level'],
-            ['name' => 'Section', 'route' => 'admin.section'],
+            /*['name' => 'Section', 'route' => 'admin.section'],*/
+            ['name' => 'Section', 'route' => 'section.index'],
             ['name' => 'Subject', 'route' => 'admin.subject'],
-            ['name' => 'Class', 'route' => 'admin.class'],
+            ['name' => 'Class Schedule', 'route' => 'admin.class'],
             ['name' => 'Class room', 'route' => 'admin.class-room'],
         ];
     @endphp

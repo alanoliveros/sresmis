@@ -1,5 +1,6 @@
 <li class="nav-item">
-    <a class="nav-link {{ Request::routeIs('teacher.dashboard') ? 'active' : '' }}" href="{{ route('teacher.dashboard') }}">
+    <a class="nav-link {{ Request::routeIs('teacher.dashboard') ? 'active' : '' }}"
+        href="{{ route('teacher.dashboard') }}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
     </a>
@@ -34,25 +35,38 @@
     </a>
     <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-            <a href="charts-chartjs.html">
-                <i class="bi bi-circle"></i><span>Chart.js</span>
+            <a href="{{ route('teacher.class-attendance.advisory') }}">
+                <i class="bi bi-circle"></i><span>Advisory</span>
             </a>
         </li>
         <li>
             <a href="charts-apexcharts.html">
-                <i class="bi bi-circle"></i><span>ApexCharts</span>
+                <i class="bi bi-circle"></i><span>Subject</span>
+            </a>
+        </li>
+
+    </ul>
+</li><!-- End Charts Nav -->
+<li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-calendar3"></i><span>Class Schedules</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="icons-bootstrap.html">
+                <i class="bi bi-circle"></i><span>Advisory</span>
             </a>
         </li>
         <li>
-            <a href="charts-echarts.html">
-                <i class="bi bi-circle"></i><span>ECharts</span>
+            <a href="icons-remix.html">
+                <i class="bi bi-circle"></i><span>Subject</span>
             </a>
         </li>
     </ul>
-</li><!-- End Charts Nav -->
-
+</li><!-- End Icons Nav -->
 <li class="nav-item">
-    <a class="nav-link {{ Request::routeIs('sresmis.teacher.student-grades') ? 'active' : '' }}" href="{{route('sresmis.teacher.student-grades')}}">
+    <a class="nav-link {{ Request::routeIs('sresmis.teacher.student-grades') ? 'active' : '' }}"
+        href="{{ route('sresmis.teacher.student-grades') }}">
         <i class="bi bi-award fs-5"></i>
         <span>Student Grades</span>
     </a>
@@ -65,51 +79,30 @@
     </a>
     <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-            <a href="forms-elements.html">
-                <i class="bi bi-circle"></i><span>Form Elements</span>
+            <a href="{{ route('teacher.sf1-view') }}">
+                <i class="bi bi-circle"></i><span>SF1</span>
             </a>
         </li>
         <li>
-            <a href="forms-layouts.html">
-                <i class="bi bi-circle"></i><span>Form Layouts</span>
+            <a href="{{ route('teacher.sf2-view') }}">
+                <i class="bi bi-circle"></i><span>SF2</span>
             </a>
         </li>
         <li>
-            <a href="forms-editors.html">
-                <i class="bi bi-circle"></i><span>Form Editors</span>
+            <a href="{{ route('teacher.sf9-view') }}">
+                <i class="bi bi-circle"></i><span>SF9</span>
             </a>
         </li>
         <li>
-            <a href="forms-validation.html">
-                <i class="bi bi-circle"></i><span>Form Validation</span>
+            <a href="{{ route('teacher.sf10-view') }}">
+                <i class="bi bi-circle"></i><span>SF10</span>
             </a>
         </li>
     </ul>
 </li><!-- End Forms Nav -->
 <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-calendar3"></i><span>Class Schedules</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="icons-bootstrap.html">
-                <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-            </a>
-        </li>
-        <li>
-            <a href="icons-remix.html">
-                <i class="bi bi-circle"></i><span>Remix Icons</span>
-            </a>
-        </li>
-        <li>
-            <a href="icons-boxicons.html">
-                <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-        </li>
-    </ul>
-</li><!-- End Icons Nav -->
-<li class="nav-item">
-    <a class="nav-link {{ Request::routeIs('sresmis.teacher.student-grades') ? 'active' : '' }}" href="{{route('teacher.mailbox')}}">
+    <a class="nav-link {{ Request::routeIs('sresmis.teacher.student-grades') ? 'active' : '' }}"
+        href="{{ route('teacher.mailbox') }}">
         <i class="bi bi-chat-left-dots"></i>
         <span>Mailbox</span>
     </a>

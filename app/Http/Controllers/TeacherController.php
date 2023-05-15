@@ -56,27 +56,6 @@ class TeacherController extends Controller
     ]);
   }
 
-  public function add_attendance_by_advisory()
-  {
-    $teacherId = auth()->user()->id;
-    $sectionName = Teacher::join('sections', 'teachers.sectionId', '=', 'sections.id')
-      ->join('grade_levels', 'teachers.gradeLevelId', '=', 'grade_levels.id')
-      ->where('teachers.teacherId', '=', $teacherId)
-      ->first();
-
-    $adminId = $sectionName->adminId;
-    $schoolYear = Session::where('adminId', '=', $adminId)->orderBy('school_year', 'desc')->get();
-
-    $students = Student::where('students.teacherId', '=', $teacherId)
-      ->join('users', 'students.studentId', '=', 'users.id')
-      ->get();
-    return view('backend.teacher.attendance.add-attendance')->with([
-      'students' => $students,
-      'schoolYear' => $schoolYear,
-      'sectionName' => $sectionName,
-    ]);
-  }
-
   public function submit_attendance(Request $request)
   {
     $date = $request->attendance_date;

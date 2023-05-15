@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('class_schedules', function (Blueprint $table) {
+        Schema::create('mailboxes', function (Blueprint $table) {
             $table->id();
-            $table->integer('subjectId');
-            $table->integer('sectionId');
-            $table->integer('teacherId');
-            $table->integer('grade_level_id');
-            $table->time('startTime');
-            $table->time('endTime');
-            $table->string('scheduleDay');
+            $table->integer('sender_id');
+            $table->integer('receiver_id');
+            $table->string('subject');
+            $table->string('message');
+            $table->integer('status')->default('1'); //1 unread //2 read
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_schedules');
+        Schema::dropIfExists('mailboxes');
     }
 };

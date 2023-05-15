@@ -17,6 +17,7 @@ use App\Http\Controllers\Manage\AdminTeacherController;
 use App\Http\Controllers\SchoolForm1;
 use App\Http\Controllers\SchoolForm2;
 use App\Http\Controllers\SchoolForm9;
+use App\Http\Controllers\SchoolForm10;
 use App\Http\Controllers\Setting\AboutCountroller;
 use App\Http\Controllers\Setting\SchoolController;
 use App\Http\Controllers\Setting\SystemController;
@@ -26,6 +27,8 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Teacher\StudentGradeController;
 use App\Http\Controllers\Notifications\MailboxController;
+use App\Http\Controllers\Attendance\StudentAttendance;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -151,11 +154,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
 
         Route::get('{gradeLevelName}/{id}', [SubjectController::class, 'show'])->name('admin.show.subject');
-
-
     });
-
-
 });
 /** ======================================= Admin end routing ======================================= */
 
@@ -171,7 +170,7 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
 /** Subjects */
 Route::prefix('/admin')->middleware('isAdmin')->group(function () {
-  /*  Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');*/
+    /*  Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');*/
     Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
     Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
 });
@@ -207,28 +206,78 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/add-student', [TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student');
     Route::get('/delete-student/{id}', [TeacherController::class, 'deleteStudent']);
 
+
+
+
+
+
     /** Teacher Attendance */
-    Route::get('/attendance/advisory', [TeacherController::class, 'attendance'])->name('sresmis.teacher.attendance.by-advisory');
+    Route::get('/class-attendace/advisory', [StudentAttendance::class, 'advisory_index'])->name('teacher.class-attendance.advisory');
+    Route::get('/create-attendance-by-advisory', [StudentAttendance::class, 'create_attendance']);
     Route::post('/submit-attendance/advisory', [TeacherController::class, 'submit_attendance']);
+
+    
+
+    
+
+
 
 
     //
-    Route::get('/add-attendance-by-advisory', [TeacherController::class, 'add_attendance_by_advisory']);
+    
     Route::get('/grades', [TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
 
     /** Teacher School Forms */
-    // sf1
-    Route::get('/school-form-1', [SchoolForm1::class, 'sf1'])->name('sresmis.teacher.sf1');
+    // sf1 teacher.sf1-view
+    Route::get('/school-form-1', [SchoolForm1::class, 'index'])->name('teacher.sf1-view');
     Route::post('/get-student-sf1-by-school-year', [SchoolForm1::class, 'get_student_sf1_by_sy']);
     Route::get('/export-sf1/{id}', [SchoolForm1::class, 'export_sf1']);
     Route::get('/read', [SchoolForm1::class, 'readtemplate']);
 
+
+
+
+
+
+
+
+
+
+
+
     // sf2
-    Route::get('/school-form-2', [SchoolForm2::class, 'sf2'])->name('sresmis.teacher.sf2');
+    Route::get('/sf2-view', [SchoolForm2::class, 'index'])->name('teacher.sf2-view');
+
+
+
+
+
+
+
+
+
 
     // sf9
-    Route::get('/school-form-9', [SchoolForm9::class, 'sf9'])->name('sresmis.teacher.sf9');
+    Route::get('/sf9-view', [SchoolForm9::class, 'index'])->name('teacher.sf9-view');
+
+
+
+
+
+
+
+    // sf10
+    Route::get('/sf10-view', [SchoolForm10::class, 'index'])->name('teacher.sf10-view');
+    Route::post('/sf-10/find-section', [SchoolForm10::class, 'get_section']);
+    Route::post('/sf-10/find-students', [SchoolForm10::class, 'get_students']);
+
+
+
+
+
+
+
 
 
     /** Manage Class Schedules */
@@ -256,22 +305,20 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
     // save grades
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
-    
-    
 
 
 
 
+
+
+    // teacher/fetchMessage-for-teacher
+    Route::get('/fetchMessage-for-teacher', [MailboxController::class, 'fetch_for_teacher']);
 
 
 
     Route::get('/mailbox', [MailboxController::class, 'teacher_index'])->name('teacher.mailbox');
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
-
-
-
-
-
+    Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
 });
 
 /** Parent Dashboard */

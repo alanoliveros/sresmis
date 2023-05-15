@@ -7,12 +7,9 @@ use App\Models\Session;
 
 class SchoolForm9 extends Controller
 {
-    public function sf9(){
+    public function index(){
         $sessions = Session::orderBy('school_year','desc')->get();
-        
-
-
-        return view('backend.teacher.school-forms.school-form-9.index')->with([
+        return view('web.backend.teacher.school-forms.sf9.index')->with([
                 'sessions' => $sessions,
         ]);
     }

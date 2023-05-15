@@ -13,6 +13,15 @@
   height: 100%;
 }
 
+
+
+
+
+
+
+
+
+
 /* dd container */
 .dropdown {
   display: inline-block;
@@ -179,7 +188,7 @@ tr .datatable-empty {
   height: 15px;
 }
 .table {
- 
+
   width: 100%;
   padding-bottom: 1rem;
 
@@ -195,7 +204,4 @@ tr .datatable-empty {
 }
 .table td {
   white-space: nowrap;
-}
-.span_text{
-  cursor: pointer;
 }

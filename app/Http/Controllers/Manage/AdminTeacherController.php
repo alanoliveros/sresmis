@@ -99,9 +99,6 @@ class AdminTeacherController extends Controller
         $teacher->numberOfAncillary = $request->ancillary;
         $teacher->save();
 
-
-
-
         return redirect()->back()->with('success_added', 'Successfully added new record');
     }
 

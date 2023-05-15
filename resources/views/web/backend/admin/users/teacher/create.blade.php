@@ -10,27 +10,27 @@
                     @csrf
                     <div class="row g-3">
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">School Year <small class="text-danger">(required)</small>
+                            <label for="validationDefault02" class="form-label">School Year <small class="text-danger">*</small>
                             </label>
                             <select name="schoolYear" class="form-select" id="">
                                 @foreach ($sessions as  $key=>$schoolYear)
                                     <option
                                         {{$key == 0? 'selected':''}} value="{{$schoolYear->school_year}}">{{$schoolYear->school_year}}</option>
-                            @endforeach
+                                @endforeach
                             </select>
 
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Email <small class="text-danger">(required)</small>
+                            <label for="validationDefault02" class="form-label">Email <small class="text-danger">*</small>
                             </label>
                             <input type="email" class="form-control" name="email">
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Password <small class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label">Password <small class="text-danger">*</small></label>
                             <input type="password" class="form-control" name="password">
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault01" class="form-label">First name <small class="text-danger">(required)</small></label>
+                            <label for="validationDefault01" class="form-label">First name <small class="text-danger">*</small></label>
                             <input type="text" class="form-control" name="firstName">
                         </div>
                         <div class="col-md-12">
@@ -38,7 +38,7 @@
                             <input type="text" class="form-control" name="middleName">
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Last name <small class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label">Last name <small class="text-danger">*</small></label>
                             <input type="text" class="form-control" name="lastName">
                         </div>
                         <div class="col-md-12">
@@ -101,9 +101,10 @@
                         </div>
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Grade Level Taught <small
-                                    class="text-danger">(required)</small></label>
+                                    class="text-danger">*</small></label>
                             <select name="gradeLevelTaught" class="form-select gradeLevelTaught" id="" required>
-                                <option value=""></option>
+
+                                <option value="">Select Grade Level</option>
                                 @foreach ($gradeLevel as $key=>$level)
                                     <option value="{{$level->id}}">{{$level->gradeLevelName}}</option>
                                 @endforeach
@@ -111,7 +112,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Section Taught <small
-                                    class="text-danger">(required)</small></label>
+                                    class="text-danger">*</small></label>
                             <select name="sectionTaught" id="sectionTaught" class="form-select">
                                 <option value="" required></option>
                             </select>

@@ -3,4 +3,5 @@ $(document).ready(function(){
     $('#studentsLists').DataTable();
     $('#studentAttendance').DataTable();
     $('#subjects').DataTable();
+    
 });

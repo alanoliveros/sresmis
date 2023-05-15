@@ -26,7 +26,7 @@
                             <div class="row my-3">
                                 <div class="col-12 col-sm-4 col-md-4">
                                     <div class="mb-3">
-                                        <select class="form-select school_year_by_advisory" required
+                                        <select class="form-select school_year" required
                                             aria-label="select example" name="school_year">
                                             <option selected disabled>Select Year</option>
                                             @foreach ($sessions as $session)
@@ -51,24 +51,25 @@
                                 <div class="col-12">
                                     <div class="mb-3 displaystudent-data">
                                         <div class="mb-1">
-                                           
-                                            <a class="btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#importsf1">Import</a>
+
+                                            <a class="btn btn-primary rounded-0" data-bs-toggle="modal"
+                                                data-bs-target="#importsf1">Import</a>
                                             @include('web.backend.teacher.school-forms.sf1.import')
-                                           
+
 
                                             <div class="dropdown">
                                                 <button class="btn btn-warning rounded-0 fw-bold" data-bs-toggle="dropdown"
-                                                    type="button" aria-expanded="false">
+                                                     type="button" aria-expanded="false">
                                                     Export
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Excel</a></li>
-                                                    <li><a class="dropdown-item" href="#">PDF</a></li>
+                                                    <li><a class="dropdown-item exportToExcel" href="{{url('teacher/export-sf1-by-school_year')}}">Excel</a></li>
+                                                    <li><a class="dropdown-item">PDF</a></li>
 
                                                 </ul>
                                             </div>
                                         </div>
-                                        <table class="table table-hover">
+                                        <table class="table table-hover" id="studentSF1">
                                             <thead>
                                                 <tr>
                                                     <th>Sr.</th>
@@ -81,16 +82,30 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($sf1data as $key=>$val)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <td>{{$val->student_lrn}}</td>
-                                                    <td>{{$val->student_complete_name}}</td>
-                                                    <td>{{$val->student_gender == 'M'? 'Male': 'Female'}}</td>
-                                                    <td>{{$val->student_age}}</td>
-                                                    <td>{{$val->student_birthdate}}</td>
-                                                    <td>Rico</td>
-                                                </tr>
+                                                @foreach ($sf1data as $key => $val)
+                                                    <tr>
+                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ $val->lrn }}</td>
+                                                        <td>{{ $val->name }}</td>
+                                                        <td>{{ $val->gender }}</td>
+                                                        <td>{{ $val->age }}</td>
+                                                        <td>{{ $val->birthdate }}</td>
+                                                        <td>
+                                                            <div class="btn-group dropend">
+                                                                <button
+                                                                    class="btn btn-sm btn-light border-dark rounded-pill fw-bold "
+                                                                    data-bs-toggle="dropdown" type="button"
+                                                                    aria-expanded="false">
+                                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item text-primary" href="#">Edit</a></li>
+                                                                    <li><a class="dropdown-item text-danger" id="deleteStudent" href="{{url('teacher/student-delete/'.$val->studentId)}}">Delete</a></li>
+
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>

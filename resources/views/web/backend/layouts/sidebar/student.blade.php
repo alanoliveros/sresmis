@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a class="nav-link " href="{{route('sresmis.student.dashboard')}}">
+    <a class="nav-link " href="{{route('student.dashboard')}}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
     </a>

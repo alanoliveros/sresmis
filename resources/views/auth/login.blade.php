@@ -25,7 +25,7 @@
                                         <p class="text-center small">Enter your email & password to login</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" method="POST" action="{{ route('login') }}">
+                                    <form class="row g-3" method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>

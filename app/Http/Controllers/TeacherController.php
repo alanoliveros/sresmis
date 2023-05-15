@@ -372,7 +372,7 @@ class TeacherController extends Controller
     }
   }
 
-  public function deleteStudent($id)
+  public function delete_student($id)
   {
     User::where('id', $id)->delete();
     Student::where('studentId', $id)->delete();
@@ -385,4 +385,6 @@ class TeacherController extends Controller
   public function class_schedule()
   {
   }
+
+  
 }

@@ -51,11 +51,14 @@
                                 <div class="col-12">
                                     <div class="mb-3 displaystudent-data">
                                         <div class="mb-1">
-                                            <input type="file" class="btn btn-primary">
+                                           
+                                            <a class="btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#importsf1">Import</a>
+                                            @include('web.backend.teacher.school-forms.sf1.import')
+                                           
 
                                             <div class="dropdown">
-                                                <button class="btn btn-warning rounded-0 fw-bold"
-                                                    data-bs-toggle="dropdown" type="button" aria-expanded="false">
+                                                <button class="btn btn-warning rounded-0 fw-bold" data-bs-toggle="dropdown"
+                                                    type="button" aria-expanded="false">
                                                     Export
                                                 </button>
                                                 <ul class="dropdown-menu">
@@ -71,11 +74,25 @@
                                                     <th>Sr.</th>
                                                     <th>LRN</th>
                                                     <th>Student Name</th>
+                                                    <th>Gender</th>
                                                     <th>Age</th>
                                                     <th>Birthdate</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
+                                            <tbody>
+                                                @foreach ($sf1data as $key=>$val)
+                                                <tr>
+                                                    <td>{{$key+1}}</td>
+                                                    <td>{{$val->student_lrn}}</td>
+                                                    <td>{{$val->student_complete_name}}</td>
+                                                    <td>{{$val->student_gender == 'M'? 'Male': 'Female'}}</td>
+                                                    <td>{{$val->student_age}}</td>
+                                                    <td>{{$val->student_birthdate}}</td>
+                                                    <td>Rico</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

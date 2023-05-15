@@ -229,12 +229,15 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
 
     /** Teacher School Forms */
+
+
     // sf1 teacher.sf1-view
     Route::get('/school-form-1', [SchoolForm1::class, 'index'])->name('teacher.sf1-view');
     Route::post('/get-student-sf1-by-school-year', [SchoolForm1::class, 'get_student_sf1_by_sy']);
     Route::get('/export-sf1/{id}', [SchoolForm1::class, 'export_sf1']);
     Route::get('/read', [SchoolForm1::class, 'readtemplate']);
-
+    
+    Route::post('/import-sf1-excel', [SchoolForm1::class, 'import'])->name('teacher.import-sf1-excel');
 
 
 

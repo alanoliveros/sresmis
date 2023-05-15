@@ -23,7 +23,11 @@ use App\Models\Section;
 use App\Models\User;
 use App\Models\Address;
 use Illuminate\Support\Facades\DB;
-use TCPDF;
+
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class SchoolForm1Controller extends Controller
 {
@@ -581,7 +585,7 @@ class SchoolForm1Controller extends Controller
 
 
   // yes functional
-  function export()
+  public function export()
   {
     // Load the Excel template
 
@@ -758,5 +762,40 @@ class SchoolForm1Controller extends Controller
   }
 
   // generate pdf
+  public function generatePDF()
+  {
+    $pdfOptions = new Options();
+    $pdfOptions->set('defaultFont', 'Arial');
 
+    $dompdf = new Dompdf($pdfOptions);
+
+    // Render the view file to HTML
+
+    $sessions = Session::orderBy('school_year', 'desc')->get();
+    $sf1data = Student::join('users', 'students.studentId', 'users.id')
+      ->join('addresses', 'users.id', 'addresses.userId')
+      ->orderBy('users.gender', 'desc')
+      ->orderBy('users.name', 'asc')
+      ->where('students.teacherId', auth()->user()->id)
+      ->get();
+
+      $html =  view('web.backend.teacher.school-forms.sf1.index')->with([
+      'sessions' => $sessions,
+      'sf1data' => $sf1data,
+    ])->render();
+    // $html = view('web.backend.teacher.school-forms.sf1.index')->render();
+
+    // Load HTML content into Dompdf
+    $dompdf->loadHtml($html);
+
+    // (Optional) Set paper size and orientation
+    $dompdf->setPaper('A4', 'landscape');
+    
+
+    // Render PDF
+    $dompdf->render();
+
+    // Output PDF to the browser
+    $dompdf->stream('document.pdf', ['Attachment' => false]);
+  }
 }

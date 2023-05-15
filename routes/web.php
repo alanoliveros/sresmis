@@ -224,8 +224,8 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/add-student', [TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student');
     Route::post('/submit-attendance/advisory', [TeacherController::class, 'submit_attendance']);
 
-    
-    
+
+
     // Student Crud
     Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);
 
@@ -240,7 +240,17 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
     Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
-    });
+    
+    
+    
+    
+    
+    
+    
+    
+    // Generate PDF
+    Route::get('/generate', [SchoolForm1Controller::class, 'generatePDF']);
+});
 
 
 /** Student Dashboard */

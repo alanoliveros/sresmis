@@ -49,7 +49,7 @@
                                                     <input type="date" class="form-control" value="{{ date('Y-m-d') }}"
                                                         name="attendance_date">
                                                 </div>
-                                                
+
 
                                             </div>
                                         </div>
@@ -185,4 +185,7 @@
             </div>
         </section>
     </main>
+@endsection
+@section('scripts')
+
 @endsection

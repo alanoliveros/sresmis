@@ -64,7 +64,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item exportToExcel" href="{{url('teacher/export-sf1-by-school_year')}}">Excel</a></li>
-                                                    <li><a class="dropdown-item">PDF</a></li>
+                                                    <li><a class="dropdown-item" href="{{url('teacher/generate')}}">PDF</a></li>
 
                                                 </ul>
                                             </div>

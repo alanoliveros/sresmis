@@ -27,7 +27,7 @@
                                    data-bs-target="#addTeacher">+ Add @yield('title')</a>
                                 @include('web.backend.admin.users.teacher.create')
                             </div>
-                            {{--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>--}}
+                            {{--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to convert to a datatable</p>--}}
 
                             <!-- Table with stripped rows -->
                             <table class="table" id="components-datatable">
@@ -47,7 +47,7 @@
                                 @foreach($teachers as $key=>$teacher)
                                     <tr>
                                         <th scope="row">{{$key+1}}</th>
-                                        <td>{{$teacher->lastname.', '.($teacher->middlename == NULL? '':$teacher->middlename.', ').$teacher->name.($teacher->suffix == NULL? '':', '.$teacher->suffix)}}</td>
+                                        <td>{{$teacher->lastname.', '.$teacher->name.', '.($teacher->middlename == NULL? '':$teacher->middlename.', ').($teacher->suffix == NULL? '':$teacher->suffix.'.')}}</td>
                                         <td>{{$teacher->designation}}</td>
                                         <td>{{$teacher->gradeLevelName}}</td>
                                         <td>{{$teacher->section_name}}</td>

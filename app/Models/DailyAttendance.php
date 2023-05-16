@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class DailyAttendance extends Model
 {
-    use HasFactory;
+    protected $fillable = ['studentId', 'school_year', 'teacherId', 'gradeLevelId', 'date'];
 }

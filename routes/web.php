@@ -222,9 +222,11 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
     Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject'])->name('teacher.student-information.by-subject.filter');
     Route::post('/add-student', [TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student');
-    Route::post('/submit-attendance/advisory', [TeacherController::class, 'submit_attendance']);
-
-
+    
+    
+    // Student Attendance
+    Route::get('/create-attendance/advisory', [StudentAttendance::class, 'create_attendance'])->name('teacher.create-attendance.advisory');
+    Route::post('/save-attendance/advisory', [StudentAttendance::class, 'save_attendance'])->name('teacher.save-attendance.advisory');
 
     // Student Crud
     Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);

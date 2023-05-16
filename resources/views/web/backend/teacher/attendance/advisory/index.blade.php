@@ -24,17 +24,23 @@
                         <div class="card-body">
                             <div class="row my-3">
                                 <div class="col-md-12 col-lg-12 col-xlg-12">
-                                    <a id="addAttendance" href="{{ url('teacher/create-attendance-by-advisory') }}"
-                                        class="btn btn-light fw-bold"><i class="mdi mdi-plus fw-bold"></i>Add</a>
+                                    <div class="float-end mb-2">
+                                        <a id="addAttendance" href="{{ url('teacher/create-attendance-by-advisory') }}"
+                                            class="btn btn-light border-dark rounded-0 fw-bold"><i class="bi bi-folder-plus"></i> Create</a>
+                                    </div>
 
+                                   
+
+                                </div>
+                                <hr>
+                                <div class="col-md-12 col-lg-12 col-xlg-12">
                                     <table id="studentAttendance" class="table table-hover" style="width:100%">
                                         <thead>
                                             <tr class="fs-5">
                                                 <th scope="col" class="text-success">#</th>
-                                                <th scope="col" class="text-success">LRN</th>
                                                 <th scope="col" class="text-success">Complete name</th>
-                                                <th scope="col" class="text-success">Age</th>
-                                                <th scope="col" class="text-success">Birthdate</th>
+                                                <th scope="col" class="text-success">Status</th>
+                                                <th scope="col" class="text-success">Date</th>
                                                 <th scope="col" class="text-success">Action</th>
                                             </tr>
                                         </thead>
@@ -42,10 +48,9 @@
                                             @foreach ($students as $key => $student)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $student->lrn }}</td>
-                                                    <td>{{ $student->lastname . ', ' . $student->name . ($student->middlename != null ? ', ' . $student->middlename : '') . ($student->suffix != null ? ', ' . $student->suffix : '') }}
+                                                    <td>{{ $student->user->lastname . ', ' . $student->name . ($student->middlename != null ? ', ' . $student->middlename : '') . ($student->suffix != null ? ', ' . $student->suffix : '') }}
                                                     </td>
-                                                    <td>{{ $student->age }}</td>
+                                                    <td>{{ $student->attendance_status  }}</td>
                                                     <td>{{ date('F d, Y', strtotime($student->birthdate)) }}</td>
                                                     <td>
                                                         <div class="dropdown" tabindex="1">
@@ -64,7 +69,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
 
@@ -78,3 +82,11 @@
         </section>
     </main>
 @endsection
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $('#studentAttendance').DataTable();
+    });
+</script>
+@endsection
+

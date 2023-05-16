@@ -10,6 +10,8 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-dark"><i
                                         class="bi bi-house-door"></i></a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="">Attendance</a>
+                            </li>
                             <li class="breadcrumb-item" aria-current="page"><a href="">Advisory</a>
                             </li>
                         </ol>
@@ -23,57 +25,36 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
                             <div class="row my-3">
-                                <div class="col-md-12 col-lg-12 col-xlg-12">
-                                    <div class="float-end mb-2">
-                                        <a id="addAttendance" href="{{ url('teacher/create-attendance-by-advisory') }}"
-                                            class="btn btn-light border-dark rounded-0 fw-bold"><i class="bi bi-folder-plus"></i> Create</a>
+                                <div class="col-md-12 col-lg-12 col-xlg-12 mb-3">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <input type="date" name="date" id="date_val" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <button class="btn btn-primary rounded-0" id="filter_date_attendance"><i
+                                                    class="bi bi-search"></i> Filter</button>
+                                        </div>
+                                        <div class="col">
+                                            <div class="float-end mb-2">
+
+                                                <a id="addAttendance"
+                                                    href="{{ url('teacher/create-attendance-by-advisory') }}"
+                                                    class="btn btn-light border-dark rounded-0 fw-bold"><i
+                                                        class="bi bi-folder-plus"></i> Create</a>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                   
+
 
                                 </div>
                                 <hr>
-                                <div class="col-md-12 col-lg-12 col-xlg-12">
-                                    <table id="studentAttendance" class="table table-hover" style="width:100%">
-                                        <thead>
-                                            <tr class="fs-5">
-                                                <th scope="col" class="text-success">#</th>
-                                                <th scope="col" class="text-success">Complete name</th>
-                                                <th scope="col" class="text-success">Status</th>
-                                                <th scope="col" class="text-success">Date</th>
-                                                <th scope="col" class="text-success">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($students as $key => $student)
-                                                <tr>
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $student->user->lastname . ', ' . $student->name . ($student->middlename != null ? ', ' . $student->middlename : '') . ($student->suffix != null ? ', ' . $student->suffix : '') }}
-                                                    </td>
-                                                    <td>{{ $student->attendance_status  }}</td>
-                                                    <td>{{ date('F d, Y', strtotime($student->birthdate)) }}</td>
-                                                    <td>
-                                                        <div class="dropdown" tabindex="1">
-                                                            <i class="db2" tabindex="1"></i>
-                                                            <a class="dropbtn"><i
-                                                                    class=" fs-4 mdi mdi-dots-vertical"></i></a>
-                                                            <div class="dropdown-content">
-                                                                <a href="#">View</a>
-                                                                <a href="#">Edit</a>
-                                                                <a href="{{ url('sresmis/teacher/delete-student/' . $student->studentId) }}"
-                                                                    class="text-danger">Delete</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                
+                                
                             </div>
 
                             <div class="students_table">
-
+                                
                             </div>
                         </div>
                     </div>
@@ -83,10 +64,5 @@
     </main>
 @endsection
 @section('scripts')
-<script>
-    $(document).ready(function(){
-        $('#studentAttendance').DataTable();
-    });
-</script>
+@include('web.backend.teacher.attendance.advisory.script')
 @endsection
-

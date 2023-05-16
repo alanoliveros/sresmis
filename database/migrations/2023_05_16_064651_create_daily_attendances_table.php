@@ -20,8 +20,9 @@ return new class extends Migration
             $table->integer('gradeLevelId');
             $table->integer('sectionId');
             $table->integer('studentId');
-            $table->integer('sessionId');
+            $table->integer('school_year');
             $table->date('date');
+            $table->string('month');
             $table->string('status');
             $table->timestamps();
         });

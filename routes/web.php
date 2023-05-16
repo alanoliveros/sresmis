@@ -15,7 +15,7 @@ use App\Http\Controllers\BackOffice\SessionController;
 use App\Http\Controllers\Manage\AdminStudentController;
 use App\Http\Controllers\Manage\AdminTeacherController;
 use App\Http\Controllers\SchoolForm1Controller;
-use App\Http\Controllers\SchoolForm2;
+use App\Http\Controllers\SchoolForm2Controller;
 use App\Http\Controllers\SchoolForm9;
 use App\Http\Controllers\Setting\AboutCountroller;
 use App\Http\Controllers\Setting\SchoolController;
@@ -204,12 +204,24 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
 
     // School Forms
+
+    // sf1
     Route::get('/school-form-1', [SchoolForm1Controller::class, 'index'])->name('teacher.sf1-view');
     Route::get('/export-sf1/{id}', [SchoolForm1Controller::class, 'export_sf1']);
     Route::get('/export-sf1-by-school_year', [SchoolForm1Controller::class, 'export']);
+    
+    // teacher/SchoolForm2Controller
+    Route::get('/export-sf2-by-school_year', [SchoolForm2Controller::class, 'export']);
+    
+
+
+
+
+
+
 
     Route::get('/read', [SchoolForm1Controller::class, 'readtemplate']);
-    Route::get('/sf2-view', [SchoolForm2::class, 'index'])->name('teacher.sf2-view');
+    Route::get('/sf2-view', [SchoolForm2Controller::class, 'index'])->name('teacher.sf2-view');
     Route::get('/sf9-view', [SchoolForm9::class, 'index'])->name('teacher.sf9-view');
     Route::get('/sf10-view', [SchoolForm1Controller::class, 'index'])->name('teacher.sf10-view');
 
@@ -227,7 +239,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // Student Attendance
     Route::get('/create-attendance/advisory', [StudentAttendance::class, 'create_attendance'])->name('teacher.create-attendance.advisory');
     Route::post('/save-attendance/advisory', [StudentAttendance::class, 'save_attendance'])->name('teacher.save-attendance.advisory');
-
+    Route::post('/filter-attendance/by-advisory', [StudentAttendance::class, 'filter_attendance']);
     // Student Crud
     Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);
 

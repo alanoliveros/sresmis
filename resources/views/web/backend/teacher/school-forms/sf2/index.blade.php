@@ -51,15 +51,17 @@
                                 <div class="col-12">
                                     <div class="mb-3 displaystudent-data">
                                         <div class="mb-1">
-                                            <input type="file" class="btn btn-primary">
+
+                                            <a href=""data-bs-toggle="modal" class="btn btn-primary rounded-0" data-bs-target="#importSf2">Import</a>
+                                           @include('web.backend.teacher.school-forms.sf2.import-sf2')
 
                                             <div class="dropdown">
-                                                <button class="btn btn-warning rounded-0 fw-bold"
-                                                    data-bs-toggle="dropdown" type="button" aria-expanded="false">
+                                                <button class="btn btn-warning rounded-0 fw-bold" data-bs-toggle="dropdown"
+                                                    type="button" aria-expanded="false">
                                                     Export
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Excel</a></li>
+                                                    <li><a class="dropdown-item" href="{{url('teacher/export-sf2-by-school_year')}}">Excel</a></li>
                                                     <li><a class="dropdown-item" href="#">PDF</a></li>
 
                                                 </ul>

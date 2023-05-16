@@ -26,8 +26,8 @@
                             <div class="row my-3">
                                 <div class="col-12 col-sm-4 col-md-4">
                                     <div class="mb-3">
-                                        <select class="form-select school_year" required
-                                            aria-label="select example" name="school_year">
+                                        <select class="form-select school_year" required aria-label="select example"
+                                            name="school_year">
                                             <option selected disabled>Select Year</option>
                                             @foreach ($sessions as $session)
                                                 <option value="{{ $session->id }}">{{ $session->school_year }}</option>
@@ -48,6 +48,23 @@
                                 {{-- add student start --}}
                                 <hr>
 
+                                <div class="here">
+                                    <div class="modal fade" id="studentModal" tabindex="-1"
+                                        aria-labelledby="studentModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="studentModalLabel">Student Data</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="studentData"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="mb-3 displaystudent-data">
                                         <div class="mb-1">
@@ -59,12 +76,15 @@
 
                                             <div class="dropdown">
                                                 <button class="btn btn-warning rounded-0 fw-bold" data-bs-toggle="dropdown"
-                                                     type="button" aria-expanded="false">
+                                                    type="button" aria-expanded="false">
                                                     Export
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item exportToExcel" href="{{url('teacher/export-sf1-by-school_year')}}">Excel</a></li>
-                                                    <li><a class="dropdown-item" href="{{url('teacher/generate')}}">PDF</a></li>
+                                                    <li><a class="dropdown-item exportToExcel"
+                                                            href="{{ url('teacher/export-sf1-by-school_year') }}">Excel</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ url('teacher/generate') }}">PDF</a></li>
 
                                                 </ul>
                                             </div>
@@ -84,13 +104,26 @@
                                             <tbody>
                                                 @foreach ($sf1data as $key => $val)
                                                     <tr>
-                                                        <td>{{ $key + 1 }}</td>
-                                                        <td>{{ $val->lrn }}</td>
-                                                        <td>{{ $val->name }}</td>
-                                                        <td>{{ $val->gender }}</td>
-                                                        <td>{{ $val->age }}</td>
-                                                        <td>{{ $val->birthdate }}</td>
-                                                        <td>
+                                                        <td data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="">{{ $key + 1 }}
+                                                        </td>
+                                                        <td data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="">{{ $val->lrn }}
+                                                        </td>
+                                                        <td data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="">{{ $val->name }}
+                                                        </td>
+                                                        <td data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="">{{ $val->gender }}
+                                                        </td>
+                                                        <td data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="">{{ $val->age }}
+                                                        </td>
+                                                        <td data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="">{{ $val->birthdate }}
+                                                        </td>
+                                                        <td data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" data-bs-title="">
                                                             <div class="btn-group dropend">
                                                                 <button
                                                                     class="btn btn-sm btn-light border-dark rounded-pill fw-bold "
@@ -99,8 +132,14 @@
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu">
-                                                                    <li><a class="dropdown-item text-primary" href="#">Edit</a></li>
-                                                                    <li><a class="dropdown-item text-danger" id="deleteStudent" href="{{url('teacher/student-delete/'.$val->studentId)}}">Delete</a></li>
+                                                                    <li class="student-cell"><a class="dropdown-item "
+                                                                            href="#">view</a></li>
+                                                                    <li><a class="dropdown-item text-primary"
+                                                                            href="#">Edit</a></li>
+                                                                    <li><a class="dropdown-item text-danger"
+                                                                            id="deleteStudent"
+                                                                            href="{{ url('teacher/student-delete/' . $val->studentId) }}">Delete</a>
+                                                                    </li>
 
                                                                 </ul>
                                                             </div>
@@ -127,5 +166,38 @@
     </main>
 @endsection
 @section('scripts')
+    {{-- <script>
+        $(document).ready(function() {
+            $('.student-cell').hover(
+                function() {
+                    // Get the student data from the corresponding row
+                    var lrn = $(this).closest('tr').find('td:eq(1)').text();
+                    var name = $(this).closest('tr').find('td:eq(2)').text();
+                    var gender = $(this).closest('tr').find('td:eq(3)').text();
+                    var age = $(this).closest('tr').find('td:eq(4)').text();
+                    var birthdate = $(this).closest('tr').find('td:eq(5)').text();
+
+                    // Create the student data HTML
+                    var studentData = '<strong>LRN:</strong> ' + lrn + '<br>' +
+                        '<strong>Name:</strong> ' + name + '<br>' +
+                        '<strong>Gender:</strong> ' + gender + '<br>' +
+                        '<strong>Age:</strong> ' + age + '<br>' +
+                        '<strong>Birthdate:</strong> ' + birthdate;
+
+                    // Set the student data in the modal body
+                    $('#studentData').html(studentData);
+
+                    // Show the modal
+                    $('#studentModal').modal('show');
+
+                  
+                },
+                function() {
+                    // Hide the modal on hover out
+                    $('#studentModal').modal('hide');
+                }
+            );
+        });
+    </script> --}}
     @include('web.backend.teacher.school-forms.sf1.script')
 @endsection

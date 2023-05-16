@@ -64,6 +64,28 @@
             </div>
         </section>
     </main>
+
+    <div class="modal fade editStudentModal" id="" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editStudentModalLabel">Edit Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   <input type="text" name="lrn" class="lrn" placeholder="LRN">
+                   <input type="text" name="name" class="name" placeholder="LRN">
+                   <input type="text" name="gender" class="gender" placeholder="LRN">
+                   <input type="text" name="lastname" class="lastname" placeholder="LRN">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="updateStudentBtn">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('scripts')
     @include('web.backend.teacher.students.admission-advisory.script') 

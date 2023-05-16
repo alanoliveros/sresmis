@@ -358,6 +358,23 @@ class SchoolForm1Controller extends Controller
       ->getFont()
       ->setName('SansSerif')
       ->setSize(10);
+    // header start
+    // $sheet->mergeCells('A1:AT1')->setCellValue('A1','School Form 1 (SF 1) School Register');
+    // $sheet->getStyle('A1')->getFont()->setSize(21)->setBold(true);
+    // $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+    // $sheet->mergeCells('A2:AT2')->setCellValue('A2','(This replaces  Form 1, Master List & STS Form 2-Family Background and Profile)');
+    // $sheet->getStyle('A2')->getFont()->setSize(7)->setItalic(true);
+    // $sheet->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+    // school header info
+    // $sheet->mergeCells('A3:E3')->setCellValue('A3','School ID');
+    // $sheet->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+
+    // end school header info
+
+
+    // end header
 
     foreach ($students as $key => $student) {
       $start = $key + 7;
@@ -492,6 +509,12 @@ class SchoolForm1Controller extends Controller
 
     }
 
+    // $writer = new Xlsx($spreadsheet);
+    // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    // header('Content-Disposition: attachment; filename="'. urlencode('helloworld.xlsx').'"');
+    // $writer->save('php://output');
+
+
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment; filename="' . urlencode('SF-1.xlsx') . '"');
     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
@@ -565,6 +588,7 @@ class SchoolForm1Controller extends Controller
   public function export()
   {
     // Load the Excel template
+
     $students = Student::join('addresses', 'students.studentId', '=', 'addresses.userId')
       ->join('parent_guardians', 'students.studentId', '=', 'parent_guardians.studentId')
       ->join('users', 'students.studentId', '=', 'users.id')
@@ -574,9 +598,6 @@ class SchoolForm1Controller extends Controller
 
     // Get the active sheet
     $sheet = $spreadsheet->getActiveSheet();
-
-    // Set the default font family to sans-serif
-    $sheet->getStyle('A1:AJ100')->getFont()->setName('Arial');
 
     // Set the student data
     foreach ($students as $key => $student) {
@@ -707,10 +728,9 @@ class SchoolForm1Controller extends Controller
       $sheet->getStyle('AR' . $start)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
       $sheet->getStyle('AR' . $start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
       $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
-
-      $sheet->getStyle('A' . $start . ':AJ' . $start)->getBorders()->getOutline()->setBorderStyle(Border::BORDER_THIN)->setColor(new Color('000000'));
       // end mothers complete name
-      $sheet->getRowDimension($start)->setRowHeight(30, 'pt');
+
+
     }
 
     // Set the page properties for fitting the bond paper
@@ -741,13 +761,6 @@ class SchoolForm1Controller extends Controller
     exit();
   }
 
-
-
-
-
-
-
-
   // generate pdf
   // public function generatePDF()
   // {
@@ -777,7 +790,7 @@ class SchoolForm1Controller extends Controller
 
   //   // (Optional) Set paper size and orientation
   //   $dompdf->setPaper('A4', 'landscape');
-
+    
 
   //   // Render PDF
   //   $dompdf->render();

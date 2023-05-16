@@ -81,9 +81,12 @@ class SchoolForm2Controller extends Controller
         // Create a new spreadsheet instance
 
         $spreadsheet = new Spreadsheet();
+        $worksheet = $spreadsheet->getActiveSheet();
+        $pageSetup =  $worksheet->getPageSetup();
+        $pageSetup->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
 
         // Get the active sheet
-        $worksheet = $spreadsheet->getActiveSheet();
+        
 
         // Set the cell values
         $worksheet->setCellValue('A1', 'School Form 2 (SF2) Daily Attendance Report of Learners');

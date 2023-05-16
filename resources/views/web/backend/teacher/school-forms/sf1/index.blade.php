@@ -104,26 +104,26 @@
                                             <tbody>
                                                 @foreach ($sf1data as $key => $val)
                                                     <tr>
-                                                        <td data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" data-bs-title="">{{ $key + 1 }}
+                                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-title="">{{ $key + 1 }}
                                                         </td>
-                                                        <td data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" data-bs-title="">{{ $val->lrn }}
+                                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-title="">{{ $val->lrn }}
                                                         </td>
-                                                        <td data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" data-bs-title="">{{ $val->name }}
+                                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-title="">{{ $val->name }}
                                                         </td>
-                                                        <td data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" data-bs-title="">{{ $val->gender }}
+                                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-title="">{{ $val->gender }}
                                                         </td>
-                                                        <td data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" data-bs-title="">{{ $val->age }}
+                                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-title="">{{ $val->age }}
                                                         </td>
-                                                        <td data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" data-bs-title="">{{ $val->birthdate }}
+                                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-title="">{{ $val->birthdate }}
                                                         </td>
-                                                        <td data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" data-bs-title="">
+                                                        <td data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-title="">
                                                             <div class="btn-group dropend">
                                                                 <button
                                                                     class="btn btn-sm btn-light border-dark rounded-pill fw-bold "

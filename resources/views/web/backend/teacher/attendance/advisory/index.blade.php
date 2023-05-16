@@ -52,7 +52,21 @@
                                 
                                 
                             </div>
-
+                            <div class="text-center mb-2">
+                                <span class="bg-light border border-dark p-2 mx-2 ">Total Male:
+                                    <small class="total_male">0</small>
+                                </span>
+                                <span class="bg-light border border-dark p-2 mx-2 ">Total Female:
+                                    <small class="total_female">0</small>
+                                </span>
+                                <span class="bg-success border border-dark p-2 mx-2 text-light">Total Present:
+                                    <small class="total_present">0</small>
+                                </span>
+                                <span class="bg-danger border border-dark p-2 mx-2 text-light">Total Absent:
+                                    <small class="total_absent">0</small>
+                                </span>
+                            </div>
+                            <hr>
                             <div class="students_table">
                                 
                             </div>

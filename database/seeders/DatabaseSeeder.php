@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Session;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Database\Factories\UserFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,48 +37,23 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'name' => 'Teacher User',
-                'role' => 2,
-                'middlename' => 'The',
-                'lastname' => 'Teacher',
-                'suffix' => null,
-                'gender' => 'Female',
-                'birthdate' => '1995-01-01',
-                'age' => 26,
-                'email' => 'teacher@example.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'image' => 'avatar.png',
-                'remember_token' => Str::random(10),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Student User',
-                'role' => 3,
-                'middlename' => 'The',
-                'lastname' => 'Student',
-                'suffix' => null,
-                'gender' => 'Male',
-                'birthdate' => '2000-01-01',
-                'age' => 21,
-                'email' => 'student@example.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'image' => 'avatar.png',
-                'remember_token' => Str::random(10),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
         ]);
 
+
+
+
         $this->call([
+            UserSeeder::class,
             GradeLevelSeeder::class,
             SessionSeeder::class,
             SectionSeeder::class,
             SubjectSeeder::class
             // Other seeders you want to run
         ]);
+
+
+
+
+
     }
 }

@@ -78,7 +78,7 @@ class ClassScheduleController extends Controller
         $gradeLevel = GradeLevel::where('gradeLevelName', '=', $changeName)->first();
 
         // echo $gradeLevel->gradeLevelName;
-        $sections = Section::where('grade_lvl_id', '=', $gradeLevel->id)->get();
+        $sections = Section::where('gradeLevelId', '=', $gradeLevel->id)->get();
         return view('web.backend.admin.academics.classschedule.by-section')->with([
             'sections' => $sections,
             'gradeLevelId' => $gradeLevel->id,

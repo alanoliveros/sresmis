@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackOffice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -10,11 +11,18 @@ class SessionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
+    /*public function index()
+    {
+        return view('web.backend.admin.backoffice.session.index');    }*/
+
     public function index()
     {
-        return view('web.backend.admin.backoffice.session.index');    }
+        $sessions = Session::all();
+        return view('web.backend.admin.backoffice.session.index', compact('sessions'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

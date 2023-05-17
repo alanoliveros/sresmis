@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    protected $fillable = ['userId'];
+    use HasFactory;
+
+    // Define the table name if different from "addresses"
+    protected $table = 'addresses';
+
+    // Define the fillable attributes
+    protected $fillable = [
+        'userId',
+        'purok',
+        'barangay',
+        'city',
+        'province',
+        'zipCode',
+    ];
 }

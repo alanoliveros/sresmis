@@ -22,7 +22,7 @@ class SectionController extends Controller
     public function index()
     {
         $gradelevel = GradeLevel::orderBy('id', 'asc')->get();
-        $sections = Section::join('grade_levels', 'sections.grade_lvl_id', 'grade_levels.id')
+        $sections = Section::join('grade_levels', 'sections.gradeLevelId', 'grade_levels.id')
             ->orderBy('grade_levels.id', 'asc')
             ->get();
         return view('web.backend.admin.academics.section.index', [
@@ -40,23 +40,11 @@ class SectionController extends Controller
 
     public function create(Request $request)
     {
-      /*  $request->validate([
-            'gradeLevel' => 'required',
-            'sectionName' => 'required',
-        ]);
-
-        $section = new Section();
-        $section->admin_id = auth()->user()->id;
-        $section->section_name = ucfirst($request->sectionName);
-        $section->grade_lvl_id = $request->gradeLevel;
-        $section->save();
-
-        return redirect()->back()->with('success_added', 'Successfully added new record');*/
     }
 
     public function getSection(Request $request)
     {
-        $getGradeLevelById = Section::where('grade_lvl_id', '=', $request->id)->get();
+        $getGradeLevelById = Section::where('gradeLevelId', '=', $request->id)->get();
         return response()->json([
             'gradeLevel' => $getGradeLevelById,
         ]);
@@ -76,9 +64,9 @@ class SectionController extends Controller
         ]);
 
         $section = new Section();
-        $section->admin_id = auth()->user()->id;
-        $section->section_name = ucfirst($request->sectionName);
-        $section->grade_lvl_id = $request->gradeLevel;
+        $section->adminId = auth()->user()->id;
+        $section->sectionName = ucfirst($request->sectionName);
+        $section->gradeLevelId = $request->gradeLevel;
         $section->save();
 
         return redirect()->back()->with('success_added', 'Successfully added new record');

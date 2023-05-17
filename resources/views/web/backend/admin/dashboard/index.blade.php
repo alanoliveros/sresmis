@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Student <span>| Today</span></h5>
+                                    <h5 class="card-title">Student {{--<span>| Today</span>--}}</h5>
 
                                     <div class="d-flex align-items-center">
                                         <div
@@ -75,7 +75,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Teacher <span>| Today</span></h5>
+                                    <h5 class="card-title">Teacher {{--<span>| Today</span>--}}</h5>
 
                                     <div class="d-flex align-items-center">
                                         <div
@@ -112,7 +112,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Performance Indicator <span>/Today</span></h5>
+                                    <h5 class="card-title">Performance Indicator {{--<span>/Today</span>--}}</h5>
 
                                     <!-- Line Chart -->
                                     <div id="performanceIndicator"></div>
@@ -234,7 +234,7 @@
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title">Teacher-pupil ratio <span>| Today</span></h5>
+                            <h5 class="card-title">Teacher-pupil ratio {{--<span>| Today</span>--}}</h5>
 
                             <div class="d-flex align-items-center">
                                 <div
@@ -268,7 +268,7 @@
                         </div>
 
                         <div class="card-body pb-0">
-                            <h5 class="card-title">Website Traffic <span>| Today</span></h5>
+                            <h5 class="card-title">Website Traffic {{--<span>| Today</span>--}}</h5>
 
                             <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\Analytic\IndicatorController;
 use App\Http\Controllers\BackOffice\LibraryController;
 use App\Http\Controllers\BackOffice\NoticeboardController;
 use App\Http\Controllers\BackOffice\SessionController;
+use App\Http\Controllers\EnrollmentProfileController;
 use App\Http\Controllers\Manage\AdminStudentController;
 use App\Http\Controllers\Manage\AdminTeacherController;
 use App\Http\Controllers\SchoolForm1Controller;
@@ -55,6 +56,8 @@ Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard')-
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/enrollment-profile', [EnrollmentProfileController::class, 'index'])->name('enrollmentprofile.dashboard');
+
 
     /** ================== User Profile ================== */
     Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
@@ -108,11 +111,11 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
 
 
-        
+
 
         /** ================== class schedule ================== */
         Route::resource('class-schedule', ClassScheduleController::class)->only(['index', 'show', 'store']);
-        
+
         Route::get('/class-schedule/{sid}/{gid}', [ClassScheduleController::class, 'show_by_section']);
 
         /*Route::get('/class-schedule', [AdminController::class, 'index'])->name('manage-class-schedules');*/
@@ -182,16 +185,16 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/create-attendance-by-subject/{ids}', [StudentAttendance::class, 'create_attendance_subject']);
     Route::post('/attendance/filter-section/by-subject', [StudentAttendance::class, 'filter_section']);
     Route::post('/attendance/view-student/by-subject', [StudentAttendance::class, 'view_student_subject']);
-    
+
     // Grades and Student Information
     Route::get('/grades', [TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
     Route::get('/student-grades', [TeacherController::class, 'student_grades'])->name('sresmis.teacher.student-grades');
     Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
-    
+
     // Student inf by sub
     Route::post('/student-information/filter-section', [TeacherController::class, 'filter_section']);
-    
+
 
     // School Forms
 
@@ -203,7 +206,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // teacher/SchoolForm2Controller
     Route::get('/export-sf2-by-school_year', [SchoolForm2Controller::class, 'export']);
 
-    
+
 
 
 

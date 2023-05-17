@@ -42,6 +42,7 @@
                                                     class="btn btn-light border-dark rounded-0 fw-bold"><i
                                                         class="bi bi-folder-plus"></i> Create</a>
                                             </div>
+
                                         </div>
                                     </div>
 
@@ -86,7 +87,7 @@
                             </div>
                             <hr>
                             <div class="students_table text-center">
-                                <img src="{{asset('storage/image/empty_box.png')}}" alt="No data found" class="w-25">
+                                <img src="{{ asset('storage/image/empty_box.png') }}" alt="No data found" class="w-25">
                                 <div>
                                     <span class="text-danger">No data found</span>
                                 </div>

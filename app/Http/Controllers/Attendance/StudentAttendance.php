@@ -8,6 +8,9 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Session;
 use App\Models\DailyAttendance;
+use App\Models\ClassSchedule;
+use App\Models\GradeLevel;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Validator;
 use App\Models\School;
 
@@ -166,9 +169,93 @@ class StudentAttendance extends Controller
   // by subject
   public function subject_index()
   {
-    $students = 'Subject';
+    $subject = ClassSchedule::where([
+      'class_schedules.teacherId' => auth()->user()->id,
+    ])
+      ->join('subjects', 'class_schedules.subjectId', 'subjects.id')
+      ->get();
+
+
+    $subjectArr = array();
+    foreach ($subject as $key => $sub) {
+      $subjectArr[$sub->id] = $sub->subjectName;
+    }
+    $subjects = $subjectArr;
+
     return view('web.backend.teacher.attendance.subject.index', [
+      'subjects' => $subjects,
+    ]);
+  }
+  public function create_attendance_subject($ids)
+  {
+
+    // $subject = ClassSchedule::where([
+    //   'class_schedules.teacherId' => auth()->user()->id,
+    // ])
+    //   ->join('subjects', 'class_schedules.subjectId', 'subjects.id')
+    //   ->get();
+    //   $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+    //   $schoolYear = Session::where('adminId', '=', $teacher->adminId)->orderBy('school_year', 'desc')->get();
+
+    // $subjectArr = array();
+    // foreach ($subject as $key => $sub) {
+    //   $subjectArr[$sub->id] = $sub->subjectName;
+    // }
+    // $subjects = $subjectArr;
+    // return view('web.backend.teacher.attendance.subject.create',[
+    //   'subjects' => $subjects,
+    //   'schoolYear' => $schoolYear,
+    // ]);
+  }
+  public function filter_section(Request $request)
+  {
+    $sub_id = $request->subjectId;
+
+    $query = ClassSchedule::where([
+      'class_schedules.teacherId' => auth()->user()->id,
+      'class_schedules.subjectId' => $sub_id,
+    ])
+      ->join('sections', 'class_schedules.sectionId', 'sections.id')
+      ->get();
+
+    $sectionArr = array();
+
+
+    foreach ($query as $key => $sec) {
+      $sectionArr[$sec->id] = $sec->sectionName;
+    }
+
+
+    $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+    $schoolYear = Session::where('adminId', '=', $teacher->adminId)->orderBy('school_year', 'desc')->get();
+
+    return response()->json([
+      'sections' => $sectionArr,
+    ]);
+  }
+
+  public function view_student_subject(Request $request)
+  {
+    $sec_id = $request->sec_id;
+    $sub_id = $request->sub_id;
+    $date = $request->date;
+
+    $students = DailyAttendance::where([
+      'teacherId' => auth()->user()->id,
+      'sectionId' => $sec_id,
+      'subject_id' => $sub_id,
+    ])->get();
+
+    $subject = Subject::find($sub_id)->join(
+      'grade_levels',
+      'subjects.gradeLevelId',
+      'grade_levels.id'
+    )->first();
+
+
+    return response()->json([
       'students' => $students,
+      'subject' => $subject,
     ]);
   }
 }

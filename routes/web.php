@@ -176,14 +176,14 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/class-attendance/advisory', [StudentAttendance::class, 'advisory_index'])->name('teacher.class-attendance.advisory');
     Route::get('/create-attendance-by-advisory', [StudentAttendance::class, 'create_attendance']);
     // Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('teacher.class-schedule');
+
+
     // subject
-Route::get('/class-schedule/subject', [StudentAttendance::class, 'subject_index'])->name('teacher.class-attendance.subject');
-
-
-
-
-
-
+    Route::get('/class-attendance/subject', [StudentAttendance::class, 'subject_index'])->name('teacher.class-attendance.subject');
+    Route::get('/create-attendance-by-subject/{ids}', [StudentAttendance::class, 'create_attendance_subject']);
+    Route::post('/attendance/filter-section/by-subject', [StudentAttendance::class, 'filter_section']);
+    Route::post('/attendance/view-student/by-subject', [StudentAttendance::class, 'view_student_subject']);
+    
     // Grades and Student Information
     Route::get('/grades', [TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
@@ -200,7 +200,7 @@ Route::get('/class-schedule/subject', [StudentAttendance::class, 'subject_index'
     // teacher/SchoolForm2Controller
     Route::get('/export-sf2-by-school_year', [SchoolForm2Controller::class, 'export']);
 
-
+    
 
 
 

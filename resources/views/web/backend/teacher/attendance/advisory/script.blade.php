@@ -3,6 +3,8 @@
         $('#studentAttendance').DataTable();
 
         $('#filter_date_attendance').on('click', function() {
+              
+             
             $.ajax({
                 method: "POST",
                 url: '/teacher/filter-attendance/by-advisory',
@@ -13,7 +15,9 @@
                     console.log(data.date);
 
                     if (data.response == 'error') {
+                        
                         sweetAlert("Oops...", "Date is required", "error");
+                        
                     } else if (!data.response || data.response.length === 0) {
                         $('.students_table').html(`<img src="{{ asset('storage/image/empty_box.png') }}" alt="No data found" class="w-25">
                                                     <div>
@@ -23,6 +27,8 @@
                         $('.total_female').text(0);
                         $('.total_present').text(0);
                         $('.total_absent').text(0);
+
+                        
                     } else {
                         console.log(data.response);
 
@@ -98,6 +104,9 @@
                         $('.total_female').text(femaleCount);
                         $('.total_present').text(presentCount);
                         $('.total_absent').text(absentCount);
+
+
+                        
                     }
                 }
             });

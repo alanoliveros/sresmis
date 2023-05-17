@@ -19,10 +19,10 @@ class SectionFactory extends Factory
     public function definition()
     {
         return [
-            'admin_id' => 1,
+            'adminId' => 1,
             /*'section_name' => $this->generateSectionName(),*/
-            'section_name' => ucfirst($this->faker->word),
-            'grade_lvl_id' => $this->faker->numberBetween(1, 7),
+            'sectionName' => ucfirst($this->faker->word),
+            'gradeLevelId' => $this->faker->numberBetween(1, 7),
             'created_at' => now(),
             'updated_at' => now(),
         ];

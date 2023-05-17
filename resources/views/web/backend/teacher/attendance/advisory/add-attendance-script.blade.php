@@ -1,5 +1,8 @@
 <script>
     $(document).ready(function() {
+        @if (session('error'))
+            sweetAlert("Oops...", "{{ session('error') }}", "error");
+        @endif
         function countStudentAttendance() {
             var presentCount = 0;
             var absentCount = 0;

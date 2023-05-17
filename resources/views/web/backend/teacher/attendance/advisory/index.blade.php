@@ -49,26 +49,47 @@
 
                                 </div>
                                 <hr>
-                                
-                                
+
+
                             </div>
-                            <div class="text-center mb-2">
-                                <span class="bg-light border border-dark p-2 mx-2 ">Total Male:
-                                    <small class="total_male">0</small>
-                                </span>
-                                <span class="bg-light border border-dark p-2 mx-2 ">Total Female:
-                                    <small class="total_female">0</small>
-                                </span>
-                                <span class="bg-success border border-dark p-2 mx-2 text-light">Total Present:
-                                    <small class="total_present">0</small>
-                                </span>
-                                <span class="bg-danger border border-dark p-2 mx-2 text-light">Total Absent:
-                                    <small class="total_absent">0</small>
-                                </span>
+                            <div class="container text-center">
+                                <div class="row justify-content-center">
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-light border border-dark p-2 mx-2 h-100">
+                                            <span class="">Total Male:
+                                                <small class="total_male">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-light border border-dark p-2 mx-2 h-100">
+                                            <span class="">Total Female:
+                                                <small class="total_female">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-success border border-dark p-2 mx-2 h-100 text-light">
+                                            <span class="">Total Present:
+                                                <small class="total_present">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-danger border border-dark p-2 mx-2 h-100 text-light">
+                                            <span class="">Total Absent:
+                                                <small class="total_absent">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <hr>
-                            <div class="students_table">
-                                
+                            <div class="students_table text-center">
+                                <img src="{{asset('storage/image/empty_box.png')}}" alt="No data found" class="w-25">
+                                <div>
+                                    <span class="text-danger">No data found</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,5 +99,5 @@
     </main>
 @endsection
 @section('scripts')
-@include('web.backend.teacher.attendance.advisory.script')
+    @include('web.backend.teacher.attendance.advisory.script')
 @endsection

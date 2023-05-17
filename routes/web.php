@@ -193,10 +193,13 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/delete-student/{id}', [TeacherController::class, 'deleteStudent']);
 
     // Attendance and Class Schedule
+    // advisory
     Route::get('/class-attendance/advisory', [StudentAttendance::class, 'advisory_index'])->name('teacher.class-attendance.advisory');
     Route::get('/create-attendance-by-advisory', [StudentAttendance::class, 'create_attendance']);
-    Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('sresmis.teacher.class-schedule');
-
+    // Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('teacher.class-schedule');
+    // subject
+    Route::get('/class-schedule/subject', [StudentAttendance::class, 'subject_index'])->name('teacher.class-attendance.subject');
+    
     // Grades and Student Information
     Route::get('/grades', [TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
@@ -209,10 +212,10 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/school-form-1', [SchoolForm1Controller::class, 'index'])->name('teacher.sf1-view');
     Route::get('/export-sf1/{id}', [SchoolForm1Controller::class, 'export_sf1']);
     Route::get('/export-sf1-by-school_year', [SchoolForm1Controller::class, 'export']);
-    
+
     // teacher/SchoolForm2Controller
     Route::get('/export-sf2-by-school_year', [SchoolForm2Controller::class, 'export']);
-    
+
 
 
 
@@ -234,8 +237,8 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
     Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject'])->name('teacher.student-information.by-subject.filter');
     Route::post('/add-student', [TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student');
-    
-    
+
+
     // Student Attendance
     Route::get('/create-attendance/advisory', [StudentAttendance::class, 'create_attendance'])->name('teacher.create-attendance.advisory');
     Route::post('/save-attendance/advisory', [StudentAttendance::class, 'save_attendance'])->name('teacher.save-attendance.advisory');
@@ -254,14 +257,14 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
     Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     // Generate PDF
     Route::get('/generate', [SchoolForm1Controller::class, 'generatePDF']);
 });

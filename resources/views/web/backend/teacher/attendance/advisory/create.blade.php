@@ -73,10 +73,11 @@
                                                         class="total_male_count text-danger fw-bold fs-4"></small></span>
                                                 <span class="border border-dark mx-2 p-2">Total Female: <small
                                                         class="total_female_count text-danger fw-bold fs-4"></small></span>
-                                                <span class="border border-dark mx-2 p-2 bg-success text-light">Total Present: <small
+                                                <span class="border border-dark mx-2 p-2 bg-success text-light">Total
+                                                    Present: <small
                                                         class="total_present text-light fw-bold fs-4"></small></span>
-                                                <span class="border border-dark mx-2 p-2 text-light bg-danger">Total Absent: <small
-                                                        class="total_absent text-light fw-bold fs-4"></small></span>
+                                                <span class="border border-dark mx-2 p-2 text-light bg-danger">Total Absent:
+                                                    <small class="total_absent text-light fw-bold fs-4"></small></span>
 
                                             </div>
                                         </div>
@@ -85,8 +86,10 @@
 
                                             <h4 class="page-title mt-2 fs-3">
                                                 {{ strtoupper($sectionName->gradeLevelName) . ' - ' . strtoupper($sectionName->sectionName) }}
-                                                <input type="hidden" value="{{$sectionName->sectionId}}" name="sectionId">
-                                                <input type="hidden" value="{{$sectionName->gradeLevelId}}" name="gradeLevelId">
+                                                <input type="hidden" value="{{ $sectionName->sectionId }}"
+                                                    name="sectionId">
+                                                <input type="hidden" value="{{ $sectionName->gradeLevelId }}"
+                                                    name="gradeLevelId">
                                             </h4>
                                         </div>
                                         <div>
@@ -135,7 +138,7 @@
                                                                         class="attendance_status_absent" value="Absent" />
                                                                     <span>A</span>
                                                                 </label>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -189,7 +192,7 @@
                                                                         class="attendance_status_absent" value="Absent" />
                                                                     <span>A</span>
                                                                 </label>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>

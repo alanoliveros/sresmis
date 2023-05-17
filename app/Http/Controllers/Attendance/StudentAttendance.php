@@ -124,9 +124,7 @@ class StudentAttendance extends Controller
 
       return redirect()->back()->with('success', 'Attendance saved successfully');
     } else {
-      // Redirect back with an error message
-      // return redirect()->back()->with('error', 'Invalid school year');
-      echo 'error';
+      return redirect()->back()->with('error', 'School year and date did not match');
     }
 
 
@@ -157,11 +155,20 @@ class StudentAttendance extends Controller
       'sectionId' =>  $teacher_detail->sectionId,
       'gradeLevelId' =>  $teacher_detail->gradeLevelId,
     ])
-    ->join('users', 'daily_attendances.studentId', 'users.id')
-    ->get();
+      ->join('users', 'daily_attendances.studentId', 'users.id')
+      ->get();
 
     return response()->json([
       'response' => $attendance,
+    ]);
+  }
+
+  // by subject
+  public function subject_index()
+  {
+    $students = 'Subject';
+    return view('web.backend.teacher.attendance.subject.index', [
+      'students' => $students,
     ]);
   }
 }

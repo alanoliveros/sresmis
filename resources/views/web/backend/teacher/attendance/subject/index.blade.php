@@ -27,26 +27,32 @@
                             <div class="row my-3">
                                 <div class="col-md-12 col-lg-12 col-xlg-12 mb-3">
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-2">
                                             <input type="date" name="date" id="date_val" class="form-control">
                                         </div>
-                                        <div class="col-3">
-                                            <button class="btn btn-primary rounded-0" id="filter_date_attendance"><i
+                                        <div class="col-2">
+                                            <select name="" class="form-select select_subject">
+                                                <option selected disabled>Select Subject</option>
+                                                @foreach ($subjects as $key => $sub)
+                                                    <option value="{{ $key }}">{{ $sub }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-2">
+                                            <select name="" class="form-select select_section">
+                                                <option selected disabled>Select Section</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-primary rounded-0 filter_by_sec_sub"><i
                                                     class="bi bi-search"></i> Filter</button>
                                         </div>
-                                        <div class="col">
-                                            <div class="float-end mb-2">
+                                        <div class="col-3">
+                                            <div class="float-end mb-2 display_add">
 
-                                                <a id="addAttendance"
-                                                    href="{{ url('teacher/create-attendance-by-advisory') }}"
-                                                    class="btn btn-light border-dark rounded-0 fw-bold"><i
-                                                        class="bi bi-folder-plus"></i> Create</a>
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                 </div>
                                 <hr>
 
@@ -86,7 +92,7 @@
                             </div>
                             <hr>
                             <div class="students_table text-center">
-                                <img src="{{asset('storage/image/empty_box.png')}}" alt="No data found" class="w-25">
+                                <img src="{{ asset('storage/image/empty_box.png') }}" alt="No data found" class="w-25">
                                 <div>
                                     <span class="text-danger">No data found</span>
                                 </div>
@@ -99,5 +105,5 @@
     </main>
 @endsection
 @section('scripts')
-    @include('web.backend.teacher.attendance.advisory.script')
+    @include('web.backend.teacher.attendance.subject.script')
 @endsection

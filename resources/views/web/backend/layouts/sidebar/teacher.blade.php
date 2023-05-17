@@ -40,7 +40,7 @@
             </a>
         </li>
         <li>
-            <a href="charts-apexcharts.html">
+            <a href="{{route('teacher.class-attendance.subject')}}">
                 <i class="bi bi-circle"></i><span>Subject</span>
             </a>
         </li>
@@ -58,7 +58,7 @@
             </a>
         </li>
         <li>
-            <a href="icons-remix.html">
+            <a href="">
                 <i class="bi bi-circle"></i><span>Subject</span>
             </a>
         </li>

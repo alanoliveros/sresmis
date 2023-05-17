@@ -24,7 +24,8 @@ return new class extends Migration {
             $table->string('mothertongue')->nullable();
             $table->string('ethnicgroup')->nullable();
             $table->string('religion')->nullable();
-            $table->string('learning_modality_id')->nullable();
+            $table->string('learning_modality')->nullable();
+            $table->string('remarks')->nullable();
             $table->integer('status')->default(1); // 1 = active, 2 = dropout;
             $table->timestamps();
         });

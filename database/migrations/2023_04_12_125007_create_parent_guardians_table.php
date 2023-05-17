@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('guardiansSuffix')->nullable();
 
             $table->string('relationshiptoStudent')->nullable();
-            $table->bigInteger('contactNumber')->nullable();
+            $table->string('contactNumber')->nullable();
 
             $table->timestamps();
         });

@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <div class="row my-3">
                                 <div class="container-fluid">
-                                    <form action="{{ url('sresmis/teacher/submit-attendance/advisory') }}" method="POST">
+                                    <form action="{{ route('teacher.save-attendance.advisory') }}" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-12 col-lg-12 col-xlg-12">
@@ -36,7 +36,7 @@
                                                         Year</label>
                                                     <select name="school_year" id="" class="form-select">
                                                         @foreach ($schoolYear as $key => $year)
-                                                            <option value="{{ $year->id }}"
+                                                            <option value="{{ $year->school_year }}"
                                                                 {{ $key == 0 ? 'selected' : '' }}>
                                                                 {{ $year->school_year }}</option>
                                                         @endforeach
@@ -49,7 +49,7 @@
                                                     <input type="date" class="form-control" value="{{ date('Y-m-d') }}"
                                                         name="attendance_date">
                                                 </div>
-                                                
+
 
                                             </div>
                                         </div>
@@ -62,23 +62,52 @@
                                                 <button type="button"
                                                     class="btn btn-danger text-light rounded-0 mx-2 mb-1 absent_all">Absent
                                                     All</button>
+                                                <button type="submit"
+                                                    class="btn btn-light border-dark text-dark rounded-0 mx-2 mb-1 float-end">Save</button>
+
+                                            </div>
+                                            <div class="col-12 text-center">
+                                                <span class="border border-dark mx-2 p-2">Total Student: <small
+                                                        class="all_student text-danger fw-bold fs-4"></small></span>
+                                                <span class="border border-dark mx-2 p-2">Total Male: <small
+                                                        class="total_male_count text-danger fw-bold fs-4"></small></span>
+                                                <span class="border border-dark mx-2 p-2">Total Female: <small
+                                                        class="total_female_count text-danger fw-bold fs-4"></small></span>
+                                                <span class="border border-dark mx-2 p-2 bg-success text-light">Total
+                                                    Present: <small
+                                                        class="total_present text-light fw-bold fs-4"></small></span>
+                                                <span class="border border-dark mx-2 p-2 text-light bg-danger">Total Absent:
+                                                    <small class="total_absent text-light fw-bold fs-4"></small></span>
+
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="col-12 d-flex no-block align-items-center justify-content-center">
+
                                             <h4 class="page-title mt-2 fs-3">
                                                 {{ strtoupper($sectionName->gradeLevelName) . ' - ' . strtoupper($sectionName->sectionName) }}
+                                                <input type="hidden" value="{{ $sectionName->sectionId }}"
+                                                    name="sectionId">
+                                                <input type="hidden" value="{{ $sectionName->gradeLevelId }}"
+                                                    name="gradeLevelId">
                                             </h4>
                                         </div>
                                         <div>
                                             <span class="fs-4 fw-bold" style="color:blue;"> <i
                                                     class="mdi mdi-gender-male"></i>Male</span>
                                         </div>
-
+                                        {{-- for female --}}
                                         <div class="row row-cols-1 row-cols-md-4 g-4">
-
+                                            @php
+                                                // Initialize counters for male and female students
+                                                $maleCount = 0;
+                                            @endphp
                                             @foreach ($students as $key => $student)
                                                 @if ($student->gender == 'Male' && $student->status == 1)
+                                                    @php
+                                                        // Increment the male counter
+                                                        $maleCount++;
+                                                    @endphp
                                                     <div class="col">
                                                         <div class="card card-inverse card-info h-100">
                                                             @if ($student->image == 'avatar.png')
@@ -109,12 +138,7 @@
                                                                         class="attendance_status_absent" value="Absent" />
                                                                     <span>A</span>
                                                                 </label>
-                                                                <label>
-                                                                    <input type="radio"
-                                                                        name="status_student_attendance_male[{{ $student->studentId }}]"
-                                                                        class="attendance_status_tardy" value="Tardy" />
-                                                                    <span>T</span>
-                                                                </label>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,9 +149,19 @@
                                             <span class="fs-4 fw-bold" style="color:palevioletred"> <i
                                                     class="mdi mdi-gender-female"></i>Female</span>
                                         </div>
+
+                                        {{-- for female --}}
                                         <div class="row row-cols-1 row-cols-md-4 g-4">
+                                            @php
+                                                // Initialize counters for male and female students
+                                                $femaleCount = 0;
+                                            @endphp
                                             @foreach ($students as $key => $student)
                                                 @if ($student->gender == 'Female' && $student->status == 1)
+                                                    @php
+                                                        // Increment the female counter
+                                                        $femaleCount++;
+                                                    @endphp
                                                     <div class="col">
                                                         <div class="card card-inverse card-info h-100">
                                                             @if ($student->image == 'avatar.png')
@@ -158,12 +192,7 @@
                                                                         class="attendance_status_absent" value="Absent" />
                                                                     <span>A</span>
                                                                 </label>
-                                                                <label>
-                                                                    <input type="radio"
-                                                                        name="status_student_attendance_female[{{ $student->studentId }}]"
-                                                                        class="attendance_status_tardy" value="Tardy" />
-                                                                    <span>T</span>
-                                                                </label>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -172,6 +201,10 @@
                                         </div>
                                     </form>
                                 </div>
+                            </div>
+                            <div class="mt-3">
+                                <small class="total_male text-primary" data-total="{{ $maleCount }}"></small>
+                                <small class="total_female text-danger" data-total="{{ $femaleCount }}"></small>
                             </div>
 
                             <div class="students_table">
@@ -185,4 +218,7 @@
             </div>
         </section>
     </main>
+@endsection
+@section('scripts')
+    @include('web.backend.teacher.attendance.advisory.add-attendance-script')
 @endsection

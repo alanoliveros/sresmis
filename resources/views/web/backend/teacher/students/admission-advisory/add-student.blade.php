@@ -1,8 +1,8 @@
 <div class="modal fade" id="addstudent_click" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-    <div class="modal-dialog modal-dialog-scrollable add-student" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-light text-dark">
-                <h1 class="modal-title fs-5  fs-5">Student Personal Information</h1>
+    <div class="modal-dialog modal-dialog-scrollable add-student " role="document">
+        <div class="modal-content rounded-0">
+            <div class="modal-header text-dark">
+                <h1 class="modal-title fs-5 ">Student Personal Information</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

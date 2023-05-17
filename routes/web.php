@@ -14,10 +14,9 @@ use App\Http\Controllers\BackOffice\NoticeboardController;
 use App\Http\Controllers\BackOffice\SessionController;
 use App\Http\Controllers\Manage\AdminStudentController;
 use App\Http\Controllers\Manage\AdminTeacherController;
-use App\Http\Controllers\SchoolForm1;
-use App\Http\Controllers\SchoolForm2;
+use App\Http\Controllers\SchoolForm1Controller;
+use App\Http\Controllers\SchoolForm2Controller;
 use App\Http\Controllers\SchoolForm9;
-use App\Http\Controllers\SchoolForm10;
 use App\Http\Controllers\Setting\AboutCountroller;
 use App\Http\Controllers\Setting\SchoolController;
 use App\Http\Controllers\Setting\SystemController;
@@ -146,150 +145,98 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
     Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');
 });
 
-
 Route::prefix('teacher')->middleware('isTeacher')->group(function () {
-    // Student Information
-    // filter student by school year | advisory
-    Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
 
-
-    // By Subject
-    Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
-    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject'])->name('teacher.student-information.by-subject.filter');
-
-
-    /** Teacher Controller */
+    // Dashboard and Advisory
     Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
     Route::get('/advisory', [TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory');
     Route::get('/grades/filter', [TeacherController::class, 'filterGrades'])->name('sresmis.teacher.grades.filter');
-
-    /** Add Student */
-    Route::post('/add-student', [TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student');
     Route::get('/delete-student/{id}', [TeacherController::class, 'deleteStudent']);
 
-
-
-
-
-
-    /** Teacher Attendance */
-    Route::get('/class-attendace/advisory', [StudentAttendance::class, 'advisory_index'])->name('teacher.class-attendance.advisory');
+    // Attendance and Class Schedule
+    // advisory
+    Route::get('/class-attendance/advisory', [StudentAttendance::class, 'advisory_index'])->name('teacher.class-attendance.advisory');
     Route::get('/create-attendance-by-advisory', [StudentAttendance::class, 'create_attendance']);
-    Route::post('/submit-attendance/advisory', [TeacherController::class, 'submit_attendance']);
+    // Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('teacher.class-schedule');
+    // subject
+Route::get('/class-schedule/subject', [StudentAttendance::class, 'subject_index'])->name('teacher.class-attendance.subject');
 
 
 
 
 
 
-
-
-    //
-
+    // Grades and Student Information
     Route::get('/grades', [TeacherController::class, 'grades'])->name('sresmis.teacher.grades');
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
-
-    /** Teacher School Forms */
-
-
-    // sf1 teacher.sf1-view
-    Route::get('/school-form-1', [SchoolForm1::class, 'index'])->name('teacher.sf1-view');
-    Route::post('/get-student-sf1-by-school-year', [SchoolForm1::class, 'get_student_sf1_by_sy']);
-    Route::get('/export-sf1/{id}', [SchoolForm1::class, 'export_sf1']);
-    Route::get('/read', [SchoolForm1::class, 'readtemplate']);
-
-    Route::post('/import-sf1-excel', [SchoolForm1::class, 'import'])->name('teacher.import-sf1-excel');
-
-
-
-
-
-
-
-
-
-
-
-    // sf2
-    Route::get('/sf2-view', [SchoolForm2::class, 'index'])->name('teacher.sf2-view');
-
-
-
-
-
-
-
-
-
-
-    // sf9
-    Route::get('/sf9-view', [SchoolForm9::class, 'index'])->name('teacher.sf9-view');
-
-
-
-
-
-
-
-    // sf10
-    Route::get('/sf10-view', [SchoolForm10::class, 'index'])->name('teacher.sf10-view');
-    Route::post('/sf-10/find-section', [SchoolForm10::class, 'get_section']);
-    Route::post('/sf-10/find-students', [SchoolForm10::class, 'get_students']);
-
-
-
-
-
-
-
-
-
-    /** Manage Class Schedules */
-    Route::get('/class-schedule', [TeacherController::class, 'class_schedule'])->name('sresmis.teacher.class-schedule');
-
-    // Student Information
-    // By Subject
-    Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
-
-
-    // Student Grades
-    // By Advisory
     Route::get('/student-grades', [TeacherController::class, 'student_grades'])->name('sresmis.teacher.student-grades');
-    // Filter By School Year
+    Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
 
-    // Grading
-    // filter by school year
+    // School Forms
+
+    // sf1
+    Route::get('/school-form-1', [SchoolForm1Controller::class, 'index'])->name('teacher.sf1-view');
+    Route::get('/export-sf1/{id}', [SchoolForm1Controller::class, 'export_sf1']);
+    Route::get('/export-sf1-by-school_year', [SchoolForm1Controller::class, 'export']);
+
+    // teacher/SchoolForm2Controller
+    Route::get('/export-sf2-by-school_year', [SchoolForm2Controller::class, 'export']);
+
+
+
+
+
+
+
+
+    Route::get('/read', [SchoolForm1Controller::class, 'readtemplate']);
+    Route::get('/sf2-view', [SchoolForm2Controller::class, 'index'])->name('teacher.sf2-view');
+    Route::get('/sf9-view', [SchoolForm9::class, 'index'])->name('teacher.sf9-view');
+    Route::get('/sf10-view', [SchoolForm1Controller::class, 'index'])->name('teacher.sf10-view');
+
+    // By Subject and Mailbox
+    Route::get('/by-subject', [TeacherController::class, 'info_by_subject'])->name('sresmis.teacher.by-subject');
+    Route::get('/fetchMessage-for-teacher', [MailboxController::class, 'fetch_for_teacher']);
+    Route::get('/mailbox', [MailboxController::class, 'teacher_index'])->name('teacher.mailbox');
+
+    // Other Routes
+    Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
+    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject'])->name('teacher.student-information.by-subject.filter');
+    Route::post('/add-student', [TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student');
+
+
+    // Student Attendance
+    Route::get('/create-attendance/advisory', [StudentAttendance::class, 'create_attendance'])->name('teacher.create-attendance.advisory');
+    Route::post('/save-attendance/advisory', [StudentAttendance::class, 'save_attendance'])->name('teacher.save-attendance.advisory');
+    Route::post('/filter-attendance/by-advisory', [StudentAttendance::class, 'filter_attendance']);
+    // Student Crud
+    Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);
+
+    Route::post('/get-student-sf1-by-school-year', [SchoolForm1Controller::class, 'get_student_sf1_by_sy']);
+    Route::post('/import-sf1-excel', [SchoolForm1Controller::class, 'import'])->name('teacher.import-sf1-excel');
+    Route::post('/sf-10/find-section', [SchoolForm1Controller::class, 'get_section']);
+    Route::post('/sf-10/find-students', [SchoolForm1Controller::class, 'get_students']);
     Route::post('/student-grades/filter-school-year', [StudentGradeController::class, 'filter_school_year']);
-    // filter by subject
     Route::post('/student-grades/filter-subject', [StudentGradeController::class, 'filter_by_subject']);
-    // filter by students
     Route::post('/student-grades/filter-students', [StudentGradeController::class, 'filter_students'])->name('teacher.student-grades.filter-students');
     Route::post('/student-grades/transmuted-grade', [StudentGradeController::class, 'transmuted_grade']);
-    // create grade
-    Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
-    // save grades
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
-
-
-
-
-
-
-    // teacher/fetchMessage-for-teacher
-    Route::get('/fetchMessage-for-teacher', [MailboxController::class, 'fetch_for_teacher']);
-
-
-
-    Route::get('/mailbox', [MailboxController::class, 'teacher_index'])->name('teacher.mailbox');
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
     Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
-});
 
-/** Parent Dashboard */
-Route::get('/sresmis/parent/dashboard', [TeacherController::class, 'index'])->name('sresmis.parent.dashboard')->middleware('isParent');
+
+
+
+
+
+
+
+    // Generate PDF
+    Route::get('/generate', [SchoolForm1Controller::class, 'generatePDF']);
+});
 
 
 /** Student Dashboard */
-Route::prefix('sresmis/student')->middleware('isStudent')->group(function () {
-    Route::get('/dashboard', [StudentController::class, 'index'])->name('sresmis.student.dashboard');
+Route::prefix('student')->middleware('isStudent')->group(function () {
+    Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
 });

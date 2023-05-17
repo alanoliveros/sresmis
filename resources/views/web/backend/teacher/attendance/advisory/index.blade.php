@@ -1,94 +1,103 @@
 @extends('web.backend.layouts.app')
-@section('title', 'Teacher | SF1')
+@section('title', 'Teacher | Class Attendance')
 @section('content')
-<div class="page-wrapper">
-    <div class="page-breadcrumb">
+    <main id="main" class="main">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title mt-2">Attendance</h4>
+                <h5 class="page-title my-2"><i class="bi bi-person-lines-fill"></i> @yield('title')</h5>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                Attendance
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-dark"><i
+                                        class="bi bi-house-door"></i></a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="">Attendance</a>
+                            </li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="">Advisory</a>
                             </li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Column -->
-            <div class="col-md-12 col-lg-12 col-xlg-12">
-                <div class="card shadow card_attendance">
-                    <div class="box bg-cyan">
-                        <h4 class="text-white">Pick Dates</h4>
-                        <div class="row">
-                            <div class="col-8  col-sm-6 col-md-8 mb-1">
-                                <input type="date" class="form-control">
-                            </div>
-                            <div class="col-4  col-sm-4 col-md-2 mb-1">
-                                <a href="" class="btn btn-light  fw-bold">Filter</a>
-                            </div>
-                            <div
-                                class="col-12  col-sm-2 col-md-2 mb-1 d-flex justify-content-start  justify-content-md-center">
-                                <a id="addAttendance" href="{{ url('teacher/create-attendance-by-advisory') }}"
-                                    class="btn btn-light fw-bold"><i class="mdi mdi-plus fw-bold"></i>Add</a>
+        <section class="section">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body">
+                            <div class="row my-3">
+                                <div class="col-md-12 col-lg-12 col-xlg-12 mb-3">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <input type="date" name="date" id="date_val" class="form-control">
+                                        </div>
+                                        <div class="col-3">
+                                            <button class="btn btn-primary rounded-0" id="filter_date_attendance"><i
+                                                    class="bi bi-search"></i> Filter</button>
+                                        </div>
+                                        <div class="col">
+                                            <div class="float-end mb-2">
 
+                                                <a id="addAttendance"
+                                                    href="{{ url('teacher/create-attendance-by-advisory') }}"
+                                                    class="btn btn-light border-dark rounded-0 fw-bold"><i
+                                                        class="bi bi-folder-plus"></i> Create</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <hr>
+
+
+                            </div>
+                            <div class="container text-center">
+                                <div class="row justify-content-center">
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-light border border-dark p-2 mx-2 h-100">
+                                            <span class="">Total Male:
+                                                <small class="total_male">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-light border border-dark p-2 mx-2 h-100">
+                                            <span class="">Total Female:
+                                                <small class="total_female">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-success border border-dark p-2 mx-2 h-100 text-light">
+                                            <span class="">Total Present:
+                                                <small class="total_present">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="p-2 bg-danger border border-dark p-2 mx-2 h-100 text-light">
+                                            <span class="">Total Absent:
+                                                <small class="total_absent">0</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="students_table text-center">
+                                <img src="{{asset('storage/image/empty_box.png')}}" alt="No data found" class="w-25">
+                                <div>
+                                    <span class="text-danger">No data found</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!-- End Recent Sales -->
             </div>
-            <div class="col-md-12 col-lg-12 col-xlg-12">
-                <div class="card shadow card_attendance">
-                    <div class="box bg-light">
-                        <table id="studentAttendance" class="table table-dark table-hover" style="width:100%">
-                            <thead>
-                                <tr class="fs-5">
-                                    <th scope="col" class="text-success">#</th>
-                                    <th scope="col" class="text-success">LRN</th>
-                                    <th scope="col" class="text-success">Complete name</th>
-                                    <th scope="col" class="text-success">Age</th>
-                                    <th scope="col" class="text-success">Birthdate</th>
-                                    <th scope="col" class="text-success">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($students as $key => $student)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $student->lrn }}</td>
-                                        <td>{{ $student->lastname . ', ' . $student->name . ($student->middlename != null ? ', ' . $student->middlename : '') . ($student->suffix != null ? ', ' . $student->suffix : '') }}
-                                        </td>
-                                        <td>{{ $student->age }}</td>
-                                        <td>{{ date('F d, Y', strtotime($student->birthdate)) }}</td>
-                                        <td>
-                                            <div class="dropdown" tabindex="1">
-                                                <i class="db2" tabindex="1"></i>
-                                                <a class="dropbtn"><i class=" fs-4 mdi mdi-dots-vertical"></i></a>
-                                                <div class="dropdown-content">
-                                                    <a href="#">View</a>
-                                                    <a href="#">Edit</a>
-                                                    <a href="{{ url('sresmis/teacher/delete-student/' . $student->studentId) }}"
-                                                        class="text-danger">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        </section>
+    </main>
 @endsection
 @section('scripts')
-    {{-- @include('web.backend.teacher.school-forms.sf1.script') --}}
+    @include('web.backend.teacher.attendance.advisory.script')
 @endsection

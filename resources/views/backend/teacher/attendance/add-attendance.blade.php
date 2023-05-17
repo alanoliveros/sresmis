@@ -7,7 +7,7 @@
         </div>
 
         <div class="container-fluid">
-            <form action="{{ url('sresmis/teacher/submit-attendance/advisory') }}" method="POST">
+            <form action="{{ url('teacher.save-attendance.advisory') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-xlg-12">

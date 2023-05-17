@@ -44,7 +44,7 @@ class LoginController extends Controller
     protected function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required',
         ]);
 

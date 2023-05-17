@@ -56,7 +56,7 @@ class ClassScheduleController extends Controller
             $days[] = $day;
         }
 
-        $section_detail = Section::where('gradeLevelId', $request->sectionId)->first();
+        $section_detail = Section::where('id', $request->sectionId)->first();
         $session_active = Session::where('status', 1)->first();  //1 means active 2 means Deactive
 
         $schedule = new ClassSchedule();

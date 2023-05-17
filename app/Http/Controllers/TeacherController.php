@@ -435,6 +435,7 @@ class TeacherController extends Controller
     $sections = ClassSchedule::where([
       'class_schedules.subjectId' => $sub_id,
       'class_schedules.school_year' => $sy,
+      'class_schedules.teacherId' => auth()->user()->id,
     ])
     ->join('sections', 'class_schedules.sectionId', 'sections.id')
     ->get();

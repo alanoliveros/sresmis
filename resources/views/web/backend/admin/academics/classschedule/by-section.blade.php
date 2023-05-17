@@ -49,7 +49,7 @@
                                                             <h1 class="font-light text-white">
                                                                 <i class="mdi mdi-view-dashboard"></i>
                                                             </h1>
-                                                            <h6 class="text-black">{{$section->section_name}}</h6>
+                                                            <h6 class="text-black">{{$section->sectionName}}</h6>
                                                         </div>
                                                     </div>
                                                 </a>

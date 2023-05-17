@@ -35,7 +35,7 @@
                                     <div class="col-md-12 col-lg-12 col-xlg-12">
                                         <div class="card">
                                             <div class="box bg-dark text-center">
-                                                <span class="font-light text-white fs-3">{{$section->sectionName. 'Subjects'}}</span>
+                                                <span class="font-light text-white fs-3">{{$section->sectionName. ' - Subjects'}}</span>
                                                 {{-- <span class="font-light text-white fs-3"><a href="" class="float-end rounded-0 btn btn-light" data-bs-toggle="modal" data-bs-target="#add-schedule">+ Add Schedule</a>
                                                 @include('backend.admin.class-schedules.add-schedule')
                                                 </span> --}}

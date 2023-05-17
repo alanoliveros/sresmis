@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('sresmis.teacher.add-student') }}" method="POST">
+                <form action="{{ route('teacher.add-student') }}" method="POST">
                     @csrf
                     <div class="row g-3">
                         <div class="col-md-12">
@@ -24,9 +24,17 @@
                                     class="text-danger">(required)</small> </label>
                             <select name="learning_mode_id" id="" class="form-select">
                                 @foreach ($learnings as $key => $learning)
-                                    <option {{ $key == 0 ? 'selected' : '' }} value="{{ $learning->id }}">
+                                    <option {{ $key == 0 ? 'selected' : '' }} value="{{ $learning->mode_name }}">
                                         {{ $learning->mode_name }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="validationDefault02" class="form-label">Learning Modality<small
+                                    class="text-danger">(required)</small> </label>
+                            <select name="enrollment_status" id="" class="form-select">
+                                <option value="1" selected>Regular</option>
+                                <option value="2">Transferee</option>
                             </select>
                         </div>
                         <div class="col-md-12">
@@ -180,8 +188,8 @@
                             <input type="number" class="form-control" name="contactNumber">
                         </div>
                         <!-- end Guardian -->
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        <div class="col-12 text-end">
+                            <button class="btn btn-primary rounded-0" type="submit">Submit form</button>
                         </div>
                     </div>
                 </form>

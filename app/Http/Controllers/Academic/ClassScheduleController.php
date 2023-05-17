@@ -8,6 +8,7 @@ use App\Models\GradeLevel;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Teacher;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 class ClassScheduleController extends Controller
@@ -44,6 +45,7 @@ class ClassScheduleController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'teacherId' => 'required',
             'scheduleDay' => 'required',
@@ -54,14 +56,21 @@ class ClassScheduleController extends Controller
             $days[] = $day;
         }
 
+        $section_detail = Section::where('gradeLevelId', $request->sectionId)->first();
+        $session_active = Session::where('status', 1)->first();  //1 means active 2 means Deactive
+
         $schedule = new ClassSchedule();
         $schedule->sectionId = $request->sectionId;
         $schedule->subjectId = $request->subjectId;
         $schedule->teacherId = $request->teacherId;
+        $schedule->grade_level_id = $section_detail->gradeLevelId;
         $schedule->startTime = $request->startTime;
         $schedule->endTime = $request->endTime;
+        $schedule->school_year = $session_active->school_year;
         $schedule->scheduleDay = implode(',', $days);
         $schedule->save();
+
+        // echo $session_active->school_year;
 
         return redirect()->back()->with('success_added', 'Successfully added new record');
     }
@@ -82,6 +91,7 @@ class ClassScheduleController extends Controller
         return view('web.backend.admin.academics.classschedule.by-section')->with([
             'sections' => $sections,
             'gradeLevelId' => $gradeLevel->id,
+            // $schedule = new ClassSchedule();
 
         ]);
     }

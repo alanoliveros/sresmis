@@ -25,19 +25,19 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
                             <div class="row my-3 ">
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-2">
                                     <div class="mb-3">
                                         <select class="form-select select_sy" required aria-label="select example"
                                             name="school_year">
                                             <option selected disabled>Select School Year</option>
                                             @foreach ($sessions as $key => $session)
-                                                <option value="{{ $session->id }}">
+                                                <option value="{{ $session->school_year }}">
                                                     {{ $session->school_year }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-2">
                                     <div class="mb-3">
                                         <select class="form-select school_year_by_subject" required
                                             aria-label="select example" name="school_year">
@@ -49,13 +49,21 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-2">
+                                    <div class="mb-3">
+                                        <select class="form-select school_year_by_section" required
+                                            aria-label="select example" name="school_year">
+                                            <option selected disabled>Select Section</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-12 col-md-3">
                                     <div class="mb-3">
                                         <button type="button" disabled
                                             class="btn btn-secondary rounded-0 filter_by">Filter</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-2">
                                     <div class="mb-3">
                                         <a href="" class="float-md-end btn btn-light rounded-0 border-dark"
                                             data-bs-toggle="modal" data-bs-target="#addstudent_click">+ Add student</a>
@@ -73,37 +81,5 @@
     </main>
 @endsection
 @section('scripts')
-    <script>
-        let sy_id = 0;
-        let sub_id = 0;
-        $(document).ready(function() {
-            $(".select_sy").on('change', function() {
-                sy_id = $(".select_sy :selected").val();
-                if (sy_id != 0 && sub_id != 0) {
-                    $('.filter_by').prop('disabled', false);
-                }
-            });
-            $(".school_year_by_subject").on('change', function() {
-                sub_id = $(".school_year_by_subject :selected").val();
-                if (sy_id != 0 && sub_id != 0) {
-                    $('.filter_by').prop('disabled', false);
-                }
-            });
-            $(".filter_by").on('click', function(e) {
-                e.preventDefault();
-                $.ajax({
-                    method: "POST",
-                    url: '/sresmis/teacher/student-information/by-subject/filter',
-                    data: {
-                        "sy_id": sy_id,
-                        "sub_id": sub_id,
-                    },
-                    success: function(data) {
-                        console.log(data.students);
-                    }
-                });
-            });
-
-        });
-    </script>
+@include('web.backend.teacher.students.admission-subject.script')
 @endsection

@@ -108,12 +108,11 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
 
 
-
+        
 
         /** ================== class schedule ================== */
         Route::resource('class-schedule', ClassScheduleController::class)->only(['index', 'show', 'store']);
-
-
+        
         Route::get('/class-schedule/{sid}/{gid}', [ClassScheduleController::class, 'show_by_section']);
 
         /*Route::get('/class-schedule', [AdminController::class, 'index'])->name('manage-class-schedules');*/
@@ -189,6 +188,10 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/students-information', [TeacherController::class, 'students_information'])->name('sresmis.teacher.students_information');
     Route::get('/student-grades', [TeacherController::class, 'student_grades'])->name('sresmis.teacher.student-grades');
     Route::get('/create-grade/{sy}/{sub}/{sec}/{qtr}', [StudentGradeController::class, 'create_grade']);
+    
+    // Student inf by sub
+    Route::post('/student-information/filter-section', [TeacherController::class, 'filter_section']);
+    
 
     // School Forms
 
@@ -206,7 +209,6 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 
 
 
-
     Route::get('/read', [SchoolForm1Controller::class, 'readtemplate']);
     Route::get('/sf2-view', [SchoolForm2Controller::class, 'index'])->name('teacher.sf2-view');
     Route::get('/sf9-view', [SchoolForm9::class, 'index'])->name('teacher.sf9-view');
@@ -219,8 +221,8 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 
     // Other Routes
     Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
-    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_info_by_subject'])->name('teacher.student-information.by-subject.filter');
-    Route::post('/add-student', [TeacherController::class, 'addStudent'])->name('sresmis.teacher.add-student');
+    Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_student_by_subject']);
+    Route::post('/add-student', [TeacherController::class, 'create_student'])->name('teacher.add-student');
 
 
     // Student Attendance

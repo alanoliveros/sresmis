@@ -15,7 +15,7 @@ use App\Models\ParentGuardian;
 use App\Models\Subject;
 use App\Models\ClassSchedule;
 use App\Models\LearningModality;
-use App\Models\DailyAttendance;
+use App\Models\Enrollment;
 use App\Models\QuarterlyGrading;
 use Carbon\Carbon;
 
@@ -58,10 +58,6 @@ class TeacherController extends Controller
 
   public function create_attendance(Request $request)
   {
-
-
-    echo 'gwpo';
-
 
     // $date = $request->attendance_date;
     // $sessionId = $request->school_year;
@@ -166,13 +162,14 @@ class TeacherController extends Controller
       ->where('teachers.teacherId', '=', $teacherId)->first();
 
     $grades = GradeLevel::where('id', '=', $section->gradeLevelId)->first();
+
+
     $students = Student::where('students.teacherId', '=', $teacherId)
       ->join('users', 'students.studentId', '=', 'users.id')
       ->orderBy('users.lastname', 'asc')
       ->get();
     $sessions = Session::orderBy('school_year', 'desc')->get();
     $learnings = LearningModality::orderBy('id', 'asc')->get();
-
 
     return view('web.backend.teacher.students.admission-advisory.index')->with([
       'section' => $section,
@@ -253,74 +250,76 @@ class TeacherController extends Controller
   {
     return view('web.backend.teacher.students.grade-advisory.grades-by-school-year');
   }
-  public function addStudent(Request $request)
+  public function create_student(Request $request)
   {
-    $school_year = $request->schoolYearId;
-    $studentLrn = $request->studentLrn;
-    $firstName = $request->firstName;
-    $middleName = $request->middleName;
-    $lastName = $request->lastName;
-    $suffix = $request->suffix;
-    $gender = $request->gender;
-    $birthdate = $request->birthdate;
-    $age = $request->age;
 
-    // student info
-    $mothertongue = $request->mothertongue;
-    $ethnicgroup = $request->ethnicgroup;
-    $religion = $request->religion;
+    try {
+      $school_year = $request->schoolYearId;
+      $studentLrn = $request->studentLrn;
+      $firstName = $request->firstName;
+      $middleName = $request->middleName;
+      $lastName = $request->lastName;
+      $suffix = $request->suffix;
+      $gender = $request->gender;
+      $birthdate = $request->birthdate;
+      $age = $request->age;
 
-    // Address
-    $purok = $request->purok;
-    $barangay = $request->barangay;
-    $city = $request->city;
-    $province = $request->province;
-    $zipCode = $request->zipCode;
+      // student info
+      $mothertongue = $request->mothertongue;
+      $ethnicgroup = $request->ethnicgroup;
+      $religion = $request->religion;
 
-    // parent guardian
-    $fathersFirstName = $request->fathersFirstName;
-    $fathersMiddleName = $request->fathersMiddleName;
-    $fathersLastName = $request->fathersLastName;
-    $fathersSuffix = $request->fathersSuffix;
+      // Address
+      $purok = $request->purok;
+      $barangay = $request->barangay;
+      $city = $request->city;
+      $province = $request->province;
+      $zipCode = $request->zipCode;
 
-    $mothersFirstName = $request->mothersFirstName;
-    $mothersMiddleName = $request->mothersMiddleName;
-    $mothersLastName = $request->mothersLastName;
-    $mothersSuffix = $request->mothersSuffix;
+      // parent guardian
+      $fathersFirstName = $request->fathersFirstName;
+      $fathersMiddleName = $request->fathersMiddleName;
+      $fathersLastName = $request->fathersLastName;
+      $fathersSuffix = $request->fathersSuffix;
 
-    $guardiansFirstName = $request->guardiansFirstName;
-    $guardiansMiddleName = $request->guardiansMiddleName;
-    $guardiansLastName = $request->guardiansLastName;
-    $guardiansSuffix = $request->guardiansSuffix;
-    $relationship = $request->relationship;
-    $contactNumber = $request->contactNumber;
+      $mothersFirstName = $request->mothersFirstName;
+      $mothersMiddleName = $request->mothersMiddleName;
+      $mothersLastName = $request->mothersLastName;
+      $mothersSuffix = $request->mothersSuffix;
 
-    $teacherId = auth()->user()->id;
-    $adminId = Teacher::where('teacherId', '=', $teacherId)->first();
+      $guardiansFirstName = $request->guardiansFirstName;
+      $guardiansMiddleName = $request->guardiansMiddleName;
+      $guardiansLastName = $request->guardiansLastName;
+      $guardiansSuffix = $request->guardiansSuffix;
+      $relationship = $request->relationship;
+      $contactNumber = $request->contactNumber;
 
-    $passwordFind = str_replace(' ', '', strtolower($lastName));
+      $teacherId = auth()->user()->id;
+      $adminId = Teacher::where('teacherId', '=', $teacherId)->first();
 
-    $email = $studentLrn;
-    $password = Hash::make($passwordFind . '1234');
+      $passwordFind = str_replace(' ', '', strtolower($lastName));
 
-    $user = User::firstOrNew(['email' => $email]);
-    /**$user = new User();*/
-    $user->name = $firstName;
-    $user->role = 3;
-    $user->middleName = $middleName;
-    $user->lastName = $lastName;
-    $user->suffix = $suffix;
-    $user->email = $email;
-    $user->password = $password;
-    /**$user->gender = $gender;*/
-    $user->gender = $gender;
-    $user->birthdate = $birthdate;
-    $user->age = $age;
-    $user->image = 'avatar.png';
-    $userSave = $user->save();
-    $studentId = $user->id;
+      $email = $studentLrn;
+      $password = Hash::make($passwordFind . '1234');
 
-    if ($userSave) {
+      $user = User::firstOrNew(['email' => $email]);
+      /**$user = new User();*/
+      $user->name = $firstName;
+      $user->role = 3;
+      $user->middleName = $middleName;
+      $user->lastName = $lastName;
+      $user->suffix = $suffix;
+      $user->email = $email;
+      $user->password = $password;
+      /**$user->gender = $gender;*/
+      $user->gender = $gender;
+      $user->birthdate = $birthdate;
+      $user->age = $age;
+      $user->image = 'avatar.png';
+      $userSave = $user->save();
+      $studentId = $user->id;
+
+
       $student = Student::firstOrNew(['studentId' => $studentId, 'school_year' => $school_year]);
       $student->adminId = $adminId->adminId;
       $student->teacherId = $teacherId;
@@ -332,11 +331,9 @@ class TeacherController extends Controller
       $student->mothertongue = $mothertongue;
       $student->ethnicgroup = $ethnicgroup;
       $student->religion = $religion;
-      $student->learning_modality_id = $request->learning_mode_id;
+      $student->learning_modality = $request->learning_mode;
       $student->save();
-    }
 
-    if ($userSave) {
       $address = Address::firstOrNew(['userId' => $studentId]);
       $address->userId = $studentId;
       $address->purok = $purok;
@@ -345,8 +342,7 @@ class TeacherController extends Controller
       $address->province = $province;
       $address->zipCode = $zipCode;
       $address->save();
-    }
-    if ($userSave) {
+
       $parent = ParentGuardian::firstOrNew(['studentId' => $studentId]);
       $parent->adminId = $adminId->adminId;
       $parent->teacherId = $teacherId;
@@ -370,12 +366,52 @@ class TeacherController extends Controller
       $parent->relationshiptoStudent = $relationship;
       $parent->contactNumber = $contactNumber;
       $parent->save();
-    }
 
-    if ($userSave) {
+
+
+
+      $teacher_detail = Teacher::where('teacherId', auth()->user()->id)->first();
+
+      $enrollment = Enrollment::firstOrNew([
+        'school_year' => $request->schoolYearId,
+        'student_id' => $studentId,
+        'lrn' => $studentLrn,
+      ]);
+      $enrollment->lrn = $studentLrn;
+      $enrollment->student_id = $studentId;
+      $enrollment->first_name = $request->firstName;
+      $enrollment->middle_name = $request->middleName;
+      $enrollment->last_name = $request->lastName;
+      $enrollment->suffix = $request->suffix;
+      $enrollment->date_of_birth = $request->birthdate;
+      $enrollment->gender = $request->gender;
+      $enrollment->purok = $request->purok;
+      $enrollment->barangay = $request->barangay;
+      $enrollment->city = $request->city;
+      $enrollment->province = $request->province;
+      $enrollment->grade_level_id = $request->gradeLevelId;
+      $enrollment->section_id = $teacher_detail->sectionId;
+      $enrollment->teacher_id = auth()->user()->id;
+      $enrollment->school_year = $request->schoolYearId;
+      $enrollment->enrollment_status = $request->enrollment_status == 1 ? 1 : 2; // You can set this value accordingly
+      // $enrollment->date_enrolled = $request->enrollment_status == 1? now():null; // You can set this value accordingly
+      // $enrollment->date_dropped = null; // You can set this value accordingly
+      // $enrollment->date_transferred_in = $request->enrollment_status == 1? now():null; // You can set this value accordingly
+      // $enrollment->date_transferred_out = null; // You can set this value accordingly
+      // $enrollment->academic_status = null; // You can set this value accordingly
+
+
+
+      if ($request->enrollment_status == 1) {
+        $enrollment->date_enrolled = now();
+      } else {
+        $enrollment->date_transferred_in = now();
+      }
+      $enrollment->save();
+
       return redirect()->back()->with('success_added', 'Successfully added new record');
-    } else {
-      return redirect()->back()->with('error', 'Something went wrong, Please try again!')->withInput();
+    } catch (\Exception $e) {
+      echo 'error';  // return redirect()->back()->with('error', 'Failed to save the record. Please try again.');
     }
   }
 
@@ -391,5 +427,47 @@ class TeacherController extends Controller
 
   public function class_schedule()
   {
+  }
+  public function filter_section(Request $request)
+  {
+    $sy = $request->sy_id;
+    $sub_id = $request->sub_id;
+    $sections = ClassSchedule::where([
+      'class_schedules.subjectId' => $sub_id,
+      'class_schedules.school_year' => $sy,
+    ])
+    ->join('sections', 'class_schedules.sectionId', 'sections.id')
+    ->get();
+
+
+      $sectionArr = array();
+      foreach($sections as $sec){
+        $sectionArr[$sec->sectionId] = $sec->sectionName;
+      }
+
+    return response()->json([
+      'sections' => $sectionArr
+    ]);
+  }
+  public function filter_student_by_subject(Request $request)
+  {
+    $sy = $request->sy;
+    $sub_id = $request->sub_id;
+    $sec_id = $request->sec_id;
+
+    $students = Student::where([
+      'students.teacherId' => auth()->user()->id,
+      'students.school_year' => $sy,
+      'students.sectionId' => $sec_id,
+    ])
+    ->join('users', 'students.studentId', 'users.id')
+    ->get();
+
+    $subject = Subject::find($sub_id);
+
+    return response()->json([
+      'students' => $students,
+      // 'subject' => $subject,
+    ]);
   }
 }

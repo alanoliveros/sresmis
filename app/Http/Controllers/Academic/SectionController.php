@@ -56,7 +56,7 @@ class SectionController extends Controller
 
     public function getSection(Request $request)
     {
-        $getGradeLevelById = Section::where('grade_lvl_id', '=', $request->id)->get();
+        $getGradeLevelById = Section::where('gradeLevelId', '=', $request->id)->get();
         return response()->json([
             'gradeLevel' => $getGradeLevelById,
         ]);

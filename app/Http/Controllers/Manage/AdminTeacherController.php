@@ -34,7 +34,7 @@ class AdminTeacherController extends Controller
             ->get();
         $gradeLevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
         $subjects = Subject::orderBy('subjectName', 'asc')->get();
-        $sessions = Session::orderBy('school_year', 'asc')->get();
+        $sessions = Session::orderBy('school_year', 'desc')->get();
 
         return view('web.backend.admin.users.teacher.index')
             ->with([

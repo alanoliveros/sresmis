@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Academic\ClassController;
 use App\Http\Controllers\Academic\ClassRoomController;
+use App\Http\Controllers\Academic\ClassScheduleController;
 use App\Http\Controllers\Academic\DailyAttendanceController;
 use App\Http\Controllers\Academic\GradeLevelController;
 use App\Http\Controllers\Academic\SectionController;
@@ -50,13 +51,13 @@ Auth::routes();
 
 /** ======================================= Admin start routing ======================================= */
 Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('isAdmin');
+
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     /** ================== User Profile ================== */
     Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
-
     /** ================== KPI Controller ================== */
     Route::prefix('analytics')->group(function () {
         Route::get('/promotion-rate', [IndicatorController::class, 'promotionIndex'])->name('admin.analytics');
@@ -71,11 +72,8 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
     });
 
-
-
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
     Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
-
 
     /** ================== Users ================== */
     Route::prefix('manage-users')->group(function () {
@@ -85,35 +83,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
         Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /** ================== Settings ================== */
     Route::prefix('settings')->group(function () {
@@ -134,18 +103,28 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::prefix('academic')->group(function () {
         Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
-        Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
+        /*Route::get('/class-schedule', [ClassController::class, 'index'])->name('admin.class');*/
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
 
 
 
 
-        Route::get('/section', [SectionController::class, 'index'])->name('admin.section');
+        /** ================== class schedule ================== */
+        Route::resource('class-schedule', ClassScheduleController::class)->only(['index', 'show', 'store']);
+
+
+        Route::get('/class-schedule/{sid}/{gid}', [ClassScheduleController::class, 'show_by_section']);
+
+        /*Route::get('/class-schedule', [AdminController::class, 'index'])->name('manage-class-schedules');*/
+        /*Route::get('/schedules/view-by-gradelevel/{name}', [AdminController::class, 'view_by_gradeLevel']);*/
+        /*Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');*/
+
+
+
+        /** ================== Section ================== */
+        Route::resource('section', SectionController::class)->only(['index', 'store']);
         Route::post('/getSection', [SectionController::class, 'getSection']);
-
-        Route::post('/create', [SectionController::class, 'create'])->name('admin.section.create');
-
 
 
 
@@ -160,7 +139,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 /** Section */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-    Route::post('/getSection', [AdminController::class, 'getSection']);
+//    Route::post('/getSection', [AdminController::class, 'getSection']);
     Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
     Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
 });
@@ -168,21 +147,21 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
 
 /** Subjects */
-Route::prefix('/admin')->middleware('isAdmin')->group(function () {
-    /*  Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');*/
-    Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
-    Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
-});
+//Route::prefix('/admin')->middleware('isAdmin')->group(function () {
+//    Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');
+//    Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
+//    Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
+//});
 
 
 
 /** Manage Class Schedules */
-Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
+/*Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
     Route::get('/manage-class-schedules', [AdminController::class, 'manage_class_schedules'])->name('manage-class-schedules');
     Route::get('/schedules/view-by-gradelevel/{name}', [AdminController::class, 'view_by_gradeLevel']);
     Route::get('/schedules/view-by-section/{sid}/{gid}', [AdminController::class, 'view_by_section']);
     Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');
-});
+});*/
 
 Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 

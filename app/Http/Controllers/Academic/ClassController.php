@@ -14,7 +14,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        return view('web.backend.admin.academics.class.index');
+        return view('web.backend.admin.academics.classschedule.index');
     }
 
     /**

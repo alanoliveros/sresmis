@@ -1,5 +1,5 @@
 @extends('web.backend.layouts.app')
-@section('title' , 'Section')
+@section('title' , 'Class')
 @section('content')
     <main id="main" class="main">
 
@@ -34,8 +34,8 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Section</th>
                                     <th scope="col">Grade Level</th>
+                                    <th scope="col">Section</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 </thead>
@@ -43,8 +43,8 @@
                                 @foreach($sections as $key=>$section)
                                     <tr>
                                         <th scope="row">{{$key+1}}</th>
-                                        <td>{{$section->section_name}}</td>
                                         <td>{{$section->gradeLevelName}}</td>
+                                        <td>{{$section->section_name}}</td>
                                         <td>
                                             <a href=""><i class="bi bi-eye-fill"></i></a>
                                             <a href=""><i class="bi bi-pencil-square"></i></a>

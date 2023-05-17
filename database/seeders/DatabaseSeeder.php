@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Session;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -70,42 +71,12 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        DB::table('grade_levels')->insert([
-            [
-                'gradeLevelName' => 'KINDERGARTEN',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'gradeLevelName' => 'GRADE I',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'gradeLevelName' => 'GRADE II',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'gradeLevelName' => 'GRADE III',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'gradeLevelName' => 'GRADE IV',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'gradeLevelName' => 'GRADE V',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'gradeLevelName' => 'GRADE VI',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+        $this->call([
+            GradeLevelSeeder::class,
+            SessionSeeder::class,
+            SectionSeeder::class,
+            SubjectSeeder::class
+            // Other seeders you want to run
         ]);
     }
 }

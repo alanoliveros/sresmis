@@ -1,7 +1,7 @@
 @extends('web.backend.layouts.app')
 @section('title' , 'Subject')
 @section('content')
-        <main id="main" class="main">
+        <main id="main" class="ma`in">
 
             <div class="pagetitle">
                 <h1>Data Tables</h1>
@@ -38,6 +38,7 @@
                                         <th scope="col">Description</th>
                                         <th scope="col">Written Work</th>
                                         <th scope="col">Performance Task</th>
+                                        <th scope="col">Quarterly Assessment</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                     </thead>
@@ -49,6 +50,7 @@
                                             <td>{{ $subject->description }}</td>
                                             <td>{{ $subject->written_work_percentage }}</td>
                                             <td>{{ $subject->performance_tasks_percentage }}</td>
+                                            <td>{{ $subject->quarterly_assessment_percentage }}</td>
                                             <td>
                                                 <a href=""><i class="bi bi-eye-fill"></i></a>
                                                 <a href=""><i class="bi bi-pencil-square"></i></a>

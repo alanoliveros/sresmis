@@ -9,7 +9,7 @@
 <!-- End Dashboard Nav -->
 
 <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('admin.dashboard')}}">
+    <a class="nav-link collapsed" href="{{route('enrollmentprofile.dashboard')}}">
         <i class="bi bi-person-lines-fill"></i>
         <span>Enrolment Profile</span>
         <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
@@ -92,10 +92,10 @@
             /*['name' => 'Grade Level', 'route' => 'admin.grade-level'],*/
             /*['name' => 'Section', 'route' => 'admin.section'],*/
             /*['name' => 'Class schedule', 'route' => 'admin.class'],*/
-            ['name' => 'Class schedule', 'route' => 'class-schedule.index'],
-            ['name' => 'Subject', 'route' => 'admin.subject'],
             ['name' => 'Class', 'route' => 'section.index'],
-            ['name' => 'Class room', 'route' => 'admin.class-room'],
+            ['name' => 'Subject', 'route' => 'admin.subject'],
+            ['name' => 'Class schedule', 'route' => 'class-schedule.index'],
+            /*['name' => 'Class room', 'route' => 'admin.class-room'],*/
         ];
     @endphp
     <ul id="academic-nav"

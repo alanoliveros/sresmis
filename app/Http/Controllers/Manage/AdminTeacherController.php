@@ -55,7 +55,6 @@ class AdminTeacherController extends Controller
     public function create(Request $request)
     {
         /** Insert User */
-//        $user = new User();
         $user = User::firstOrNew(['email' => $request->email]);
         $user->name = $request->firstName;
         $user->role = 2;

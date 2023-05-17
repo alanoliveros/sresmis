@@ -11,9 +11,9 @@ class Section extends Model
     use HasFactory;
 
     protected $fillable = [
-        'admin_id',
-        'section_name',
-        'grade_lvl_id',
+        'adminId',
+        'sectionName',
+        'gradeLevelId',
     ];
     protected static function newFactory()
     {

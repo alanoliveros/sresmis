@@ -44,7 +44,7 @@
                                     <tr>
                                         <th scope="row">{{$key+1}}</th>
                                         <td>{{$section->gradeLevelName}}</td>
-                                        <td>{{$section->section_name}}</td>
+                                        <td>{{$section->sectionName}}</td>
                                         <td>
                                             <a href=""><i class="bi bi-eye-fill"></i></a>
                                             <a href=""><i class="bi bi-pencil-square"></i></a>

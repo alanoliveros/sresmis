@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
 {
@@ -37,10 +38,11 @@ class SubjectController extends Controller
      *
      * @return RedirectResponse
      */
-    public function create(Request $request)
+    /*public function create(Request $request)
     {
-        $request->validate([
+        $validator=$request->validate([
             'subjectname' => 'required',
+            'gradeLevelId' => 'required',
         ]);
 
         $gradeLevelId = $request->gradeLevelId;
@@ -59,8 +61,38 @@ class SubjectController extends Controller
             $subject->performance_tasks_percentage= $performance_task;
             $subject->save();
 
+        if ($validator == false) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+        return redirect()->back()->with('success_added', 'Successfully added new record');
+    }*/
+
+    public function create(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'subjectname' => 'required',
+            'gradeLevelId' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $subject = new Subject();
+        $subject->adminId = auth()->user()->id;
+        $subject->gradeLevelId = $request->gradeLevelId;
+        $subject->subjectName = $request->subjectname;
+        $subject->description = $request->description;
+        $subject->written_work_percentage = $request->writtenWork;
+        $subject->performance_tasks_percentage = $request->performanceTask;
+        $subject->quarterly_assessment_percentage = $request->quarterlyAssessment;
+        $subject->save();
+
         return redirect()->back()->with('success_added', 'Successfully added new record');
     }
+
 
     /**
      * Store a newly created resource in storage.

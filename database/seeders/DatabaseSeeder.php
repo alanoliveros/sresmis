@@ -74,6 +74,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             GradeLevelSeeder::class,
             SessionSeeder::class,
+            SectionSeeder::class,
+            SubjectSeeder::class
             // Other seeders you want to run
         ]);
     }

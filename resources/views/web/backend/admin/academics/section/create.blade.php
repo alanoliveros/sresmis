@@ -12,23 +12,24 @@
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label text-dark">Grade Level <small class="text-danger">(required)</small></label>
+                            <label for="validationDefault02" class="form-label text-dark">Grade Level <small class="text-danger">*</small></label>
                             <select name="gradeLevel" class="form-select">
                                 <option selected disabled>Please select grade level</option>
                                 @foreach ($gradelevel as $level)
-                                    <option value="{{$level->id}}">{{$level->gradeLevelName}}</option>
+                                    <option value="{{ $level->id }}" {{ old('gradeLevel') == $level->id ? 'selected' : '' }}>{{ $level->gradeLevelName }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label text-dark">Section Name <small class="text-danger">(required)</small></label>
-                            <input type="text" class="form-control" name="sectionName">
+                            <label for="validationDefault02" class="form-label text-dark">Section Name <small class="text-danger">*</small></label>
+                            <input type="text" class="form-control" name="sectionName" value="{{ old('sectionName') }}">
                         </div>
                         <div class="col-12">
                             <button class="btn btn-primary float-end" type="submit">Create</button>
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </form>

@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Academic\ClassController;
 use App\Http\Controllers\Academic\ClassRoomController;
+use App\Http\Controllers\Academic\ClassScheduleController;
 use App\Http\Controllers\Academic\DailyAttendanceController;
 use App\Http\Controllers\Academic\GradeLevelController;
 use App\Http\Controllers\Academic\SectionController;
@@ -102,13 +103,30 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::prefix('academic')->group(function () {
         Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
-        Route::get('/class', [ClassController::class, 'index'])->name('admin.class');
+        /*Route::get('/class-schedule', [ClassController::class, 'index'])->name('admin.class');*/
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
+
+
+
+
+        /** ================== class schedule ================== */
+        Route::resource('class-schedule', ClassScheduleController::class)->only(['index', 'show', 'store']);
+
+
+        Route::get('/class-schedule/{sid}/{gid}', [ClassScheduleController::class, 'show_by_section']);
+
+        /*Route::get('/class-schedule', [AdminController::class, 'index'])->name('manage-class-schedules');*/
+        /*Route::get('/schedules/view-by-gradelevel/{name}', [AdminController::class, 'view_by_gradeLevel']);*/
+        /*Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');*/
+
+
 
         /** ================== Section ================== */
         Route::resource('section', SectionController::class)->only(['index', 'store']);
         Route::post('/getSection', [SectionController::class, 'getSection']);
+
+
 
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
         Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
@@ -138,12 +156,12 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 
 
 /** Manage Class Schedules */
-Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
+/*Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
     Route::get('/manage-class-schedules', [AdminController::class, 'manage_class_schedules'])->name('manage-class-schedules');
     Route::get('/schedules/view-by-gradelevel/{name}', [AdminController::class, 'view_by_gradeLevel']);
     Route::get('/schedules/view-by-section/{sid}/{gid}', [AdminController::class, 'view_by_section']);
     Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');
-});
+});*/
 
 Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 

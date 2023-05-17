@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('adminId');
             $table->string('school_year');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

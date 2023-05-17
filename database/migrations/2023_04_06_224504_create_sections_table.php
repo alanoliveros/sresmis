@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('admin_id');
             $table->string('section_name');
-            $table->integer('grade_lvl_id');
+            $table->integer('grade_lvl_id')->default(1);
             $table->timestamps();
         });
     }

@@ -103,7 +103,7 @@
                                 <thead>
                                 <tr class="fs-5">
                                     <th scope="col" class="text-success">#</th>
-                                    <th scope="col" class="text-success">Full name</th>
+                                    <th scope="col" class="text-success">Name</th>
                                     <th scope="col" class="text-success">Designation</th>
                                     <th scope="col" class="text-success">Grade Level Taught</th>
                                     <th scope="col" class="text-success">Section Assigned</th>

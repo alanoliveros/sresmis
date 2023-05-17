@@ -247,7 +247,10 @@ class AdminController extends Controller
     public function manage_class_schedules()
     {
         $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
-        return view('backend.admin.class-schedules.index')->with([
+        /*resources/views/web/backend/admin/academics/classschedule/index.blade.php*/
+        return view('web.backend.admin.academics.classschedule.index')->with([
+
+       /* return view('backend.admin.class-schedules.index')->with([*/
             'gradelevel' => $gradelevel,
         ]);
     }
@@ -259,8 +262,9 @@ class AdminController extends Controller
 
         // echo $gradeLevel->gradeLevelName;
         $sections = Section::where('gradeLevelId', '=', $gradeLevel->id)->get();
+        /*resources/views/web/backend/admin/academics/classschedule/by-section.blade.php*/
 
-        return view('backend.admin.class-schedules.by-section')->with([
+        return view('web.backend.admin.academics.classschedules.by-section')->with([
             'sections' => $sections,
             'gradeLevelId' => $gradeLevel->id,
 
@@ -276,7 +280,10 @@ class AdminController extends Controller
         $teachers = Teacher::where('teachers.adminId', '=', auth()->user()->id)->join('users', 'teachers.teacherId', 'users.id')->get();
         $schedules = ClassSchedule::where('class_schedules.sectionId', '=', $sid)->join('subjects', 'class_schedules.subjectId', 'subjects.id')->orderBy('class_schedules.startTime', 'asc')->get();
 
-        return view('backend.admin.class-schedules.section')->with([
+        /*resources/views/web/backend/admin/academics/classschedule/section.blade.php*/
+
+        return view('web.backend.admin.academics.classschedules.section')->with([
+        /*return view('backend.admin.class-schedules.section')->with([*/
             'section' => $section,
             'classSchedule' => $classSchedule,
             'subjects' => $subjects,

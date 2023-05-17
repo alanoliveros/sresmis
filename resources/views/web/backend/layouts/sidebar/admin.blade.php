@@ -89,11 +89,12 @@
     @php
         $components = [
             /*['name' => 'Daily Attendance', 'route' => 'admin.daily-attendance'],*/
-            ['name' => 'Grade Level', 'route' => 'admin.grade-level'],
+            /*['name' => 'Grade Level', 'route' => 'admin.grade-level'],*/
             /*['name' => 'Section', 'route' => 'admin.section'],*/
-            ['name' => 'Section', 'route' => 'section.index'],
+            /*['name' => 'Class schedule', 'route' => 'admin.class'],*/
+            ['name' => 'Class schedule', 'route' => 'class-schedule.index'],
             ['name' => 'Subject', 'route' => 'admin.subject'],
-            ['name' => 'Class Schedule', 'route' => 'admin.class'],
+            ['name' => 'Class', 'route' => 'section.index'],
             ['name' => 'Class room', 'route' => 'admin.class-room'],
         ];
     @endphp

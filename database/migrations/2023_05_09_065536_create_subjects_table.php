@@ -17,10 +17,12 @@ return new class extends Migration
             $table->id();
             $table->integer('adminId');
             $table->integer('gradeLevelId');
+            $table->integer('sectionName');
             $table->string('subjectName');
             $table->string('description')->nullable();
             $table->integer('written_work_percentage')->nullable();
             $table->integer('performance_tasks_percentage')->nullable();
+            $table->integer('quarterly_assessment_percentage')->nullable();
             $table->timestamps();
         });
     }

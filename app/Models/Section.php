@@ -15,8 +15,4 @@ class Section extends Model
         'sectionName',
         'gradeLevelId',
     ];
-    protected static function newFactory()
-    {
-        return SectionFactory::new();
-    }
 }

@@ -24,24 +24,35 @@ class AdminTeacherController extends Controller
     {
         $adminId = auth()->user()->id;
 
-        $teachers = Teacher::join('users', 'teachers.teacherId', '=', 'users.id')
-            ->join('grade_levels', 'teachers.gradeLevelId', '=', 'grade_levels.id')
-            ->join('sections', 'teachers.sectionId', '=', 'sections.id')
-            ->orderBy('users.lastname', 'asc')->where([
-                'teachers.adminId' => $adminId,
-                'users.role' => 2
-            ])
+        $teachers = Teacher::where([
+            'teachers.adminId' => $adminId,
+            'users.role' => 2
+        ])
+            ->join('users',
+                'teachers.teacherId', '=', 'users.id')
+            ->join('grade_levels',
+                'teachers.gradeLevelId', '=', 'grade_levels.id')
+            ->join('sections',
+                'teachers.sectionId', '=', 'sections.id')
+
+            ->orderBy('grade_levels.gradeLevelName', 'asc')
             ->get();
+
         $gradeLevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
         $subjects = Subject::orderBy('subjectName', 'asc')->get();
         $sessions = Session::orderBy('school_year', 'desc')->get();
 
+
+        /*foreach ($teachers as $teacher) {
+            echo $teacher->teacherId.' '.$teacher->name .' '. $teacher->gradeLevelName .' '. $teacher->sectionName . '<br>';
+        }*/
+
         return view('web.backend.admin.users.teacher.index')
             ->with([
-                'gradeLevel' => $gradeLevel,
-                'subjects' => $subjects,
                 'teachers' => $teachers,
                 'sessions' => $sessions,
+                'gradeLevel' => $gradeLevel,
+                'subjects' => $subjects,
             ]);
     }
 

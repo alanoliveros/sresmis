@@ -18,15 +18,16 @@ class SectionFactory extends Factory
     protected $model = Section::class;
     public function definition()
     {
-        static $sectionNumber = 1;
+        static $sectionLetter = 'A';
 
         return [
             'adminId' => 1,
-            'sectionName' => 'Section ' . $sectionNumber++,
+            'sectionName' => 'Section ' . $sectionLetter++,
             'gradeLevelId' => $this->faker->numberBetween(1, 7),
             'created_at' => now(),
             'updated_at' => now(),
         ];
+
     }
 
 

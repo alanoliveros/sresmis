@@ -33,7 +33,6 @@
                             <table class="table" id="components-datatable">
                                 <thead>
                                 <tr>
-                                    {{--<th scope="col">#</th>--}}
                                     <th scope="col">Name</th>
                                     <th scope="col">Designation</th>
                                     <th scope="col">Grade Level Taught</th>
@@ -47,7 +46,6 @@
                                 <tbody>
                                 @foreach($teachers as $key=>$teacher)
                                     <tr>
-                                        {{--<th scope="row">{{$key+1}}</th>--}}
                                         <td>{{$teacher->lastname.', '.$teacher->name.', '.($teacher->middlename == NULL? '':$teacher->middlename).($teacher->suffix == NULL? '':', '.$teacher->suffix)}}</td>
                                         <td>{{$teacher->designation}}</td>
                                         <td>{{$teacher->gradeLevelName}}</td>

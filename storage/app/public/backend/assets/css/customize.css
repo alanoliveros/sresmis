@@ -205,3 +205,6 @@ tr .datatable-empty {
 .table td {
   white-space: nowrap;
 }
+.not-available {
+  color: red;
+}

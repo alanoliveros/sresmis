@@ -24,24 +24,38 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
                             <div class="row my-3">
-                                <div class="col-12 col-sm-4 col-md-4">
+                                <div class="col-12 col-sm-4 col-md-3">
                                     <div class="mb-3">
                                         <select class="form-select school_year" required aria-label="select example"
                                             name="school_year">
-                                            @foreach ($sessions as $key=>$session)
-                                                <option {{$key == 0? 'selected':''}} value="{{ $session->id }}">{{ $session->school_year }}</option>
+                                            @foreach ($sessions as $key => $session)
+                                                <option {{ $key == 0 ? 'selected' : '' }}
+                                                    value="{{ $session->school_year }}">
+                                                    {{ $session->school_year }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4 col-md-4">
+                                <div class="col-12 col-sm-4 col-md-3">
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-secondary rounded-0 filter_Sy">Filter</button>
+                                        <select class="form-select select_student_by" required aria-label="select example"
+                                            name="school_year">
+                                            {{-- @foreach ($students as $student)
+                                                <option value="">{{$student->name}}</option>
+                                            @endforeach --}}
+                                        </select>
                                     </div>
                                 </div>
+
                                 {{-- add student start --}}
-                                <div class="col-12 col-sm-4 col-md-4">
+                                <div class="col-12 col-sm-4 col-md-6">
                                     <div class="mb-3 addstudent-button">
+                                        <a href="" class="btn btn-primary rounded-0 float-md-end"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                                class="bi bi-folder-plus"></i> Create</a>
+
+                                        @include('web.backend.teacher.quarterly-grade.advisory.create')
+
                                     </div>
                                 </div>
                                 {{-- add student start --}}
@@ -69,17 +83,17 @@
                                         <table class="table table-hover" id="studentSF1">
                                             <thead>
                                                 <tr>
-                                                    <th>Sr.</th>
-                                                    <th>LRN</th>
-                                                    <th>Student Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Age</th>
-                                                    <th>Birthdate</th>
-                                                    <th>Action</th>
+                                                    <th>Learning Areas</th>
+                                                    <th>Q1</th>
+                                                    <th>Q2</th>
+                                                    <th>Q3</th>
+                                                    <th>Q4</th>
+                                                    <th>Final Grades</th>
+                                                    <th>Remarks</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                               
+                                            <tbody class="tbody_data">
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -100,5 +114,5 @@
     </main>
 @endsection
 @section('scripts')
-    @include('web.backend.teacher.quarterly-grade.script')
+    @include('web.backend.teacher.quarterly-grade.advisory.script')
 @endsection

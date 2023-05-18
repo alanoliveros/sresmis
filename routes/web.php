@@ -142,7 +142,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 /** Section */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-//    Route::post('/getSection', [AdminController::class, 'getSection']);
+    //    Route::post('/getSection', [AdminController::class, 'getSection']);
     Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
     Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
 });
@@ -247,24 +247,19 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
     Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // Fitler Student grades 
-    Route::get('/teacher/student/grades', [QuarterlyGradeController::class, 'index'])->name('teacher.student.grades');
 
+
+
+
+
+
+    // Fitler Student grades 
+    Route::get('/student/grades', [QuarterlyGradeController::class, 'index'])->name('teacher.student.grades');
+    Route::post('/student-grade/quarterly', [QuarterlyGradeController::class, 'getStudents']);
     
+    // save quarterly grade by advisory
+    Route::post('/teacher/save-quarterly-grade/by-advisory', [QuarterlyGradeController::class, 'createGrade'])->name('teacher.save-quarterly-grade.by-advisory');
+   
 
     // Generate PDF
     Route::get('/generate', [SchoolForm1Controller::class, 'generatePDF']);

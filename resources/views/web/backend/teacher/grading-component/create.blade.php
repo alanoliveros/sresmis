@@ -14,9 +14,7 @@
     .table td:first-child {
         position: sticky;
         left: 0;
-        background-color: antiquewhites;
-       
-       
+        background-color: white;
     }
 
     .table td {
@@ -105,25 +103,25 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="text-nowrap">Highest Possible Score</th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
-                                                        <th><input type="number" min="1"
+                                                        <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
                                                     </tr>
                                                 </thead>
@@ -131,6 +129,16 @@
                                                     @foreach ($students as $student)
                                                         <tr>
                                                             <td>{{$student->lastname. ', '.$student->name}}</td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
                                                         </tr>
                                                     @endforeach
 

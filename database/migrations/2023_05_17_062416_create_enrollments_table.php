@@ -30,8 +30,8 @@ return new class extends Migration
             $table->integer('grade_level_id')->nullable();
             $table->integer('section_id')->nullable();
             $table->integer('teacher_id')->nullable();
-            $table->integer('school_year')->nullable();
-            $table->date('enrollment_status')->nullable();
+            $table->string('school_year')->nullable();
+            $table->integer('enrollment_status')->nullable();
             $table->date('date_enrolled')->nullable();
             $table->date('date_dropped')->nullable();
             $table->date('date_transferred_in')->nullable();

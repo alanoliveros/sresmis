@@ -65,8 +65,8 @@
     </ul>
 </li><!-- End Icons Nav -->
 <li class="nav-item">
-    <a class="nav-link {{ Request::routeIs('sresmis.teacher.student-grades') ? 'active' : '' }}"
-        href="{{ route('sresmis.teacher.student-grades') }}">
+    <a class="nav-link {{ Request::routeIs('teacher.student-grades') ? 'active' : '' }}"
+        href="{{ route('teacher.student.grades') }}">
         <i class="bi bi-award fs-5"></i>
         <span>Student Grades</span>
     </a>

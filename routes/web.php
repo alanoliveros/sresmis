@@ -29,6 +29,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Teacher\StudentGradeController;
 use App\Http\Controllers\Notifications\MailboxController;
 use App\Http\Controllers\Attendance\StudentAttendance;
+use App\Http\Controllers\Teacher\QuarterlyGradeController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -246,13 +247,24 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
     Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Fitler Student grades 
+    Route::get('/teacher/student/grades', [QuarterlyGradeController::class, 'index'])->name('teacher.student.grades');
 
-
-
-
-
-
-
+    
 
     // Generate PDF
     Route::get('/generate', [SchoolForm1Controller::class, 'generatePDF']);

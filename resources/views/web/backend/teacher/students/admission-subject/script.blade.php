@@ -5,10 +5,12 @@
             // if (sy_id != 0 && sub_id != 0) {
             //     $('.filter_by').prop('disabled', false);
             // }
+
+            console.log(sy_id);
         });
         $(".school_year_by_subject").on('change', function() {
             let subject = $(".school_year_by_subject :selected").val();
-
+            console.log(subject);
             $.ajax({
                 method: "POST",
                 url: '/teacher/student-information/filter-section',
@@ -17,6 +19,9 @@
                     "sub_id": subject,
                 },
                 success: function(data) {
+
+
+                    console.log(data);
                     let opt = `<option selected disabled>Select Section</option>`;
                     $.each(data.sections, function(key, val){
                         opt+= `

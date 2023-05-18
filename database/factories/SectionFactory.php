@@ -18,20 +18,16 @@ class SectionFactory extends Factory
     protected $model = Section::class;
     public function definition()
     {
+        static $sectionNumber = 1;
+
         return [
             'adminId' => 1,
-            /*'section_name' => $this->generateSectionName(),*/
-            'sectionName' => ucfirst($this->faker->word),
+            'sectionName' => 'Section ' . $sectionNumber++,
             'gradeLevelId' => $this->faker->numberBetween(1, 7),
             'created_at' => now(),
             'updated_at' => now(),
         ];
     }
-    /*private function generateSectionName()
-    {
-        $sectionLetters = range('A', 'Z');
-        $sectionNumber = $this->faker->numberBetween(1, 10);
 
-        return 'Section ' . $sectionLetters[array_rand($sectionLetters)] . $sectionNumber;
-    }*/
+
 }

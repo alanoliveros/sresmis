@@ -30,10 +30,10 @@
 
                                 <!-- Table with stripped rows -->
 
-                                <table class="table" id="components-datatable">
+                                <table class="table" id="subject-datatable">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        {{--<th scope="col">#</th>--}}
                                         <th scope="col">Subject</th>
                                         <th scope="col">Description</th>
                                         {{--<th scope="col">Written Work</th>
@@ -45,7 +45,7 @@
                                     <tbody>
                                     @foreach($subjects as $key=>$subject)
                                         <tr>
-                                            <th scope="row">{{ $key + 1 }}</th>
+                                            {{--<th scope="row">{{ $key + 1 }}</th>--}}
                                             <td>{{ $subject->subjectName }}</td>
                                             <td>{{ $subject->description }}</td>
                                             {{--<td>{{ $subject->written_work_percentage }}</td>

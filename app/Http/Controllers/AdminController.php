@@ -211,13 +211,13 @@ class AdminController extends Controller
         return redirect()->back()->with('success_added', 'Successfully added new record');
     }
 
-    public function getSection(Request $request)
+    /*public function getSection(Request $request)
     {
         $getGradeLevelById = Section::where('gradeLevelId', '=', $request->id)->get();
         return response()->json([
             'gradeLevel' => $getGradeLevelById,
         ]);
-    }
+    }*/
 
 
 

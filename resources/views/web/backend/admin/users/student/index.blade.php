@@ -38,7 +38,7 @@
                             <table class="table" id="components-datatable">
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    {{--<th scope="col">#</th>--}}
                                     <th scope="col">Name</th>
                                     <th scope="col">Designation</th>
                                     <th scope="col">Grade Level Taught</th>

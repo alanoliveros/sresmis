@@ -25,8 +25,17 @@ class SectionController extends Controller
         $sections = Section::join('grade_levels', 'sections.gradeLevelId', 'grade_levels.id')
             ->orderBy('grade_levels.id', 'asc')
             ->get();
+
+        $glevel = array();
+        foreach($sections as $level){
+            $glevel[$level->gradeLevelId] = [
+                'gradeLevel' => $level->gradeLevelName,
+                'sections' => Section::where('gradeLevelId', $level->gradeLevelId)->get(),
+            ];
+        }
+//        print_r($glevel);
         return view('web.backend.admin.academics.section.index', [
-            'sections' => $sections,
+            'glevel' => $glevel,
             'gradelevel' => $gradelevel,
         ]);
     }
@@ -44,11 +53,17 @@ class SectionController extends Controller
 
     public function getSection(Request $request)
     {
-        $getGradeLevelById = Section::where('gradeLevelId', '=', $request->id)->get();
+        $getGradeLevelById = Section::where('sections.gradeLevelId', $request->id)
+            ->join('teachers', 'sections.id', '=', 'teachers.sectionId')
+            ->join('users', 'teachers.teacherId', '=', 'users.id')
+            ->select('sections.*', 'teachers.teacherId as teacherId', 'users.*')
+            ->get();
+
         return response()->json([
             'gradeLevel' => $getGradeLevelById,
         ]);
     }
+
 
     /**
      * Store a newly created resource in storage.

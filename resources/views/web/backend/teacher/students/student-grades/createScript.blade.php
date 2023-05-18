@@ -78,8 +78,10 @@
 
         $('.display_student_grade').html(student_names);
         let subject = <?php echo json_encode($subject); ?>;
-        $('.written_works_average').text(subject.written_work_percentage + '%').attr("data-val",subject.written_work_percentage);
-        $('.performance_tasks_average').text(subject.performance_tasks_percentage + '%').attr("data-val",subject.performance_tasks_percentage);
+        $('.written_works_average').text(subject.written_work_percentage + '%').attr("data-val", subject
+            .written_work_percentage);
+        $('.performance_tasks_average').text(subject.performance_tasks_percentage + '%').attr("data-val", subject
+            .performance_tasks_percentage);
     }
 
     function student_score(parent, pname, input) {
@@ -147,13 +149,13 @@
         let performanceHead = $(highestScorePerformance).find('.performance_tasks_possible_score').find('input');
         let possibleWrittenScores = [];
 
-       
-        $.each($(writtenHead), function(key, val){
+
+        $.each($(writtenHead), function(key, val) {
             possibleWrittenScores.push($(val).val());
         });
 
         let possiblePerformanceScores = [];
-        $.each($(performanceHead), function(key, val){
+        $.each($(performanceHead), function(key, val) {
             possiblePerformanceScores.push($(val).val());
         });
 
@@ -173,13 +175,19 @@
         let perFormancePSAverage = $(performance).find('.ps_by_learner').text();
         let perFormanceWeightedAverage = $(performance).find('.wa_by_learner').text();
 
-        let possibleScoreWrittenTotal = $(highestScore).find('.written_tasks_possible_score').find('.total_high_score').text();
-        let possibleWrittenPercentageScore = $(highestScore).find('.written_tasks_possible_score').find('.percentage').attr('data-val');
-        let possibleWrittenWeightedAverage = $(highestScore).find('.written_tasks_possible_score').find('.written_works_average').attr('data-val');
-        
-        let possibleScorePerformanceTotal = $(highestScorePerformance).find('.performance_tasks_possible_score').find('.total_high_score').text();
-        let possiblePerformancePercentageScore = $(highestScorePerformance).find('.performance_tasks_possible_score').find('.percentage').attr('data-val');
-        let possiblePerformanceWeightedAverage = $(highestScorePerformance).find('.performance_tasks_possible_score').find('.performance_tasks_average').attr('data-val');
+        let possibleScoreWrittenTotal = $(highestScore).find('.written_tasks_possible_score').find('.total_high_score')
+            .text();
+        let possibleWrittenPercentageScore = $(highestScore).find('.written_tasks_possible_score').find('.percentage')
+            .attr('data-val');
+        let possibleWrittenWeightedAverage = $(highestScore).find('.written_tasks_possible_score').find(
+            '.written_works_average').attr('data-val');
+
+        let possibleScorePerformanceTotal = $(highestScorePerformance).find('.performance_tasks_possible_score').find(
+            '.total_high_score').text();
+        let possiblePerformancePercentageScore = $(highestScorePerformance).find('.performance_tasks_possible_score')
+            .find('.percentage').attr('data-val');
+        let possiblePerformanceWeightedAverage = $(highestScorePerformance).find('.performance_tasks_possible_score')
+            .find('.performance_tasks_average').attr('data-val');
 
 
         $.each($(performance).find('input'), function(key, val) {
@@ -198,34 +206,34 @@
             'school_year': data_by.sy,
             'quarter': data_by.qtr,
             'outputs': {
-                    'performance_tasks': {
-                        "quizzes": possiblePerformanceScores,
-                        "totalscore": possibleScorePerformanceTotal,
-                        "ps": possiblePerformancePercentageScore,
-                        "ww": possiblePerformanceWeightedAverage,
-                    },
-                    'written_works': {
-                        "quizzes": possibleWrittenScores,
-                        "totalscore": possibleScoreWrittenTotal,
-                        "ps": possibleWrittenPercentageScore,
-                        "ww": possibleWrittenWeightedAverage,
-                    },
-                    'student_written': {
-                        "quizzes": writtArrQuizzes,
-                        "totalscore": writtenTotalScore,
-                        "ps": writtenPSAverage,
-                        "ww": writtenWeightedAverage,
-                    },
-                    'student_performance': {
-                        "quizzes": writtArrQuizzes,
-                        "totalscore": writtenTotalScore,
-                        "ps": writtenPSAverage,
-                        "ww": writtenWeightedAverage,
-                    },
+                'performance_tasks': {
+                    "quizzes": possiblePerformanceScores,
+                    "totalscore": possibleScorePerformanceTotal,
+                    "ps": possiblePerformancePercentageScore,
+                    "ww": possiblePerformanceWeightedAverage,
+                },
+                'written_works': {
+                    "quizzes": possibleWrittenScores,
+                    "totalscore": possibleScoreWrittenTotal,
+                    "ps": possibleWrittenPercentageScore,
+                    "ww": possibleWrittenWeightedAverage,
+                },
+                'student_written': {
+                    "quizzes": writtArrQuizzes,
+                    "totalscore": writtenTotalScore,
+                    "ps": writtenPSAverage,
+                    "ww": writtenWeightedAverage,
+                },
+                'student_performance': {
+                    "quizzes": writtArrQuizzes,
+                    "totalscore": writtenTotalScore,
+                    "ps": writtenPSAverage,
+                    "ww": writtenWeightedAverage,
+                },
             },
         };
 
-        
+
         console.log(studentOutputs);
 
 
@@ -233,7 +241,7 @@
             method: "POST",
             url: '/teacher/student-grades/save-grades',
             data: {
-                "outputs" : JSON.stringify(studentOutputs),
+                "outputs": JSON.stringify(studentOutputs),
             },
             success: function(data) {
                 swal("Deleted!", "Your imaginary file has been deleted.", "success");

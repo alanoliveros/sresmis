@@ -53,6 +53,16 @@
     </a>
     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
+            <a href="{{ route('teacher.grade-component-index') }}">
+                <i class="bi bi-circle"></i><span>Grade Component</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('teacher.create-grade.student-advisory') }}">
+                <i class="bi bi-circle"></i><span>Quizzes</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('teacher.student.grades') }}">
                 <i class="bi bi-circle"></i><span>Advisory</span>
             </a>

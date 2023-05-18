@@ -1,6 +1,27 @@
 @extends('web.backend.layouts.app')
 @section('title', 'SRESMIS | Grades')
 @section('content')
+<style>
+    .table {
+
+  width: 100%;
+  padding-bottom: 1rem;
+
+}
+.table th:first-child,
+.table td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: rgb(246, 253, 252);
+  color: black;
+  font-weight: bold;
+
+}
+.table td {
+  white-space: nowrap;
+}
+
+</style>
     <main id="main" class="main">
 
         <div class="row">

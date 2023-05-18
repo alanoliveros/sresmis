@@ -39,9 +39,14 @@
                                                 aria-controls="contact" aria-selected="false">Performance Tasks</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                data-bs-target="#quarterly_assessment" type="button" role="tab"
+                                                aria-controls="contact" aria-selected="false">Quarterly Assessment</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
                                             <button class="nav-link get_final_grade" id="contact-tab" data-bs-toggle="tab"
                                                 data-bs-target="#contact" type="button" role="tab"
-                                                data-students_final_grade='["written_works", "performance_tasks"]'
+                                                data-students_final_grade='["written_works", "quarterly_assement", "quarterly_assessment"]'
                                                 aria-controls="contact" aria-selected="false">Transmuted Grade</button>
                                         </li>
                                     </ul>
@@ -90,6 +95,42 @@
                                             <div class="table-responsive">
                                                 <table data-grade_component="Performance Tasks"
                                                     class="table table-stripped performance_tasks">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>1</th>
+                                                            <th class="between_count_num">Total</th>
+                                                            <th>PS</th>
+                                                            <th>WA</th>
+                                                            <th class="text-center">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tr class="text-success performance_tasks_possible_score">
+                                                        <th class="text-center">HIGHEST POSSIBLE SCORE</th>
+                                                        <th><input
+                                                                data-total_possible_score="performance_tasks_possible_score"
+                                                                type="number" name="written_score[]"
+                                                                class="written_score" min="1">
+                                                        </th>
+                                                        <th class="between_highest_score total_high_score">Total</th>
+                                                        <th data-val="100" class="percentage">100%</th>
+                                                        <th class="tasks_average performance_tasks_average"></th>
+    
+                                                        <th class="text-center"><button type="button"
+                                                                class="btn btn-success rounded-0  add_score"
+                                                                data-gcomponent="performance_tasks">+</button>
+                                                        </th>
+                                                    </tr>
+                                                    <tbody class="display_student_data">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="quarterly_assessment" role="tabpanel"
+                                            aria-labelledby="profile-tab">
+                                            <div class="table-responsive">
+                                                <table data-grade_component="Quarterly Assessment"
+                                                    class="table table-stripped quarterly_assessment">
                                                     <thead>
                                                         <tr>
                                                             <th></th>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AdminStudentController extends Controller
@@ -14,7 +15,17 @@ class AdminStudentController extends Controller
      */
     public function index()
     {
-        return view('web.backend.admin.users.student.index');
+
+        $students = Student::where('students.adminId', auth()->user()->id)
+        ->join('users', 'students.studentId', 'users.id')
+        ->get();
+
+        // foreach($students as $student){
+        //     echo $student->name;
+        // }
+        return view('web.backend.admin.users.student.index',[
+            'students' => $students,
+        ]);
     }
 
     /**

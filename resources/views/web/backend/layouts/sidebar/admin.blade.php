@@ -2,7 +2,7 @@
     <a class="nav-link collapsed" href="{{route('admin.dashboard')}}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
+        {{--<i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>--}}
     </a>
 </li>
 
@@ -12,14 +12,14 @@
     <a class="nav-link collapsed" href="{{route('enrollmentprofile.dashboard')}}">
         <i class="bi bi-person-lines-fill"></i>
         <span>Enrolment Profile</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
+        {{--<i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>--}}
     </a>
 </li>
 
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#analytics-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-bar-chart"></i><span>Analytics</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
+        {{--<i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>--}}
         <i class="bi bi-chevron-down ms-auto"></i>
     </a>
     @php
@@ -56,7 +56,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person-fill"></i><span>Users</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
+        {{--<i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>--}}
         <i class="bi bi-chevron-down ms-auto"></i>
     </a>
     @php
@@ -83,7 +83,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#academic-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Academic</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
+        {{--<i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>--}}
         <i class="bi bi-chevron-down ms-auto"></i>
     </a>
     @php
@@ -116,7 +116,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#back-office-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-basket3"></i><span>Back office</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
+        {{--<i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>--}}
         <i class="bi bi-chevron-down ms-auto"></i>
     </a>
 
@@ -146,7 +146,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#settings-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gear"></i><span>Settings</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
+        {{--<i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>--}}
         <i class="bi bi-chevron-down ms-auto"></i>
     </a>
 

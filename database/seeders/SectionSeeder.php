@@ -33,6 +33,6 @@ class SectionSeeder extends Seeder
             // Add more sections as needed
         ]);*/
 
-        $sections = Section::factory()->count(10)->create();
+        Section::factory()->count(15)->create();
     }
 }

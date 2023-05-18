@@ -1,7 +1,7 @@
 <div class="modal fade" id="addTeacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-dialog-scrollable add-teacher" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
+        <div class="modal-content rounded-0">
+            <div class="modal-header bg-primary rounded-0">
                 <h1 class="modal-title fs-5 text-light fs-5">Teacher Personal Information</h1>
                 <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -109,7 +109,7 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Section Taught <small
+                            <label for="validationDefault02" class="form-label">Section Advisory <small
                                     class="text-danger">*</small></label>
                             <select name="sectionTaught" id="sectionTaught" class="form-select">
                                 <option value="" required></option>

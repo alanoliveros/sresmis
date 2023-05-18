@@ -187,7 +187,7 @@ tr .datatable-empty {
   width: 200px;
   height: 15px;
 }
-.table {
+/*.table {
 
   width: 100%;
   padding-bottom: 1rem;
@@ -204,7 +204,4 @@ tr .datatable-empty {
 }
 .table td {
   white-space: nowrap;
-}
-.not-available {
-  color: red;
-}
+}*/

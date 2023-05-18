@@ -21,6 +21,6 @@ class UserSeeder extends Seeder
         /** Insert User */
         /** Insert Address */
         /** Insert Teacher */
-        User::factory()->count(20)->create();
+        User::factory()->count(10)->create();
     }
 }

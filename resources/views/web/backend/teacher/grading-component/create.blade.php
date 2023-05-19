@@ -6,10 +6,11 @@
         padding-bottom: 1rem;
     }
 
-    .table th:first-child{
+    .table th:first-child {
         color: black;
         font-weight: bold;
     }
+
     .table th:first-child,
     .table td:first-child {
         position: sticky;
@@ -44,7 +45,7 @@
                     <div class="card info-card sales-card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-2 gx-1">
+                                <div class="col-3 gx-1">
                                     <div class="mb-3 p-2">
                                         <select class="form-select school_year_select" name="school_year" id="">
 
@@ -56,34 +57,41 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-2 gx-1">
+                                <div class="col-3 gx-1">
                                     <div class="mb-3 p-2">
-                                        <select class="form-select" name="school_year" id="">
+                                        <select class="form-select quarter_select" name="school_year" id="">
                                             @foreach ($quarters as $quarter)
                                                 <option {{ $quarter->status == 1 ? 'selected' : 'disabled' }}
-                                                    value="{{ $quarter->id }}">{{ $quarter->quarter_name }}
+                                                    value="{{ $quarter->id}}">{{ $quarter->quarter_name }}
                                                     {{ $quarter->status == 2 ? '--Disabled--' : '' }} </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-2 gx-1">
+                                <div class="col-3 gx-1">
                                     <div class="mb-3 p-2">
 
                                         <select class="form-select subject_select" name="school_year" id="">
                                             <option selected disabled>Select Subject</option>
                                             @foreach ($subjects as $subject)
-                                                <option value="{{ $subject->id }}">{{ $subject->subjectName }}
+                                                <option value="{{ $subject->id }}"
+                                                    data-subject_name="{{ $subject->subjectName }}">
+                                                    {{ $subject->subjectName }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-3 gx-1">
+                                    <div class="mb-3 p-2 float-md-end">
+                                        <button class="btn btn-primary rounded-0" id="saveButton">Save</button>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="mb-3 p-2">
                                         <div class="table-responsive">
-                                            <table class="table table-hover table-sticky">
+                                            <table class="table table-hover table-sticky" id="written_works">
                                                 <thead>
                                                     <tr>
                                                         <th></th>
@@ -101,7 +109,7 @@
                                                         <th class="text-center">PS</th>
                                                         <th class="text-center">WA</th>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="possible_score_container">
                                                         <th class="text-nowrap">Highest Possible Score</th>
                                                         <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
@@ -123,22 +131,39 @@
                                                                 class="input-sm input-responsive"></th>
                                                         <th><input type="number" name="possible_score[]" min="1"
                                                                 class="input-sm input-responsive"></th>
+                                                        <th class="possible_total_score">Total</th>
+                                                        <th class="possible_percentage_score">100</th>
+                                                        <th class="possible_weighted_average">WA</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($students as $student)
-                                                        <tr>
-                                                            <td>{{$student->lastname. ', '.$student->name}}</td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
-                                                            <td><input type="number" name="student_score[]" min="1" class="input-sm input-responsive"></td>
+                                                    @foreach ($students as $key => $student)
+                                                        <tr class="learner_score_container{{ $student->id }}" data-student_id="{{$student->studentId}}">
+                                                            <td>{{ $key + 1 }}{{ '. ' . $student->lastname . ', ' . $student->name }}
+                                                            </td>
+                                                            <td><input type="number" name="student_score[]" min="1"
+                                                                    class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]" min="1"
+                                                                    class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td><input type="number" name="student_score[]"
+                                                                    min="1" class="input-sm input-responsive"></td>
+                                                            <td class="student_total_score">0</td>
+                                                            <td class="student_percentage_score">0</td>
+                                                            <td class="student_weighted_average">0</td>
                                                         </tr>
                                                     @endforeach
 
@@ -147,10 +172,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>

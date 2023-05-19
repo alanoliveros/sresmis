@@ -266,9 +266,8 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     // Student Grading System Written Works Performance Tasks and Quarterly Assessment
     Route::get('/grade-component-index', [GradingComponentController::class, 'index'])->name('teacher.grade-component-index');
     Route::get('/grade-component-create-grade', [GradingComponentController::class, 'create'])->name('teacher.create-grade.grade-component');
-
-
-
+    Route::post('/grade-component/filter-subject', [GradingComponentController::class, 'filter_subject']);
+    Route::post('/grade-component/save', [GradingComponentController::class, 'save']);
 
 
 

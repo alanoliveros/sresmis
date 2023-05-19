@@ -1,5 +1,5 @@
 @extends('web.backend.layouts.app')
-@section('title' , 'Class')
+@section('title' , 'Section')
 @section('content')
     <main id="main" class="main">
 
@@ -86,7 +86,7 @@
                                         </td>
 
                                         <td>
-                                            <a href=""><i class="bi bi-eye-fill"></i></a>
+                                            {{--<a href=""><i class="bi bi-eye-fill"></i></a>--}}
                                             <a href=""><i class="bi bi-pencil-square"></i></a>
                                             <a href=""><i class="bi bi-trash"></i></a>
                                         </td>

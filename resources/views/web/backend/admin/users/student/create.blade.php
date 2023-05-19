@@ -6,20 +6,10 @@
                 <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('teacher.create')}}" method="POST">
+                <form action="{{route('student.create')}}" method="POST">
                     @csrf
                     <div class="row g-3">
-                        <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">School Year <small class="text-danger">*</small>
-                            </label>
-                            <select name="schoolYear" class="form-select" id="">
-                                @foreach ($sessions as  $key=>$schoolYear)
-                                    <option
-                                        {{$key == 0? 'selected':''}} value="{{$schoolYear->school_year}}">{{$schoolYear->school_year}}</option>
-                                @endforeach
-                            </select>
 
-                        </div>
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Email <small class="text-danger">*</small>
                             </label>
@@ -98,16 +88,7 @@
                             <label for="validationDefault02" class="form-label">Minor</label>
                             <input type="text" class="form-control" name="minor">
                         </div>
-                        <div class="col-md-12">
-                            <label for="validationDefault02" class="form-label">Grade Level Taught <small
-                                    class="text-danger">*</small></label>
-                            <select name="gradeLevelTaught" class="form-select gradeLevelTaught" id="" required>
-                                <option selected disabled>Select Grade Level</option>
-                                @foreach ($gradeLevel as $key=>$level)
-                                    <option value="{{$level->id}}">{{$level->gradeLevelName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Section Advisory <small
                                     class="text-danger">*</small></label>

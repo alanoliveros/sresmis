@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
+            $table->integer('enrollment_status')->nullable();   //late enrolled --transferre //
             $table->integer('student_id')->nullable();
             $table->string('lrn')->nullable();
             $table->string('first_name')->nullable();
@@ -31,12 +32,30 @@ return new class extends Migration
             $table->integer('section_id')->nullable();
             $table->integer('teacher_id')->nullable();
             $table->string('school_year')->nullable();
-            $table->integer('enrollment_status')->nullable();
+
+            $table->integer('current_status')->nullable();
+            $table->integer('is_dropped_out')->nullable();
+            $table->date('is_dropped_out_date')->nullable();
+
+            $table->integer('is_transferred_out')->nullable();
+            $table->date('is_transferred_out_date')->nullable();
+
+            $table->integer('is_transferred_in')->nullable();
+            $table->date('is_transferred_in_date')->nullable();
+
             $table->date('date_enrolled')->nullable();
             $table->date('date_dropped')->nullable();
             $table->date('date_transferred_in')->nullable();
             $table->date('date_transferred_out')->nullable();
-            $table->integer('academic_status')->nullable();
+
+            $table->integer('moving_up_status')->nullable();  //repeater || moved up
+            
+            $table->string('moving_up_status')->nullable();  //repeater || moved up
+
+            $table->string('academic_status')->nullable();  //passed or failed
+
+            
+
             $table->timestamps();
         });
     }

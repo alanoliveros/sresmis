@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassSchedule;
 use App\Models\Session;
 use App\Models\Subject;
 use App\Models\QuarterlyGrading;
@@ -172,5 +173,72 @@ class GradingComponentController extends Controller
     public function display_subjects(Request $request)
     {
         $subjects = Subject::where('sy', $request->sy);
+    }
+    public function find_subjects(Request $request)
+    {
+        $sy = $request->sy;
+        $subjects = ClassSchedule::where([
+            'school_year' => $sy,
+            'teacherId' => auth()->user()->id,
+        ])
+            ->orderBy('subjects.subjectName', 'asc')
+            ->join('subjects', 'class_schedules.subjectId', 'subjects.id')->get();
+
+        $subjectArr = array();
+
+        foreach ($subjects as $subject) {
+            $subjectArr[$subject->subjectId] = $subject->subjectName;
+        }
+
+        return response()->json([
+            'subjects' => $subjectArr,
+        ]);
+    }
+    public function filter_students(Request $request)
+    {
+        $sy = $request->sy;
+        $subject = $request->subject;
+        $section = $request->section;
+
+
+        $students = Student::where([
+            'school_year' => $sy,
+            'teacherId' => auth()->user()->id,
+            'sectionId' => $section,
+        ])
+            ->orderBy('users.lastname', 'asc')
+            ->join('users', 'students.studentId', 'users.id')
+            ->get();
+        // subject where
+        $subjectted = Subject::find($subject);
+
+        return response()->json([
+            'students' => $students,
+            'subject' => $subjectted,
+        ]);
+    }
+    public function find_sections(Request $request)
+    {
+        $sy = $request->sy;
+        $subject = $request->subject;
+
+
+        $sections = ClassSchedule::where([
+            'school_year' => $sy,
+            'subjectId' => $subject,
+            'teacherId' => auth()->user()->id,
+        ])
+            ->orderBy('sections.sectionName', 'asc')
+            ->join('sections', 'class_schedules.sectionId', 'sections.id')->get();
+
+        $sectionArr = array();
+
+        foreach ($sections as $section) {
+            $sectionArr[$section->sectionId] = $section->sectionName;
+        }
+
+        return response()->json([
+            'sections' => $sectionArr,
+        ]);
     }
 }

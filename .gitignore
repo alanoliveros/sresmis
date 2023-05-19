@@ -17,3 +17,4 @@ yarn-error.log
     /.vscode
 public/backend
 /storage/app/public/backend/.gitignore
+/.idea/php-test-framework.xml

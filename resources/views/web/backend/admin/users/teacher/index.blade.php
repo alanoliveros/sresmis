@@ -3,7 +3,7 @@
 @section('content')
     <main id="main" class="main">
 
-        <div class="pagetitle">
+        {{--<div class="pagetitle">
             <h1>Data Tables</h1>
             <nav>
                 <ol class="breadcrumb">
@@ -12,7 +12,8 @@
                     <li class="breadcrumb-item active">Data</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>--}}
+        <!-- End Page Title -->
 
         <section class="section">
             <div class="row">

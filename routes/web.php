@@ -62,6 +62,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
     /** ================== User Profile ================== */
     Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
+
     /** ================== KPI Controller ================== */
     Route::prefix('analytics')->group(function () {
         Route::get('/promotion-rate', [IndicatorController::class, 'promotionIndex'])->name('admin.analytics');
@@ -81,11 +82,12 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
     /** ================== Users ================== */
     Route::prefix('manage-users')->group(function () {
-        Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
-        Route::post('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');
+        /*Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
+        Route::post('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');*/
+        /*Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');*/
 
-
-        Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');
+        Route::resource('teacher', AdminTeacherController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('student', AdminStudentController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     });
 
     /** ================== Settings ================== */
@@ -112,8 +114,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
 
 
-
-
         /** ================== class schedule ================== */
         Route::resource('class-schedule', ClassScheduleController::class)->only(['index', 'show', 'store']);
 
@@ -124,11 +124,9 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         /*Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');*/
 
 
-
         /** ================== Section ================== */
         Route::resource('section', SectionController::class)->only(['index', 'store']);
         Route::post('/getSection', [SectionController::class, 'getSection']);
-
 
 
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
@@ -148,14 +146,12 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
 });
 
 
-
 /** Subjects */
 //Route::prefix('/admin')->middleware('isAdmin')->group(function () {
 //    Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');
 //    Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
 //    Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
 //});
-
 
 
 /** Manage Class Schedules */
@@ -208,11 +204,6 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/export-sf2-by-school_year', [SchoolForm2Controller::class, 'export']);
 
 
-
-
-
-
-
     Route::get('/read', [SchoolForm1Controller::class, 'readtemplate']);
     Route::get('/sf2-view', [SchoolForm2Controller::class, 'index'])->name('teacher.sf2-view');
     Route::get('/sf9-view', [SchoolForm9::class, 'index'])->name('teacher.sf9-view');
@@ -247,24 +238,11 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
     Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // Fitler Student grades 
+
+
+    // Fitler Student grades
     Route::get('/teacher/student/grades', [QuarterlyGradeController::class, 'index'])->name('teacher.student.grades');
 
-    
 
     // Generate PDF
     Route::get('/generate', [SchoolForm1Controller::class, 'generatePDF']);

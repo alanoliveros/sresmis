@@ -52,7 +52,7 @@
                                             <td>{{ $subject->performance_tasks_percentage }}</td>
                                             <td>{{ $subject->quarterly_assessment_percentage }}</td>--}}
                                             <td>
-                                                <a href=""><i class="bi bi-eye-fill"></i></a>
+                                                {{--<a href=""><i class="bi bi-eye-fill"></i></a>--}}
                                                 <a href=""><i class="bi bi-pencil-square"></i></a>
                                                 <a href=""><i class="bi bi-trash"></i></a>
                                             </td>

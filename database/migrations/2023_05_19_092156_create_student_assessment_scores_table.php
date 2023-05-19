@@ -24,24 +24,27 @@ return new class extends Migration
 
             $table->string('written_student_score')->nullable();
             $table->string('written_possible_score')->nullable();
-            $table->float('written_total_possible_score', 8, 2)->nullable();
-            $table->float('written_student_percentage_score', 8, 2)->nullable();
-            $table->float('written_student_weighted_average', 8, 2)->nullable();
+            $table->integer('written_total_possible_score')->nullable();
+            $table->integer('written_total_student_score')->nullable();
+            $table->integer('written_student_percentage_score')->nullable();
+            $table->integer('written_student_weighted_average')->nullable();
 
             $table->string('performance_student_score')->nullable();
             $table->string('performance_possible_score')->nullable();
-            $table->float('performance_total_possible_score', 8, 2)->nullable();
-            $table->float('performance_student_percentage_score', 8, 2)->nullable();
-            $table->float('performance_student_weighted_average', 8, 2)->nullable();
+            $table->integer('performance_total_student_score')->nullable();
+            $table->integer('performance_total_possible_score')->nullable();
+            $table->integer('performance_student_percentage_score')->nullable();
+            $table->integer('performance_student_weighted_average')->nullable();
 
             $table->string('quarterly_assessment_student_score')->nullable();
             $table->string('quarterly_assessment_possible_score')->nullable();
-            $table->float('quarterly_total_assessment_possible_score', 8, 2)->nullable();
-            $table->float('quarterly_assessment_student_percentage_score', 8, 2)->nullable();
-            $table->float('quarterly_assessment_student_weighted_average', 8, 2)->nullable();
+            $table->integer('quarterly_total_assessment_student_score')->nullable();
+            $table->integer('quarterly_total_assessment_possible_score')->nullable();
+            $table->integer('quarterly_assessment_student_percentage_score')->nullable();
+            $table->integer('quarterly_assessment_student_weighted_average')->nullable();
 
             $table->float('initial_grade', 8, 2)->nullable();
-            $table->float('quarterly_grade', 8, 2)->nullable();
+            $table->integer('quarterly_grade')->nullable();
             $table->string('remarks')->nullable();
 
             $table->timestamps();

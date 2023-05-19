@@ -72,13 +72,13 @@ class GradingComponentController extends Controller
     }
     public function save(Request $request)
     {
-        $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
-        foreach ($request->students as $student) {
-            $scores = implode(',', $student['scores']);
-            $possibleScores = implode(',', $student['possible_scores']);
 
+        $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+        $students = array();
+        foreach ($request->outputs as $key => $student) {
             $data = [
                 'sy' => $request->sy,
+                'admin_id' => $teacher->adminId,
                 'student_id' => $student['student_id'],
                 'subject_id' => $request->subject_id,
                 'quarter_id' => $request->quarter_id,
@@ -86,14 +86,91 @@ class GradingComponentController extends Controller
             ];
 
             $grade = StudentAssessmentScore::updateOrCreate($data, $data);
-            $grade->written_student_score = $scores;
-            $grade->written_total_possible_score = $student['possible_total_score'];
-            $grade->written_possible_score = $possibleScores;
-            $grade->written_student_percentage_score = $student['student_percentage_score'];
-            $grade->written_student_weighted_average = $student['student_weighted_average'];
+            $grade->student_id = $student['student_id'];
+
+            $grade->written_student_score = implode(',', $student['written_student_scores']);
+            $grade->written_total_student_score =  $student['written_student_total_score'];
+            $grade->written_possible_score = implode(',', $student['written_possible_scores']);
+            $grade->written_total_possible_score = $student['written_possible_total_score'];
+            $grade->written_student_percentage_score = $student['written_student_percentage_score'];
+            $grade->written_student_weighted_average = $student['written_student_weighted_average'];
+
+
+            $grade->performance_possible_score = implode(',', $request->performance_outputs[$key]['performance_possible_scores']);
+            $grade->performance_student_score = implode(',', $request->performance_outputs[$key]['performance_student_scores']);
+            $grade->performance_total_student_score = $request->performance_outputs[$key]['performance_student_total_score'];
+            $grade->performance_total_possible_score = $request->performance_outputs[$key]['performance_possible_total_score'];
+            $grade->performance_student_percentage_score = $request->performance_outputs[$key]['performance_student_percentage_score'];
+            $grade->performance_student_weighted_average = $request->performance_outputs[$key]['performance_student_weighted_average'];
+
+
+            $grade->quarterly_assessment_student_score = implode(',', $request->assessment_outputs[$key]['assessment_student_scores']);
+            $grade->quarterly_total_assessment_student_score = $request->assessment_outputs[$key]['assessment_student_total_score'];
+            $grade->quarterly_assessment_possible_score = implode(',', $request->assessment_outputs[$key]['assessment_possible_scores']);
+            $grade->quarterly_total_assessment_possible_score = $request->assessment_outputs[$key]['assessment_possible_total_score'];
+            $grade->quarterly_assessment_student_percentage_score = $request->assessment_outputs[$key]['assessment_student_percentage_score'];
+            $grade->quarterly_assessment_student_weighted_average = $request->assessment_outputs[$key]['assessment_student_weighted_average'];
+
+            $grade->initial_grade = $request->transmuted_grade[$key]['initial_grade'];
+            $grade->quarterly_grade = $request->transmuted_grade[$key]['final_grade'];
+
+
             $grade->save();
         }
 
-        return response()->json(['success' => true]);
+        // start
+        // $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+        // $inserted = 0;
+        // $updated = 0;
+
+        // foreach ($request->students as $student) {
+        //     $scores = implode(',', $student['scores']);
+        //     $possibleScores = implode(',', $student['possible_scores']);
+
+        //     $data = [
+        //         'sy' => $request->sy,
+        //         'student_id' => $student['student_id'],
+        //         'subject_id' => $request->subject_id,
+        //         'quarter_id' => $request->quarter_id,
+        //         'teacher_id' => auth()->user()->id,
+        //     ];
+
+        //     $grade = StudentAssessmentScore::updateOrCreate($data, $data);
+        //     $grade->written_student_score = $scores;
+        //     $grade->written_total_possible_score = $student['possible_total_score'];
+        //     $grade->written_possible_score = $possibleScores;
+        //     $grade->written_student_percentage_score = $student['student_percentage_score'];
+        //     $grade->written_student_weighted_average = $student['student_weighted_average'];
+        //     $grade->save();
+
+        //     if ($grade->wasRecentlyCreated) {
+        //         $inserted++;
+        //     } else {
+        //         $updated++;
+        //     }
+        // }
+
+        // $message = '';
+        // if ($inserted > 0) {
+        //     $message .= $inserted . ' record(s) inserted. ';
+        // }
+        // if ($updated > 0) {
+        //     $message .= $updated . ' record(s) updated.';
+        // }
+
+        // end
+
+
+
+
+
+        return response()->json([
+            'success' => true,
+            'students' => $students
+        ]);
+    }
+    public function display_subjects(Request $request)
+    {
+        $subjects = Subject::where('sy', $request->sy);
     }
 }

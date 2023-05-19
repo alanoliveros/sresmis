@@ -31,6 +31,7 @@ use App\Http\Controllers\Teacher\GradingComponentController;
 use App\Http\Controllers\Notifications\MailboxController;
 use App\Http\Controllers\Attendance\StudentAttendance;
 use App\Http\Controllers\Teacher\QuarterlyGradeController;
+use App\Http\Controllers\Teacher\GradeSummaryController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -148,25 +149,6 @@ Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
     Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
 });
 
-
-
-/** Subjects */
-//Route::prefix('/admin')->middleware('isAdmin')->group(function () {
-//    Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');
-//    Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
-//    Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
-//});
-
-
-
-/** Manage Class Schedules */
-/*Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-    Route::get('/manage-class-schedules', [AdminController::class, 'manage_class_schedules'])->name('manage-class-schedules');
-    Route::get('/schedules/view-by-gradelevel/{name}', [AdminController::class, 'view_by_gradeLevel']);
-    Route::get('/schedules/view-by-section/{sid}/{gid}', [AdminController::class, 'view_by_section']);
-    Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');
-});*/
-
 Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 
     // Dashboard and Advisory
@@ -268,10 +250,13 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/grade-component-create-grade', [GradingComponentController::class, 'create'])->name('teacher.create-grade.grade-component');
     Route::post('/grade-component/filter-subject', [GradingComponentController::class, 'filter_subject']);
     Route::post('/grade-component/save', [GradingComponentController::class, 'save']);
+   
+    Route::post('/grade-component/display_subjects', [GradingComponentController::class, 'display_subjects']);
 
-
-
-
+    
+    // Summary of grades
+    Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
+    Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
 
 
 

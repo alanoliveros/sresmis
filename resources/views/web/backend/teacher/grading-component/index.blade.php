@@ -4,7 +4,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>icon here @yield('title')</h1>
+            <h1><i class="bi bi-building-fill-check"></i> @yield('title')</h1>
         </div>
         <section class="section dashboard">
             <div class="row">
@@ -26,9 +26,8 @@
                                     <div class="mb-3 p-2">
                                         <select class="form-select" name="school_year" id="">
                                             @foreach ($quarters as $quarter)
-                                                <option {{ $quarter->status == 1 ? 'selected' : 'disabled' }}
-                                                    value="{{ $quarter->id }}">{{ $quarter->quarter_name }}
-                                                    {{ $quarter->status == 2 ? '--Disabled--' : '' }} </option>
+                                                <option value="{{ $quarter->id }}">{{ $quarter->quarter_name }}
+                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>

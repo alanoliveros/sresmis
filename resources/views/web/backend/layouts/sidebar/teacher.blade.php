@@ -58,6 +58,11 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('teacher.grade-summary-index') }}">
+                <i class="bi bi-circle"></i><span>Summary of grades</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('teacher.create-grade.student-advisory') }}">
                 <i class="bi bi-circle"></i><span>Quizzes</span>
             </a>

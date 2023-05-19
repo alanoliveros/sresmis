@@ -60,7 +60,7 @@ class StudentGradeController extends Controller
         $sy = $request->sy;
         $quarter = $request->quarter;
         $subject = Subject::find($request->subject);
-        
+
         $students = Student::where([
             'students.teacherId' => auth()->user()->id,
             'students.school_year' => $sy,
@@ -70,50 +70,50 @@ class StudentGradeController extends Controller
             ->orderBy('users.gender', 'desc')
             ->orderBy('users.lastname', 'asc')
             ->get();
-    
-            return response()->json([
-                'students' => $students,
-                'subject' => $subject,
-            ]);
-         
-        
+
+        return response()->json([
+            'students' => $students,
+            'subject' => $subject,
+        ]);
     }
-    public function create_grade($sy, $sub, $sec, $qtr){
-       $quarter = str_replace('-', ' ', $qtr);
-       
-       $data = array(
-        'sy' => $sy,
-        'sub' => $sub,
-        'sec' => $sec,
-        'qtr' => $quarter,
-       );
-       
-       $students = Student::where([
-        'students.teacherId' => auth()->user()->id,
-        'students.school_year' => $sy,
-        'students.sectionId' => $sec,
-    ])
-        ->join('users', 'students.studentId', 'users.id')
-        ->orderBy('users.gender', 'desc')
-        ->orderBy('users.lastname', 'asc')
-        ->get();
+    public function create_grade($sy, $sub, $sec, $qtr)
+    {
+        $quarter = str_replace('-', ' ', $qtr);
+
+        $data = array(
+            'sy' => $sy,
+            'sub' => $sub,
+            'sec' => $sec,
+            'qtr' => $quarter,
+        );
+
+        $students = Student::where([
+            'students.teacherId' => auth()->user()->id,
+            'students.school_year' => $sy,
+            'students.sectionId' => $sec,
+        ])
+            ->join('users', 'students.studentId', 'users.id')
+            ->orderBy('users.gender', 'desc')
+            ->orderBy('users.lastname', 'asc')
+            ->get();
         $subject = Subject::find($sub);
 
-       return view('web.backend.teacher.students.student-grades.create',[
-        'students' => $students,
-        'data' => $data,
-        'subject' => $subject,
-       ]);
-    }
+        return view('web.backend.teacher.students.student-grades.create', [
+            'students' => $students,
+            'data' => $data,
+            'subject' => $subject,
+        ]);
+    }   
 
-    public function save_grade(Request $request){
-         $outputs = json_decode($request->input('outputs'));
-         $form = array();
-            foreach($outputs->outputs->student_written->quizzes as $key=>$val){
-                $form[] = $val;
-            }
+    public function save_grade(Request $request)
+    {
+        $outputs = json_decode($request->input('outputs'));
+        $form = array();
+        foreach ($outputs->outputs->student_written->quizzes as $key => $val) {
+            $form[] = $val;
+        }
 
-         return response()->json([
+        return response()->json([
             'id' => $form,
         ]);
     }
@@ -129,11 +129,10 @@ class StudentGradeController extends Controller
 
         $transmuted = 0;
 
-        if($grade == 100) {
+        if ($grade == 100) {
             $transmuted = 100;
-        }else if ($grade <= 98.39 && $grade >= 96.80) {
-
-        }else if($grade >= 99.99 && $grade <= 98.40) {
+        } else if ($grade <= 98.39 && $grade >= 96.80) {
+        } else if ($grade >= 99.99 && $grade <= 98.40) {
             $transmuted = 99;
         } else if ($grade <= 98.39 && $grade >= 96.80) {
             $transmuted = 98;
@@ -213,7 +212,7 @@ class StudentGradeController extends Controller
             $transmuted = 61;
         } else if ($grade <= 3.99 && $grade >= 0) {
             $transmuted = 60;
-        } else if($grade < 0) {
+        } else if ($grade < 0) {
             $transmuted = 60;
         }
         return response()->json([

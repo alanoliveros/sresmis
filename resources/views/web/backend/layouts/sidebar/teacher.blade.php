@@ -48,6 +48,33 @@
     </ul>
 </li><!-- End Charts Nav -->
 <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-layout-text-window-reverse"></i><span>Student Grades</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{{ route('teacher.grade-component-index') }}">
+                <i class="bi bi-circle"></i><span>Grade Component</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('teacher.create-grade.student-advisory') }}">
+                <i class="bi bi-circle"></i><span>Quizzes</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('teacher.student.grades') }}">
+                <i class="bi bi-circle"></i><span>Advisory</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{route('teacher.class-attendance.subject')}}">
+                <i class="bi bi-circle"></i><span>Subject</span>
+            </a>
+        </li>
+    </ul>
+  </li><!-- End Tables Nav -->
+<li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-calendar3"></i><span>Class Schedules</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
@@ -64,13 +91,6 @@
         </li>
     </ul>
 </li><!-- End Icons Nav -->
-<li class="nav-item">
-    <a class="nav-link {{ Request::routeIs('teacher.student-grades') ? 'active' : '' }}"
-        href="{{ route('teacher.student.grades') }}">
-        <i class="bi bi-award fs-5"></i>
-        <span>Student Grades</span>
-    </a>
-</li><!-- End Profile Page Nav -->
 
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

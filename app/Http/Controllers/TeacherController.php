@@ -320,7 +320,7 @@ class TeacherController extends Controller
       $studentId = $user->id;
 
 
-      $student = Student::firstOrNew(['studentId' => $studentId, 'school_year' => $school_year]);
+      $student = Student::firstOrNew(['studentId' => $studentId, 'school_year' => $school_year, 'lrn' => $studentLrn]);
       $student->adminId = $adminId->adminId;
       $student->teacherId = $teacherId;
       $student->studentId = $studentId;

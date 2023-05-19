@@ -235,14 +235,14 @@
 
         $('.section_select').on('change', function() {
             section = $(".section_select :selected").val();
-            
+             $(".filter_grades").prop("disabled", false);
 
         });
         $('.quarter_select').on('change', function() {
            
             
             if($(".quarter_select :selected").val() != '' && $(".section_select :selected").val() != null){
-                $(".filter_grades").prop("disabled", false);
+                // $(".filter_grades").prop("disabled", false);
             }
         });
 

@@ -27,6 +27,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Teacher\StudentGradeController;
+use App\Http\Controllers\Teacher\GradingComponentController;
 use App\Http\Controllers\Notifications\MailboxController;
 use App\Http\Controllers\Attendance\StudentAttendance;
 use App\Http\Controllers\Teacher\QuarterlyGradeController;
@@ -140,7 +141,7 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 /** Section */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-//    Route::post('/getSection', [AdminController::class, 'getSection']);
+    //    Route::post('/getSection', [AdminController::class, 'getSection']);
     Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
     Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
 });
@@ -238,6 +239,62 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/save-grades', [StudentGradeController::class, 'save_grade']);
     Route::post('/filter-send-to', [MailboxController::class, 'messageTo']);
     Route::post('/submit-message-to', [MailboxController::class, 'save_message']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Student Grading System Written Works Performance Tasks and Quarterly Assessment
+    Route::get('/grade-component-index', [GradingComponentController::class, 'index'])->name('teacher.grade-component-index');
+    Route::get('/grade-component-create-grade', [GradingComponentController::class, 'create'])->name('teacher.create-grade.grade-component');
+    Route::post('/grade-component/filter-subject', [GradingComponentController::class, 'filter_subject']);
+    Route::post('/grade-component/save', [GradingComponentController::class, 'save']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Fitler Student grades
+    Route::get('/student/grades', [QuarterlyGradeController::class, 'index'])->name('teacher.student.grades');
+    Route::post('/student-grade/quarterly', [QuarterlyGradeController::class, 'getStudents']);
+
+    // save quarterly grade by advisory
+    Route::get('/create-grade/student-advisory', [QuarterlyGradeController::class, 'createGrade'])->name('teacher.create-grade.student-advisory');
+    Route::post('/save-quarterly-grade/by-advisory', [QuarterlyGradeController::class, 'saveGrade'])->name('teacher.save-quarterly-grade.by-advisory');
+    Route::post('/student-information/by-subject/filter', [StudentGradeController::class, 'filter_by_subject'])->name('teacher.student-information.by-subject.filter');
+
 
 
     // Fitler Student grades

@@ -14,9 +14,7 @@
                             <td>${enrollment.last_name + ', ' + (enrollment.middle_name == null ? '' : enrollment.middle_name + ', ') + enrollment.first_name + (enrollment.suffix == null ? '' : ', ' + enrollment.suffix)}</td>
                             <td>${enrollment.gender}</td>
                             <td>${enrollment.current_status}</td>
-                            <td>
-                                ${enrollment.academic_status == 1 ? 'Active' : enrollment.academic_status == 2 ? 'Enactive' : enrollment.academic_status}
-                            </td>
+                            <td>${enrollment.academic_status == 1 ? 'Active' : enrollment.academic_status == 2 ? 'Enactive' : enrollment.academic_status} </td>
                             <td>
                                 <a href="" class="bi bi-eye" style="margin-right: 6px"></a>
                                 <a href="" class="bi bi-pencil-square" style="margin-right: 6px"></a>
@@ -47,16 +45,15 @@
                     "pageLength": 25,
                 });
 
-
             }
-       
+
 
             $('.select_sy').on('change', function() {
 
 
                 let select_sy = $('.select_sy :selected').val();
 
-             
+
                 $.ajax({
                     url: "{{ route('admin.student.get_students_by_year') }}",
                     type: "POST",
@@ -86,7 +83,7 @@
                 console.log(select_sy);
                 console.log(grade_level_id);
 
-            
+
                 $.ajax({
                     type: "POST",
                     url: "/admin/manage-users/getStudents/by-school-year-and-grade-level",

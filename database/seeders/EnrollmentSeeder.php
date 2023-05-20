@@ -19,7 +19,6 @@ class EnrollmentSeeder extends Seeder
     {
         $faker = Faker::create();
 
-
         $numberOfStudents = $faker->numberBetween(60, 80); // Generate a random number between 1 and 100
         for ($i = 0; $i < $numberOfStudents; $i++) {
             $startDate = $faker->dateTimeBetween('-11 years', '-6 years');

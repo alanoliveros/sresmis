@@ -9,6 +9,7 @@ use App\Http\Controllers\Academic\GradeLevelController;
 use App\Http\Controllers\Academic\SectionController;
 use App\Http\Controllers\Academic\SubjectController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\Analytic\IndicatorController;
 use App\Http\Controllers\BackOffice\LibraryController;
 use App\Http\Controllers\BackOffice\NoticeboardController;
@@ -93,8 +94,9 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 
 
-        Route::resource('teacher', AdminTeacherController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
-        Route::resource('student', AdminStudentController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('teacher', AdminTeacherController::class);
+        Route::resource('student', AdminStudentController::class);
+        Route::resource('admission', AdmissionController::class);
 
     });
 
@@ -277,7 +279,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/student-grades/get-sections-by-school-year', [GradingComponentController::class, 'find_sections']);
     Route::post('/grade-component/get-students', [GradingComponentController::class, 'filter_students']);
     // filter grades
-    Route::post('/grade-component/filter-grades/display-grades', [GradingC\omponentController::class, 'display_grades']);
+    Route::post('/grade-component/filter-grades/display-grades', [GradingComponentController::class, 'display_grades']);
 
 
 

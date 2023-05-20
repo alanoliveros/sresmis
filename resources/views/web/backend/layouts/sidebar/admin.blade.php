@@ -65,7 +65,12 @@
         <span>Student</span>
     </a>
 </li>
-
+<li class="nav-item">
+    <a class="nav-link collapsed" href="{{route('admission.index')}}">
+        <i class="bi bi-plus-square"></i>
+        <span>Admission</span>
+    </a>
+</li>
 
 
 {{--<li class="nav-item">

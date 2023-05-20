@@ -38,26 +38,6 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ]);
-        DB::table('users')->insert([
-            [
-                'name' => 'Admin User',
-                'role' => 2,
-                'middlename' => 'The',
-                'lastname' => 'Admin',
-                'suffix' => null,
-                'gender' => 'Male',
-                'birthdate' => '1990-01-01',
-                'age' => 31,
-                'email' => 'teacher@example.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'image' => 'avatar.png',
-                'remember_token' => Str::random(10),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
-
 
         $this->call([
             UserSeeder::class,

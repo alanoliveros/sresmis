@@ -42,6 +42,19 @@ class AdminStudentController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
+    public function getStudentsFilterBySchoolYear(Request $request)
+    {
+
+        $enrollments = Enrollment::where([
+            'enrollments.adminId' => auth()->user()->id,
+            'enrollments.school_year' => $request->select_sy,
+        ])
+            ->get();
+        return response()->json([
+            'students' => $enrollments,
+        ]);
+    }
     public function getStudentsBySchoolYearAndGradeLevel(Request $request)
     {
         $enrollments = Enrollment::where([
@@ -52,20 +65,19 @@ class AdminStudentController extends Controller
             ->get();
 
 
-        $by_sy = Enrollment::where('school_year', $request->sy)->get();
+        // $by_sy = Enrollment::where('school_year', $request->sy)->get();
 
 
 
 
         return response()->json([
-            'enrollments' => $enrollments,
-            'filter_by_year' => $by_sy,
+            'students' => $enrollments,
         ]);
     }
 
     public function create(Request $request)
     {
-//        /** Insert User */
+        //        /** Insert User */
 //        $user = User::firstOrNew(['email' => $request->email]);
 //        $user->name = $request->firstName;
 //        $user->role = 3;

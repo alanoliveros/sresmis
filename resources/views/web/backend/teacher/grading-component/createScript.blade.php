@@ -26,7 +26,7 @@
 
             $.ajax({
                 method: "POST",
-                url: '/teacher/student-grades/get-subjects-by-school-year',
+                url: '/teacher/student-grades/get-sections-by-school-year',
                 data: {
                     "sy": sy,
                 },
@@ -34,12 +34,12 @@
                     console.log(data);
 
                     let option = `<option disabled selected>Select Section</option>`;
-                    $.each(data.subjects, function(key, val) {
+                    $.each(data.sections, function(key, val) {
                         option += `
                             <option value="${key}">${val}</option>
                         `;
                     });
-                    $('.subject_select').html(option);
+                    $('.section_select').html(option);
                 }
             });
 
@@ -93,49 +93,46 @@
 
         $('#search_button').on('click', function() {
             let section = $('.section_select :selected').val();
-            let subject = $('.subject_select :selected').val();
             let sy = $('.school_year_select :selected').val();
 
             // ajax
             $.ajax({
                 method: "POST",
-                url: "/teacher/grade-component/filter-students",
+                url: "/teacher/grade-component/get-students",
                 data: {
                     "section": section,
-                    "subject": subject,
                     "sy": sy,
                 },
                 success: function(data) {
-                    console.log(data);
-                    $('#search_button').prop('disabled', false);
-                    var writtenWorkPercentage = data.subject
-                        .written_work_percentage;
-                    var performanceTasksPercentage = data.subject
-                        .performance_tasks_percentage;
-                    var quarterlyAssessmentPercentage = data.subject
-                        .quarterly_assessment_percentage;
 
-                    $('.possible_weighted_average[data-component="written_works"]')
-                        .text(
-                            writtenWorkPercentage);
-                    $('.possible_weighted_average[data-component="performance_tasks"]')
-                        .text(performanceTasksPercentage);
-                    $('.possible_weighted_average[data-component="quarterly_assessment"]')
-                        .text(quarterlyAssessmentPercentage);
+
+
+                    // var writtenWorkPercentage = data.subject
+                    //     .written_work_percentage;
+                    // var performanceTasksPercentage = data.subject
+                    //     .performance_tasks_percentage;
+                    // var quarterlyAssessmentPercentage = data.subject
+                    //     .quarterly_assessment_percentage;
+
+                    // $('.possible_weighted_average[data-component="written_works"]')
+                    //     .text(
+                    //         writtenWorkPercentage);
+                    // $('.possible_weighted_average[data-component="performance_tasks"]')
+                    //     .text(performanceTasksPercentage);
+                    // $('.possible_weighted_average[data-component="quarterly_assessment"]')
+                    //     .text(quarterlyAssessmentPercentage);
 
 
                     $('.header_container').html(`<span class="text-center mx-4 fs-5 subject_name">--------------</span>
                                                         <span class="float-md-end mx-4 fs-5 quarter_tabs">
                                                                 <div class="messageTOUser mb-3">
                                                                     @foreach ($quarters as $key => $quarter)
-                                                                        <input {{ $quarter->status == 1 ? 'checked' : 'disabled' }} type="radio" id="quarter{{ $key + 1 }}" name="messageTo" class="messageTo"
-                                                                            value="1" />
+                                                                        <input {{ $quarter->status == 1 ? 'checked' : 'disabled' }} type="radio" id="quarter{{ $key + 1 }}" name="per_quarter" class="per_quarter"
+                                                                            value="{{ $quarter->id }}" />
                                                                         <label for="quarter{{ $key + 1 }}">{{ Str::limit($quarter->quarter_name, 4, '') }}</label>
                                                                     @endforeach
                                                                 </div>
                                                      </span>`);
-
-
                     $('.components').html(`
                                                     <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified"
                                                         role="tablist">
@@ -162,7 +159,23 @@
                                                     </ul>
                                             `);
 
+                    let sub = ``;
+                    // each subjects
 
+
+
+
+
+                    $.each(data.subjects, function(key, val) {
+                        sub += `
+                        <input type="radio" id="subject_${key}" name="per_subject" class="per_subject"
+                         value="${key}" />
+                         <label for="subject_${key}">${val}</label>
+                       
+
+                       `;
+                    });
+                    $('.display_subjects').html(sub);
 
                     let written_datatable = ``;
                     let performance_datatable = ``;
@@ -422,12 +435,12 @@
 
                     $.each(data.students, function(key, student) {
                         transmuted_grade_datatable += `
-                                <tr class="learner_score_container_${student.studentId}"
+                                <tr class="learner_score_container_${key}"
                                                             data-student_id="${student.studentId}">
                                         <td>${key+1}${ '. ' + student.lastname + ', ' + student.name }
                                         </td>
-                                        <td class="text-center" id="initial_grade">0</td>
-                                        <td class="text-center" id="student_quarterly_grade">0</td>
+                                        <td class="text-center initial_grade">0</td>
+                                        <td class="text-center student_quarterly_grade">0</td>
                                 </tr>       
                             `;
 
@@ -446,27 +459,162 @@
                                 <tbody>
                                     ${transmuted_grade_datatable}
                                 </tbody>
-                        </table>`);
+                    </table>`);
 
-                    var writtenWorkPercentage = data.subject
-                        .written_work_percentage;
-                    var performanceTasksPercentage = data.subject
-                        .performance_tasks_percentage;
-                    var quarterlyAssessmentPercentage = data.subject
-                        .quarterly_assessment_percentage;
-
-                    $('.possible_weighted_average[data-component="written_works"]')
-                        .text(
-                            writtenWorkPercentage);
-                    $('.possible_weighted_average[data-component="performance_tasks"]')
-                        .text(performanceTasksPercentage);
-                    $('.possible_weighted_average[data-component="quarterly_assessment"]')
-                        .text(quarterlyAssessmentPercentage);
 
                 }
             });
         });
 
+
+
+        $('body').on('change', 'input[name="per_subject"]', function() {
+            if ($(this).is(':checked')) {
+                // Radio button is checked
+
+                var subject_id = $(this).val();
+                
+
+                let data = {
+                    subject_id: subject_id,
+                    quarter: $('input[name="per_quarter"]:checked').val(),
+                    sy: $('.school_year_select :selected').val(),
+                    section: $('.section_select :selected').val(),
+                };
+
+
+                console.log(data);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/teacher/grade-component/filter-grades/display-grades",
+                    data: {
+                        subject_id: subject_id,
+                        quarter: $('input[name="per_quarter"]:checked').val(),
+                        sy: $('.school_year_select :selected').val(),
+                        section: $('.section_select :selected').val(),
+                    },
+                    success: function(data) {
+
+                        let query = data.display_grades.length > 0 ? true : false;
+                        // console.log(data.display_grades[0].id);
+
+                        var writtenWorkPercentage = data.subject
+                            .written_work_percentage;
+                        var performanceTasksPercentage = data.subject
+                            .performance_tasks_percentage;
+                        var quarterlyAssessmentPercentage = data.subject
+                            .quarterly_assessment_percentage;
+
+                        $('.possible_weighted_average[data-component="written_works"]')
+                            .text(query ? data.display_grades[0].id :
+                                writtenWorkPercentage);
+                        $('.possible_weighted_average[data-component="performance_tasks"]')
+                            .text(query ? data.display_grades[0].id :
+                                performanceTasksPercentage);
+
+                        $('.possible_weighted_average[data-component="quarterly_assessment"]')
+                            .text(query ? data.display_grades[0].id :
+                                quarterlyAssessmentPercentage);
+
+
+
+                        let theadInputs = $('#written_works thead tr').find('input');
+
+                        $('#written_works tbody tr').each(function(index, element) {
+                            let inputs = $(this).find('input');
+                            let totals = $('[data-table="written_works"]');
+
+                            // console.log($(totals).text());
+
+
+
+                            totals.each(function(i) {
+                                let total = i;
+                                // $(this).val(query ? (total !== '0' ? total : '') : '');
+                                $(this).text(i);
+                            });
+
+
+                            let displayGrades = data.display_grades[index];
+
+                            if (displayGrades && displayGrades
+                                .written_student_score) {
+                                let old = displayGrades.written_student_score.split(
+                                    ",");
+                                console.log(old);
+
+                                inputs.each(function(i) {
+                                    let inputValue = old[i];
+                                    $(this).val(query ? (inputValue !==
+                                        '0' ? inputValue : '') : '');
+                                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            } else {
+                                inputs.val(
+                                    ''); // Clear the inputs if there is no data
+                            }
+                            // Assuming you have a unique identifier for each subject (e.g., subjectId)
+                            // let subjectId = $(this).data('subject-id');
+                            
+                         
+                            let thead = $('#written_works').find('thead').data('my-data', subject_id);
+                            let theadInputs = thead.find('input');
+
+                            let possibleScores = query? displayGrades
+                                .written_possible_score.split(","): 0;
+                            theadInputs.each(function(i) {
+                                let possible_scores = possibleScores[i] ||
+                                    '';
+                                let value = 'Some value ' + (i +
+                                1); // Example: Change this line with your desired logic
+                                $(this).val(query ? (possible_scores !==
+                                        '0' ? possible_scores : '') :
+                                    '');
+                            });
+
+
+                        });
+
+
+
+                        // if (data.display_grades.length > 0) {
+                        //     console.log("Data value is greater than 0");
+                        // } else {
+                        //     console.log("No data found");
+                        //     console.log('Students data has length of: ' + data.students
+                        //         .length);
+                        //     var writtenWorkPercentage = data.subject
+                        //         .written_work_percentage;
+                        //     var performanceTasksPercentage = data.subject
+                        //         .performance_tasks_percentage;
+                        //     var quarterlyAssessmentPercentage = data.subject
+                        //         .quarterly_assessment_percentage;
+
+                        //     $('.possible_weighted_average[data-component="written_works"]')
+                        //         .text(
+                        //             writtenWorkPercentage);
+                        //     $('.possible_weighted_average[data-component="performance_tasks"]')
+                        //         .text(performanceTasksPercentage);
+                        //     $('.possible_weighted_average[data-component="quarterly_assessment"]')
+                        //         .text(quarterlyAssessmentPercentage);
+                        // }
+                    }
+                });
+            }
+        });
         $('body').on('input', 'input[name="student_score[]"]', function() {
             var container = $(this).closest('tr');
             var studentScores = container.find('input[name="student_score[]"]');
@@ -534,27 +682,30 @@
                 studentWeightedAverages.assessment.push(student_weighted_average);
             });
 
+
+            console.log(studentWeightedAverages);
+
             $.each(studentWeightedAverages.assessment, function(key, val) {
+
+
+
                 let a = parseFloat(val);
                 let b = parseFloat(studentWeightedAverages.performance[key]);
                 let c = parseFloat(studentWeightedAverages.written[key]);
 
                 let initial_grade = Math.round(a + b + c);
 
-                $(`.learner_score_container_${key+1}`).find('#initial_grade').text(1);
-
+                $(`.learner_score_container_${key}`).find('.initial_grade').text(initial_grade);
+                // console.log($(`.learner_score_container_${key+1}`));
                 studentTransmutedGrade(initial_grade).then(function(
                         transmutedGrade) {
-                        $(`.learner_score_container_${key+1}`).find(
-                            '#student_quarterly_grade').text(
+                        $(`.learner_score_container_${key}`).find(
+                            '.student_quarterly_grade').text(
                             transmutedGrade);
                     })
                     .catch(function(error) {
                         console.error("Error:", error);
-                        // Handle the error case if necessary
-                    })
-
-                // console.log(a+b+c);
+                    });
             });
 
         });
@@ -577,8 +728,9 @@
         $('#saveButton').on('click', function() {
             var data = {
                 sy: $('.school_year_select :selected').val(),
-                subject_id: $('.subject_select :selected').val(),
-                quarter_id: $('.quarter_select :selected').val(),
+                subject_id: $('input[name="per_subject"]:checked').val(),
+                section_id: $('.section_select :selected').val(),
+                quarter_id: $('input[name="per_quarter"]:checked').val(),
                 outputs: [],
                 performance_outputs: [],
                 assessment_outputs: [],

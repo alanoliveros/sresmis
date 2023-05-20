@@ -11,6 +11,7 @@ use App\Models\StudentAssessmentScore;
 use App\Models\Teacher;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
 class GradingComponentController extends Controller
 {
@@ -88,6 +89,7 @@ class GradingComponentController extends Controller
 
             $grade = StudentAssessmentScore::updateOrCreate($data, $data);
             $grade->student_id = $student['student_id'];
+            $grade->section_id = $request->section_id   ;
 
             $grade->written_student_score = implode(',', $student['written_student_scores']);
             $grade->written_total_student_score =  $student['written_student_total_score'];
@@ -197,7 +199,6 @@ class GradingComponentController extends Controller
     public function filter_students(Request $request)
     {
         $sy = $request->sy;
-        $subject = $request->subject;
         $section = $request->section;
 
 
@@ -209,23 +210,33 @@ class GradingComponentController extends Controller
             ->orderBy('users.lastname', 'asc')
             ->join('users', 'students.studentId', 'users.id')
             ->get();
-        // subject where
-        $subjectted = Subject::find($subject);
+
+        $subjects = ClassSchedule::where([
+            'school_year' => $sy,
+            'teacherId' => auth()->user()->id,
+            'sectionId' => $section,
+        ])
+            ->orderBy('subjects.subjectName', 'asc')
+            ->join('subjects', 'class_schedules.subjectId', 'subjects.id')->get();
+
+        $subjectArr = array();
+
+        foreach ($subjects as $subject) {
+            $subjectArr[$subject->subjectId] = $subject->subjectName;
+        }
 
         return response()->json([
             'students' => $students,
-            'subject' => $subjectted,
+            'subjects' => $subjectArr,
         ]);
     }
     public function find_sections(Request $request)
     {
         $sy = $request->sy;
-        $subject = $request->subject;
 
 
         $sections = ClassSchedule::where([
             'school_year' => $sy,
-            'subjectId' => $subject,
             'teacherId' => auth()->user()->id,
         ])
             ->orderBy('sections.sectionName', 'asc')
@@ -239,6 +250,42 @@ class GradingComponentController extends Controller
 
         return response()->json([
             'sections' => $sectionArr,
+        ]);
+    }
+    public function display_grades(Request $request)
+    {
+        $sy = $request->sy;
+        $section_id = $request->section;
+        $subject_id = $request->subject_id;
+        $quarter_id = $request->quarter;
+
+        $display_grades = StudentAssessmentScore::where([
+            'student_assessment_scores.teacher_id' => auth()->user()->id,
+            'student_assessment_scores.subject_id' => $subject_id,
+            'student_assessment_scores.section_id' => $section_id,
+            'student_assessment_scores.sy' => $sy,
+            'student_assessment_scores.quarter_id' => $quarter_id,
+
+        ])
+        ->join('users', 'student_assessment_scores.student_id', 'users.id')
+        ->get();
+
+        $students = Student::where([
+            'school_year' => $sy,
+            'teacherId' => auth()->user()->id,
+            'sectionId' => $section_id,
+        ])
+            ->orderBy('users.lastname', 'asc')
+            ->join('users', 'students.studentId', 'users.id')
+            ->get();
+
+        $subject = Subject::find($subject_id);
+        
+
+        return response()->json([
+            'display_grades' => $display_grades,
+            'students' => $students,
+            'subject' => $subject,
         ]);
     }
 }

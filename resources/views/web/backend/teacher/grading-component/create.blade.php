@@ -99,13 +99,6 @@
                                 </div>
                                 <div class="col-12 col-md-2 gx-1">
                                     <div class="mb-3 p-2">
-                                        <select class="form-select subject_select" name="subject_select" id="">
-                                            <option selected disabled>Select Subject</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-2 gx-1">
-                                    <div class="mb-3 p-2">
                                         <select class="form-select section_select" name="section_select" id="">
                                             <option value="">Select Section</option>
                                         </select>
@@ -137,6 +130,9 @@
                                     </div>
                                 </div>
                                 <hr>
+                                <div class="col-12 my-2 display_subjects">
+
+                                </div>
                                 <div class="col-12 bg-dark text-light py-2 header_container">
 
                                 </div>

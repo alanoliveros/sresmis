@@ -9,12 +9,12 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\QuarterlyGrading;
 use App\Models\Student;
+use App\Models\ClassSchedule;
 
 class GradeSummaryController extends Controller
 {
     public function index(){
         $sessions = Session::orderBy('school_year', 'desc')->get();
-        $subjects = Subject::orderBY('subjectName', 'asc')->get();
         $quarters = QuarterlyGrading::orderBY('quarter_name', 'asc')->get();
 
         $teacher_detail = Teacher::where('teacherId', auth()->user()->id)->first();
@@ -25,9 +25,14 @@ class GradeSummaryController extends Controller
             'adminId' => $teacher_detail->adminId,
         ])->get();
 
+        // $class_schedule = ClassSchedule::where([
+        //     'teacher_id' => auth()->user()->id,
+        //     'teacher_id' => auth()->user()->id,
+        // ])
+
         return view('web.backend.teacher.grade-summary.index', [
             'sessions' => $sessions,
-            'subjects' => $subjects,
+            // 'subjects' => $subjects,
             'quarters' => $quarters,
             'students' => $students,
         ]);

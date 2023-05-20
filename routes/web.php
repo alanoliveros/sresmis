@@ -87,7 +87,11 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         /*Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
         Route::post('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');*/
         /*Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');*/
+
         Route::post('/getStudents/by-school-year-and-grade-level', [AdminStudentController::class, 'getStudentsBySchoolYearAndGradeLevel']);
+        Route::post('/getStudents/by-student-year', [AdminController::class, 'admin.student.get_students_by_year']);
+
+
 
         Route::resource('teacher', AdminTeacherController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
         Route::resource('student', AdminStudentController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);

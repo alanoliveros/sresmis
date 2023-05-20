@@ -51,8 +51,15 @@ class AdminStudentController extends Controller
         ])
             ->get();
 
+
+        $by_sy = Enrollment::where('school_year', $request->sy)->get();
+
+
+
+
         return response()->json([
             'enrollments' => $enrollments,
+            'filter_by_year' => $by_sy,
         ]);
     }
 

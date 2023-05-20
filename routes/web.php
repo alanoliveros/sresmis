@@ -88,8 +88,14 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::post('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');*/
         /*Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');*/
 
+        Route::post('/getStudents/by-school-year-and-grade-level', [AdminStudentController::class, 'getStudentsBySchoolYearAndGradeLevel']);
+        Route::post('/getStudents/by-student-year', [AdminController::class, 'admin.student.get_students_by_year']);
+
+
+
         Route::resource('teacher', AdminTeacherController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
         Route::resource('student', AdminStudentController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+
     });
 
     /** ================== Settings ================== */
@@ -262,11 +268,11 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::get('/grade-component-create-grade', [GradingComponentController::class, 'create'])->name('teacher.create-grade.grade-component');
     Route::post('/grade-component/filter-subject', [GradingComponentController::class, 'filter_subject']);
     Route::post('/grade-component/save', [GradingComponentController::class, 'save']);
-   
+
     Route::post('/grade-component/display_subjects', [GradingComponentController::class, 'display_subjects']);
-    
-    
-    // Revise 
+
+
+    // Revise
     Route::post('/student-grades/get-subjects-by-school-year', [GradingComponentController::class, 'find_subjects']);
     Route::post('/student-grades/get-sections-by-school-year', [GradingComponentController::class, 'find_sections']);
     Route::post('/grade-component/get-students', [GradingComponentController::class, 'filter_students']);

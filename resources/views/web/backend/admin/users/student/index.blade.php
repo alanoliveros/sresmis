@@ -15,9 +15,6 @@
         </div>--}}<!-- End Page Title -->
 
 
-
-
-
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -33,7 +30,7 @@
                                    data-bs-target="#addStudent">+ Add @yield('title')</a>
 
                             </div>
-                                {{--@include('backend.admin.teachers.add-teacher')--}}
+                            {{--@include('backend.admin.teachers.add-teacher')--}}
 
 
                             <div class="row">
@@ -43,82 +40,41 @@
                                         <select class="form-select select_sy" required aria-label="select example"
                                                 name="school_year">
                                             <option selected disabled>Select School Year</option>
-                                            {{--@foreach ($sessions as $key => $session)
+                                            @foreach ($sessions as $key => $session)
                                                 <option value="{{ $session->school_year }}">
                                                     {{ $session->school_year }}</option>
-                                            @endforeach--}}
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-2">
                                     <div class="mb-3">
-                                        <select class="form-select school_year_by_subject" required
+                                        <select class="form-select grade_level_id" required
                                                 aria-label="select example" name="school_year">
                                             <option selected disabled>Select Grade Level</option>
-                                            {{-- @foreach ($subjects as $key => $subject)
-                                                 <option value="{{ $subject->id }}">
-                                                     {{ $subject->subjectName }}</option>
-                                             @endforeach--}}
+                                            @foreach ($grade_levels as $key => $level)
+                                                <option value="{{ $level->id }}">
+                                                    {{ $level->gradeLevelName }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-2">
-                                    <div class="mb-3">
-                                        <select class="form-select school_year_by_section" required
-                                                aria-label="select example" name="school_year">
-                                            <option selected disabled>Select Section</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-3">
+                                {{--<div class="col-12 col-md-3">
                                     <div class="mb-3">
                                         <button type="button" disabled
                                                 class="btn btn-secondary rounded-0 filter_by">Filter</button>
                                     </div>
-                                </div>
+                                </div>--}}
 
                             </div>
 
 
-
-                            <!-- Table with stripped rows -->
-                            <table class="table" id="components-datatable">
-                                <thead>
-                                <tr>
-                                    <th scope="col">LRN</th>
-                                    <th scope="col">Student Name</th>
-                                    <th scope="col">Remarks</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($students as $student)
-                                    <tr>
-                                        <td>{{$student->lrn}}</td>
-                                        <td>{{$student->lastname.', '.($student->middlename == NULL? '':$student->middlename.', ').$student->name.($student->suffix == NULL? '':', '.$student->suffix)}}</td>
-                                        <td>{{$student->remarks}}</td>
-                                        <td>
-                                            @if($student->status == 1)
-                                                Active
-                                            @elseif($student->status == 2)
-                                                Enactive
-                                            @else
-                                                {{$student->status}}
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="" class="bi bi-eye" style="margin-right: 6px"></a>
-                                            <a href="" class="bi bi-pencil-square" style="margin-right: 6px"></a>
-                                            <a href="" class="bi bi-trash"></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
+                            <div class="col-12 student_data_container">
+                                <div class="text-center">
+                                    <img class="w-25" src="{{asset('storage/image/empty_box.png')}}" alt="">
+                                <h3 class="mt-3">No data</h3>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -131,6 +87,6 @@
 
 @endsection
 <x-datatable/>
-@section('scripts')
-    @include('web.backend.teacher.students.admission-subject.script')
-@endsection
+
+
+

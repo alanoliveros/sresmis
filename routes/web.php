@@ -268,8 +268,12 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     
     // Revise 
     Route::post('/student-grades/get-subjects-by-school-year', [GradingComponentController::class, 'find_subjects']);
-    Route::post('/grade-component/filter-sections', [GradingComponentController::class, 'find_sections']);
-    Route::post('/grade-component/filter-students', [GradingComponentController::class, 'filter_students']);
+    Route::post('/student-grades/get-sections-by-school-year', [GradingComponentController::class, 'find_sections']);
+    Route::post('/grade-component/get-students', [GradingComponentController::class, 'filter_students']);
+    // filter grades
+    Route::post('/grade-component/filter-grades/display-grades', [GradingC\omponentController::class, 'display_grades']);
+
+
 
     // Summary of grades
     Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');

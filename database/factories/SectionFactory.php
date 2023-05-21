@@ -23,7 +23,7 @@ class SectionFactory extends Factory
         return [
             'adminId' => 1,
             'sectionName' => 'Section ' . $sectionLetter++,
-            'gradeLevelId' => $this->faker->numberBetween(0, 6),
+            'gradeLevelId' => $this->faker->numberBetween(1, 7),
             'created_at' => now(),
             'updated_at' => now(),
         ];

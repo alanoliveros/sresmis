@@ -44,7 +44,15 @@ class DatabaseSeeder extends Seeder
             GradeLevelSeeder::class,
             SessionSeeder::class,
             SectionSeeder::class,
-            SubjectSeeder::class
+            SubjectSeeder::class,
+
+            Grade1Seeder::class,
+            Grade2Seeder::class,
+            Grade3Seeder::class,
+            Grade4Seeder::class,
+            Grade5Seeder::class,
+            Grade6Seeder::class,
+            Grade0Seeder::class
             // Other seeders you want to run
         ]);
 

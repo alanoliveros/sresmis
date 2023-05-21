@@ -17,32 +17,32 @@ class GradeLevelSeeder extends Seeder
     {
         DB::table('grade_levels')->insert([
             [
-                'gradeLevelName' => 'GRADE-I',
+                'gradeLevelName' => 'GRADE I',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gradeLevelName' => 'GRADE-II',
+                'gradeLevelName' => 'GRADE II',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gradeLevelName' => 'GRADE-III',
+                'gradeLevelName' => 'GRADE III',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gradeLevelName' => 'GRADE-IV',
+                'gradeLevelName' => 'GRADE IV',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gradeLevelName' => 'GRADE-V',
+                'gradeLevelName' => 'GRADE V',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'gradeLevelName' => 'GRADE-VI',
+                'gradeLevelName' => 'GRADE VI',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

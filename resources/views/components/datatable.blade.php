@@ -13,7 +13,7 @@
                             <td>${enrollment.lrn}</td>
                             <td>${enrollment.last_name + ', ' + (enrollment.middle_name == null ? '' : enrollment.middle_name + ', ') + enrollment.first_name + (enrollment.suffix == null ? '' : ', ' + enrollment.suffix)}</td>
                             <td>${enrollment.gender}</td>
-                            <td>${enrollment.grade_level_id === 1 ? 'GRADE I' : enrollment.grade_level_id === 2 ? 'GRADE II' : enrollment.grade_level_id === 3 ? 'GRADE III' : enrollment.grade_level_id === 4 ? 'GRADE IV' : enrollment.grade_level_id === 5 ? 'GRADE V' : enrollment.grade_level_id === 6 ? 'GRADE VI' : 'KINDERGARTEN'}</td>
+                            <td>${enrollment.grade_level_id === 1 ? 'GRADE I' : enrollment.grade_level_id === 2 ? 'GRADE II' : enrollment.grade_level_id === 3 ? 'GRADE III' : enrollment.grade_level_id === 4 ? 'GRADE IV' : enrollment.grade_level_id === 5 ? 'GRADE V' : enrollment.grade_level_id === 6 ? 'GRADE VI' : ' KINDERGARTEN'}</td>
                             <td>${enrollment.current_status}</td>
                             <td>${enrollment.academic_status === 1 ? 'Active' : enrollment.academic_status === 2 ? 'Enactive' : enrollment.academic_status} </td>
                             <td>

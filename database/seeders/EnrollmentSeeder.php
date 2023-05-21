@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Enrollment;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class EnrollmentSeeder extends Seeder
 {
@@ -17,6 +16,8 @@ class EnrollmentSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('Enrollments')->truncate();
+
         $faker = Faker::create();
 
         $numberOfStudents = $faker->numberBetween(60, 80); // Generate a random number of students between 60 and 80
@@ -51,8 +52,8 @@ class EnrollmentSeeder extends Seeder
                 'gender' => $faker->randomElement(['Male', 'Female']), // Random gender
                 'religion' => 'Christianity',
                 'barangay' => $barangays[$i],
-                'city' => 'Maramag', //
-                'province' => 'Bukidnon', //
+                'city' => 'Maramag',
+                'province' => 'Bukidnon',
                 'grade_level_id' => 1,
                 'school_year' => '2017-2018',
                 'current_status' => 'Enrolled',

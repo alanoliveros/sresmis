@@ -117,7 +117,7 @@
   outline: none;
   box-shadow: none;
 }
-
+/* 
 input[type="radio"] {
   width: 30px;
   height: 30px;
@@ -125,9 +125,8 @@ input[type="radio"] {
   border: 2px solid #1FBED6;
   background-color: white;
   -webkit-appearance: none;
-  /*to disable the default appearance of radio button*/
   -moz-appearance: none;
-}
+} */
 
 input[type="radio"]:focus {
   /*no need, if you don't disable default appearance*/

@@ -25,7 +25,7 @@
                         <div class="card-body">
 
                             <div class="row my-3">
-                                <div class="col-12 col-sm-4 col-md-4">
+                                <div class="col-12 col-sm-4 col-md-3">
                                     <div class="mb-3">
                                         <select class="form-select school_year_by_advisory" required
                                             aria-label="select example" name="school_year">
@@ -37,13 +37,19 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4 col-md-4">
+                                <div class="col-12 col-sm-4 col-md-3">
                                     <div class="mb-3">
                                         <button type="button"
                                             class="btn btn-secondary rounded-0 filter_student">Filter</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4 col-md-4">
+                                <div class="col-12 col-sm-4 col-md-2">
+                                    <div class="mb-3">
+                                        <button type="button"
+                                            class="btn btn-secondary rounded-0 filter_student">Pull data</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4 col-md-3">
                                     <div class="mb-3">
                                         <a href="" class="float-md-end btn btn-light rounded-0 border-dark"
                                             data-bs-toggle="modal" data-bs-target="#addstudent_click">+ Add student</a>

@@ -34,6 +34,7 @@
         border: none;
         background: transparent;
         padding: 5px;
+        overflow: hidden
     }
 
     .student-table th,
@@ -132,6 +133,7 @@
                                 <hr>
                                 <div class="col-12 my-2 display_subjects">
 
+
                                 </div>
                                 <div class="col-12 bg-dark text-light py-2 header_container">
 
@@ -155,25 +157,61 @@
                                     <div class="tab-pane fade" id="quarterly_assessment_tab" role="tabpanel"
                                         aria-labelledby="profile-tab">
                                         <div class="table-responsive assessment_data_table">
-                                            
+
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="transmuted_grade_tab" role="tabpanel"
                                         aria-labelledby="contact-tab">
                                         <div class="table-responsive transmuted_data_table">
-                                        
+
+                                        </div>
                                     </div>
-                                </div><!-- End Bordered Tabs Justified -->
+                                </div>
+                                <div class="col-4 ">
 
 
+                                    <button type="button" class="btn btn-primary float-end rounded-0"
+                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        Summary of Grades
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+                                            style="min-width:95%;">
+                                            <div class="modal-content rounded-0">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Summary of Grades
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                   
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Understood</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
 @endsection
 @section('scripts')
     @include('web.backend.teacher.grading-component.createScript')
 @endsection
+{{-- // <button class="btn btn-primary rounded-0 float-md-end">Summary of Grades</button> --}}

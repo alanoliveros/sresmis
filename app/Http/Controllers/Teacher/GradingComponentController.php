@@ -9,7 +9,9 @@ use App\Models\Subject;
 use App\Models\QuarterlyGrading;
 use App\Models\StudentAssessmentScore;
 use App\Models\Teacher;
+use App\Models\QuarterlySummaryGrade;
 use App\Models\Student;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
@@ -76,6 +78,7 @@ class GradingComponentController extends Controller
     {
 
         $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+        $grade_level_id = Section::find($request->section_id);
         $students = array();
         foreach ($request->outputs as $key => $student) {
             $data = [
@@ -89,7 +92,7 @@ class GradingComponentController extends Controller
 
             $grade = StudentAssessmentScore::updateOrCreate($data, $data);
             $grade->student_id = $student['student_id'];
-            $grade->section_id = $request->section_id   ;
+            $grade->section_id = $request->section_id;
 
             $grade->written_student_score = implode(',', $student['written_student_scores']);
             $grade->written_total_student_score =  $student['written_student_total_score'];
@@ -117,8 +120,40 @@ class GradingComponentController extends Controller
             $grade->initial_grade = $request->transmuted_grade[$key]['initial_grade'];
             $grade->quarterly_grade = $request->transmuted_grade[$key]['final_grade'];
 
+            $finalGrade = $request->transmuted_grade[$key]['final_grade'];
 
+            if ($finalGrade <= 74) {
+                $grade->remarks = 'Failed';
+            } else if ($finalGrade >= 75 && $finalGrade <= 100) {
+                $grade->remarks = 'Passed';
+            }
             $grade->save();
+
+            $gradeSummary = QuarterlySummaryGrade::firstOrNew([
+                'school_year' =>  $request->sy,
+                'teacher_id' => auth()->user()->id,
+                'student_id' => $student['student_id'],
+                'subject_id' =>  $request->subject_id,
+            ]);
+
+            $gradeSummary->school_year = $request->sy;
+            $gradeSummary->admin_id = $teacher->adminId;
+            $gradeSummary->teacher_id = auth()->user()->id;
+            $gradeSummary->student_id = $student['student_id'];
+            $gradeSummary->subject_id = $request->subject_id;
+            $gradeSummary->grade_level_id = $grade_level_id->gradeLevelId;
+            $gradeSummary->section_id = $request->section_id;
+
+            if ($request->quarter_id == 1) {
+                $gradeSummary->quarter_1 = $request->transmuted_grade[$key]['final_grade'];
+            } else if ($request->quarter_id == 2) {
+                $gradeSummary->quarter_2 = $request->transmuted_grade[$key]['final_grade'];
+            } else if ($request->quarter_id == 3) {
+                $gradeSummary->quarter_3 = $request->transmuted_grade[$key]['final_grade'];
+            } else if ($request->quarter_id == 4) {
+                $gradeSummary->quarter_4 = $request->transmuted_grade[$key]['final_grade'];
+            }
+            $gradeSummary->save();
         }
 
         // start
@@ -204,7 +239,6 @@ class GradingComponentController extends Controller
 
         $students = Student::where([
             'school_year' => $sy,
-            'teacherId' => auth()->user()->id,
             'sectionId' => $section,
         ])
             ->orderBy('users.lastname', 'asc')
@@ -267,8 +301,8 @@ class GradingComponentController extends Controller
             'student_assessment_scores.quarter_id' => $quarter_id,
 
         ])
-        ->join('users', 'student_assessment_scores.student_id', 'users.id')
-        ->get();
+            ->join('users', 'student_assessment_scores.student_id', 'users.id')
+            ->get();
 
         $students = Student::where([
             'school_year' => $sy,
@@ -280,7 +314,7 @@ class GradingComponentController extends Controller
             ->get();
 
         $subject = Subject::find($subject_id);
-        
+
 
         return response()->json([
             'display_grades' => $display_grades,

@@ -28,7 +28,6 @@
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
                                    data-bs-target="#addStudent">+ Add @yield('title')</a>
-
                             </div>
                             {{--@include('backend.admin.teachers.add-teacher')--}}
 

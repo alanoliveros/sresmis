@@ -244,10 +244,10 @@
 
     @php
         $components = [
-            ['name' => 'System settings', 'route' => 'admin.system-settings'],
-            ['name' => 'Website settings', 'route' => 'admin.website-settings'],
-            ['name' => 'School settings', 'route' => 'admin.school-settings'],
-            ['name' => 'About', 'route' => 'admin.about'],
+            ['name' => 'System settings', 'route' => 'system.index'],
+            ['name' => 'Website settings', 'route' => 'website.index'],
+            ['name' => 'School settings', 'route' => 'school.index'],
+            ['name' => 'About', 'route' => 'about.index'],
         ];
     @endphp
     <ul id="settings-nav"

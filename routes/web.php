@@ -17,6 +17,7 @@ use App\Http\Controllers\BackOffice\SessionController;
 use App\Http\Controllers\EnrollmentProfileController;
 use App\Http\Controllers\Manage\AdminStudentController;
 use App\Http\Controllers\Manage\AdminTeacherController;
+use App\Http\Controllers\ManageSectionController;
 use App\Http\Controllers\SchoolForm1Controller;
 use App\Http\Controllers\SchoolForm2Controller;
 use App\Http\Controllers\SchoolForm9;
@@ -55,7 +56,7 @@ Route::get('/', function () {
 Auth::routes();
 
 /** ======================================= Admin start routing ======================================= */
-Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('isAdmin');
+Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('isAdmin');
 
 /** ================== Admin Controller ================== */
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
@@ -102,10 +103,10 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
     /** ================== Settings ================== */
     Route::prefix('settings')->group(function () {
-        Route::get('/system-settings', [SystemController::class, 'index'])->name('admin.system-settings');
-        Route::get('/website-settings', [WebsiteCountroller::class, 'index'])->name('admin.website-settings');
-        Route::get('/school-settings', [SchoolController::class, 'index'])->name('admin.school-settings');
-        Route::get('/about', [AboutCountroller::class, 'index'])->name('admin.about');
+        Route::resource('system', SystemController::class);
+        Route::resource('website', WebsiteCountroller::class);
+        Route::resource('school', SchoolController::class);
+        Route::resource('about', AboutCountroller::class);
     });
 
     /** ================== Back office ================== */
@@ -151,8 +152,8 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 /** Section */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
     //    Route::post('/getSection', [AdminController::class, 'getSection']);
-    Route::get('/manage-sections', [AdminController::class, 'manageSections'])->name('manage-sections');
-    Route::post('/create-section', [AdminController::class, 'create_section'])->name('create-section');
+    Route::get('/manage-sections', [ManageSectionController::class, 'manageSections'])->name('manage-sections');
+    Route::post('/create-section', [ManageSectionController::class, 'create_section'])->name('create-section');
 });
 
 

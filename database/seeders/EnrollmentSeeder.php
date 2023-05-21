@@ -46,6 +46,7 @@ class EnrollmentSeeder extends Seeder
                 'current_status' => 'Enrolled', // Random current status (0 or 1)
                 'academic_status' => 'Active', // Random academic status
             ]);
+
         }
     }
 }

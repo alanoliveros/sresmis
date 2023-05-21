@@ -139,7 +139,8 @@ class SubjectSeeder extends Seeder
             [
                 'adminId' => 1,
                 'gradeLevelId' => 1,
-                'subjectName' => 'Edukasyong Pantahanan at Pangkabuhayan (EPP) / Technology and Livelihood Education (TLE)',
+                /*'subjectName' => 'Edukasyong Pantahanan at Pangkabuhayan (EPP) / Technology and Livelihood Education (TLE)',*/
+                'subjectName' => 'EPP / TLE',
                 'description' => 'EPP and TLE subject description',
                 'written_work_percentage' => 50,
                 'performance_tasks_percentage' => 30,

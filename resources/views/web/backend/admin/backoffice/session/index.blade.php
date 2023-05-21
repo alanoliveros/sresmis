@@ -33,20 +33,17 @@
                             <table class="table" id="components-datatable">
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Grade Level</th>
-                                    <th scope="col">Section</th>
+                                    <th scope="col">Session title</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($sessions as $key=>$session)
                                     <tr>
-                                        <th scope="row">{{$key+1}}</th>
                                         <td>{{$session->school_year}}</td>
                                         <td>{{$session->status == 1?'Active':'Deactive'}}</td>
                                         <td>
-                                            <a href=""><i class="bi bi-eye-fill"></i></a>
                                             <a href=""><i class="bi bi-pencil-square"></i></a>
                                             <a href=""><i class="bi bi-trash"></i></a>
                                         </td>

@@ -81,8 +81,8 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
     });
 
-    Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
-    Route::post('/add-teacher', [AdminController::class, 'addTeacher'])->name('admin.add-teacher');
+    Route::get('/teachers', [AdminTeacherController::class, 'teachers'])->name('admin.teachers');
+    Route::post('/add-teacher', [AdminTeacherController::class, 'addTeacher'])->name('admin.add-teacher');
 
     /** ================== Users ================== */
     Route::prefix('manage-users')->group(function () {
@@ -130,15 +130,9 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
         Route::get('/class-schedule/{sid}/{gid}', [ClassScheduleController::class, 'show_by_section']);
 
-        /*Route::get('/class-schedule', [AdminController::class, 'index'])->name('manage-class-schedules');*/
-        /*Route::get('/schedules/view-by-gradelevel/{name}', [AdminController::class, 'view_by_gradeLevel']);*/
-        /*Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');*/
-
-
         /** ================== Section ================== */
         Route::resource('section', SectionController::class)->only(['index', 'store']);
         Route::post('/getSection', [SectionController::class, 'getSection']);
-
 
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
         Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
@@ -151,30 +145,13 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 /** Section */
 Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-    //    Route::post('/getSection', [AdminController::class, 'getSection']);
     Route::get('/manage-sections', [ManageSectionController::class, 'manageSections'])->name('manage-sections');
     Route::post('/create-section', [ManageSectionController::class, 'create_section'])->name('create-section');
 });
 
 
 
-// /** Subjects */
-//Route::prefix('/admin')->middleware('isAdmin')->group(function () {
-//    Route::get('/manage-subjects', [AdminController::class, 'manageSubjects'])->name('manage-subjects');
-//    Route::get('/{name}/{id}', [AdminController::class, 'addsubjectByGradeLevel']);
-//    Route::post('/add-subjectBygradeLevel', [AdminController::class, 'add_subjectBygradeLevel'])->name('add-subjectBygradeLevel');
-//});
-
-
-
-/** Manage Class Schedules */
-/*Route::prefix('sresmis/admin')->middleware('isAdmin')->group(function () {
-    Route::get('/manage-class-schedules', [AdminController::class, 'manage_class_schedules'])->name('manage-class-schedules');
-    Route::get('/schedules/view-by-gradelevel/{name}', [AdminController::class, 'view_by_gradeLevel']);
-    Route::get('/schedules/view-by-section/{sid}/{gid}', [AdminController::class, 'view_by_section']);
-    Route::post('/schedules/add-schedule-by-section', [AdminController::class, 'add_schedule_by_section'])->name('add-schedule-by-section');
-});*/
-
+/** ======================================= Teacher start routing ======================================= */
 Route::prefix('teacher')->middleware('isTeacher')->group(function () {
 
     // Dashboard and Advisory

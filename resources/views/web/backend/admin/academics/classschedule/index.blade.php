@@ -2,46 +2,28 @@
 @section('title' , 'Schedules')
 @section('content')
     <main id="main" class="main">
-
-        <div class="pagetitle">
-            <h1>Data Tables</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Tables</li>
-                    <li class="breadcrumb-item active">Data</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
-
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="padding-bottom: 0;">
 
                             <div class="card-title">
-                                <span class="fs-4">@yield('title')</span>
-                               {{-- <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addSection">+ Add @yield('title')</a>
-                                @include('web.backend.admin.academics.section.create')--}}
+                                <span class="fs-4">Class Schedules</span>
                             </div>
+                        </div>
+                    </div>
 
-                            <!-- Table with stripped rows -->
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+
 
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-12 col-xlg-12">
-                                        <div class="card">
-                                            <div class="box bg-dark text-center">
-                                                <span class="font-light text-white fs-3">Grade Levels</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                     @foreach ($gradelevel as $level)
-                                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                                        <div class="pt-3 col-md-6 col-lg-3 col-xlg-3">
                                             <a href="{{url('admin/academic/class-schedule/'.str_replace(' ', '-', $level->gradeLevelName))}}">
                                                 <div class="card card-hover">
                                                     <div class="box bg-cyan text-center">

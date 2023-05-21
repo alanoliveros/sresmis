@@ -21,9 +21,8 @@ class EnrollmentSeeder extends Seeder
 
         $numberOfStudents = $faker->numberBetween(60, 80); // Generate a random number between 1 and 100
         for ($i = 0; $i < $numberOfStudents; $i++) {
-            $startDate = $faker->dateTimeBetween('-11 years', '-6 years');
+            $startDate = $faker->dateTimeBetween('-11 years', '-6 years'); // this code snippet generates a random date of birth within the specified range, the resulting age would fall between 6 years and 11 years at the time the code is executed.
             $endDate = $startDate->modify('+1 day');
-
             $dateOfBirth = $faker->dateTimeBetween($startDate, $endDate)->format('Y-m-d');
 
 
@@ -38,9 +37,10 @@ class EnrollmentSeeder extends Seeder
                 'date_of_birth' => $dateOfBirth,
                 'gender' => $faker->randomElement(['Male', 'Female']), // Random gender
                 'religion' => 'Christianity', // Random religion
-                'barangay' => $faker->randomElement(['San Roque', 'Dologon', 'Panadtalan']),
-                'city' => 'Maramag',
-                'province' => 'Bukidnon',
+                /*'barangay' => $faker->randomElement(['San Roque', 'Dologon', 'Panadtalan']),*/
+                'barangay' => $faker->randomElement(['San Roque', 'San Roque', 'San Roque', 'Dologon', 'Panadtalan']),
+                'city' => 'Maramag', // Random city pero dili na siya random kay ang school is located sa Maramag
+                'province' => 'Bukidnon', // Random province pero dili na siya random kay ang school is located sa Bukidnon
                 'grade_level_id' => 1, // Random grade level ID between 1 and 12
                 'school_year' => '2017-2018', // Random school year
                 'current_status' => 'Enrolled', // Random current status (0 or 1)

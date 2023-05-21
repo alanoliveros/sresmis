@@ -15,7 +15,7 @@ class SessionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sessions')->insert([
+/*        DB::table('sessions')->insert([
             [
                 'adminId' => 1,
                 'school_year' => '2009-2010',
@@ -94,6 +94,23 @@ class SessionSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ]);
+        ])*/;
+        $data = [];
+        $adminId = 1;
+        $currentYear = date('Y');
+        $startingYear = 2017;
+
+        for ($year = $startingYear; $year <= $currentYear; $year++) {
+            $schoolYear = $year . '-' . ($year + 1);
+            $data[] = [
+                'adminId' => $adminId,
+                'school_year' => $schoolYear,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        DB::table('sessions')->insert($data);
+
     }
 }

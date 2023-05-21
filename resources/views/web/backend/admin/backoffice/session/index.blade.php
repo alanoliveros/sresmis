@@ -2,59 +2,84 @@
 @section('title' , 'Session')
 @section('content')
     <main id="main" class="main">
-
-        {{--<div class="pagetitle">
-            <h1>Data Tables</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Tables</li>
-                    <li class="breadcrumb-item active">Data</li>
-                </ol>
-            </nav>
-        </div>--}}<!-- End Page Title -->
-
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="padding-bottom: 0;">
 
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
-                                <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
+                                <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
                                    data-bs-target="#addSection">+ Add @yield('title')</a>
-                                {{--@include('web.backend.admin.academics.section.create')--}}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card pt-3">
+                                <div class="card-body">
+                                    <!-- Table with stripped rows -->
+                                    <div class="alert alert-primary alert-dismissible fade show mt-2" role="alert">
+                                        Active session
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-8">
+                                        <select class="form-select select_sy" required aria-label="select example"
+                                                name="school_year">
+                                            <option selected disabled>Select School Year</option>
+                                            @foreach ($sessions as $key => $session)
+                                                <option value="{{ $session->school_year }}">
+                                                    {{ $session->school_year }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-secondary"><i class="bi bi-check-lg"></i> Activate</button>
+                                    </div>
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <!-- Table with stripped rows -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- Table with stripped rows -->
 
-                            <table class="table" id="components-datatable">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Session title</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($sessions as $key=>$session)
-                                    <tr>
-                                        <td>{{$session->school_year}}</td>
-                                        <td>{{$session->status == 1?'Active':'Deactive'}}</td>
-                                        <td>
-                                            <a href=""><i class="bi bi-pencil-square"></i></a>
-                                            <a href=""><i class="bi bi-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    <table class="table table-borderless mt-3" id="{{--components-datatable--}}">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Session title</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($sessions as $key=>$session)
+                                            <tr>
+                                                <td>{{$session->school_year}}</td>
+                                                <td style="font-style: italic;">{{$session->status == 1?'Active':'Deactive'}}</td>
+                                                <td>
+                                                    <a href=""><i class="bi bi-pencil-square"></i></a>
+                                                    <a href=""><i class="bi bi-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table with stripped rows -->
+
+                                </div>
+                            </div>
 
                         </div>
+
                     </div>
 
                 </div>
@@ -65,4 +90,3 @@
 
 @endsection
 <x-datatable/>
-

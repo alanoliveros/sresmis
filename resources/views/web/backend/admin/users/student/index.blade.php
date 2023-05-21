@@ -18,19 +18,28 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="padding-bottom: 0;">
+
+                            <div class="card-title">
+                                <span class="fs-4">@yield('title')</span>
+                                <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
+                                   data-bs-target="#addStudent">+ Add @yield('title')</a>
+                                {{--@include('web.backend.admin.academics.section.create')--}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body mt-3">
 
                             {{--<h5 class="card-title">@yield('title')</h5>--}}
-
+{{--
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
                                    data-bs-target="#addStudent">+ Add @yield('title')</a>
-                            </div>
+                            </div>--}}
                             {{--@include('backend.admin.teachers.add-teacher')--}}
-
 
                             <div class="row">
                                 <div class="col-12 col-md-2">

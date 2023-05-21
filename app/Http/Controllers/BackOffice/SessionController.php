@@ -19,7 +19,7 @@ class SessionController extends Controller
 
     public function index()
     {
-        $sessions = Session::all();
+        $sessions = Session::orderBy('school_year', 'desc')->get();
         return view('web.backend.admin.backoffice.session.index', compact('sessions'));
     }
 

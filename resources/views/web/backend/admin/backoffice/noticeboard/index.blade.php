@@ -19,15 +19,18 @@
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="padding-bottom: 0;">
 
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
-                                <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addSection">+ Add @yield('title')</a>
+                                <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
+                                   data-bs-target="#addStudent">+ Add @yield('title')</a>
                                 {{--@include('web.backend.admin.academics.section.create')--}}
                             </div>
-
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body mt-3">
                             <!-- Table with stripped rows -->
 
                             <table class="table" id="components-datatable">

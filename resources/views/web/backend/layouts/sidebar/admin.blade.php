@@ -2,6 +2,7 @@
     <a class="nav-link collapsed" href="{{route('admin.dashboard')}}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 
@@ -11,6 +12,7 @@
     <a class="nav-link collapsed" href="{{route('enrollmentprofile.dashboard')}}">
         <i class="bi bi-person-vcard"></i>
         <span>Enrolment Profile</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 
@@ -24,14 +26,14 @@
         $components = [
             ['name' => 'Promotion Rate', 'route' => 'admin.analytics'],
             ['name' => 'Retention Rate', 'route' => 'admin.retention'],
-            /*['name' => 'Cohort Survival Rate', 'route' => 'admin.cohort'],
+            ['name' => 'Cohort Survival Rate', 'route' => 'admin.cohort'],
             ['name' => 'Graduation Rate', 'route' => 'admin.graduation'],
             ['name' => 'Drop-out Rate', 'route' => 'admin.dropout'],
             ['name' => 'Failure Rate', 'route' => 'admin.failure'],
             ['name' => 'Completion Rate', 'route' => 'admin.completion'],
             ['name' => 'Achievement Rate', 'route' => 'admin.achievement'],
             ['name' => 'Transition Rate', 'route' => 'admin.transition'],
-            ['name' => 'Participation Rate', 'route' => 'admin.participation'],*/
+            ['name' => 'Participation Rate', 'route' => 'admin.participation'],
         ];
     @endphp
     <ul id="analytics-nav"
@@ -57,18 +59,21 @@
     <a class="nav-link collapsed" href="{{route('teacher.index')}}">
         <i class="bi bi-person-circle"></i>
         <span>Teacher</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 <li class="nav-item">
     <a class="nav-link collapsed" href="{{route('student.index')}}">
         <i class="bi bi-person-circle"></i>
         <span>Student</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 <li class="nav-item">
     <a class="nav-link collapsed" href="{{route('admission.index')}}">
         <i class="bi bi-plus-square"></i>
         <span>Admission</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 
@@ -185,18 +190,21 @@
     <a class="nav-link collapsed{{ request()->routeIs('admin.library') ? 'active' : '' }}" href="{{ route('admin.library') }}">
         <i class="bi bi-collection {{ request()->routeIs('admin.library') ? 'active' : '' }}"></i>
         <span>Library</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 <li class="nav-item">
     <a class="nav-link collapsed{{ request()->routeIs('admin.session') ? 'active' : '' }}" href="{{ route('admin.session') }}">
         <i class="bi bi-calendar-week"></i>
         <span>Session</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 <li class="nav-item">
     <a class="nav-link collapsed{{ request()->routeIs('admin.noticeboard') ? 'active' : '' }}" href="{{ route('admin.noticeboard') }}">
         <i class="bi bi-card-checklist"></i>
         <span>Noticeboard</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 
@@ -239,6 +247,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#settings-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gear"></i><span>Settings</span>
+        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
         <i class="bi bi-chevron-down ms-auto"></i>
     </a>
 

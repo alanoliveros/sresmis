@@ -3,7 +3,7 @@
 @section('content')
     <main id="main" class="main">
 
-        <div class="pagetitle">
+        {{--<div class="pagetitle">
             <h1>Data Tables</h1>
             <nav>
                 <ol class="breadcrumb">
@@ -12,21 +12,34 @@
                     <li class="breadcrumb-item active">Data</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>--}}<!-- End Page Title -->
 
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="padding-bottom: 0;">
 
                             <div class="card-title">
+                                <span class="fs-4">@yield('title')</span>
+                                <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
+                                   data-bs-target="#addSection">+ Add @yield('title')</a>
+                                @include('web.backend.admin.academics.section.create')
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+
+                            {{--<div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
                                    data-bs-target="#addSection">+ Add @yield('title')</a>
                                 @include('web.backend.admin.academics.section.create')
-                            </div>
+                            </div>--}}
 
                             <!-- Table with stripped rows -->
 

@@ -87,18 +87,12 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
     /** ================== Users ================== */
     Route::prefix('manage-users')->group(function () {
-        /*Route::get('/teacher', [AdminTeacherController::class, 'index'])->name('admin.users-teacher');
-        Route::post('/add-teacher', [AdminTeacherController::class, 'create'])->name('admin.add.users-teacher');*/
-        /*Route::get('/student', [AdminStudentController::class, 'index'])->name('admin.users-student');*/
-
         Route::post('/getStudents/by-school-year-and-grade-level', [AdminStudentController::class, 'getStudentsBySchoolYearAndGradeLevel']);
         Route::post('/getStudents/by-student-year', [AdminStudentController::class, 'getStudentsFilterBySchoolYear'])->name('admin.student.get_students_by_year');
 
-
-
-        Route::resource('teacher', AdminTeacherController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
-        Route::resource('student', AdminStudentController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
-
+        Route::resource('teacher', AdminTeacherController::class);
+        Route::resource('student', AdminStudentController::class);
+        Route::resource('admission', AdmissionController::class);
     });
 
     /** ================== Settings ================== */
@@ -120,7 +114,6 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::prefix('academic')->group(function () {
         Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
         Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
-        /*Route::get('/class-schedule', [ClassController::class, 'index'])->name('admin.class');*/
         Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
         Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
 
@@ -267,7 +260,7 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/quarter-grades/get_student_summary_grade', [QuarterGradeController::class, 'get_student_summary_grade']);
 
     // Summary of grades
-    
+
     Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
     Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
 

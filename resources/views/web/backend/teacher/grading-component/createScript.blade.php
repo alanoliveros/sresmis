@@ -168,9 +168,43 @@
 
                     $.each(data.subjects, function(key, val) {
                         sub += `
-                        <input type="radio" id="subject_${key}" name="per_subject" class="per_subject"
-                         value="${key}" />
-                         <label for="subject_${key}">${val}</label>
+                         <div class="row">
+                            <div class="col-8">
+                                
+                                <input type="radio" id="subject_${key}" name="per_subject" class="per_subject"
+                                value="${key}" />
+                                <label for="subject_${key}">${val}</label>
+                                
+                            </div>
+                            <div class="col-4 ">
+                                
+                                   
+                                <button type="button" class="btn btn-primary float-end rounded-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Summary of Grades
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                                    <div class="modal-content rounded-0">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Understood</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                               
+                            
+                            </div>
+                        </div>
                        
 
                        `;
@@ -461,6 +495,8 @@
                                 </tbody>
                     </table>`);
 
+                    $('.grade_summary').html('<h1>Habol</h1>');
+
 
                 }
             });
@@ -532,7 +568,7 @@
                             totals.each(function(i) {
                                 let total = i;
                                 // $(this).val(query ? (total !== '0' ? total : '') : '');
-                                $(this).text(i);
+                                // $(this).text(i);
                             });
 
 
@@ -550,18 +586,6 @@
                                         '0' ? inputValue : '') : '');
                                 });
 
-
-
-
-
-
-
-
-
-
-
-
-
                             } else {
                                 inputs.val(
                                     ''); // Clear the inputs if there is no data
@@ -577,9 +601,7 @@
                                 .written_possible_score.split(","): 0;
                             theadInputs.each(function(i) {
                                 let possible_scores = possibleScores[i] ||
-                                    '';
-                                let value = 'Some value ' + (i +
-                                1); // Example: Change this line with your desired logic
+                                    '';// Example: Change this line with your desired logic
                                 $(this).val(query ? (possible_scores !==
                                         '0' ? possible_scores : '') :
                                     '');
@@ -587,30 +609,6 @@
 
 
                         });
-
-
-
-                        // if (data.display_grades.length > 0) {
-                        //     console.log("Data value is greater than 0");
-                        // } else {
-                        //     console.log("No data found");
-                        //     console.log('Students data has length of: ' + data.students
-                        //         .length);
-                        //     var writtenWorkPercentage = data.subject
-                        //         .written_work_percentage;
-                        //     var performanceTasksPercentage = data.subject
-                        //         .performance_tasks_percentage;
-                        //     var quarterlyAssessmentPercentage = data.subject
-                        //         .quarterly_assessment_percentage;
-
-                        //     $('.possible_weighted_average[data-component="written_works"]')
-                        //         .text(
-                        //             writtenWorkPercentage);
-                        //     $('.possible_weighted_average[data-component="performance_tasks"]')
-                        //         .text(performanceTasksPercentage);
-                        //     $('.possible_weighted_average[data-component="quarterly_assessment"]')
-                        //         .text(quarterlyAssessmentPercentage);
-                        // }
                     }
                 });
             }
@@ -686,8 +684,6 @@
             console.log(studentWeightedAverages);
 
             $.each(studentWeightedAverages.assessment, function(key, val) {
-
-
 
                 let a = parseFloat(val);
                 let b = parseFloat(studentWeightedAverages.performance[key]);
@@ -821,8 +817,8 @@
 
             $('#transmuted_grades_table tbody tr').each(function() {
                 let transmuted = {
-                    initial_grade: $(this).find('#initial_grade').text(),
-                    final_grade: $(this).find('#student_quarterly_grade').text(),
+                    initial_grade: $(this).find('.initial_grade').text(),
+                    final_grade: $(this).find('.student_quarterly_grade').text(),
                 };
 
                 data.transmuted_grade.push(transmuted);
@@ -851,6 +847,10 @@
                 }
             });
         });
+
+        $('body').on('click', '#asd',function(){
+            $('.summary_of_grades').html('<p>ASd</p>');
+        })
 
     });
 </script>

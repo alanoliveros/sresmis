@@ -50,7 +50,7 @@
                                 {{-- add student start --}}
                                 <div class="col-12 col-sm-4 col-md-6">
                                     <div class="mb-3 addstudent-button">
-                                        <a href="{{route('teacher.create-grade.student-advisory')}}" class="btn btn-primary rounded-0 float-md-end"><i
+                                        <a href="" class="btn btn-primary rounded-0 float-md-end"><i
                                                 class="bi bi-folder-plus"></i> Create</a>
 
                                         {{-- @include('web.backend.teacher.quarterly-grade.advisory.create') --}}
@@ -112,6 +112,6 @@
         </section>
     </main>
 @endsection
-@section('scripts')
+{{-- @section('scripts')
     @include('web.backend.teacher.quarterly-grade.advisory.script')
-@endsection
+@endsection --}}

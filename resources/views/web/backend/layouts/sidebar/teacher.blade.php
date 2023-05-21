@@ -8,6 +8,24 @@
 
 {{-- Students Information --}}
 <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-calendar3"></i><span>Class Schedules</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="icons-bootstrap.html">
+                <i class="bi bi-circle"></i><span>Advisory</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="bi bi-circle"></i><span>Subject</span>
+            </a>
+        </li>
+    </ul>
+</li><!-- End Icons Nav -->
+
+<li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person-video2"></i><span>Students Information</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
@@ -58,11 +76,16 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('teacher.quarter-grades.index') }}">
+                <i class="bi bi-circle"></i><span>Quarter Grades</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('teacher.grade-summary-index') }}">
                 <i class="bi bi-circle"></i><span>Summary of grades</span>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('teacher.create-grade.student-advisory') }}">
                 <i class="bi bi-circle"></i><span>Quizzes</span>
             </a>
@@ -76,26 +99,9 @@
             <a href="{{route('teacher.class-attendance.subject')}}">
                 <i class="bi bi-circle"></i><span>Subject</span>
             </a>
-        </li>
+        </li> --}}
     </ul>
   </li><!-- End Tables Nav -->
-<li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-calendar3"></i><span>Class Schedules</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-            <a href="icons-bootstrap.html">
-                <i class="bi bi-circle"></i><span>Advisory</span>
-            </a>
-        </li>
-        <li>
-            <a href="">
-                <i class="bi bi-circle"></i><span>Subject</span>
-            </a>
-        </li>
-    </ul>
-</li><!-- End Icons Nav -->
 
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->unsignedBigInteger('teacher_id')->nullable();
             $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('section_id')->nullable();
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->unsignedBigInteger('quarter_id')->nullable();
 

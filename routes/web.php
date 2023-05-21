@@ -34,6 +34,7 @@ use App\Http\Controllers\Notifications\MailboxController;
 use App\Http\Controllers\Attendance\StudentAttendance;
 use App\Http\Controllers\Teacher\QuarterlyGradeController;
 use App\Http\Controllers\Teacher\GradeSummaryController;
+use App\Http\Controllers\Teacher\QuarterGradeController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -95,9 +96,8 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
 
 
 
-        Route::resource('teacher', AdminTeacherController::class);
-        Route::resource('student', AdminStudentController::class);
-        Route::resource('admission', AdmissionController::class);
+        Route::resource('teacher', AdminTeacherController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('student', AdminStudentController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
     });
 
@@ -260,12 +260,16 @@ Route::prefix('teacher')->middleware('isTeacher')->group(function () {
     Route::post('/grade-component/filter-grades/display-grades', [GradingComponentController::class, 'display_grades']);
 
 
+    // Quarter Grades
+    Route::post('/grade-component/get_section', [QuarterGradeController::class, 'get_section']);
+    Route::post('/grade-component/get_subjects', [QuarterGradeController::class, 'get_subjects']);
+    Route::get('/quarter-grades/index', [QuarterGradeController::class, 'index'])->name('teacher.quarter-grades.index');
+    Route::post('/quarter-grades/get_student_summary_grade', [QuarterGradeController::class, 'get_student_summary_grade']);
 
     // Summary of grades
+    
     Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
     Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
-
-
 
 
 

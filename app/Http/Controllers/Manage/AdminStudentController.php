@@ -55,6 +55,7 @@ class AdminStudentController extends Controller
             'students' => $enrollments,
         ]);
     }
+
     public function getStudentsBySchoolYearAndGradeLevel(Request $request)
     {
         $enrollments = Enrollment::where([
@@ -63,13 +64,6 @@ class AdminStudentController extends Controller
             'enrollments.grade_level_id' => $request->grade_level_id,
         ])
             ->get();
-
-
-        // $by_sy = Enrollment::where('school_year', $request->sy)->get();
-
-
-
-
         return response()->json([
             'students' => $enrollments,
         ]);
@@ -127,7 +121,6 @@ class AdminStudentController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-
 
 
     public function store(Request $request)

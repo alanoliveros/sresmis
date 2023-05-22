@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Enrollment;
 use Faker\Factory as Faker;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class EnrollmentSeeder extends Seeder
+class Grade2Seeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +16,6 @@ class EnrollmentSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Enrollments')->truncate();
-
         $faker = Faker::create();
 
         $numberOfStudents = $faker->numberBetween(60, 80); // Generate a random number of students between 60 and 80
@@ -25,7 +23,7 @@ class EnrollmentSeeder extends Seeder
         for ($i = 0; $i < $numberOfStudents; $i++) {
 
             // Generate a random date of birth within a specific range to ensure the resulting age falls between 6 and 11 years at the time the code is executed.
-            $startDate = $faker->dateTimeBetween('-11 years', '-6 years');
+            $startDate = $faker->dateTimeBetween('-8 years', '-7 years');
             $endDate = $startDate->modify('+1 day');
             $dateOfBirth = $faker->dateTimeBetween($startDate, $endDate)->format('Y-m-d');
 
@@ -52,9 +50,9 @@ class EnrollmentSeeder extends Seeder
                 'gender' => $faker->randomElement(['Male', 'Female']), // Random gender
                 'religion' => 'Christianity',
                 'barangay' => $barangays[$i],
-                'city' => 'Maramag',
-                'province' => 'Bukidnon',
-                'grade_level_id' => 1,
+                'city' => 'Maramag', //
+                'province' => 'Bukidnon', //
+                'grade_level_id' => 2,
                 'school_year' => '2017-2018',
                 'current_status' => 'Enrolled',
                 'academic_status' => 'Active',

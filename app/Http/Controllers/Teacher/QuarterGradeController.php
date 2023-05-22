@@ -73,6 +73,8 @@ class QuarterGradeController extends Controller
             ->join('users', 'quarterly_summary_grades.student_id', 'users.id')
             ->get();
 
+        
+
         return response()->json([
             'students' => $students_grades
         ]);

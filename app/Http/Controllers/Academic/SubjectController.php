@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Academic;
 
 use App\Http\Controllers\Controller;
 use App\Models\GradeLevel;
+use App\Models\GradeLevelSubject;
 use App\Models\Subject;
+use App\Models\Session;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+
 
 class SubjectController extends Controller
 {
@@ -23,11 +26,13 @@ class SubjectController extends Controller
     public function index()
     {
         {
+            $sessions = Session::orderBy('school_year', 'desc')->get();
             $subjects = Subject::all();
             $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
             return view('web.backend.admin.academics.subject.index', [
                 'subjects' => $subjects,
                 'gradelevel' => $gradelevel,
+                'sessions' => $sessions,
             ]);
 
         }
@@ -72,22 +77,27 @@ class SubjectController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'subjectname' => 'required',
-            'gradeLevelId' => 'required',
+            'grade_level_id' => 'required',
+            'subject_id' => 'required',
+            'school_year' => 'required',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $subject = new Subject();
-        $subject->adminId = auth()->user()->id;
-        $subject->gradeLevelId = $request->gradeLevelId;
-        $subject->subjectName = $request->subjectname;
+        $subject =  GradeLevelSubject::firstOrNew([
+            'grade_level_id' => $request->grade_level_id,
+            'subject_id' => $request->subject_id,
+        ]);
+        $subject->admin_id = auth()->user()->id;
+        $subject->school_year = $request->school_year;
+        $subject->grade_level_id = $request->grade_level_id;
+        $subject->subject_id = $request->subject_id;
         $subject->description = $request->description;
-        $subject->written_work_percentage = $request->writtenWork;
-        $subject->performance_tasks_percentage = $request->performanceTask;
-        $subject->quarterly_assessment_percentage = $request->quarterlyAssessment;
+        // $subject->written_work_percentage = $request->writtenWork;
+        // $subject->performance_tasks_percentage = $request->performanceTask;
+        // $subject->quarterly_assessment_percentage = $request->quarterlyAssessment;
         $subject->save();
 
         return redirect()->back()->with('success_added', 'Successfully added new record');

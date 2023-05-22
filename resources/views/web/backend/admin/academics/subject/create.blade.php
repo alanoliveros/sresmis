@@ -12,14 +12,29 @@
                     <div class="row g-3">
 
                         <div class="col-md-12">
+                            <label for="validationDefault02" class="form-label text-dark">School Year <small
+                                    class="text-danger">*</small></label>
+                            {{-- <input type="text" class="form-control" name="subjectname" value="{{ old('subjectname') }}"> --}}
+                            <select name="school_year" class="form-select" id="">
+                                @foreach ($sessions as $session)
+                                    <option value="{{$session->school_year}}">{{$session->school_year}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
                             <label for="validationDefault02" class="form-label text-dark">Subject Name <small
                                     class="text-danger">*</small></label>
-                            <input type="text" class="form-control" name="subjectname" value="{{ old('subjectname') }}">
+                            {{-- <input type="text" class="form-control" name="subjectname" value="{{ old('subjectname') }}"> --}}
+                            <select name="subject_id" class="form-select" id="">
+                                @foreach ($subjects as $key=>$subject)
+                                    <option {{$key == 0? 'selected': ''}} value="{{$subject->id}}">{{$subject->subjectName}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label text-dark">Grade Level <small
                                     class="text-danger">*</small></label>
-                            <select name="gradeLevelId" class="form-select">
+                            <select name="grade_level_id" class="form-select">
                                 <option selected disabled>Please select grade level</option>
                                 @foreach ($gradelevel as $level)
                                     <option

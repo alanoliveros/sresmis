@@ -45,27 +45,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-2 gx-1">
-                                    <div class="mb-3 p-2">
-                                        <select class="form-select school_year_select" name="school_year" id="">
-                                            <option selected disabled>Select Subject</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-2 gx-1">
-                                    <div class="mb-3 p-2">
-                                        <select class="form-select school_year_select" name="school_year" id="">
-                                            <option selected disabled>Select Section</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-2 gx-1">
-                                    <div class="mb-3 p-2">
-                                        <select class="form-select school_year_select" name="school_year" id="">
-                                            <option selected disabled>Select Section</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-2 gx-1">
                                     <div class="mb-3 p-2">
                                         <button class="btn btn-primary rounded-0 filter_data">Filter</button>
@@ -78,107 +57,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="table ">
-                                        <table class="table table-bordered border-dark">
-                                            <thead>
-                                                <tr>
-                                                    <th class="th_parent" rowspan="3">Name of Learners</th>
-                                                    @foreach ($subjects as $subject)
-                                                    <th colspan="5" class="text-center">{{$subject->subjectName}}</th>
-                                                    @endforeach
-                                                   
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <th colspan="5">Quarter</th>
-                                                    <th colspan="5">Quarter</th>
-                                                    <th colspan="5">Quarter</th>
-                                                    <th colspan="5">Quarter</th>
-                                                    <th colspan="5">Quarter</th>
-                                                    <th colspan="5">Quarter</th>
-                                                    <th colspan="5">Quarter</th>
-                                                </tr>
-                                                <tr class="text-center">
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>Final</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>Final</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>Final</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>Final</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>Final</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>Final</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>Final</td>
-                                                    <th class="text-center">Initial</th>
-                                                    <th class="text-center">General Average</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <td class="">Buknoy</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Final</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Final</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Final</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Final</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Final</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Final</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Final</td>
-                                                <td class="text-center">Initial</td>
-                                                <td class="text-center">General Average</td>
-
-                                            </tbody>
-                                        </table>
+                                    <div class="table table-responsive summary_grade_table">
+                                        
 
 
                                     </div>

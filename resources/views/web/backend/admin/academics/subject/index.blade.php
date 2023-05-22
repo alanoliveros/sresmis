@@ -24,7 +24,7 @@
                                 <div class="card-title">
                                     <span class="fs-4">@yield('title')</span>
                                     <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                                       data-bs-target="#addSection">+ Add @yield('title')</a>
+                                       data-bs-target="#addSubject">+ Add @yield('title')</a>
                                     @include('web.backend.admin.academics.subject.create')
                                 </div>
                             </div>

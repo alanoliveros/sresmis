@@ -63,6 +63,7 @@
             </a>
         </li>
 
+        
     </ul>
 </li><!-- End Charts Nav -->
 <li class="nav-item">
@@ -71,18 +72,25 @@
     </a>
     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
+            <a href="{{ route('teacher.report-card.index') }}">
+                <i class="bi bi-circle"></i><span>Report Card</span>
+            </a>
+        </li>	
+        <li>
             <a href="{{ route('teacher.grade-component-index') }}">
                 <i class="bi bi-circle"></i><span>Grade Component</span>
             </a>
         </li>
-        <li>
+       																											
+
+        {{-- <li>
             <a href="{{ route('teacher.quarter-grades.index') }}">
                 <i class="bi bi-circle"></i><span>Quarter Grades</span>
             </a>
         </li>
-        <li>
+        <li> --}}
             <a href="{{ route('teacher.grade-summary-index') }}">
-                <i class="bi bi-circle"></i><span>Summary of grades</span>
+                <i class="bi bi-circle"></i><span>Final Grades | Advisory</span>
             </a>
         </li>
         {{-- <li>

@@ -62,7 +62,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th rowspan="3">Name of Learners</th>
-                                                        <th colspan="4" class="text-center">Mother Tounge</th>
+                                                        <th colspan="4" class="text-center subjectName_display">-----------</th>
                                                     </tr>
                                                     <tr class="text-center">
                                                         <th colspan="4">Quarter</th>

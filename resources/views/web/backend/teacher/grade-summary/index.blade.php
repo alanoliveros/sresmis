@@ -83,13 +83,10 @@
                                             <thead>
                                                 <tr>
                                                     <th class="th_parent" rowspan="3">Name of Learners</th>
-                                                    <th colspan="5" class="text-center">Mother Tounge</th>
-                                                    <th colspan="5" class="text-center">English</th>
-                                                    <th colspan="5" class="text-center">English</th>
-                                                    <th colspan="5" class="text-center">English</th>
-                                                    <th colspan="5" class="text-center">English</th>
-                                                    <th colspan="5" class="text-center">English</th>
-                                                    <th colspan="5" class="text-center">English</th>
+                                                    @foreach ($subjects as $subject)
+                                                    <th colspan="5" class="text-center">{{$subject->subjectName}}</th>
+                                                    @endforeach
+                                                   
                                                 </tr>
                                                 <tr class="text-center">
                                                     <th colspan="5">Quarter</th>

@@ -58,7 +58,8 @@
 
         $('.per_subject').on('change', function() {
 
-            let section = $('.per_subject :selected').val();
+            let subjectName = $('.per_subject :selected').text();
+            $('.subjectName_display').text(subjectName);
             $('.filter_data').prop('disabled', false);
         });
 

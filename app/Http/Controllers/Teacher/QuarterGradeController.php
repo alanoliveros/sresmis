@@ -22,6 +22,9 @@ class QuarterGradeController extends Controller
     public function get_section(Request $request)
     {
         // $sections = Section::where('class_id', $request->class_id)->get();
+
+        $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+        
         $sections = ClassSchedule::where([
             'class_schedules.school_year' => $request->sy,
             'class_schedules.teacherId' => auth()->user()->id,

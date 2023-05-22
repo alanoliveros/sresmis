@@ -16,11 +16,19 @@
                             <td>${enrollment.grade_level_id === 1 ? 'GRADE I' : enrollment.grade_level_id === 2 ? 'GRADE II' : enrollment.grade_level_id === 3 ? 'GRADE III' : enrollment.grade_level_id === 4 ? 'GRADE IV' : enrollment.grade_level_id === 5 ? 'GRADE V' : enrollment.grade_level_id === 6 ? 'GRADE VI' : ' KINDERGARTEN'}</td>
                             <td>${enrollment.current_status}</td>
                             <td>${enrollment.academic_status === 1 ? 'Active' : enrollment.academic_status === 2 ? 'Enactive' : enrollment.academic_status} </td>
-                            <td>
-                                <a href="" class="bi bi-eye" style="margin-right: 6px"></a>
-                                <a href="" class="bi bi-pencil-square" style="margin-right: 6px"></a>
-                                <a href="" class="bi bi-trash"></a>
-                            </td>
+                            <td style="padding-bottom: 0; padding-top: 0;">
+                                            <div class="btn-group">
+                                                <a type="button" data-bs-toggle="dropdown" data-bs-auto-close="true"
+                                                   aria-expanded="false" href="">
+                                                    <i class="bi bi-three-dots" style="font-size: 26px;"></i>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> Show</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
                             </tr>
                         `;
                 });

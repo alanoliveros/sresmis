@@ -1,100 +1,69 @@
 @extends('web.backend.layouts.app')
 @section('title' , 'Subject')
 @section('content')
-        <main id="main" class="ma`in">
+    <main id="main" class="ma`in">
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
 
-            {{--<div class="pagetitle">
-                <h1>Data Tables</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item">Tables</li>
-                        <li class="breadcrumb-item active">Data</li>
-                    </ol>
-                </nav>
-            </div>--}}<!-- End Page Title -->
-
-            <section class="section">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <div class="card">
-                            <div class="card-body" style="padding-bottom: 0;">
+                    <div class="card">
+                        <div class="card-body" style="padding-bottom: 0;">
 
                                 <div class="card-title">
                                     <span class="fs-4">@yield('title')</span>
                                     <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                                       data-bs-target="#addSubject">+ Add @yield('title')</a>
+                                       data-bs-target="#addSection">+ Add @yield('title')</a>
                                     @include('web.backend.admin.academics.subject.create')
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="card">
-                            <div class="card-body pt-3">
+                    <div class="card">
+                        <div class="card-body pt-3">
 
-                                {{--<div class="card-title">
-                                    <span class="fs-4">@yield('title')</span>
-                                    <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                       data-bs-target="#addSubject">+ Add @yield('title')</a>
-                                    @include('web.backend.admin.academics.subject.create')
-                                </div>--}}
-
-                                <!-- Table with stripped rows -->
-
-                                <table class="table" id="subject-datatable">
-                                    <thead>
+                            <table class="table" id="subject-datatable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($subjects as $key=>$subject)
                                     <tr>
-                                        {{--<th scope="col">#</th>--}}
-                                        <th scope="col">Subject</th>
-                                        <th scope="col">Description</th>
-                                        {{--<th scope="col">Written Work</th>
-                                        <th scope="col">Performance Task</th>
-                                        <th scope="col">Quarterly Assessment</th>--}}
-                                        <th scope="col">Action</th>
+                                        <td>{{ $subject->subjectName }}</td>
+                                        <td>{{ $subject->description }}</td>
+                                        <td style="padding-bottom: 0; padding-top: 0;">
+                                            <div class="btn-group">
+                                                <a type="button" data-bs-toggle="dropdown" data-bs-auto-close="true"
+                                                   aria-expanded="false" href="">
+                                                    <i class="bi bi-three-dots" style="font-size: 26px;"></i>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> Show</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($subjects as $key=>$subject)
-                                        <tr>
-                                            {{--<th scope="row">{{ $key + 1 }}</th>--}}
-                                            <td>{{ $subject->subjectName }}</td>
-                                            <td>{{ $subject->description }}</td>
-                                            {{--<td>{{ $subject->written_work_percentage }}</td>
-                                            <td>{{ $subject->performance_tasks_percentage }}</td>
-                                            <td>{{ $subject->quarterly_assessment_percentage }}</td>--}}
-                                            <td>
-                                                {{--<a href=""><i class="bi bi-eye-fill"></i></a>--}}
-                                                <a href=""><i class="bi bi-pencil-square"></i></a>
-                                                <a href=""><i class="bi bi-trash"></i></a>
-                                            </td>
-                                        </tr>
 
+                                @endforeach
 
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
 
-
-
-
-
-
-
-
-
-                                    @endforeach
-
-                                    </tbody>
-                                </table>
-                                <!-- End Table with stripped rows -->
-
-                            </div>
                         </div>
-
                     </div>
+
                 </div>
-            </section>
+            </div>
+        </section>
 
-        </main><!-- End #main -->
+    </main><!-- End #main -->
 
-    @endsection
-    <x-datatable/>
+@endsection
+<x-datatable/>

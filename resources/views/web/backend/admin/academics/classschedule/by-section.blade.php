@@ -27,6 +27,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12 col-xlg-12">
                                         <div class="card">
+
                                             <div class="box bg-white text-center">
                                                 <span class="fs-3">Sections</span>
 
@@ -35,7 +36,7 @@
                                     </div>
                                     @if (count($sections) > 0)
                                         @foreach ($sections as $section)
-                                            <div class="col-md-6 col-lg-2 col-xlg-3">
+                                            <div class="col-md-6 col-lg-3 col-xlg-3">
                                                 <a href="{{url('admin/academic/class-schedule/'.$section->id.'/'.$gradeLevelId)}}">
                                                     <div class="card card-hover">
                                                         <div class="box text-center">

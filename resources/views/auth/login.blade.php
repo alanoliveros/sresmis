@@ -11,8 +11,8 @@
 
                             <div class="d-flex justify-content-center py-4">
                                 <a href="/" class="logo d-flex align-items-center w-auto">
-                                    <img src="{{ asset('storage/backend/assets/img/logo.png') }}" alt="">
-                                    <span class="d-none d-lg-block">SRESMIS</span>
+                                    <img src="{{ asset('storage/backend/assets/img/logo.png') }}" alt="" style="transform: rotate(-90deg)">
+                                    <span class="d-none d-lg-block" style="font-size: 29px">RESMIS</span>
                                 </a>
                             </div><!-- End Logo -->
 

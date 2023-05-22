@@ -200,13 +200,13 @@
         <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
-<li class="nav-item">
+{{--<li class="nav-item">
     <a class="nav-link collapsed{{ request()->routeIs('admin.noticeboard') ? 'active' : '' }}" href="{{ route('admin.noticeboard') }}">
         <i class="bi bi-card-checklist"></i>
         <span>Noticeboard</span>
         <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
-</li>
+</li>--}}
 
 
 

@@ -12,7 +12,7 @@
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
                                 <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addSection">+ Add @yield('title')</a>
+                                   data-bs-target="#addSubject">+ Add @yield('title')</a>
                                 @include('web.backend.admin.academics.subject.create')
                             </div>
                         </div>
@@ -42,9 +42,9 @@
                                                     <i class="bi bi-three-dots" style="font-size: 26px;"></i>
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                                    <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> Show</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>

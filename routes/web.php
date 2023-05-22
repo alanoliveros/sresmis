@@ -100,7 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Academic
         Route::prefix('academic')->group(function () {
             Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
+
             Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
+
             Route::get('/class-room', [ClassRoomController::class, 'index'])->name('admin.class-room');
             Route::get('/grade-level', [GradeLevelController::class, 'index'])->name('admin.grade-level');
 

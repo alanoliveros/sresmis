@@ -1,5 +1,28 @@
 <script>
     $(document).ready(function() {
+
+        function finalRatingPerSubjectFunction(className) {
+            let rating = 0;
+            let lengthMapehAll = 0;
+            lengthMapehAll = $(`.${className}`).filter(function() {
+                let text = $(this).text().trim();
+                return /^\d+$/.test(text);
+            }).length;
+
+            console.log(lengthMapehAll);
+            $(`.${className}`).each(function(key, val) {
+                let finalRatingMapeh = parseInt($(this).text()) || 0;
+                rating += finalRatingMapeh;
+            });
+
+            console.log(rating);
+
+            let totalRating = Math.ceil(rating / lengthMapehAll);
+            console.log(totalRating);
+            $('.general_average_value').text(totalRating);
+        }
+
+
         function calculateQuarterMapeh(selector, outputSelector) {
             let total = 0;
             let length = 0;
@@ -15,6 +38,30 @@
 
             let result = Math.ceil(total / length);
             $(outputSelector).text(isNaN(result) ? '' : result);
+
+            let rating = 0;
+            let lengthMapehAll = 0;
+            lengthMapehAll = $('.mapehall').filter(function() {
+                let text = $(this).text().trim();
+                return /^\d+$/.test(text);
+            }).length;
+
+            console.log(lengthMapehAll);
+            $('.mapehall').each(function(key, val) {
+                let finalRatingMapeh = parseInt($(this).text()) || 0;
+                rating += finalRatingMapeh;
+            });
+
+            console.log(rating);
+
+            let totalRating = Math.ceil(rating / lengthMapehAll);
+
+            $('.finalRatingMapeh').text(totalRating);
+            let remarks = (totalRating <= 74) ? 'Failed' : 'Passed';
+            $('.remarksMapeh ').text(remarks);
+
+
+
         }
         $('.school_year_select').on('change', function() {
             let school_year_id = $(this).val();
@@ -45,12 +92,12 @@
                                 tbody += `
                                     <tr class="mapeh">
                                         <td style="background-color:#e4e4e4">MAPEH</td>
-                                        <td style="background-color:#e4e4e4" class="firstQuarterMapeh"></td>
-                                        <td style="background-color:#e4e4e4" class="secondQuarterMapeh"></td>
-                                        <td style="background-color:#e4e4e4" class="thirdQuarterMapeh"></td>
-                                        <td style="background-color:#e4e4e4" class="fourthQuarterMapeh"></td>
-                                        <td style="background-color:#e4e4e4" class="finalRatingMapeh"></td>
-                                        <td style="background-color:#e4e4e4" class="remarksMapeh"></td>
+                                        <td style="background-color:#e4e4e4" class="firstQuarterMapeh mapehall"></td>
+                                        <td style="background-color:#e4e4e4" class="secondQuarterMapeh mapehall"></td>
+                                        <td style="background-color:#e4e4e4" class="thirdQuarterMapeh mapehall"></td>
+                                        <td style="background-color:#e4e4e4" class="fourthQuarterMapeh mapehall"></td>
+                                        <td style="background-color:#e4e4e4" class="finalRatingMapeh finalRatingPerSubject"></td>
+                                        <td style="background-color:#e4e4e4" class="remarksMapeh "></td>
                                     </tr>
                                     <tr class="${val.subject_id}">
                                         <td>${val.subjectName}</td>
@@ -82,7 +129,7 @@
                                     <tr class="average">
                                         <td></td>
                                         <td colspan="4" class="text-end">General Average</td>
-                                        <td></td>
+                                        <td class="general_average_value"></td>
                                         <td></td>
                                     </tr>
                                 `;
@@ -142,8 +189,12 @@
                     remarks = 'Passed';
                 }
 
-                container.find('.finalRatingPerSubject').text(total + '%');
+                container.find('.finalRatingPerSubject').text(total);
                 container.find('.remarksPerSubject').text(remarks);
+
+                let values = 'finalRatingPerSubject';
+
+                finalRatingPerSubjectFunction(values);
             }
 
             if (excludedIds.includes(parseInt(container.attr('class')))) {
@@ -156,6 +207,11 @@
                 calculateQuarterMapeh('.thirdPart', '.thirdQuarterMapeh');
                 // fourth Quarter PE
                 calculateQuarterMapeh('.fourthPart', '.fourthQuarterMapeh');
+
+
+                let values = 'finalRatingPerSubject';
+
+                finalRatingPerSubjectFunction(values);
             }
 
 

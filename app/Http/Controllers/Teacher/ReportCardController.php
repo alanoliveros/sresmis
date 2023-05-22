@@ -15,12 +15,9 @@ class ReportCardController extends Controller
     public function index()
     {
         $sessions = Session::orderBy('school_year', 'desc')->get();
-        return view(
-            'web.backend.teacher.report-card.index',
-            [
+        return view('web.backend.teacher.report-card.index',[
                 'sessions' => $sessions
-            ]
-        );
+            ]);
     }
     public function filter_students(Request $request)
     {

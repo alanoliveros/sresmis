@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('teacher.create')}}" method="POST">
+                <form action="{{route('teacher.store')}}" method="POST">
                     @csrf
                     <div class="row g-3">
                         <div class="col-md-12">

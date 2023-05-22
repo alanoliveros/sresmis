@@ -74,7 +74,19 @@ class SubjectController extends Controller
         return redirect()->back()->with('success_added', 'Successfully added new record');
     }*/
 
-    public function create(Request $request)
+    public function create()
+    {
+
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'grade_level_id' => 'required',
@@ -101,37 +113,6 @@ class SubjectController extends Controller
         $subject->save();
 
         return redirect()->back()->with('success_added', 'Successfully added new record');
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request)
-    {
-       /* $request->validate([
-            'subjectname' => 'required',
-        ]);
-
-        $gradeLevelId = $request->gradeLevelId;
-        $subjectname = $request->subjectname;
-        $description = $request->description;
-
-
-        foreach ($subjectname as $key => $name) {
-
-            // echo $name.'<br>';
-            $subject = new Subject();
-            $subject->adminId = auth()->user()->id;
-            $subject->gradeLevelId = $gradeLevelId;
-            $subject->subjectName = $name;
-            $subject->description = $description[$key];
-            $subject->save();
-        }
-        return redirect()->back()->with('success_added', 'Successfully added new record');*/
     }
 
     /**

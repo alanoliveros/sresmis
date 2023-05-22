@@ -3,26 +3,23 @@
 @section('content')
     <main id="main" class="main">
 
-        <div class="pagetitle">
-            <h1>Data Tables</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Tables</li>
-                    <li class="breadcrumb-item active">Data</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
 
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="padding-bottom: 0;">
 
                             <div class="card-title">
-                                <span class="fs-4">@yield('title')</span>
+                                <span class="fs-4">{{$section->sectionName. ' - Subjects'}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body pt-3">
                                 {{-- <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
                                     data-bs-target="#addSection">+ Add @yield('title')</a>
                                  @include('web.backend.admin.academics.section.create')--}}
@@ -32,20 +29,8 @@
 
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-12 col-xlg-12">
-                                        <div class="card">
-                                            <div class="box bg-dark text-center">
-                                                <span class="font-light text-white fs-3">{{$section->sectionName. ' - Subjects'}}</span>
-                                                {{-- <span class="font-light text-white fs-3"><a href="" class="float-end rounded-0 btn btn-light" data-bs-toggle="modal" data-bs-target="#add-schedule">+ Add Schedule</a>
-                                                @include('backend.admin.class-schedules.add-schedule')
-                                                </span> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-
-
                                     @foreach ($subjects as $subject)
-                                        <div class="col-md-6 col-lg-2 col-xlg-3">
+                                        <div class="col-md-6 col-lg-3 col-xlg-3 ">
                                             <a href="{{url('admin/schedule-by-subject')}}" data-bs-toggle="modal" data-bs-target="#add-schedule{{$subject->id}}">
                                                 <div class="card card-hover">
                                                     <div class="box bg-cyan text-center">

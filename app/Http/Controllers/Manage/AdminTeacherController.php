@@ -52,7 +52,14 @@ class AdminTeacherController extends Controller
     }
 
 
-    public function create(Request $request)
+    public function create()
+    {
+
+    }
+
+
+
+    public function store(Request $request)
     {
         /** Insert User */
         $user = User::firstOrNew(['email' => $request->email]);
@@ -99,13 +106,6 @@ class AdminTeacherController extends Controller
         $teacher->save();
 
         return redirect()->back()->with('success_added', 'Successfully added new record');
-    }
-
-
-
-    public function store(Request $request)
-    {
-        //
     }
 
 

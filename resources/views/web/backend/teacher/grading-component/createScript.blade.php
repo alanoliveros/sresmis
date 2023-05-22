@@ -127,7 +127,7 @@
                                                         <span class="float-md-end mx-4 fs-5 quarter_tabs">
                                                                 <div class="messageTOUser mb-3">
                                                                     @foreach ($quarters as $key => $quarter)
-                                                                        <input {{ $quarter->status == 1 ? 'checked' : 'disabled' }} type="radio" id="quarter{{ $key + 1 }}" name="per_quarter" class="per_quarter"
+                                                                        <input type="radio" id="quarter{{ $key + 1 }}" name="per_quarter" class="per_quarter"
                                                                             value="{{ $quarter->id }}" />
                                                                         <label for="quarter{{ $key + 1 }}">{{ Str::limit($quarter->quarter_name, 4, '') }}</label>
                                                                     @endforeach

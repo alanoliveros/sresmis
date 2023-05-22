@@ -62,6 +62,7 @@ Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard')-
 Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/enrollment-profile', [EnrollmentProfileController::class, 'index'])->name('enrollmentprofile.dashboard');
+    Route::get('/admission', [EnrollmentProfileController::class, 'index'])->name('admission.index');
 
 
     /** ================== User Profile ================== */

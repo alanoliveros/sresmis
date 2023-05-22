@@ -25,6 +25,13 @@ class GradeSummaryController extends Controller
             'adminId' => $teacher_detail->adminId,
         ])->get();
 
+
+        // get subject by advisory
+
+
+        $subjects = Subject::where('gradeLevelId', $teacher_detail->gradeLevelId)
+        ->get();
+
         // $class_schedule = ClassSchedule::where([
         //     'teacher_id' => auth()->user()->id,
         //     'teacher_id' => auth()->user()->id,
@@ -35,6 +42,7 @@ class GradeSummaryController extends Controller
             // 'subjects' => $subjects,
             'quarters' => $quarters,
             'students' => $students,
+            'subjects' => $subjects,
         ]);
     }
     public function filter_student(Request $request)

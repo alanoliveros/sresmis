@@ -2,19 +2,6 @@
 @section('title' , 'Teacher')
 @section('content')
     <main id="main" class="main">
-
-        {{--<div class="pagetitle">
-            <h1>Data Tables</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Tables</li>
-                    <li class="breadcrumb-item active">Data</li>
-                </ol>
-            </nav>
-        </div>--}}
-        <!-- End Page Title -->
-
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -24,11 +11,10 @@
 
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
-                                <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
+                                <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
                                    data-bs-target="#addTeacher">+ Add @yield('title')</a>
                                 @include('web.backend.admin.users.teacher.create')
                             </div>
-                            {{--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to convert to a datatable</p>--}}
 
                             <!-- Table with stripped rows -->
                             <table class="table" id="components-datatable">
@@ -52,10 +38,18 @@
                                         <td>{{$teacher->gradeLevelName}}</td>
                                         <td>{{$teacher->position}}</td>
                                         <td>{{$teacher->sectionName}}</td>
-                                        <td>
-                                            <a href="" class="bi bi-eye" style="margin-right: 6px"></a>
-                                            <a href="" class="bi bi-pencil-square" style="margin-right: 6px"></a>
-                                            <a href="" class="bi bi-trash"></a>
+                                        <td style="padding-bottom: 0; padding-top: 0;">
+                                            <div class="btn-group">
+                                                <a type="button" data-bs-toggle="dropdown" data-bs-auto-close="true"
+                                                   aria-expanded="false" href="">
+                                                    <i class="bi bi-three-dots" style="font-size: 26px;"></i>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

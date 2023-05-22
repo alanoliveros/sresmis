@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/getStudents/by-school-year-and-grade-level', [AdminStudentController::class, 'getStudentsBySchoolYearAndGradeLevel']);
             Route::post('/getStudents/by-student-year', [AdminStudentController::class, 'getStudentsFilterBySchoolYear'])->name('admin.student.get_students_by_year');
 
-            Route::resource('teacher', AdminTeacherController::class);
+            Route::resource('teacher', AdminTeacherController::class)->only(['index', 'store', 'update', 'destroy']);
             Route::resource('student', AdminStudentController::class);
             Route::resource('admission', AdmissionController::class);
         });
@@ -109,7 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/class-schedule/{sid}/{gid}', [ClassScheduleController::class, 'show_by_section']);
 
             // Back office
-            Route::resource('section', SectionController::class)->only(['index', 'store']);
+            Route::resource('section', SectionController::class);
             Route::post('/getSection', [SectionController::class, 'getSection']);
 
             Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');

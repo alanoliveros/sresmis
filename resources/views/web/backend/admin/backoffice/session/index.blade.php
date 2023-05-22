@@ -64,9 +64,18 @@
                                             <tr>
                                                 <td>{{$session->school_year}}</td>
                                                 <td style="font-style: italic;">{{$session->status == 1?'Active':'Deactive'}}</td>
-                                                <td>
-                                                    <a href=""><i class="bi bi-pencil-square"></i></a>
-                                                    <a href=""><i class="bi bi-trash"></i></a>
+                                                <td style="padding-bottom: 0; padding-top: 0;">
+                                                    <div class="btn-group">
+                                                        <a type="button" data-bs-toggle="dropdown" data-bs-auto-close="true"
+                                                           aria-expanded="false" href="">
+                                                            <i class="bi bi-three-dots" style="font-size: 26px;"></i>
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                                            <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                                            <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

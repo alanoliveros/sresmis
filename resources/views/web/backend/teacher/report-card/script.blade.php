@@ -16,12 +16,12 @@
                 }
             });
 
-            let result = overallTotal/ finalRatingTextLength;
+            let result = overallTotal / finalRatingTextLength;
 
-            $('.general_average_value').text(result+'%');
-          console.log(result);
-          console.log(finalRatingTextLength);
-          console.log(overallTotal);
+            $('.general_average_value').text(result + '%');
+            console.log(result);
+            console.log(finalRatingTextLength);
+            console.log(overallTotal);
 
 
             // console.log(total);
@@ -316,8 +316,55 @@
             let data = {
                 student_id: $('.student_select :selected').val(),
                 sy: $('.school_year_select :selected').val(),
-                subject_ids: []
+                subject_ids: [],
+                makadiyos : [],
+                makatao : [],
+                makakalikasan : [],
+                makabansa_first : [],
+                makabansa_second : [],
             };
+
+
+            $('select[name^="makadiyos"]').each(function() {
+                let selectedValue = $(this).val();
+                data.makadiyos.push(selectedValue);
+            });
+            $('select[name^="makatao"]').each(function() {
+                let selectedValue = $(this).val();
+                data.makatao.push(selectedValue);
+            });
+            $('select[name^="makakalikasan"]').each(function() {
+                let selectedValue = $(this).val();
+                data.makakalikasan.push(selectedValue);
+            });
+            $('select[name^="makabansa_first"]').each(function() {
+                let selectedValue = $(this).val();
+                data.makabansa_first.push(selectedValue);
+            });
+            $('select[name^="makabansa_second"]').each(function() {
+                let selectedValue = $(this).val();
+                data.makabansa_second.push(selectedValue);
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             $('.subjectReference').each(function() {
                 let parent = $(this);
@@ -343,12 +390,12 @@
                 });
             });
 
-            // console.log(data);
+            console.log(data);
 
             // console.log(data.length);
-            $.each(data.subject_ids, function(key, val) {
-                console.log(val.grades[0]);
-            });
+            // $.each(data.subject_ids, function(key, val) {
+            //     console.log(val.grades[0]);
+            // });
             // ajax
 
             $.ajax({
@@ -361,35 +408,41 @@
                     console.log(data);
 
 
-                    if (data.status == 'success') {
-                        swal({
-                            title: "Success",
-                            text: data.message,
-                            type: "success"
-                        }, function() {
-                            location.reload();
-                        });
-                    } else {
-                        swal({
-                            title: "Error",
-                            text: data.message,
-                            type: "error"
-                        }, function() {
-                            location.reload();
-                        });
-                    }
+                    // if (data.status == 'success') {
+                    //     swal({
+                    //         title: "Success",
+                    //         text: data.message,
+                    //         type: "success"
+                    //     }, function() {
+                    //         location.reload();
+                    //     });
+                    // } else {
+                    //     swal({
+                    //         title: "Error",
+                    //         text: data.message,
+                    //         type: "error"
+                    //     }, function() {
+                    //         location.reload();
+                    //     });
+                    // }
                 }
             });
 
 
         });
 
-        $('.select_core_values').on('change', function(e){
-            e.preventDefault();
-            let trParent = $(this).closest('tr').attr('data-values');
+        // $('.select_core_values').on('change', function(e) {
+        //     e.preventDefault();
+        //     let core_value_number = $(this).closest('tr').attr('data-values'); //1-5
+        //     let quarter = $(this).attr('data-quarter'); // quarter_1
+        //     let core_values_value = $(this).val(); //AO
+        //     // console.log(core_value_number);
+        //     // console.log(quarter);
+        //     // console.log(core_values_value);
 
-            var core_values = $(this).val();
-            console.log(trParent);
-        });
+        //     console.log(core_values);
+
+
+        // });
     });
 </script>

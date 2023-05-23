@@ -148,7 +148,7 @@
                                                             @endphp
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select class="select_core_values" name="makadiyos[{{$i}}]" class="border border-none w-100"
+                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makadiyos[{{$i}}]" class="border border-none w-100"
                                                                         id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
@@ -165,7 +165,7 @@
                                                             </td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select class="select_core_values" name="makatao[{{$i}}]" class="border border-none w-100"
+                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makatao[{{$i}}]" class="border border-none w-100"
                                                                         id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
@@ -184,7 +184,7 @@
                                                                 judiciously, and economically</td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select class="select_core_values" name="makakalikasan[{{$i}}]" class="border border-none w-100"
+                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makakalikasan[{{$i}}]" class="border border-none w-100"
                                                                         id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
@@ -202,7 +202,7 @@
                                                                 responsibilities of a Filipino citizen</td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select class="select_core_values" name="makabansa_first[{{$i}}]"
+                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makabansa_first[{{$i}}]"
                                                                         class="border border-none w-100" id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
@@ -213,13 +213,13 @@
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start core_values" data-values="4">
+                                                        <tr class="text-start core_values" data-values="5">
                                                             <td>Demonstrates appropriate behavior in carrying out activities
                                                                 in the
                                                                 school, community, and country</td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select class="select_core_values" name="makabansa_second[{{$i}}]"
+                                                                    <select class="select_core_values" data-quarter="{{$i}}" name="makabansa_second[]"
                                                                         class="border border-none w-100" id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)

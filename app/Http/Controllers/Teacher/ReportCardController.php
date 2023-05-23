@@ -77,6 +77,8 @@ class ReportCardController extends Controller
             $student_card->save();
 
         }
+
+        
         return response()->json([
             'status' => 'success'
         ]);

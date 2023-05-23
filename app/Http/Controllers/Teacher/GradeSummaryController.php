@@ -10,10 +10,12 @@ use App\Models\Teacher;
 use App\Models\QuarterlyGrading;
 use App\Models\Student;
 use App\Models\ClassSchedule;
+use Illuminate\Support\Facades\DB;
 
 class GradeSummaryController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $sessions = Session::orderBy('school_year', 'desc')->get();
         $quarters = QuarterlyGrading::orderBY('quarter_name', 'asc')->get();
 
@@ -30,7 +32,7 @@ class GradeSummaryController extends Controller
 
 
         $subjects = Subject::where('gradeLevelId', $teacher_detail->gradeLevelId)
-        ->get();
+            ->get();
 
         // $class_schedule = ClassSchedule::where([
         //     'teacher_id' => auth()->user()->id,
@@ -47,8 +49,39 @@ class GradeSummaryController extends Controller
     }
     public function filter_student(Request $request)
     {
+
+
+        $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+
+
+        $subjects = DB::table('grade_level_subjects')
+            ->where('grade_level_subjects.grade_level_id', $teacher->gradeLevelId)
+            ->where('grade_level_subjects.school_year', $request->sy)
+            ->join('subjects', 'grade_level_subjects.subject_id', 'subjects.id')
+            ->get();
+
+        // $students = Student::where([
+        //     'students.adminId' => $teacher->adminId,
+        //     'students.teacherId' => auth()->user()->id,
+        //     'students.sectionId' => $teacher->sectionId,
+        //     'students.school_year' => $request->sy,
+        // ])
+        // ->join('users', 'students.studentId', 'users.id')
+        // ->orderBy('users.lastname', 'asc')
+        // ->get();
+
+        $studentGrade = DB::table('quarterly_summary_grades')->where([
+            'quarterly_summary_grades.school_year' => $request->sy,
+            'quarterly_summary_grades.admin_id' => $teacher->adminId,
+            // 'quarterly_summary_grades.section_id' => $teacher->sectionId,
+        ])
+        ->join('subjects', 'quarterly_summary_grades.subject_id', 'subjects.id')
+        ->join('users', 'quarterly_summary_grades.student_id', 'users.id')
+        ->get();
+
         return response()->json([
-            ''
+            'students' => $studentGrade,
+            'subjects' => $subjects,
         ]);
     }
 }

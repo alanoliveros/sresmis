@@ -31,9 +31,15 @@ use App\Http\Controllers\Teacher\GradeSummaryController;
 use App\Http\Controllers\Teacher\GradingComponentController;
 use App\Http\Controllers\Teacher\QuarterGradeController;
 use App\Http\Controllers\Teacher\QuarterlyGradeController;
+use App\Http\Controllers\Teacher\ReportCardController;
 use App\Http\Controllers\Teacher\StudentGradeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserProfileController;
+
+
+
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -233,8 +239,26 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Summary of grades
 
-        Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
-        Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
+    Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
+    Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
+    
+    
+    
+    
+    
+    
+    
+    // report card
+    Route::get('/report-card/index', [ReportCardController::class, 'index'])->name('teacher.report-card.index');
+    Route::post('/report-card/filter-students', [ReportCardController::class, 'filter_students']);
+    Route::post('/report-card/create', [ReportCardController::class, 'create']);
+    Route::get('/report-card/get-data', [ReportCardController::class, 'show']);
+
+
+
+
+
+
 
 
         // Fitler Student grades

@@ -10,6 +10,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClassScheduleController extends Controller
 {
@@ -100,7 +101,10 @@ class ClassScheduleController extends Controller
     {
         $section = Section::find($sid);
         $classSchedule = ClassSchedule::where('sectionId', '=', $gid)->get();
-        $subjects = Subject::where('gradeLevelId', '=', $gid)->get();
+        $subjects = DB::table('grade_level_subjects')->
+        where('grade_level_subjects.grade_level_id', '=', $gid)
+        ->join('subjects', 'grade_level_subjects.subject_id', 'subjects.id')
+        ->get();
         $teachers = Teacher::where('teachers.adminId', '=', auth()->user()->id)->join('users', 'teachers.teacherId', 'users.id')->get();
         $schedules = ClassSchedule::where('class_schedules.sectionId', '=', $sid)->join('subjects', 'class_schedules.subjectId', 'subjects.id')->orderBy('class_schedules.startTime', 'asc')->get();
 

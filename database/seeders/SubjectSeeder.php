@@ -73,7 +73,7 @@ class SubjectSeeder extends Seeder
             [
                 'adminId' => 1,
                 'gradeLevelId' => 1,
-                'subjectName' => 'Araling Panlipunan',
+                'subjectName' => 'Araling Panlipunan (AP)',
                 'description' => 'Araling Panlipunan subject description',
                 'written_work_percentage' => 30,
                 'performance_tasks_percentage' => 50,
@@ -87,6 +87,19 @@ class SubjectSeeder extends Seeder
                 'subjectName' => 'Edukasyon sa Pagpapakatao (EsP)',
                 'description' => 'EsP subject description',
                 'written_work_percentage' => 30,
+                'performance_tasks_percentage' => 30,
+                'quarterly_assessment_percentage' => 20,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'adminId' => 1,
+                'gradeLevelId' => 1,
+                'subjectName' => 'Edukasyong Pantahanan at     
+                Pangkabuhayan (EPP)
+                ',
+                'description' => 'EPP and TLE subject description',
+                'written_work_percentage' => 50,
                 'performance_tasks_percentage' => 30,
                 'quarterly_assessment_percentage' => 20,
                 'created_at' => now(),
@@ -136,18 +149,7 @@ class SubjectSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'adminId' => 1,
-                'gradeLevelId' => 1,
-                /*'subjectName' => 'Edukasyong Pantahanan at Pangkabuhayan (EPP) / Technology and Livelihood Education (TLE)',*/
-                'subjectName' => 'EPP / TLE',
-                'description' => 'EPP and TLE subject description',
-                'written_work_percentage' => 50,
-                'performance_tasks_percentage' => 30,
-                'quarterly_assessment_percentage' => 20,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+           
         ]);
     }
 }

@@ -60,7 +60,9 @@ class DatabaseSeeder extends Seeder
             Grade4Seeder::class,
             Grade5Seeder::class,
             Grade6Seeder::class,
-            Grade0Seeder::class
+            Grade0Seeder::class,
+            LearningModalitySeeder::class,
+            QuarterlyGrading::class,
             // Other seeders you want to run
         ]);
 

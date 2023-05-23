@@ -18,7 +18,7 @@
 
             let result = overallTotal/ finalRatingTextLength;
 
-            $('.general_average_value').text(result);
+            $('.general_average_value').text(result+'%');
           console.log(result);
           console.log(finalRatingTextLength);
           console.log(overallTotal);
@@ -111,8 +111,8 @@
                                         <td style="background-color:#e4e4e4" class="secondQuarterMapeh mapehall text-center"></td>
                                         <td style="background-color:#e4e4e4" class="thirdQuarterMapeh mapehall text-center"></td>
                                         <td style="background-color:#e4e4e4" class="fourthQuarterMapeh mapehall text-center"></td>
-                                        <td style="background-color:#e4e4e4" class="finalRatingMapeh finalRatingPerSubject"></td>
-                                        <td style="background-color:#e4e4e4" class="remarksMapeh "></td>
+                                        <td style="background-color:#e4e4e4" class="finalRatingMapeh finalRatingPerSubject text-center"></td>
+                                        <td style="background-color:#e4e4e4" class="remarksMapeh text-center"></td>
                                     </tr>
                                     <tr data-id="${val.subject_id}" class="subjectReference ${val.subject_id}">
                                         <td>${val.subjectName}</td>
@@ -144,7 +144,7 @@
                                     <tr class="average">
                                         <td></td>
                                         <td colspan="4" class="text-end">General Average</td>
-                                        <td class="general_average_value"></td>
+                                        <td class="general_average_value text-center"></td>
                                         <td></td>
                                     </tr>
                                 `;
@@ -382,6 +382,14 @@
             });
 
 
+        });
+
+        $('.select_core_values').on('change', function(e){
+            e.preventDefault();
+            let trParent = $(this).closest('tr').attr('data-values');
+
+            var core_values = $(this).val();
+            console.log(trParent);
         });
     });
 </script>

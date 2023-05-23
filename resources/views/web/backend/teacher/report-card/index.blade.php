@@ -137,7 +137,7 @@
                                                     </thead>
                                                     <tbody class="observed_values">
 
-                                                        <tr class="text-start">
+                                                        <tr class="text-start core_values" data-values="1">
                                                             <td>1. Maka-Diyos</td>
                                                             <td>Expresses one’s spiritual beliefs while respecting the
                                                                 spiritual
@@ -146,79 +146,84 @@
                                                             @php
                                                                 $options = ['AO', 'SO', 'RO', 'NO'];
                                                             @endphp
-                                                            @for ($i = 0; $i < 4; $i++)
+                                                            @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select name="" class="border border-none w-100"
+                                                                    <select class="select_core_values" name="makadiyos[{{$i}}]" class="border border-none w-100"
                                                                         id="">
+                                                                        <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="">{{ $option }}
+                                                                            <option value="{{$option}}">{{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start">
+                                                        <tr class="text-start core_values" data-values="2">
                                                             <td>2. Makatao</td>
                                                             <td>Shows adherence to ethical principles by upholding truth
                                                             </td>
-                                                            @for ($i = 0; $i < 4; $i++)
+                                                            @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select name="" class="border border-none w-100"
+                                                                    <select class="select_core_values" name="makatao[{{$i}}]" class="border border-none w-100"
                                                                         id="">
+                                                                        <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="">{{ $option }}
+                                                                            <option value="{{$option}}">{{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start">
+                                                        <tr class="text-start core_values" data-values="3">
                                                             <td>3. Maka-
                                                                 kalikasan
                                                             </td>
                                                             <td>Cares for the environment and utilizes resources wisely,
                                                                 judiciously, and economically</td>
-                                                            @for ($i = 0; $i < 4; $i++)
+                                                            @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select name="" class="border border-none w-100"
+                                                                    <select class="select_core_values" name="makakalikasan[{{$i}}]" class="border border-none w-100"
                                                                         id="">
+                                                                        <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="">{{ $option }}
+                                                                            <option value="{{$option}}">{{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start">
+                                                        <tr class="text-start core_values" data-values="4">
                                                             <td rowspan="2" class="">4. Makabansa</td>
                                                             <td>Demonstrates pride in being a Filipino; exercises the rights
                                                                 and
                                                                 responsibilities of a Filipino citizen</td>
-                                                            @for ($i = 0; $i < 4; $i++)
+                                                            @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select name=""
+                                                                    <select class="select_core_values" name="makabansa_first[{{$i}}]"
                                                                         class="border border-none w-100" id="">
+                                                                        <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="">{{ $option }}
+                                                                            <option value="{{$option}}">{{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start">
+                                                        <tr class="text-start core_values" data-values="4">
                                                             <td>Demonstrates appropriate behavior in carrying out activities
                                                                 in the
                                                                 school, community, and country</td>
-                                                            @for ($i = 0; $i < 4; $i++)
+                                                            @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select name=""
+                                                                    <select class="select_core_values" name="makabansa_second[{{$i}}]"
                                                                         class="border border-none w-100" id="">
+                                                                        <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="">{{ $option }}
+                                                                            <option value="{{$option}}">{{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>

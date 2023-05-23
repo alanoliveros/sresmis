@@ -248,12 +248,8 @@ Route::group(['middleware' => 'auth'], function () {
     // report card
     Route::get('/report-card/index', [ReportCardController::class, 'index'])->name('teacher.report-card.index');
     Route::post('/report-card/filter-students', [ReportCardController::class, 'filter_students']);
-
-
-
-
-
-
+    Route::post('/report-card/create', [ReportCardController::class, 'create']);
+    Route::get('/report-card/get-data', [ReportCardController::class, 'show']);
 
 
 

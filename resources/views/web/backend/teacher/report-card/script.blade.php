@@ -1,31 +1,39 @@
 <script>
     $(document).ready(function() {
 
-        function finalRatingPerSubjectFunction(className) {
-            let rating = 0;
-            let lengthMapehAll = 0;
-            lengthMapehAll = $(`.${className}`).filter(function() {
-                let text = $(this).text().trim();
-                return /^\d+$/.test(text);
+        function finalRatingPerSubjectRate() {
+            let finalRatingTextLength = $('.finalRatingPerSubject').filter(function() {
+                return $(this).text().trim() !== '';
             }).length;
 
-            console.log(lengthMapehAll);
-            $(`.${className}`).each(function(key, val) {
-                let finalRatingMapeh = parseInt($(this).text()) || 0;
-                rating += finalRatingMapeh;
+            // let total = 0;
+            let overallTotal = 0;
+
+            $('.finalRatingPerSubject').each(function() {
+                let text = parseInt($(this).text().trim());
+                if (!isNaN(text)) {
+                    overallTotal += text;
+                }
             });
 
-            console.log(rating);
+            let result = overallTotal/ finalRatingTextLength;
 
-            let totalRating = Math.ceil(rating / lengthMapehAll);
-            console.log(totalRating);
-            $('.general_average_value').text(totalRating);
+            $('.general_average_value').text(result);
+          console.log(result);
+          console.log(finalRatingTextLength);
+          console.log(overallTotal);
+
+
+            // console.log(total);
+            // let result = Math.round(total / finalRatingTextLength);
+            // $('.general_average_value').text(total);
         }
-
 
         function calculateQuarterMapeh(selector, outputSelector) {
             let total = 0;
             let length = 0;
+            // console.log(selector);
+            // console.log(outputSelector);
 
             length = parseInt($(selector).filter(function() {
                 return $(this).val().trim() !== '';
@@ -34,35 +42,42 @@
             $(selector).each(function(key, val) {
                 let value = parseInt($(this).val()) || 0;
                 total += value;
+                console.log($(val).val());
             });
 
-            let result = Math.ceil(total / length);
-            $(outputSelector).text(isNaN(result) ? '' : result);
 
+
+            let result = Math.round(total / length);
+            $(outputSelector).text(isNaN(result) ? '' : result);
+        }
+
+        function calculateRating(className) {
             let rating = 0;
-            let lengthMapehAll = 0;
-            lengthMapehAll = $('.mapehall').filter(function() {
+            let length = 0;
+
+            length = $(`.mapehall`).filter(function() {
                 let text = $(this).text().trim();
                 return /^\d+$/.test(text);
             }).length;
 
-            console.log(lengthMapehAll);
-            $('.mapehall').each(function(key, val) {
-                let finalRatingMapeh = parseInt($(this).text()) || 0;
-                rating += finalRatingMapeh;
+
+
+            $.each($(`.mapehall`), function(key, val) {
+                let value = parseInt($(this).text()) || 0;
+                rating += value;
             });
+            console.log('rating ' + rating);
+            console.log('length ' + length);
+            console.log('className ' + className);
 
-            console.log(rating);
+            let totalRating = Math.round(rating / length);
+            $(`.${className}`).text(totalRating);
 
-            let totalRating = Math.ceil(rating / lengthMapehAll);
-
-            $('.finalRatingMapeh').text(totalRating);
             let remarks = (totalRating <= 74) ? 'Failed' : 'Passed';
-            $('.remarksMapeh ').text(remarks);
-
-
-
+            $('.remarksMapeh').text(remarks);
         }
+
+
         $('.school_year_select').on('change', function() {
             let school_year_id = $(this).val();
 
@@ -92,33 +107,33 @@
                                 tbody += `
                                     <tr class="mapeh">
                                         <td style="background-color:#e4e4e4">MAPEH</td>
-                                        <td style="background-color:#e4e4e4" class="firstQuarterMapeh mapehall"></td>
-                                        <td style="background-color:#e4e4e4" class="secondQuarterMapeh mapehall"></td>
-                                        <td style="background-color:#e4e4e4" class="thirdQuarterMapeh mapehall"></td>
-                                        <td style="background-color:#e4e4e4" class="fourthQuarterMapeh mapehall"></td>
+                                        <td style="background-color:#e4e4e4" class="firstQuarterMapeh mapehall text-center"></td>
+                                        <td style="background-color:#e4e4e4" class="secondQuarterMapeh mapehall text-center"></td>
+                                        <td style="background-color:#e4e4e4" class="thirdQuarterMapeh mapehall text-center"></td>
+                                        <td style="background-color:#e4e4e4" class="fourthQuarterMapeh mapehall text-center"></td>
                                         <td style="background-color:#e4e4e4" class="finalRatingMapeh finalRatingPerSubject"></td>
                                         <td style="background-color:#e4e4e4" class="remarksMapeh "></td>
                                     </tr>
-                                    <tr class="${val.subject_id}">
+                                    <tr data-id="${val.subject_id}" class="subjectReference ${val.subject_id}">
                                         <td>${val.subjectName}</td>
-                                        <td><input style="border:none;" class="text-center firstPart" name="grading_input[]"  min="1" type="number"/></td>
-                                        <td><input style="border:none;" class="text-center secondPart" name="grading_input[]"  min="1" type="number"/></td>
-                                        <td><input style="border:none;" class="text-center thirdPart" name="grading_input[]"  min="1" type="number"/></td>
-                                        <td><input style="border:none;" class="text-center fourthPart" name="grading_input[]"  min="1" type="number"/></td>
+                                        <td><input style="border:none;" class="text-center firstPart" name="grading_input[]"  min="60" type="number"/></td>
+                                        <td><input style="border:none;" class="text-center secondPart" name="grading_input[]"  min="60" type="number"/></td>
+                                        <td><input style="border:none;" class="text-center thirdPart" name="grading_input[]"  min="60" type="number"/></td>
+                                        <td><input style="border:none;" class="text-center fourthPart" name="grading_input[]"  min="60" type="number"/></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                 `;
                             } else {
                                 tbody += `
-                                    <tr class="${val.subject_id}">
+                                    <tr data-id="${val.subject_id}" class="subjectReference ${val.subject_id}">
                                         <td>${val.subjectName}</td>
-                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'firstPart': val.subject_id == 11? 'firstPart': val.subject_id == 12? 'firstPart':''}" name="grading_input[]"  min="1" type="number"/></td>
-                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'secondPart': val.subject_id == 11? 'secondPart': val.subject_id == 12? 'secondPart':''}" name="grading_input[]"  min="1" type="number"/></td>
-                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'thirdPart': val.subject_id == 11? 'thirdPart': val.subject_id == 12? 'thirdPart':''}" name="grading_input[]"  min="1" type="number"/></td>
-                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'fourthPart': val.subject_id == 11? 'fourthPart': val.subject_id == 12? 'fourthPart':''}" name="grading_input[]"  min="1" type="number"/></td>
-                                        <td class="finalRatingPerSubject"></td>
-                                        <td class="remarksPerSubject"></td>
+                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'firstPart': val.subject_id == 11? 'firstPart': val.subject_id == 12? 'firstPart':''}" name="grading_input[]"  min="60" type="number"/></td>
+                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'secondPart': val.subject_id == 11? 'secondPart': val.subject_id == 12? 'secondPart':''}" name="grading_input[]"  min="60" type="number"/></td>
+                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'thirdPart': val.subject_id == 11? 'thirdPart': val.subject_id == 12? 'thirdPart':''}" name="grading_input[]"  min="60" type="number"/></td>
+                                        <td><input style="border:none;" class="text-center ${val.subject_id == 10? 'fourthPart': val.subject_id == 11? 'fourthPart': val.subject_id == 12? 'fourthPart':''}" name="grading_input[]"  min="60" type="number"/></td>
+                                        <td class=" text-center ${val.subject_id == 10 ? 'skip' : (val.subject_id == 11 ? 'skip' : (val.subject_id == 12 ? 'skip' : 'finalRatingPerSubject'))}"></td>
+                                        <td class="${val.subject_id == 10 ? 'skip' : (val.subject_id == 11 ? 'skip' : (val.subject_id == 12 ? 'skip' : 'remarksPerSubject'))} text-center"></td>
                                     </tr>
                                 `;
                             }
@@ -157,6 +172,82 @@
             $('.student_select :selected').attr('data-studentLRN');
             $('.studentLRN').text($('.student_select :selected').attr('data-studentLRN'));
 
+            // ajax
+            $.ajax({
+                type: "GET",
+                url: "/teacher/report-card/get-data",
+                data: {
+                    'student_id': $('.student_select :selected').val(),
+                    'sy': $('.school_year_select :selected').val(),
+                },
+                success: function(data) {
+                    // Assuming you have an existing table with an ID of "existingTable"
+                    let table = $('.report_card').find('tbody');
+
+                    let container = $('.report_card').find('tbody').find('tr');
+                    let excludedIds = [9, 10, 11, 12]; // IDs to exclude
+
+                    $.each(data.students, function(index, subject) {
+                        let subjectId = subject.subject_id;
+                        let grades = [subject.quarter_1, subject.quarter_2, subject
+                            .quarter_3, subject.quarter_4
+                        ];
+                        let finalGrading = subject.final_grade;
+                        let remarks = subject.remarks;
+
+                        // Check if the subject ID is in the excluded IDs array
+                        if (!excludedIds.includes(parseInt(subjectId))) {
+                            // Find the table row with matching subjectId
+                            let row = table.find('tr.' + subjectId);
+
+                            // Populate the input values
+                            row.find('input[name="grading_input[]"]').each(function(
+                                index) {
+                                $(this).val(grades[index]);
+                            });
+
+                            // Populate the final grading
+                            row.find('.finalRatingPerSubject').text(finalGrading);
+
+                            // Populate the remarks
+                            row.find('.remarksPerSubject').text(remarks);
+                            finalRatingPerSubjectRate()
+                        } else if (excludedIds.includes(parseInt(subjectId))) {
+
+
+                            let row = table.find('tr.' + subjectId);
+
+                            // Populate the input values
+                            row.find('input[name="grading_input[]"]').each(function(
+                                index) {
+                                $(this).val(grades[index]);
+                            });
+
+                            calculateQuarterMapeh('.firstPart',
+                                '.firstQuarterMapeh');
+                            // console.log(container.attr('class'));
+                            // second Quarter PE
+                            calculateQuarterMapeh('.secondPart',
+                                '.secondQuarterMapeh');
+                            // third Quarter PE
+                            calculateQuarterMapeh('.thirdPart',
+                                '.thirdQuarterMapeh');
+                            // fourth Quarter PE
+                            calculateQuarterMapeh('.fourthPart',
+                                '.fourthQuarterMapeh');
+
+
+                            let val = 'finalRatingMapeh';
+                            calculateRating(val);
+                            finalRatingPerSubjectRate();
+
+                        }
+                    });
+
+
+                }
+            });
+
         });
 
 
@@ -180,7 +271,7 @@
                 });
 
                 let final_grade_total = finalRating / lengthVal;
-                let total = Math.ceil(final_grade_total);
+                let total = Math.round(final_grade_total);
                 let remarks = '';
 
                 if (total <= 74) {
@@ -192,15 +283,18 @@
                 container.find('.finalRatingPerSubject').text(total);
                 container.find('.remarksPerSubject').text(remarks);
 
-                let values = 'finalRatingPerSubject';
-
-                finalRatingPerSubjectFunction(values);
+                // console.log(excludedIds);
+                finalRatingPerSubjectRate();
             }
 
-            if (excludedIds.includes(parseInt(container.attr('class')))) {
+            if (excludedIds.includes(parseInt(container.attr('data-id')))) {
+                let studentScores = container.find('input[name="grading_input[]"]');
+
+                // console.log(excludedIds);
+
                 // first Quarter PE
                 calculateQuarterMapeh('.firstPart', '.firstQuarterMapeh');
-
+                // console.log(container.attr('class'));
                 // second Quarter PE
                 calculateQuarterMapeh('.secondPart', '.secondQuarterMapeh');
                 // third Quarter PE
@@ -209,10 +303,83 @@
                 calculateQuarterMapeh('.fourthPart', '.fourthQuarterMapeh');
 
 
-                let values = 'finalRatingPerSubject';
 
-                finalRatingPerSubjectFunction(values);
+
+                calculateRating('finalRatingMapeh');
+                finalRatingPerSubjectRate();
             }
+
+
+        });
+
+        $('body').on('click', '.btnSaveCard', function() {
+            let data = {
+                student_id: $('.student_select :selected').val(),
+                sy: $('.school_year_select :selected').val(),
+                subject_ids: []
+            };
+
+            $('.subjectReference').each(function() {
+                let parent = $(this);
+                let id = parent.attr('data-id');
+                let subjectId = parent.attr('class').split(' ')[0];
+                let inputValues = [];
+                let finalGrading = '';
+                let remarks = '';
+
+                parent.find('td input[name="grading_input[]"]').each(function() {
+                    let inputValue = $(this).val();
+                    inputValues.push(inputValue);
+                });
+
+                finalGrading = parent.find('.finalRatingPerSubject').text();
+                remarks = parent.find('.remarksPerSubject').text();
+
+                data.subject_ids.push({
+                    id: id,
+                    grades: inputValues,
+                    finalGrading: finalGrading,
+                    remarks: remarks
+                });
+            });
+
+            // console.log(data);
+
+            // console.log(data.length);
+            $.each(data.subject_ids, function(key, val) {
+                console.log(val.grades[0]);
+            });
+            // ajax
+
+            $.ajax({
+                type: 'POST',
+                url: '/teacher/report-card/create',
+                data: {
+                    data: data
+                },
+                success: function(data) {
+                    console.log(data);
+
+
+                    if (data.status == 'success') {
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success"
+                        }, function() {
+                            location.reload();
+                        });
+                    } else {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error"
+                        }, function() {
+                            location.reload();
+                        });
+                    }
+                }
+            });
 
 
         });

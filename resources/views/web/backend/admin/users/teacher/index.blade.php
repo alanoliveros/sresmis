@@ -39,18 +39,24 @@
                                         <td>{{$teacher->position}}</td>
                                         <td>{{$teacher->sectionName}}</td>
                                         <td style="padding-bottom: 0; padding-top: 0;">
-                                            <div class="btn-group">
-                                                <a type="button" data-bs-toggle="dropdown" data-bs-auto-close="true"
-                                                   aria-expanded="false" href="">
-                                                    <i class="bi bi-three-dots" style="font-size: 26px;"></i>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> Show</a></li>
-                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
-                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Delete</a></li>
-                                                </ul>
-                                            </div>
+{{--                                            <div class="btn-group">--}}
+{{--                                                <a type="button" data-bs-toggle="dropdown" data-bs-auto-close="true"--}}
+{{--                                                   aria-expanded="false" href="">--}}
+{{--                                                    <i class="bi bi-three-dots" style="font-size: 26px;"></i>--}}
+{{--                                                </a>--}}
+{{--                                                <ul class="dropdown-menu">--}}
+{{--                                                    <li><a class="dropdown-item" href="{{route('teacher.show', $teacher->id)}}"><i class="bi bi-eye"></i> Show</a></li>--}}
+{{--                                                    <li><a class="dropdown-item" href="{{route('teacher.edit', $teacher->id)}}"><i class="bi bi-pencil-square"></i> Edit</a></li>--}}
+{{--                                                    <li><a class="dropdown-item" href="{{route('teacher.destroy', $teacher->id)}}"><i class="bi bi-trash3"></i> Delete</a></li>--}}
+{{--                                                </ul>--}}
+{{--                                            </div>--}}
+                                            @include('components.dropdown',
+                                            [
+                                                 'showRoute' => route('teacher.show', $teacher->id),
+                                                  'editRoute' => route('teacher.edit', $teacher->id),
+                                                 'deleteRoute' => route('teacher.destroy', $teacher->id) ])
                                         </td>
+
                                     </tr>
                                 @endforeach
 

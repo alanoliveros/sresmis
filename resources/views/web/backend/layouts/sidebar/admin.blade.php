@@ -50,7 +50,7 @@
         @endforeach
     </ul>
 </li>
-
+`
 
 <li class="nav-heading">Manage Users</li>
 
@@ -59,23 +59,21 @@
     <a class="nav-link collapsed" href="{{route('teacher.index')}}">
         <i class="bi bi-person-circle"></i>
         <span>Teacher</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 <li class="nav-item">
     <a class="nav-link collapsed" href="{{route('student.index')}}">
         <i class="bi bi-person-circle"></i>
         <span>Student</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
-<li class="nav-item">
+{{--<li class="nav-item">
     <a class="nav-link collapsed" href="{{route('admission.index')}}">
         <i class="bi bi-plus-square"></i>
         <span>Admission</span>
         <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
-</li>
+</li>--}}
 
 
 {{--<li class="nav-item">
@@ -114,7 +112,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('admin.subject')}}">
+    <a class="nav-link collapsed" href="{{route('subject.index')}}">
         <i class="bi bi-window-plus"></i>
         <span>Subject</span>
     </a>
@@ -197,7 +195,6 @@
     <a class="nav-link collapsed{{ request()->routeIs('admin.session') ? 'active' : '' }}" href="{{ route('admin.session') }}">
         <i class="bi bi-calendar-week"></i>
         <span>Session</span>
-        <i class="spinner-border" style="width: 15px; height: 15px; margin-left: 20px"></i>
     </a>
 </li>
 {{--<li class="nav-item">

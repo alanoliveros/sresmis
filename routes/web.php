@@ -68,16 +68,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
         });
 
-        // Teachers
-        Route::get('/teachers', [AdminTeacherController::class, 'teachers'])->name('admin.teachers');
-        Route::post('/add-teacher', [AdminTeacherController::class, 'addTeacher'])->name('admin.add-teacher');
-
         // Users
         Route::prefix('manage-users')->group(function () {
             Route::post('/getStudents/by-school-year-and-grade-level', [AdminStudentController::class, 'getStudentsBySchoolYearAndGradeLevel']);
             Route::post('/getStudents/by-student-year', [AdminStudentController::class, 'getStudentsFilterBySchoolYear'])->name('admin.student.get_students_by_year');
 
-            Route::resource('teacher', AdminTeacherController::class)->only(['index', 'store', 'update', 'destroy']);
+            Route::resource('teacher', AdminTeacherController::class);
             Route::resource('student', AdminStudentController::class);
             Route::resource('admission', AdmissionController::class);
         });
@@ -99,6 +95,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Academic
         Route::prefix('academic')->group(function () {
+
+
+
             Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
 
             Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
@@ -114,9 +113,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::resource('section', SectionController::class);
             Route::post('/getSection', [SectionController::class, 'getSection']);
 
-            Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
-            Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
-            Route::get('{gradeLevelName}/{id}', [SubjectController::class, 'show'])->name('admin.show.subject');
+//            Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
+//            Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
+//            Route::get('/subjects/{id}', [SubjectController::class, 'show'])->name('admin.show.subject');
+
+
+            Route::resource('subject', SubjectController::class)->parameters(['subject' => 'subject']);
+
         });
     });
 

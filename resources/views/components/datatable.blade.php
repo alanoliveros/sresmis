@@ -116,25 +116,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $('.gradeLevelTaught').on('change', function () {
 
                 let gradeLevelTaughtId = $(".gradeLevelTaught :selected").val();

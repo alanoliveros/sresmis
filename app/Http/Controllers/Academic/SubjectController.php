@@ -5,21 +5,11 @@ namespace App\Http\Controllers\Academic;
 use App\Http\Controllers\Controller;
 use App\Models\GradeLevel;
 use App\Models\Subject;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class SubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
     public function index()
     {
         {
@@ -33,54 +23,12 @@ class SubjectController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return RedirectResponse
-     */
-    /*public function create(Request $request)
-    {
-        $validator=$request->validate([
-            'subjectname' => 'required',
-            'gradeLevelId' => 'required',
-        ]);
-
-        $gradeLevelId = $request->gradeLevelId;
-        $subjectname = $request->subjectname;
-        $description = $request->description;
-        $written_work = $request->writtenWork;
-        $performance_task = $request->performanceTask;
-
-
-            $subject = new Subject();
-            $subject->adminId = auth()->user()->id;
-            $subject->gradeLevelId = $gradeLevelId;
-            $subject->subjectName = $subjectname;
-            $subject->description = $description;
-            $subject->written_work_percentage= $written_work;
-            $subject->performance_tasks_percentage= $performance_task;
-            $subject->save();
-
-        if ($validator == false) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-
-        return redirect()->back()->with('success_added', 'Successfully added new record');
-    }*/
-
     public function create()
     {
 
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -105,55 +53,66 @@ class SubjectController extends Controller
         return redirect()->back()->with('success_added', 'Successfully added new record');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Application|Factory|View
-     */
-    public function show($gradeLevelName, $id)
+    public function show($id)
     {
-       /* $gradelevel = GradeLevel::orderBy('gradeLevelName', 'asc')->get();
-        $subject = Subject::where('gradeLevelId', '=', $id)->get();
-        return view('web.backend.admin.academics.subject.show')->with([
-            'name' => $gradeLevelName,
-            'id' => $id,
-            'gradelevel' => $gradelevel,
-            'subjects' => $subject,
-        ]);*/
-    }
+        $subject = Subject::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
+        if (!$subject) {
+            return redirect()->back()->with('error', 'Subject not found');
+        }
+        return view('web.backend.admin.academics.subject.show', compact('subject'));
+    }
     public function edit($id)
     {
-        //
+        $subject = Subject::find($id);
+
+        if (!$subject) {
+            return redirect()->back()->with('error', 'Subject not found');
+        }
+
+        return view('web.backend.admin.academics.subject.edit', compact('subject'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param  int  $id
-     * @return Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'subjectName' => 'required',
+            'description' => 'required',
+            'writtenWork' => 'required',
+            'performanceTask' => 'required',
+            'quarterlyAssessment' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $subject = Subject::find($id);
+
+        if (!$subject) {
+            return redirect()->back()->with('error', 'Subject not found');
+        }
+
+        $subject->subjectName = $request->subjectName;
+        $subject->description = $request->description;
+        $subject->written_work_percentage = $request->writtenWork;
+        $subject->performance_tasks_percentage = $request->performanceTask;
+        $subject->quarterly_assessment_percentage = $request->quarterlyAssessment;
+        $subject->update();
+
+        return redirect()->back()->with('success_updated', 'Successfully updated the record');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function destroy($id)
     {
-        //
+        $subject = Subject::find($id);
+
+        if (!$subject) {
+            return redirect()->back()->with('error', 'Subject not found');
+        }
+
+        $subject->delete();
+
+        return redirect()->back()->with('success_deleted', 'Successfully deleted the record');
     }
 }

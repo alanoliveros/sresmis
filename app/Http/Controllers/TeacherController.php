@@ -187,6 +187,8 @@ class TeacherController extends Controller
     ])
       ->orderBy('users.lastname', 'asc')
       ->join('users', 'students.studentId', 'users.id')
+      ->join('addresses', 'students.studentId', 'addresses.userId')
+      ->join('parent_guardians', 'students.studentId', 'parent_guardians.studentId')
       ->get();
     return response()->json(['students' => $students]);
   }
@@ -368,8 +370,6 @@ class TeacherController extends Controller
       $parent->save();
 
 
-
-
       $teacher_detail = Teacher::where('teacherId', auth()->user()->id)->first();
 
       $enrollment = Enrollment::firstOrNew([
@@ -437,14 +437,14 @@ class TeacherController extends Controller
       'class_schedules.school_year' => $sy,
       'class_schedules.teacherId' => auth()->user()->id,
     ])
-    ->join('sections', 'class_schedules.sectionId', 'sections.id')
-    ->get();
+      ->join('sections', 'class_schedules.sectionId', 'sections.id')
+      ->get();
 
 
-      $sectionArr = array();
-      foreach($sections as $sec){
-        $sectionArr[$sec->sectionId] = $sec->sectionName;
-      }
+    $sectionArr = array();
+    foreach ($sections as $sec) {
+      $sectionArr[$sec->sectionId] = $sec->sectionName;
+    }
 
     return response()->json([
       'sections' => $sectionArr
@@ -461,13 +461,145 @@ class TeacherController extends Controller
       'students.school_year' => $sy,
       'students.sectionId' => $sec_id,
     ])
-    ->join('users', 'students.studentId', 'users.id')
-    ->get();
+      ->join('users', 'students.studentId', 'users.id')
+      ->get();
 
     $subject = Subject::find($sub_id);
 
     return response()->json([
       'students' => $students,
+      // 'subject' => $subject,
+    ]);
+  }
+  public function update(Request $request)
+  {
+    $data = $request->data['studentId'];
+
+    // try {
+
+      // Update the student record with the new values
+
+      $user = User::findOrFail($request->data['studentId']);
+      $user->name = $request->data['name'];
+      $user->middlename = $request->data['middlename'];
+      $user->lastname = $request->data['lastname'];
+      $user->suffix = $request->data['suffix'];
+      $user->gender = $request->data['gender'];
+      $user->birthdate = $request->data['birth_date'];
+      $user->age = $request->data['age'];
+      $user->email = $request->data['lrn'];
+      $user->save();
+
+      $student = Student::where('studentId', $request->data['studentId'])->first();  
+      $student->school_year = $request->data['school_year'];
+      $student->lrn = $request->data['lrn'];
+      // $student->mothertongue = $request->data['mothertongue'];
+      $student->ethnicgroup = $request->data['ethnicgroup'];
+      $student->religion = $request->data['religion'];
+      // $student->learning_modality = $request->data['learning_modality'];
+      // $student->enrollment_status = $request->data['enrollment_status'];
+      $student->save();
+
+      
+      $address = Address::where('userId', $request->data['studentId']);  
+      $student->purok = $request->data['purok'];
+      $student->barangay = $request->data['barangay'];
+      $student->city = $request->data['city'];
+      $student->province = $request->data['province'];
+      $student->zipcode = $request->data['zipcode'];
+      
+
+
+      $parentGuardian = ParentGuardian::where('studentId',$request->data['studentId'])->first();
+
+      $parentGuardian->fathersFirstName = $request->data['fathersFirstName'];
+      $parentGuardian->fathersMiddleName = $request->data['fathersMiddleName'];
+      $parentGuardian->fathersLastName = $request->data['fathersLastName'];
+      $parentGuardian->fathersSuffix = $request->data['fathersSuffix'];
+      $parentGuardian->mothersFirstName = $request->data['mothersFirstName'];
+      $parentGuardian->mothersMiddleName = $request->data['mothersMiddleName'];
+      $parentGuardian->mothersLastName = $request->data['mothersLastName'];
+      $parentGuardian->mothersSuffix = $request->data['mothersSuffix'];
+      $parentGuardian->guardiansFirstName = $request->data['guardiansFirstName'];
+      $parentGuardian->guardiansMiddleName = $request->data['guardiansMiddleName'];
+      $parentGuardian->guardiansLastName = $request->data['guardiansLastName'];
+      $parentGuardian->guardiansSuffix = $request->data['guardiansSuffix'];
+      // $parentGuardian->relationshiptoStudent = $request->data['relationshiptoStudent'];
+      // $parentGuardian->contactNumber = $request->data['contactNumber'];
+      $parentGuardian->save();
+
+
+      $teacher_detail = Teacher::where('teacherId', auth()->user()->id)->first();
+      $enrollment = Enrollment::where('student_id',$request->data['studentId'])->first();
+      $enrollment->adminId = $teacher_detail->adminId;
+      $enrollment->lrn = $request->data['lrn'];
+      $enrollment->first_name =$request->data['name'];
+      $enrollment->middle_name = $request->data['middlename'];
+      $enrollment->last_name = $request->data['lastname'];
+      $enrollment->suffix = $request->data['suffix'];
+      $enrollment->date_of_birth = $request->data['birth_date'];
+      $enrollment->gender = $request['gender'];
+      $enrollment->purok = $request['purok'];
+      $enrollment->barangay = $request['barangay'];
+      $enrollment->city = $request['city'];
+      $enrollment->school_year = $request->data['school_year'];
+      $enrollment->enrollment_status = $request['enrollment_status'] == 1 ? 1 : 2;
+      if ($request['enrollment_status'] == 1) {
+        $enrollment->date_enrolled = now();
+      } else {
+        $enrollment->date_transferred_in = now();
+      }
+      $enrollment->save();
+     
+
+      return response()->json([
+        'success_added' =>'Successfully updated the record'
+      ]);
+    // } catch (\Exception $e) {
+    //   return response()->json([
+    //     'error' =>'Erro occur'
+    //   ]);
+    // }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return response()->json([
+      'data' => $data,
+    ]);
+  }
+  public function delete(Request $request)
+  {
+    $student_id = $request->student_id;
+
+    User::findOrFail($student_id)->delete();
+    Student::where('studentId', $student_id)->delete();
+    ParentGuardian::where('studentId', $student_id)->delete();
+    Address::where('userId', $student_id)->delete();
+    Enrollment::where('student_id', $student_id)->delete();
+
+
+
+
+    return response()->json([
+      'success' => 'Successfully deleted the record'
       // 'subject' => $subject,
     ]);
   }

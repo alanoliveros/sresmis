@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/enrollment-profile', [EnrollmentProfileController::class, 'index'])->name('enrollmentprofile.dashboard');
-    Route::get('/admission', [EnrollmentProfileController::class, 'index'])->name('admission.index');
+        Route::get('/admission', [EnrollmentProfileController::class, 'index'])->name('admission.index');
 
         // User Profile
         Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
@@ -189,12 +189,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
         Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_student_by_subject']);
         Route::post('/add-student', [TeacherController::class, 'create_student'])->name('teacher.add-student');
-
+        Route::post('/student-data-advisory/update', [TeacherController::class, 'update']);
+        Route::post('/student-data-advisory/delete', [TeacherController::class, 'delete']);
 
         // Student Attendance
         Route::get('/create-attendance/advisory', [StudentAttendance::class, 'create_attendance'])->name('teacher.create-attendance.advisory');
         Route::post('/save-attendance/advisory', [StudentAttendance::class, 'save_attendance'])->name('teacher.save-attendance.advisory');
         Route::post('/filter-attendance/by-advisory', [StudentAttendance::class, 'filter_attendance']);
+        Route::get('/daily-attendance/delete/{id}', [StudentAttendance::class, 'delete']);
+        Route::get('/daily-attendance/edit/{id}', [StudentAttendance::class, 'edit']);
+       
+
         // Student Crud
         Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);
 
@@ -236,20 +241,20 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Summary of grades
 
-    Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
-    Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
-    
-    
-    
-    
-    
-    
-    
-    // report card
-    Route::get('/report-card/index', [ReportCardController::class, 'index'])->name('teacher.report-card.index');
-    Route::post('/report-card/filter-students', [ReportCardController::class, 'filter_students']);
-    Route::post('/report-card/create', [ReportCardController::class, 'create']);
-    Route::get('/report-card/get-data', [ReportCardController::class, 'show']);
+        Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
+        Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
+
+
+
+
+
+
+
+        // report card
+        Route::get('/report-card/index', [ReportCardController::class, 'index'])->name('teacher.report-card.index');
+        Route::post('/report-card/filter-students', [ReportCardController::class, 'filter_students']);
+        Route::post('/report-card/create', [ReportCardController::class, 'create']);
+        Route::get('/report-card/get-data', [ReportCardController::class, 'show']);
 
 
 
@@ -281,6 +286,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('student')->middleware('isStudent')->group(function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
     });
-
-
 });

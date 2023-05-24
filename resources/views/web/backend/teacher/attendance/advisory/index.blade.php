@@ -1,6 +1,8 @@
 @extends('web.backend.layouts.app')
 @section('title', 'Teacher | Class Attendance')
 @section('content')
+
+
     <main id="main" class="main">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
@@ -30,10 +32,7 @@
                                         <div class="col-3">
                                             <input type="date" name="date" id="date_val" class="form-control">
                                         </div>
-                                        <div class="col-3">
-                                            <button class="btn btn-primary rounded-0" id="filter_date_attendance"><i
-                                                    class="bi bi-search"></i> Filter</button>
-                                        </div>
+                                        
                                         <div class="col">
                                             <div class="float-end mb-2">
 

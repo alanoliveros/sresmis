@@ -10,6 +10,7 @@ use App\Models\Session;
 use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\QuarterlySummaryGrade;
+use App\Models\StudentReportCardCoreValues;
 
 class ReportCardController extends Controller
 {
@@ -43,6 +44,8 @@ class ReportCardController extends Controller
             ->orderBy('subjects.id', 'asc')
             ->get();
 
+       
+
         return response()->json([
             'students' => $students,
             'subjects' => $subjects,
@@ -75,12 +78,39 @@ class ReportCardController extends Controller
             $student_card->final_grade = $id['finalGrading'];
             $student_card->remarks = $id['remarks'];
             $student_card->save();
-
         }
 
-        
+        $core_values = [
+            'makadiyos' => $request->data['makadiyos'],
+            'makatao' => $request->data['makatao'],
+            'makakalikasan' => $request->data['makakalikasan'],
+            'makabansa_first' => $request->data['makabansa_first'],
+            'makabansa_second' => $request->data['makabansa_second'],
+        ];
+
+        foreach ($core_values as $key => $core) {
+            $student_core_value = StudentReportCardCoreValues::firstOrNew([
+                'student_id' => $request->data['student_id'],
+                'admin_id' => $teacher->adminId,
+                'teacher_id' => auth()->user()->id,
+                'school_year' =>  $request->data['sy'],
+                'core_values' =>  $key,
+            ]);
+
+            // $student_core_value->admin_id = 
+            $student_core_value->teacher_id = auth()->user()->id;
+            $student_core_value->student_id = $request->data['student_id'];
+            $student_core_value->school_year = $request->data['sy'];
+            $student_core_value->core_values = $key;
+            $student_core_value->quarter_1 = $core[0];
+            $student_core_value->quarter_2 = $core[1];
+            $student_core_value->quarter_3 = $core[2];
+            $student_core_value->quarter_4 = $core[3];
+            $student_core_value->save();
+        }
+
         return response()->json([
-            'status' => 'success'
+            'status' => $core_values,
         ]);
     }
     public function show(Request $request)
@@ -89,12 +119,19 @@ class ReportCardController extends Controller
         $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
         $student_card = QuarterlySummaryGrade::where([
             'school_year' => $request->sy,
-            'school_year' => $request->sy,
+            'student_id' => $request->student_id,
         ])
         ->get();
-        
+
+        $core_values = StudentReportCardCoreValues::where([
+            'admin_id' => $teacher->adminId,
+            'teacher_id' => auth()->user()->id,
+            'student_id' => $request->student_id,
+        ])->get();
+
         return response()->json([
             'students' => $student_card,
+            'core_values' => $core_values,
         ]);
     }
 }

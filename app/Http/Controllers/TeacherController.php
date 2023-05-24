@@ -24,7 +24,16 @@ class TeacherController extends Controller
 
   public function index()
   {
-    return view('web.backend.teacher.dashboard.index');
+    $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
+    $students = Student::where([
+      'sectionId' => $teacher->sectionId,
+      'school_year' => $teacher->school_year,
+    ])->get();
+    
+    return view('web.backend.teacher.dashboard.index',[
+      'teacher' => $teacher,
+      'students' => $students,
+    ]);
   }
 
   public function attendance()

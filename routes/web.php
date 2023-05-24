@@ -33,6 +33,7 @@ use App\Http\Controllers\Teacher\QuarterGradeController;
 use App\Http\Controllers\Teacher\QuarterlyGradeController;
 use App\Http\Controllers\Teacher\ReportCardController;
 use App\Http\Controllers\Teacher\StudentGradeController;
+use App\Http\Controllers\Teacher\ClassSchedulesController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserProfileController;
 
@@ -101,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/library', [LibraryController::class, 'index'])->name('admin.library');
             Route::get('/session', [SessionController::class, 'index'])->name('admin.session');
             Route::get('/noticeboard', [NoticeboardController::class, 'index'])->name('admin.noticeboard');
+            Route::post('/update', [SessionController::class, 'update'])->name('admin.back-office.update.session');
         });
 
         // Academic
@@ -137,6 +139,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Dashboard and Advisory
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+
+
+
+
+
+        // class schedules
+        // advisory
+        Route::get('/class-schedule/advisory', [ClassSchedulesController::class, 'index'])->name('teacher.class-schedule.advisory');
+
         Route::get('/advisory', [TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory');
         Route::get('/grades/filter', [TeacherController::class, 'filterGrades'])->name('sresmis.teacher.grades.filter');
         Route::get('/delete-student/{id}', [TeacherController::class, 'deleteStudent']);

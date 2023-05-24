@@ -11,6 +11,21 @@ use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\QuarterlySummaryGrade;
 use App\Models\StudentReportCardCoreValues;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
+use Illuminate\Support\Facades\Hash;
+
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ReportCardController extends Controller
 {
@@ -44,7 +59,7 @@ class ReportCardController extends Controller
             ->orderBy('subjects.id', 'asc')
             ->get();
 
-       
+
 
         return response()->json([
             'students' => $students,
@@ -110,7 +125,7 @@ class ReportCardController extends Controller
         }
 
         return response()->json([
-            'status' => $core_values,
+            'status' => 'success',
         ]);
     }
     public function show(Request $request)
@@ -121,7 +136,7 @@ class ReportCardController extends Controller
             'school_year' => $request->sy,
             'student_id' => $request->student_id,
         ])
-        ->get();
+            ->get();
 
         $core_values = StudentReportCardCoreValues::where([
             'admin_id' => $teacher->adminId,
@@ -133,5 +148,49 @@ class ReportCardController extends Controller
             'students' => $student_card,
             'core_values' => $core_values,
         ]);
+    }
+    public function print_excel()
+    {
+        $spreadsheet = new Spreadsheet();
+
+        // Get the active sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Merge cells B5 to AF5
+        $sheet->mergeCells('B5:AF5');
+
+        // Set the value of the merged cells
+        $sheet->setCellValue('B5', 'Republic of the Philippines');
+
+        // Center align the text
+        $sheet->getStyle('B5')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        // Set the font name and size
+        $sheet->getStyle('B5')->getFont()->setName('Times New Roman');
+        $sheet->getStyle('B5')->getFont()->setSize(9);
+
+        // Calculate the approximate width in points for 12 pixels
+        $columnWidth = 12 / 6.57; // Approximate conversion from pixels to points
+
+        // Set the width of cells B5 to AF5
+        foreach (range('B', 'AF') as $column) {
+            $sheet->getColumnDimension($column)->setWidth($columnWidth);
+        }
+
+        // Create a PDF writer instance
+        $writer = new Mpdf($spreadsheet);
+
+
+
+        // Add another sheet
+        // $sheet2 = $spreadsheet->createSheet();
+        // $sheet2->setTitle('Sheet 2');
+        // $sheet2->setCellValue('A1', 'Data for Sheet 2');
+
+        // Save the spreadsheet
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . urlencode('SF-1.xlsx') . '"');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
     }
 }

@@ -60,7 +60,7 @@
                                             Print
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Excel</a></li>
+                                            <li><a class="dropdown-item" href="{{url('teacher/report-card/print-excel')}}">Excel</a></li>
                                             <li><a class="dropdown-item" href="#">PDF</a></li>
                                         </ul>
                                     </div>

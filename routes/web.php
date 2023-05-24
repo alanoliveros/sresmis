@@ -255,7 +255,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/report-card/filter-students', [ReportCardController::class, 'filter_students']);
         Route::post('/report-card/create', [ReportCardController::class, 'create']);
         Route::get('/report-card/get-data', [ReportCardController::class, 'show']);
-
+        Route::get('/report-card/print-excel', [ReportCardController::class, 'print_excel']);
 
 
 

@@ -201,9 +201,6 @@
                             });
                         });
                     }
-                    else{
-                        $('select').text('');
-                    }
 
                     // Assuming you have an existing table with an ID of "existingTable"
                     let table = $('.report_card').find('tbody');
@@ -411,21 +408,9 @@
 
 
                     if (data.status == 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: 'Data inserted successfully',
-                            timer: 2000, // Adjust the timer value as needed (in milliseconds)
-                            showConfirmButton: false
-                        });
+                        sweetAlert("Save successfully", "success");
                     } else {
-                        swal({
-                            title: "Error",
-                            text: data.message,
-                            type: "error"
-                        }, function() {
-                            location.reload();
-                        });
+                      
                     }
                 }
             });

@@ -71,7 +71,7 @@
             // console.log('className ' + className);
 
             let totalRating = Math.round(rating / length);
-            $(`.${className}`).text(totalRating);
+            $(`.${className}`).text(isNaN(totalRating) ? '' : totalRating);
 
             let remarks = (totalRating <= 74) ? 'Failed' : 'Passed';
             $('.remarksMapeh').text(remarks);
@@ -171,6 +171,18 @@
             $('.studentName').text($('.student_select :selected').text());
             $('.student_select :selected').attr('data-studentLRN');
             $('.studentLRN').text($('.student_select :selected').attr('data-studentLRN'));
+
+            let student_id = $('.student_select :selected').val();
+            let sy = $('.school_year_select :selected').val();
+            if (!/^\d+$/.test(student_id)) {
+
+                sweetAlert("Please select student name", "error");
+            } else {
+                // ajax
+               $('#print-sf9-word').attr('href', `{{url('/teacher/report-card/print-word-by-student')}}/${student_id}/${sy}`);
+            }
+
+
 
             // ajax
             $.ajax({
@@ -410,12 +422,10 @@
                     if (data.status == 'success') {
                         sweetAlert("Save successfully", "success");
                     } else {
-                      
+
                     }
                 }
             });
-
-
         });
     });
 </script>

@@ -44,6 +44,9 @@
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
+                                        <a href="" class="btn btn-warning rounded-0" data-bs-toggle="modal" data-bs-target="#import-student-advisory">Import</a>
+                                        @include('web.backend.teacher.students.admission-advisory.import')
+
                                         <a href="" class="float-md-end btn btn-light rounded-0 border-dark"
                                             data-bs-toggle="modal" data-bs-target="#addstudent_click">+ Add student</a>
                                         @include('web.backend.teacher.students.admission-advisory.add-student')

@@ -7,7 +7,9 @@ use App\Models\GradeLevelSubject;
 use Illuminate\Http\Request;
 
 use App\Models\Session;
+use App\Models\User;
 use App\Models\Teacher;
+use App\Models\School;
 use App\Models\Student;
 use App\Models\QuarterlySummaryGrade;
 use App\Models\StudentReportCardCoreValues;
@@ -17,7 +19,7 @@ use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
-use PhpOffice\PhpSpreadsheet\IOFactory;
+// use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,6 +28,9 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Style\Font;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
 
 class ReportCardController extends Controller
 {
@@ -190,7 +195,46 @@ class ReportCardController extends Controller
         // Save the spreadsheet
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="' . urlencode('SF-1.xlsx') . '"');
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        // $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
+    }
+
+    // word
+    public function print_word($id, $sy)
+    {
+        
+        $teacher_detail = Teacher::where('teachers.teacherId', auth()->user()->id)
+        ->join('users', 'teachers.teacherId', 'users.id')
+        ->first();
+        $teacher = new TemplateProcessor('storage/school-forms/SF-9/SF_9.docx');
+        $school = School::where('adminId', $teacher_detail->adminId)->first();
+        $teacher->setValue('schoolRegion', $school->schoolRegion);
+        $teacher->setValue('schoolDivision', $school->schoolDivision);
+        $teacher->setValue('schoolDistrict', $school->schoolDistrict);
+        $teacher->setValue('schoolName', $school->schoolName);
+        $student = QuarterlySummaryGrade::where('student_id', $id)->get();
+        $student_detail = User::where('users.id',$id)
+        ->join('students', 'users.id', 'students.studentId')
+        ->join('grade_levels', 'students.gradeLevelId', 'grade_levels.id')
+        ->join('sections', 'students.sectionId', 'sections.id')
+        ->first();
+        $admin_detail = User::find($teacher_detail->adminId)->first();
+        $teacher->setValue('school_year', $sy);
+        $fullname = $student_detail->lastname . ', ' . $student_detail->name. ($student_detail->middlename != NULL? ', '.$student_detail->middlename:'');
+        $teacher->setValue('fullname', $fullname);
+        $teacher->setValue('age', $student_detail->age);
+        $teacher->setValue('gender', $student_detail->gender);
+        $teacher->setValue('lrn', $student_detail->lrn);
+        $teacher->setValue('sectionName', $student_detail->sectionName);
+        $teacher->setValue('gradeLevelName', $student_detail->gradeLevelName);
+        $teacherfullname = $teacher_detail->lastname . ', ' . $teacher_detail->name. ($teacher_detail->middlename != NULL? ', '.$teacher_detail->middlename:'');
+        $teacher->setValue('teacherfullname', $teacherfullname);
+        $adminfullname = $admin_detail->lastname . ', ' . $admin_detail->name. ($admin_detail->middlename != NULL? ', '.$admin_detail->middlename:'');
+        $teacher->setValue('adminfullname', $adminfullname);
+
+        $fileName = 'School-Form-9';
+        $teacher->saveAs($fileName . '.docx');
+        return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
+        
     }
 }

@@ -13,7 +13,7 @@
     </a>
     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-            <a href="icons-bootstrap.html">
+            <a href="{{route('teacher.class-schedule.advisory')}}">
                 <i class="bi bi-circle"></i><span>Advisory</span>
             </a>
         </li>

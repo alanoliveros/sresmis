@@ -24,13 +24,36 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
                             <div class="row my-3">
-                                <div class="col-md-12 col-lg-12 col-xlg-12 mb-3">
-                                    <div class="row">
-                                       
-                                    </div>
+                                <div class="col-md-12 col-lg-4 mb-3">
+                                    <select name="" class="form-select sy_select">
+                                            <option value="">Select School Year</option>
+                                        @foreach ($sessions as $year)
+                                            <option value="{{$year->school_year}}">{{$year->school_year}}</option>
+                                        @endforeach
+                                    </select>
 
 
-
+                                </div>
+                                <div class="col-md-12 mt-4">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr class="bg-primary text-light">
+                                                <th class="border border-dark text-center">Time</th>
+                                                <th class="border border-dark text-center">Mon</th>
+                                                <th class="border border-dark text-center">Tue</th>
+                                                <th class="border border-dark text-center">Wed</th>
+                                                <th class="border border-dark text-center">Thu</th>
+                                                <th class="border border-dark text-center">Fri</th>
+                                                <th class="border border-dark text-center">Sat</th>
+                                                <th class="border border-dark text-center">Sun</th>
+                                            </tr>    
+                                        </thead>
+                                        <tbody class="schedule-data text-center">
+                                            <tr>
+                                                <td colspan="7" class="text-center text-danger">No data found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
 
 
@@ -42,3 +65,7 @@
         </section>
     </main>
 @endsection
+@section('scripts')
+    @include('web.backend.teacher.class-schedule.script')
+@endsection
+

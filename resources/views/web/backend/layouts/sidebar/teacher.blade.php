@@ -6,7 +6,12 @@
     </a>
 </li><!-- End Dashboard Nav -->
 
-{{-- Students Information --}}
+<li class="nav-item">
+    <a class="nav-link collapsed" href="{{route('teacher.class-schedule.index')}}">
+      <i class="bi bi-card-list"></i>
+      <span>Class Schedules</span>
+    </a>
+  </li>
 <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-calendar3"></i><span>Class Schedules</span><i class="bi bi-chevron-down ms-auto"></i>

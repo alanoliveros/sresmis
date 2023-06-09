@@ -55,6 +55,8 @@
                                                     <table class="table table-hover" id="subjects">
                                                         <thead>
                                                         <tr class="fs-5">
+
+                                                            <th class="bg-primary border border-dark text-light">Time</th>
                                                             <th class="bg-primary border border-dark text-light">Monday</th>
                                                             <th class="bg-primary border border-dark text-light">Tuesday</th>
                                                             <th class="bg-primary border border-dark text-light">Wednesday</th>
@@ -68,7 +70,6 @@
                                                         @foreach ($schedules as $sched)
                                                             @php
                                                                 $arr =   explode (",", $sched->scheduleDay);
-
                                                             @endphp
                                                             <tr class="text-center">
                                                                 <td class="bg-warning">{{$sched->startTime.' - '.date('h:i:s a', strtotime($sched->endTime))}}</td>
@@ -83,7 +84,6 @@
                                                         @endforeach
                                                         </tbody>
                                                     </table>
-
                                                 </div>
                                             </div>
                                         </div>

@@ -46,6 +46,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+    return redirect('/login');
+});
+Route::get('/homepage', function () {
     return view('welcome');
 });
 
@@ -140,7 +143,13 @@ Route::group(['middleware' => 'auth'], function () {
         // Dashboard and Advisory
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
 
-
+        // Class_Schedule
+        Route::prefix('class-schedule')->group(function () {
+            Route::get('/index', [ClassSchedulesController::class, 'index'])->name('teacher.class-schedule.index');
+            Route::post('/filter_sy', [ClassSchedulesController::class, 'filter_sy']);
+            // Route::get('/retention-rate', [IndicatorController::class, 'retentionIndex'])->name('admin.retention');
+            
+        });
 
 
 
@@ -209,7 +218,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/filter-attendance/by-advisory', [StudentAttendance::class, 'filter_attendance']);
         Route::get('/daily-attendance/delete/{id}', [StudentAttendance::class, 'delete']);
         Route::get('/daily-attendance/edit/{id}', [StudentAttendance::class, 'edit']);
-       
+
 
         // Student Crud
         Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);

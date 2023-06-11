@@ -48,9 +48,22 @@
                                 </div>
 
 
-                                <div class="col gx-1">
+                                <div class="col gx-0">
                                     <div class="mb-3 p-2 float-md-end">
                                         <button type="button" class="btn btn-primary rounded-0 btnSaveCard">Save</button>
+                                    </div>
+                                </div>
+                                <div class="col gx-0">
+                                    <div class="dropdown">
+                                        <button class="btn btn-warning rounded-0" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Print
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{url('teacher/report-card/print-excel')}}">Excel</a></li>
+                                            <li><a class="dropdown-item" href="#">PDF</a></li>
+                                            <li><a class="dropdown-item" href="#" id="print-sf9-word">Word</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <hr>
@@ -137,7 +150,7 @@
                                                     </thead>
                                                     <tbody class="observed_values">
 
-                                                        <tr class="text-start core_values" data-values="1">
+                                                        <tr class="text-start core_values" data-values="makadiyos">
                                                             <td>1. Maka-Diyos</td>
                                                             <td>Expresses one’s spiritual beliefs while respecting the
                                                                 spiritual
@@ -148,35 +161,41 @@
                                                             @endphp
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makadiyos[{{$i}}]" class="border border-none w-100"
-                                                                        id="">
+                                                                    <select data-quarter="{{ $i }}"
+                                                                        class="select_core_values"
+                                                                        name="makadiyos[{{ $i }}]"
+                                                                        class="border border-none w-100" id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="{{$option}}">{{ $option }}
+                                                                            <option value="{{ $option }}">
+                                                                                {{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start core_values" data-values="2">
+                                                        <tr class="text-start core_values" data-values="makatao">
                                                             <td>2. Makatao</td>
                                                             <td>Shows adherence to ethical principles by upholding truth
                                                             </td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makatao[{{$i}}]" class="border border-none w-100"
-                                                                        id="">
+                                                                    <select data-quarter="{{ $i }}"
+                                                                        class="select_core_values"
+                                                                        name="makatao[{{ $i }}]"
+                                                                        class="border border-none w-100" id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="{{$option}}">{{ $option }}
+                                                                            <option value="{{ $option }}">
+                                                                                {{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start core_values" data-values="3">
+                                                        <tr class="text-start core_values" data-values="makakalikasan">
                                                             <td>3. Maka-
                                                                 kalikasan
                                                             </td>
@@ -184,46 +203,55 @@
                                                                 judiciously, and economically</td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makakalikasan[{{$i}}]" class="border border-none w-100"
-                                                                        id="">
+                                                                    <select data-quarter="{{ $i }}"
+                                                                        class="select_core_values"
+                                                                        name="makakalikasan[{{ $i }}]"
+                                                                        class="border border-none w-100" id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="{{$option}}">{{ $option }}
+                                                                            <option value="{{ $option }}">
+                                                                                {{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start core_values" data-values="4">
+                                                        <tr class="text-start core_values" data-values="makabansa_first">
                                                             <td rowspan="2" class="">4. Makabansa</td>
                                                             <td>Demonstrates pride in being a Filipino; exercises the rights
                                                                 and
                                                                 responsibilities of a Filipino citizen</td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select data-quarter="{{$i}}" class="select_core_values" name="makabansa_first[{{$i}}]"
+                                                                    <select data-quarter="{{ $i }}"
+                                                                        class="select_core_values"
+                                                                        name="makabansa_first[{{ $i }}]"
                                                                         class="border border-none w-100" id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="{{$option}}">{{ $option }}
+                                                                            <option value="{{ $option }}">
+                                                                                {{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                             @endfor
                                                         </tr>
-                                                        <tr class="text-start core_values" data-values="5">
+                                                        <tr class="text-start core_values" data-values="makabansa_second">
                                                             <td>Demonstrates appropriate behavior in carrying out activities
                                                                 in the
                                                                 school, community, and country</td>
                                                             @for ($i = 1; $i <= 4; $i++)
                                                                 <td>
-                                                                    <select class="select_core_values" data-quarter="{{$i}}" name="makabansa_second[]"
+                                                                    <select class="select_core_values"
+                                                                        data-quarter="{{ $i }}"
+                                                                        name="makabansa_second[]"
                                                                         class="border border-none w-100" id="">
                                                                         <option value="">Select</option>
                                                                         @foreach ($options as $option)
-                                                                            <option value="{{$option}}">{{ $option }}
+                                                                            <option value="{{ $option }}">
+                                                                                {{ $option }}
                                                                             </option>
                                                                         @endforeach
                                                                     </select>

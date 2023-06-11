@@ -4,7 +4,7 @@
             @csrf
                 <div class="modal-content">
                     <div class="modal-header bg-primary text-light">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{$section->sectionName.$subject->subjectName. ' - Schedule'}}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{$section->sectionName.' '.$subject->subjectName. ' - Schedule'}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -32,6 +32,7 @@
                             <div class="col-md-12">
                                 <label for="validationDefault02" class="form-label text-dark">Section Day<small class="text-danger"> (Note: Press hold <u>Ctrl+Left     CLick</u> to select multiple value)</small></label>
                                <select name="scheduleDay[]" multiple  style="width:100%; height:100%">
+                                        
                                         <option value="Monday">Monday</option>
                                         <option value="Tuesday">Tuesday</option>
                                         <option value="Wednesday">Wednesday</option>

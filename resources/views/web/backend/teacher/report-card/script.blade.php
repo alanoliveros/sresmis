@@ -19,9 +19,9 @@
             let result = overallTotal / finalRatingTextLength;
 
             $('.general_average_value').text(result + '%');
-            console.log(result);
-            console.log(finalRatingTextLength);
-            console.log(overallTotal);
+            // console.log(result);
+            // console.log(finalRatingTextLength);
+            // console.log(overallTotal);
 
 
             // console.log(total);
@@ -42,7 +42,7 @@
             $(selector).each(function(key, val) {
                 let value = parseInt($(this).val()) || 0;
                 total += value;
-                console.log($(val).val());
+                // console.log($(val).val());
             });
 
 
@@ -66,12 +66,12 @@
                 let value = parseInt($(this).text()) || 0;
                 rating += value;
             });
-            console.log('rating ' + rating);
-            console.log('length ' + length);
-            console.log('className ' + className);
+            // console.log('rating ' + rating);
+            // console.log('length ' + length);
+            // console.log('className ' + className);
 
             let totalRating = Math.round(rating / length);
-            $(`.${className}`).text(totalRating);
+            $(`.${className}`).text(isNaN(totalRating) ? '' : totalRating);
 
             let remarks = (totalRating <= 74) ? 'Failed' : 'Passed';
             $('.remarksMapeh').text(remarks);
@@ -90,7 +90,7 @@
                     sy: school_year_id
                 },
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
 
                     let tbody = '';
                     let classAverageAdded = false;
@@ -172,6 +172,18 @@
             $('.student_select :selected').attr('data-studentLRN');
             $('.studentLRN').text($('.student_select :selected').attr('data-studentLRN'));
 
+            let student_id = $('.student_select :selected').val();
+            let sy = $('.school_year_select :selected').val();
+            if (!/^\d+$/.test(student_id)) {
+
+                sweetAlert("Please select student name", "error");
+            } else {
+                // ajax
+               $('#print-sf9-word').attr('href', `{{url('/teacher/report-card/print-word-by-student')}}/${student_id}/${sy}`);
+            }
+
+
+
             // ajax
             $.ajax({
                 type: "GET",
@@ -181,6 +193,27 @@
                     'sy': $('.school_year_select :selected').val(),
                 },
                 success: function(data) {
+
+
+                    console.log(data);
+
+                    if (data.core_values.length > 0) {
+                        $.each(data.core_values, function(index, val) {
+                            let rowValues =
+                                val; // Assuming each core_value object has properties quarter_1, quarter_2, quarter_3, and quarter_4
+                            let selectElements = $(
+                                `tr[data-values="${val.core_values}"]`).find(
+                                'select');
+
+                            selectElements.each(function(index) {
+                                let quarterValue = rowValues[
+                                    `quarter_${index + 1}`
+                                ]; // Get the value for the corresponding quarter (quarter_1, quarter_2, etc.)
+                                $(this).val(quarterValue);
+                            });
+                        });
+                    }
+
                     // Assuming you have an existing table with an ID of "existingTable"
                     let table = $('.report_card').find('tbody');
 
@@ -189,7 +222,8 @@
 
                     $.each(data.students, function(index, subject) {
                         let subjectId = subject.subject_id;
-                        let grades = [subject.quarter_1, subject.quarter_2, subject
+                        let grades = [subject.quarter_1, subject.quarter_2,
+                            subject
                             .quarter_3, subject.quarter_4
                         ];
                         let finalGrading = subject.final_grade;
@@ -201,13 +235,15 @@
                             let row = table.find('tr.' + subjectId);
 
                             // Populate the input values
-                            row.find('input[name="grading_input[]"]').each(function(
-                                index) {
-                                $(this).val(grades[index]);
-                            });
+                            row.find('input[name="grading_input[]"]').each(
+                                function(
+                                    index) {
+                                    $(this).val(grades[index]);
+                                });
 
                             // Populate the final grading
-                            row.find('.finalRatingPerSubject').text(finalGrading);
+                            row.find('.finalRatingPerSubject').text(
+                                finalGrading);
 
                             // Populate the remarks
                             row.find('.remarksPerSubject').text(remarks);
@@ -218,10 +254,11 @@
                             let row = table.find('tr.' + subjectId);
 
                             // Populate the input values
-                            row.find('input[name="grading_input[]"]').each(function(
-                                index) {
-                                $(this).val(grades[index]);
-                            });
+                            row.find('input[name="grading_input[]"]').each(
+                                function(
+                                    index) {
+                                    $(this).val(grades[index]);
+                                });
 
                             calculateQuarterMapeh('.firstPart',
                                 '.firstQuarterMapeh');
@@ -236,7 +273,6 @@
                             calculateQuarterMapeh('.fourthPart',
                                 '.fourthQuarterMapeh');
 
-
                             let val = 'finalRatingMapeh';
                             calculateRating(val);
                             finalRatingPerSubjectRate();
@@ -250,9 +286,9 @@
 
         });
 
-
-
         $('body').on('input', 'input[name="grading_input[]"]', function() {
+
+            console.log('asdasd');
             let container = $(this).closest('tr');
             let excludedIds = [9, 10, 11, 12]; // IDs to exclude
 
@@ -317,11 +353,11 @@
                 student_id: $('.student_select :selected').val(),
                 sy: $('.school_year_select :selected').val(),
                 subject_ids: [],
-                makadiyos : [],
-                makatao : [],
-                makakalikasan : [],
-                makabansa_first : [],
-                makabansa_second : [],
+                makadiyos: [],
+                makatao: [],
+                makakalikasan: [],
+                makabansa_first: [],
+                makabansa_second: [],
             };
 
 
@@ -345,25 +381,6 @@
                 let selectedValue = $(this).val();
                 data.makabansa_second.push(selectedValue);
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             $('.subjectReference').each(function() {
@@ -390,13 +407,7 @@
                 });
             });
 
-            console.log(data);
-
-            // console.log(data.length);
-            // $.each(data.subject_ids, function(key, val) {
-            //     console.log(val.grades[0]);
-            // });
-            // ajax
+            // console.log(data);
 
             $.ajax({
                 type: 'POST',
@@ -405,44 +416,16 @@
                     data: data
                 },
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
 
 
-                    // if (data.status == 'success') {
-                    //     swal({
-                    //         title: "Success",
-                    //         text: data.message,
-                    //         type: "success"
-                    //     }, function() {
-                    //         location.reload();
-                    //     });
-                    // } else {
-                    //     swal({
-                    //         title: "Error",
-                    //         text: data.message,
-                    //         type: "error"
-                    //     }, function() {
-                    //         location.reload();
-                    //     });
-                    // }
+                    if (data.status == 'success') {
+                        sweetAlert("Save successfully", "success");
+                    } else {
+
+                    }
                 }
             });
-
-
         });
-
-        // $('.select_core_values').on('change', function(e) {
-        //     e.preventDefault();
-        //     let core_value_number = $(this).closest('tr').attr('data-values'); //1-5
-        //     let quarter = $(this).attr('data-quarter'); // quarter_1
-        //     let core_values_value = $(this).val(); //AO
-        //     // console.log(core_value_number);
-        //     // console.log(quarter);
-        //     // console.log(core_values_value);
-
-        //     console.log(core_values);
-
-
-        // });
     });
 </script>

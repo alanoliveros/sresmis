@@ -80,49 +80,54 @@ class StudentAttendance extends Controller
 
       // Process male students' attendance
 
-      foreach ($statusStudentAttendanceMale as $studentId => $status) {
-        $attendance = DailyAttendance::firstOrNew([
-          'studentId' => $studentId,
-          'school_year' => $school_year,
-          'teacherId' => auth()->user()->id,
-          'gradeLevelId' => $request->gradeLevelId,
-          'date' => $request->attendance_date,
-          'month' => $f_date[1],
-        ]);
+      if (!is_null($statusStudentAttendanceMale)) {
+        foreach ($statusStudentAttendanceMale as $studentId => $status) {
+          $attendance = DailyAttendance::firstOrNew([
+            'studentId' => $studentId,
+            'school_year' => $school_year,
+            'teacherId' => auth()->user()->id,
+            'gradeLevelId' => $request->gradeLevelId,
+            'date' => $request->attendance_date,
+            'month' => $f_date[1],
+          ]);
 
-        $attendance->adminId = $teacher_detail->adminId;
-        $attendance->teacherId = auth()->user()->id;
-        $attendance->gradeLevelId = $request->gradeLevelId;
-        $attendance->sectionId = $request->sectionId;
-        $attendance->studentId = $studentId;
-        $attendance->school_year = $school_year;
-        $attendance->date = $request->attendance_date;
-        $attendance->status = $status;
-        $attendance->month = $month;
-        $attendance->save();
+          $attendance->adminId = $teacher_detail->adminId;
+          $attendance->teacherId = auth()->user()->id;
+          $attendance->gradeLevelId = $request->gradeLevelId;
+          $attendance->sectionId = $request->sectionId;
+          $attendance->studentId = $studentId;
+          $attendance->school_year = $school_year;
+          $attendance->date = $request->attendance_date;
+          $attendance->status = $status;
+          $attendance->month = $month;
+          $attendance->save();
+        }
       }
 
-      foreach ($statusStudentAttendanceFemale as $studentId => $status) {
-        $attendance = DailyAttendance::firstOrNew([
-          'studentId' => $studentId,
-          'school_year' => $school_year,
-          'teacherId' => auth()->user()->id,
-          'gradeLevelId' => $request->gradeLevelId,
-          'date' => $request->attendance_date,
-          'month' => $f_date[1],
-        ]);
+      if (!is_null($statusStudentAttendanceFemale)) {
+        foreach ($statusStudentAttendanceFemale as $studentId => $status) {
+          $attendance = DailyAttendance::firstOrNew([
+            'studentId' => $studentId,
+            'school_year' => $school_year,
+            'teacherId' => auth()->user()->id,
+            'gradeLevelId' => $request->gradeLevelId,
+            'date' => $request->attendance_date,
+            'month' => $f_date[1],
+          ]);
 
-        $attendance->adminId = $teacher_detail->adminId;
-        $attendance->teacherId = auth()->user()->id;
-        $attendance->gradeLevelId = $request->gradeLevelId;
-        $attendance->sectionId = $request->sectionId;
-        $attendance->studentId = $studentId;
-        $attendance->school_year = $school_year;
-        $attendance->date = $request->attendance_date;
-        $attendance->status = $status;
-        $attendance->month = $month;
-        $attendance->save();
+          $attendance->adminId = $teacher_detail->adminId;
+          $attendance->teacherId = auth()->user()->id;
+          $attendance->gradeLevelId = $request->gradeLevelId;
+          $attendance->sectionId = $request->sectionId;
+          $attendance->studentId = $studentId;
+          $attendance->school_year = $school_year;
+          $attendance->date = $request->attendance_date;
+          $attendance->status = $status;
+          $attendance->month = $month;
+          $attendance->save();
+        }
       }
+
 
 
       return redirect()->back()->with('success', 'Attendance saved successfully');
@@ -152,13 +157,14 @@ class StudentAttendance extends Controller
 
     $teacher_detail = Teacher::where('teacherId', auth()->user()->id)->first();
 
-    $attendance = DailyAttendance::where([
-      'teacherId' => auth()->user()->id,
-      'date' =>  $request->date,
-      'sectionId' =>  $teacher_detail->sectionId,
-      'gradeLevelId' =>  $teacher_detail->gradeLevelId,
-    ])
-      ->join('users', 'daily_attendances.studentId', 'users.id')
+    $attendance = DailyAttendance::join('users', 'daily_attendances.studentId', 'users.id')
+      ->select('daily_attendances.status as st', 'daily_attendances.date as dt', 'daily_attendances.id as daily_id', 'users.*')
+      ->where([
+        ['teacherId', '=', auth()->user()->id],
+        ['date', '=', $request->date],
+        ['sectionId', '=', $teacher_detail->sectionId],
+        ['gradeLevelId', '=', $teacher_detail->gradeLevelId]
+      ])
       ->get();
 
     return response()->json([
@@ -189,23 +195,6 @@ class StudentAttendance extends Controller
   public function create_attendance_subject($ids)
   {
 
-    // $subject = ClassSchedule::where([
-    //   'class_schedules.teacherId' => auth()->user()->id,
-    // ])
-    //   ->join('subjects', 'class_schedules.subjectId', 'subjects.id')
-    //   ->get();
-    //   $teacher = Teacher::where('teacherId', auth()->user()->id)->first();
-    //   $schoolYear = Session::where('adminId', '=', $teacher->adminId)->orderBy('school_year', 'desc')->get();
-
-    // $subjectArr = array();
-    // foreach ($subject as $key => $sub) {
-    //   $subjectArr[$sub->id] = $sub->subjectName;
-    // }
-    // $subjects = $subjectArr;
-    // return view('web.backend.teacher.attendance.subject.create',[
-    //   'subjects' => $subjects,
-    //   'schoolYear' => $schoolYear,
-    // ]);
   }
   public function filter_section(Request $request)
   {
@@ -256,6 +245,52 @@ class StudentAttendance extends Controller
     return response()->json([
       'students' => $students,
       'subject' => $subject,
+    ]);
+  }
+  public function delete($id)
+  {
+
+    try {
+      $attendance = DailyAttendance::find($id);
+
+      if (!$attendance) {
+        return response()->json([
+          'error' => 'Attendance not found',
+        ]);
+      }
+
+      $attendance->delete();
+
+      return response()->json([
+        'success' => 'Deleted successfully',
+      ]);
+    } catch (\Exception $e) {
+      return response()->json([
+        'error' => 'An error occurred while deleting the attendance',
+      ]);
+    }
+  }
+  public function edit($id){
+    $teacherId = auth()->user()->id;
+    $sectionName = Teacher::join('sections', 'teachers.sectionId', '=', 'sections.id')
+      ->join('grade_levels', 'teachers.gradeLevelId', '=', 'grade_levels.id')
+      ->where('teachers.teacherId', '=', $teacherId)
+      ->first();
+
+    $adminId = $sectionName->adminId;
+    $schoolYear = Session::where('adminId', '=', $adminId)->orderBy('school_year', 'desc')->get();
+
+    $students = Student::where('students.teacherId', '=', $teacherId)
+      ->join('users', 'students.studentId', '=', 'users.id')
+      ->get();
+
+    $schoolYear = Session::where('adminId', '=', $adminId)->orderBy('school_year', 'desc')->get();
+    return view('web.backend.teacher.attendance.advisory.edit', [
+      'id' => $id,
+      'schoolYear' => $schoolYear,
+      'students' => $students,
+      'schoolYear' => $schoolYear,
+      'sectionName' => $sectionName,
     ]);
   }
 }

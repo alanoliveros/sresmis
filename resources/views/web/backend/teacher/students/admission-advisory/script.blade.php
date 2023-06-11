@@ -3,10 +3,7 @@
         let id = 0;
         $(".school_year_by_advisory").on('change', function() {
             id = $(".school_year_by_advisory :selected").val();
-        });
 
-        $('.filter_student').on('click', function(e) {
-            e.preventDefault();
             $.ajax({
                 method: "POST",
                 url: '/teacher/student-information/advisory/' + id,
@@ -36,25 +33,50 @@
                                     <td>${dt.toLocaleString('default', { month: 'long' }) + " " + (dt.getDate()) + ", " + dt.getFullYear()}</td>
                                     <td>${student.age}</td>
                                     <td>
-                                        <div class="dropdown dropend">
-                                            <button class="btn btn-light rounded-pill border-dark btn-sm" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-                                                <i class="bi bi-three-dots-vertical"></i>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item text-primary edit-student" href="#" 
-                                                    data-id="${student.id}"
-                                                    data-name="${student.name}"
-                                                    data-lrn="${student.lrn}"
-                                                    data-lastname="${student.lastname}"
-                                                    data-gender="${student.gender}"
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    >Edit</a></li>
-                                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                            </ul>
+                                        <div class="dropdown dropstart">
+                                        <button class="btn btn-sm btn-light border-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item edit-student-data" href="#"
+                                                data-id="${student.studentId}"
+                                                data-school_year="${student.school_year}"
+                                                data-learning_modality="${student.learning_modality}"
+                                                data-enrollment_status="${student.enrollment_status}"
+                                                data-lrn="${student.lrn}"
+                                                data-name="${student.name}"
+                                                data-middlename="${student.middlename}"
+                                                data-lastname="${student.lastname}"
+                                                data-suffix="${student.suffix}"
+                                                data-gender="${student.gender}"
+                                                data-birth_date="${student.birthdate}"
+                                                data-age="${student.age}"
+                                                data-ethnicgroup="${student.ethnicgroup}"
+                                                data-religion="${student.religion}"
+                                                data-purok="${student.purok}"
+                                                data-barangay="${student.barangay}"
+                                                data-city="${student.city}"
+                                                data-province="${student.province}"
+                                                data-zipCode="${student.zipCode}"
+                                                data-mothertongue="${student.mothertongue}"
+
+                                                data-fathersFirstName="${student.fathersFirstName}"
+                                                data-fathersMiddleName="${student.fathersMiddleName}"
+                                                data-fathersLastName="${student.fathersLastName}"
+                                                data-fathersSuffix="${student.fathersSuffix}"
+                                                data-mothersFirstName="${student.mothersFirstName}"
+                                                data-mothersMiddleName="${student.mothersMiddleName}"
+                                                data-mothersLastName="${student.mothersLastName}"
+                                                data-mothersSuffix="${student.mothersSuffix}"
+                                                data-guardiansFirstName="${student.guardiansFirstName}"
+                                                data-guardiansMiddleName="${student.guardiansMiddleName}"
+                                                data-guardiansLastName="${student.guardiansLastName}"
+                                                data-guardiansSuffix="${student.guardiansSuffix}"
+                                                data-relationshiptoStudent="${student.relationshiptoStudent}"
+                                                data-contactNumber="${student.relationshiptoStudent}"
+                                                >Edit</a></li>
+                                            <li><a  data-id="${student.studentId}" class="dropdown-item text-danger deleteStudentRecord" href="#">Delete</a></li>
+                                        </ul>
                                         </div>
                                     </td>
                                 </tr>
@@ -105,7 +127,6 @@
                             </tbody>
                         </table>
                     `;
-
                         $('.students_table').html(table);
                         $('#student_info').DataTable();
                     } else {
@@ -124,56 +145,162 @@
                     }
                 }
             });
+
+
+
         });
 
-        // Edit student modal
-        $(document).on('click', '.edit-student', function(e) {
-            e.preventDefault();
+        $('body').on('click', '.edit-student-data', function() {
             $('.editStudentModal').modal('show');
             let studentId = $(this).data('id');
 
-            $('.lrn').val(studentId);
-            $('.name').val($(this).data('name'));
-            $('.gender').val($(this).data('gender'));
-            $('.lastname').val($(this).data('lastname'));
 
-            // Fetch student data for editing
-            $.ajax({
-                method: "GET",
-                url: '/teacher/student-information/edit/' + studentId,
-                success: function(data) {
-                    let student = data.student;
-                    // Update modal fields with student data
-                    $('#editStudentForm #studentId').val(student.id);
-                    $('#editStudentForm #editLastName').val(student.lastname);
-                    $('#editStudentForm #editFirstName').val(student.name);
-                    $('#editStudentForm #editMiddleName').val(student.middlename);
-                    // Open the modal
+            $('input.studentId').val(studentId);
+            $('select.school_year').val($(this).data('school_year'));
+            $('select.learning_modality').val($(this).data('learning_modality'));
+            $('select.enrollment_status').val($(this).data('enrollment_status'));
+            $('input.lrn').val($(this).data('lrn'));
+            $('input.name').val($(this).data('name'));
+            $('input.middlename').val($(this).data('middlename'));
+            $('input.lastname').val($(this).data('lastname'));
+            $('input.suffix').val($(this).data('suffix'));
+            $('select.gender').val($(this).data('gender'));
+            $('input.birth_date').val($(this).data('birth_date'));
+            $('input.age').val($(this).data('age'));
+            $('input.ethnicgroup').val($(this).data('ethnicgroup'));
+            $('input.religion').val($(this).data('religion'));
+            $('input.purok').val($(this).data('purok'));
+            $('input.barangay').val($(this).data('barangay'));
+            $('input.city').val($(this).data('city'));
+            $('input.province').val($(this).data('province'));
+            $('input.zipcode').val($(this).data('zipcode'));
+            $('input.mothertongue').val($(this).data('mothertongue'));
 
-                }
-            });
+
+            $('input.fathersFirstName').val($(this).data('fathersFirstName'));
+            $('input.fathersMiddleName').val($(this).data('fathersMiddleName'));
+            $('input.fathersLastName').val($(this).data('fathersLastName'));
+            $('input.fathersSuffix').val($(this).data('fathersSuffix'));
+            $('input.mothersFirstName').val($(this).data('mothersFirstName'));
+            $('input.mothersMiddleName').val($(this).data('mothersMiddleName'));
+            $('input.mothersLastName').val($(this).data('mothersLastName'));
+            $('input.mothersSuffix').val($(this).data('mothersSuffix'));
+            $('input.guardiansFirstName').val($(this).data('guardiansFirstName'));
+            $('input.guardiansMiddleName').val($(this).data('guardiansMiddleName'));
+            $('input.guardiansLastName').val($(this).data('guardiansLastName'));
+            $('input.guardiansSuffix').val($(this).data('guardiansSuffix'));
+            $('input.relationshiptoStudent').val($(this).data('relationshiptoStudent'));
+            $('input.contactNumber').val($(this).data('contactNumber'));
         });
 
-        // Handle form submission for updating student data
-        $('#updateStudentBtn').on('click', function(e) {
-            e.preventDefault();
-            let form = $('#editStudentForm');
-            let studentId = form.find('#studentId').val();
-            let formData = form.serialize();
+        $('body').on('click', '.btnEditStudent', function() {
 
-            // Send AJAX request to update student data
+            let studentId = $('.studentId').val();
+            let school_year = $('.school_year :selected').val();
+            let learning_modality = $('.learning_modality :selected').val();
+            let enrollment_status = $('.enrollment_status :selected').val();
+            let lrn = $('.lrn').val();
+            let name = $('.name').val();
+            let middlename = $('.middlename').val();
+            let lastname = $('.lastname').val();
+            let suffix = $('.suffix').val();
+            let gender = $('.gender :selected').val();
+            let birth_date = $('.birth_date').val();
+            let age = $('.age').val();
+            let ethnicgroup = $('.ethnicgroup').val();
+            let religion = $('.religion').val();
+            let purok = $('.purok').val();
+            let barangay = $('.barangay').val();
+            let city = $('.city').val();
+            let province = $('.province').val();
+            let zipcode = $('.zipcode').val();
+            let mothertongue = $('.mothertongue').val();
+
+            let fathersFirstName = $('.fathersFirstName').val();
+            let fathersMiddleName = $('.fathersMiddleName').val();
+            let fathersLastName = $('.fathersLastName').val();
+            let fathersSuffix = $('.fathersSuffix').val();
+            let mothersFirstName = $('.mothersFirstName').val();
+            let mothersMiddleName = $('.mothersMiddleName').val();
+            let mothersLastName = $('.mothersLastName').val();
+            let mothersSuffix = $('.mothersSuffix').val();
+            let guardiansFirstName = $('.guardiansFirstName').val();
+            let guardiansMiddleName = $('.guardiansMiddleName').val();
+            let guardiansLastName = $('.guardiansLastName').val();
+            let guardiansSuffix = $('.guardiansSuffix').val();
+            let relationshiptoStudent = $('.relationshiptoStudent').val();
+            let contactNumber = $('.contactNumber').val();
+
+            let student_data = {
+                'studentId': studentId,
+                'school_year': school_year,
+                'learning_modality': learning_modality,
+                'enrollment_status': enrollment_status,
+                'lrn': lrn,
+                'name': name,
+                'middlename': middlename,
+                'lastname': lastname,
+                'suffix': suffix,
+                'gender': gender,
+                'birth_date': birth_date,
+                'age': age,
+                'ethnicgroup': ethnicgroup,
+                'religion': religion,
+                'purok': purok,
+                'barangay': barangay,
+                'city': city,
+                'province': province,
+                'zipcode': zipcode,
+                'mothertongue': mothertongue,
+
+                'fathersFirstName': fathersFirstName,
+                'fathersMiddleName': fathersMiddleName,
+                'fathersLastName': fathersLastName,
+                'fathersSuffix': fathersSuffix,
+                'mothersFirstName': mothersFirstName,
+                'mothersMiddleName': mothersMiddleName,
+                'mothersLastName': mothersLastName,
+                'mothersSuffix': mothersSuffix,
+                'guardiansFirstName': guardiansFirstName,
+                'guardiansMiddleName': guardiansMiddleName,
+                'guardiansLastName': guardiansLastName,
+                'guardiansSuffix': guardiansSuffix,
+                'relationshiptoStudent': relationshiptoStudent,
+                'contactNumber': contactNumber
+            };
+
+
+
+            // ajax update student
             $.ajax({
-                method: "POST",
-                url: '/teacher/student-information/update/' + studentId,
-                data: formData,
-                success: function(response) {
-                    // Update the student information on the page if needed
-                    if (response.success) {
-                        // Perform necessary UI updates here
-                        // Close the modal
-                        $('#editStudentModal').modal('hide');
-                    }
+                type: 'POST',
+                url: "/teacher/student-data-advisory/update",
+                data: {
+                    'data': student_data,
+                },
+                success: function(data) {
+                    console.log(data);
+                    location.reload()
                 }
+
+            });
+
+        });
+
+        $('body').on('click', '.deleteStudentRecord', function() {
+            let studentId = $(this).attr('data-id');
+
+            $.ajax({
+                type: 'POST',
+                url: "/teacher/student-data-advisory/delete",
+                data: {
+                    'student_id': studentId,
+                },
+                success: function(data) {
+                    console.log(data);
+                    // location.reload()
+                }
+
             });
         });
     });

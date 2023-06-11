@@ -37,20 +37,16 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4 col-md-3">
+                                <div class="col-12 col-sm-4 col-md-2 float-md-end">
                                     <div class="mb-3">
-                                        <button type="button"
-                                            class="btn btn-secondary rounded-0 filter_student">Filter</button>
+                                        <button type="button" class="btn btn-secondary rounded-0 filter_student">Pull data</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-4 col-md-2">
+                                <div class="col">
                                     <div class="mb-3">
-                                        <button type="button"
-                                            class="btn btn-secondary rounded-0 filter_student">Pull data</button>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4 col-md-3">
-                                    <div class="mb-3">
+                                        <a href="" class="btn btn-warning rounded-0" data-bs-toggle="modal" data-bs-target="#import-student-advisory">Import</a>
+                                        @include('web.backend.teacher.students.admission-advisory.import')
+
                                         <a href="" class="float-md-end btn btn-light rounded-0 border-dark"
                                             data-bs-toggle="modal" data-bs-target="#addstudent_click">+ Add student</a>
                                         @include('web.backend.teacher.students.admission-advisory.add-student')
@@ -60,39 +56,26 @@
                             </div>
 
                             <div class="students_table">
-
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="text-center">
+                                            <img style="width: 100px" src="{{ asset('storage/image/empty_box.png') }}">
+                                            <p class="text-danger">No data found</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                             </div>
                         </div>
-
                     </div>
-                </div><!-- End Recent Sales -->
-
+                </div>
             </div>
         </section>
     </main>
-
-    <div class="modal fade editStudentModal" id="" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editStudentModalLabel">Edit Student</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                   <input type="text" name="lrn" class="lrn" placeholder="LRN">
-                   <input type="text" name="name" class="name" placeholder="LRN">
-                   <input type="text" name="gender" class="gender" placeholder="LRN">
-                   <input type="text" name="lastname" class="lastname" placeholder="LRN">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="updateStudentBtn">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('web.backend.teacher.students.admission-advisory.edit') 
 
 @endsection
 @section('scripts')
-    @include('web.backend.teacher.students.admission-advisory.script') 
+    @include('web.backend.teacher.students.admission-advisory.script')
 @endsection

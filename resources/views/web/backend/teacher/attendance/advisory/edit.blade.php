@@ -231,5 +231,5 @@
     </main>
 @endsection
 @section('scripts')
-    @include('web.backend.teacher.attendance.advisory.add-attendance-script')
+    @include('web.backend.teacher.attendance.advisory.editScript')
 @endsection

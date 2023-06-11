@@ -2,9 +2,9 @@
     $(document).ready(function() {
         $('#studentAttendance').DataTable();
 
-        $('#filter_date_attendance').on('click', function() {
-              
-             
+        $('#date_val').on('change', function() {
+
+
             $.ajax({
                 method: "POST",
                 url: '/teacher/filter-attendance/by-advisory',
@@ -15,9 +15,9 @@
                     console.log(data.date);
 
                     if (data.response == 'error') {
-                        
+
                         sweetAlert("Oops...", "Date is required", "error");
-                        
+
                     } else if (!data.response || data.response.length === 0) {
                         $('.students_table').html(`<img src="{{ asset('storage/image/empty_box.png') }}" alt="No data found" class="w-25">
                                                     <div>
@@ -28,7 +28,7 @@
                         $('.total_present').text(0);
                         $('.total_absent').text(0);
 
-                        
+
                     } else {
                         console.log(data.response);
 
@@ -43,8 +43,8 @@
                             <tr>
                                 <td>${key+1}</td>
                                 <td>${val.name}</td>
-                                <td>${val.date}</td>
-                                <td>${val.status}</td>
+                                <td>${val.dt}</td>
+                                <td>${val.st}</td>
                                 <td>
                                     <div class="btn-group dropend">
                                         <button class="btn btn-sm btn-light border-dark rounded-pill fw-bold "
@@ -53,8 +53,8 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li class="student-cell"><a class="dropdown-item " href="#">view</a></li>
-                                            <li><a class="dropdown-item text-primary" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item text-danger" id="deleteStudent" href="">Delete</a></li>
+                                            <li><a class="dropdown-item text-primary" href="{{url('/teacher/daily-attendance/edit/${val.daily_id}')}}">Edit</a></li>
+                                            <li><a class="dropdown-item text-danger" id="deleteStudentAttendance" data-id="${val.daily_id}" href="#">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -106,9 +106,21 @@
                         $('.total_absent').text(absentCount);
 
 
-                        
+
                     }
                 }
+            });
+        });
+        $('body').on('click', '#deleteStudentAttendance', function() {
+            let id = $(this).attr('data-id');
+            // ajax
+            $.ajax({
+                type: 'get',
+                url: "/teacher/daily-attendance/delete/"+id,
+                success: function(data) {
+                    console.log(data);
+                }
+
             });
         });
     });

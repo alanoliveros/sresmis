@@ -1,5 +1,7 @@
 .add-teacher,
-.add-student {
+.add-student,
+.edit-student-here
+ {
   position: fixed;
   margin: auto;
   width: 100%;

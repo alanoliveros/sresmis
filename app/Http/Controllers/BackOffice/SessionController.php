@@ -40,9 +40,10 @@ class SessionController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->school_year;
+        // $session = Session::where('')
     }
 
     public function destroy($id)

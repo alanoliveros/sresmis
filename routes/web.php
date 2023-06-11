@@ -33,6 +33,7 @@ use App\Http\Controllers\Teacher\QuarterGradeController;
 use App\Http\Controllers\Teacher\QuarterlyGradeController;
 use App\Http\Controllers\Teacher\ReportCardController;
 use App\Http\Controllers\Teacher\StudentGradeController;
+use App\Http\Controllers\Teacher\ClassSchedulesController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserProfileController;
 
@@ -45,6 +46,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+    return redirect('/login');
+});
+Route::get('/homepage', function () {
     return view('welcome');
 });
 
@@ -55,7 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('admin')->middleware('isAdmin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/enrollment-profile', [EnrollmentProfileController::class, 'index'])->name('enrollmentprofile.dashboard');
-    Route::get('/admission', [EnrollmentProfileController::class, 'index'])->name('admission.index');
+        Route::get('/admission', [EnrollmentProfileController::class, 'index'])->name('admission.index');
 
         // User Profile
         Route::get('/profile', [UserProfileController::class, 'index'])->name('users-profile');
@@ -97,6 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/library', [LibraryController::class, 'index'])->name('admin.library');
             Route::get('/session', [SessionController::class, 'index'])->name('admin.session');
             Route::get('/noticeboard', [NoticeboardController::class, 'index'])->name('admin.noticeboard');
+            Route::post('/update', [SessionController::class, 'update'])->name('admin.back-office.update.session');
         });
 
         // Academic
@@ -140,6 +145,21 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Dashboard and Advisory
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+
+        // Class_Schedule
+        Route::prefix('class-schedule')->group(function () {
+            Route::get('/index', [ClassSchedulesController::class, 'index'])->name('teacher.class-schedule.index');
+            Route::post('/filter_sy', [ClassSchedulesController::class, 'filter_sy']);
+            // Route::get('/retention-rate', [IndicatorController::class, 'retentionIndex'])->name('admin.retention');
+            
+        });
+
+
+
+        // class schedules
+        // advisory
+        Route::get('/class-schedule/advisory', [ClassSchedulesController::class, 'index'])->name('teacher.class-schedule.advisory');
+
         Route::get('/advisory', [TeacherController::class, 'advisory'])->name('sresmis.teacher.advisory');
         Route::get('/grades/filter', [TeacherController::class, 'filterGrades'])->name('sresmis.teacher.grades.filter');
         Route::get('/delete-student/{id}', [TeacherController::class, 'deleteStudent']);
@@ -192,12 +212,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/student-information/advisory/{id}', [TeacherController::class, 'student_advisory_by_school_year']);
         Route::post('/student-information/by-subject/filter', [TeacherController::class, 'filter_student_by_subject']);
         Route::post('/add-student', [TeacherController::class, 'create_student'])->name('teacher.add-student');
-
+        Route::post('/student-data-advisory/update', [TeacherController::class, 'update']);
+        Route::post('/student-data-advisory/delete', [TeacherController::class, 'delete']);
 
         // Student Attendance
         Route::get('/create-attendance/advisory', [StudentAttendance::class, 'create_attendance'])->name('teacher.create-attendance.advisory');
         Route::post('/save-attendance/advisory', [StudentAttendance::class, 'save_attendance'])->name('teacher.save-attendance.advisory');
         Route::post('/filter-attendance/by-advisory', [StudentAttendance::class, 'filter_attendance']);
+        Route::get('/daily-attendance/delete/{id}', [StudentAttendance::class, 'delete']);
+        Route::get('/daily-attendance/edit/{id}', [StudentAttendance::class, 'edit']);
+
+
         // Student Crud
         Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);
 
@@ -239,21 +264,22 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Summary of grades
 
-    Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
-    Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
-    
-    
-    
-    
-    
-    
-    
-    // report card
-    Route::get('/report-card/index', [ReportCardController::class, 'index'])->name('teacher.report-card.index');
-    Route::post('/report-card/filter-students', [ReportCardController::class, 'filter_students']);
-    Route::post('/report-card/create', [ReportCardController::class, 'create']);
-    Route::get('/report-card/get-data', [ReportCardController::class, 'show']);
+        Route::get('/grade-summary-index', [GradeSummaryController::class, 'index'])->name('teacher.grade-summary-index');
+        Route::get('/grade-summary/filter-student', [GradeSummaryController::class, 'filter_student']);
 
+
+
+
+
+
+
+        // report card
+        Route::get('/report-card/index', [ReportCardController::class, 'index'])->name('teacher.report-card.index');
+        Route::post('/report-card/filter-students', [ReportCardController::class, 'filter_students']);
+        Route::post('/report-card/create', [ReportCardController::class, 'create']);
+        Route::get('/report-card/get-data', [ReportCardController::class, 'show']);
+        Route::get('/report-card/print-excel', [ReportCardController::class, 'print_excel']);
+        Route::get('/report-card/print-word-by-student/{id}/{sy}', [ReportCardController::class, 'print_word']);
 
 
 
@@ -284,6 +310,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('student')->middleware('isStudent')->group(function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
     });
-
-
 });

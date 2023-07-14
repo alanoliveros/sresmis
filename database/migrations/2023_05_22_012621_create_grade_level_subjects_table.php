@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('subject_id');
             $table->integer('admin_id');
             $table->integer('grade_level_id');
-            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

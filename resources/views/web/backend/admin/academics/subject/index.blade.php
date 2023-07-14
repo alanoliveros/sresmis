@@ -5,20 +5,16 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="card-body" style="padding-bottom: 0;">
-
                                 <div class="card-title">
                                     <span class="fs-4">@yield('title')</span>
                                     <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                                       data-bs-target="#addSection">+ Add @yield('title')</a>
+                                       data-bs-target="#addSubject">+ Add @yield('title')</a>
                                     @include('web.backend.admin.academics.subject.create')
                                 </div>
                             </div>
                         </div>
-
-
                     <div class="card">
                         <div class="card-body pt-3">
 
@@ -49,13 +45,10 @@
                                             </div>
                                         </td>
                                     </tr>
-
                                 @endforeach
-
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
-
                         </div>
                     </div>
 

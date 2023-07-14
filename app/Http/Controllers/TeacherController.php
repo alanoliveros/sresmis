@@ -29,10 +29,12 @@ class TeacherController extends Controller
       'sectionId' => $teacher->sectionId,
       'school_year' => $teacher->school_year,
     ])->get();
+    $activeSession = Session::where('status', 1)->first();
     
     return view('web.backend.teacher.dashboard.index',[
       'teacher' => $teacher,
       'students' => $students,
+      'activeSession' => $activeSession,
     ]);
   }
 

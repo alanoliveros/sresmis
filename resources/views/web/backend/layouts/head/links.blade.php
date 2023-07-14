@@ -1,5 +1,5 @@
 <!-- Favicons -->
-<link href="{{asset('storage/backend/assets/img/favicon.png')}}" rel="icon">
+<link href="{{asset('storage/backend/assets/img/favicon.png')}}" rel="icon" style="transform: rotate(-90deg) !important;">
 <link href="{{asset('storage/backend/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
 <!-- Google Fonts -->

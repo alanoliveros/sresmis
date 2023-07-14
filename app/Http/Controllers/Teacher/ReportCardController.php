@@ -156,6 +156,9 @@ class ReportCardController extends Controller
     }
     public function print_excel()
     {
+
+
+        // Create a new Spreadsheet instance
         $spreadsheet = new Spreadsheet();
 
         // Get the active sheet
@@ -174,13 +177,8 @@ class ReportCardController extends Controller
         $sheet->getStyle('B5')->getFont()->setName('Times New Roman');
         $sheet->getStyle('B5')->getFont()->setSize(9);
 
-        // Calculate the approximate width in points for 12 pixels
-        $columnWidth = 12 / 6.57; // Approximate conversion from pixels to points
-
-        // Set the width of cells B5 to AF5
-        foreach (range('B', 'AF') as $column) {
-            $sheet->getColumnDimension($column)->setWidth($columnWidth);
-        }
+        // Set the width of cells B5 to AF5 to approximately 1 point
+        $sheet->getColumnDimension('B')->setWidth(1);
 
         // Create a PDF writer instance
         $writer = new Mpdf($spreadsheet);

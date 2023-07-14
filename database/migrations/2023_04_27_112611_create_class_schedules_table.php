@@ -22,6 +22,7 @@ return new class extends Migration
             $table->time('startTime');
             $table->time('endTime');
             $table->string('scheduleDay');
+            $table->string('school_year');
             $table->timestamps();
         });
     }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassSchedule;
 use Illuminate\Http\Request;
+use App\Models\Session;
 
 class ClassSchedulesController extends Controller
 {
@@ -14,7 +16,12 @@ class ClassSchedulesController extends Controller
      */
     public function index()
     {
-        return view('web.backend.teacher.class-schedule.index');
+        $sessions = Session::orderBy('school_year', 'desc')->get();
+        $activeSession = Session::where('status', 1)->first();
+
+        return view('web.backend.teacher.class-schedule.index', [
+            'sessions' => $sessions,
+        ]);
     }
 
     /**
@@ -22,64 +29,15 @@ class ClassSchedulesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function filter_sy(Request $request)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $sy = ClassSchedule::where([
+            'school_year' => $request->sy,
+            'teacherId' => auth()->user()->id,
+        ])->get();
+        return response()->json([
+            'sy' => $sy,
+        ]);
     }
 }

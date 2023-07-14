@@ -148,5 +148,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery.dataTables" level="application" />
     <orderEntry type="library" name="toastr.js" level="application" />
+    <orderEntry type="library" name="sweetalert" level="application" />
+    <orderEntry type="library" name="sweetalert2" level="application" />
+    <orderEntry type="library" name="sb-forms-latest" level="application" />
   </component>
 </module>

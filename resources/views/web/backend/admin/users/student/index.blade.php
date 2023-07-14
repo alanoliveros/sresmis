@@ -7,12 +7,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body" style="padding-bottom: 0;">
-
                             <div class="card-title">
                                 <span class="fs-4">@yield('title')</span>
-                                <a href="" class="btn btn-secondary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addStudent">+ Add @yield('title')</a>
-                                {{--@include('web.backend.admin.academics.section.create')--}}
+                                <a href="{{route('student.create')}}" class="btn btn-secondary float-end">+
+                                    Add @yield('title')</a>
                             </div>
                         </div>
                     </div>
@@ -53,7 +51,7 @@
                             <div class="col-12 student_data_container">
                                 <div class="text-center">
                                     <img class="w-25" src="{{asset('storage/image/empty_box.png')}}" alt="">
-                                <h3 class="mt-3">No data</h3>
+                                    <h3 class="mt-3">No data</h3>
                                 </div>
                             </div>
 

@@ -30,5 +30,21 @@ class Teacher extends Model
         'totalTeachingTimePerWeek',
         'numberOfAncillary',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'teacherId');
+    }
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'id', 'addressId');
+    }
+    public function section()
+    {
+        return $this->belongsTo(Section::class, 'sectionId');
+    }
+    public function gradeLevel()
+    {
+        return $this->belongsTo(GradeLevel::class, 'gradeLevelId');
+    }
 
 }

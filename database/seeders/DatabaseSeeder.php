@@ -19,9 +19,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('enrollments')->truncate();
+//        DB::table('enrollments')->truncate();
+//        DB::table('users')->truncate();
+//        DB::table('grade_levels')->truncate();
+//        DB::table('sessions')->truncate();
+//        DB::table('sections')->truncate();
+//        DB::table('subjects')->truncate();
+//        DB::table('teachers')->truncate();
 
-        /*DB::table('users')->insert([
+        DB::table('users')->insert([
             [
                 'name' => 'Admin User',
                 'role' => 1,
@@ -39,14 +45,14 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ]);*/
+        ]);
 
         $this->call([
-            /*UserSeeder::class,
+            UserSeeder::class,
             GradeLevelSeeder::class,
             SessionSeeder::class,
             SectionSeeder::class,
-            SubjectSeeder::class,*/
+            SubjectSeeder::class,
 
             Grade1Seeder::class,
             Grade2Seeder::class,

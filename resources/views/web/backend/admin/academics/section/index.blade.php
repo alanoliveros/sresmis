@@ -34,16 +34,9 @@
                     <div class="card">
                         <div class="card-body pt-3">
 
-                            {{--<div class="card-title">
-                                <span class="fs-4">@yield('title')</span>
-                                <a href="" class="btn btn-primary float-end" data-bs-toggle="modal"
-                                   data-bs-target="#addSection">+ Add @yield('title')</a>
-                                @include('web.backend.admin.academics.section.create')
-                            </div>--}}
-
                             <!-- Table with stripped rows -->
 
-                            <table class="table" id="components-datatable" {{--style="vertical-align: middle;"--}}>
+                            <table class="table" id="components-datatable">
                                 <thead>
                                 <tr>
                                     <th scope="col">Grade Level</th>
@@ -52,43 +45,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{--@foreach($sections as $key=>$section)
-                                    <tr>
-                                        <th scope="row">{{$key+1}}</th>
-                                        <td>{{$section}}</td>
-                                        <td></td>
-                                        <td>
-                                            <a href=""><i class="bi bi-eye-fill"></i></a>
-                                            <a href=""><i class="bi bi-pencil-square"></i></a>
-                                            <a href=""><i class="bi bi-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach--}}
-
-                                {{--@foreach($glevel as $gradeLevelId => $data)
-                                    <tr>
-                                        <th>{{ $data['gradeLevel'] }}</th>
-
-                                        <td>
-                                            @foreach($data['sections'] as $section)
-                                                {{ $section->sectionName }}
-
-                                            @endforeach
-                                        </td>
-
-
-                                        <td>
-                                            <a href=""><i class="bi bi-eye-fill"></i></a>
-                                            <a href=""><i class="bi bi-pencil-square"></i></a>
-                                            <a href=""><i class="bi bi-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach--}}
 
                                 @foreach($glevel as $gradeLevelId => $data)
                                     <tr>
                                         <td>{{ $data['gradeLevel'] }}</td>
-
                                         <td>
                                             @foreach($data['sections'] as $key => $section)
                                                 {{ $section->sectionName }}
@@ -105,7 +65,8 @@
                                                     <i class="bi bi-three-dots" style="font-size: 26px;"></i>
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> Show</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> Show</a>
+                                                    </li>
                                                     <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square"></i> Edit</a></li>
                                                     <li><a class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Delete</a></li>
                                                 </ul>
@@ -113,61 +74,8 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
-
-                                {{--        @foreach($glevel as $gradeLevelId => $data)
-                                            <h1>{{ $data['gradeLevel'] }}</h1>
-
-                                            @foreach($data['sections'] as $section)
-                                                <p>{{ $section->sectionName }}</p>
-                                            @endforeach
-                                        @endforeach--}}
-
-                                {{--@php
-                                    $previousGradeLevel = null;
-                                    $mergedSections = '';
-                                @endphp
-
-                                @foreach($sections as $key => $section)
-                                    @if($previousGradeLevel !== $section->gradeLevelName)
-                                        @if($previousGradeLevel !== null)
-                                            <tr>
-                                                <th --}}{{--colspan="2"--}}{{-->{{$previousGradeLevel}}</th>
-                                                <td>{{$mergedSections}}</td>
-                                                <td>
-                                                    <a href=""><i class="bi bi-eye-fill"></i></a>
-                                                    <a href=""><i class="bi bi-pencil-square"></i></a>
-                                                    <a href=""><i class="bi bi-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                        @php
-                                            $previousGradeLevel = $section->gradeLevelName;
-                                            $mergedSections = $section->sectionName;
-                                        @endphp
-                                    @else
-                                        @php
-                                            $mergedSections .= ', ' . $section->sectionName;
-                                        @endphp
-                                    @endif
-                                @endforeach
-
-                                @if($previousGradeLevel !== null)
-                                    <tr>
-                                        <th colspan="2">{{$previousGradeLevel}}</th>
-                                        <td>{{$mergedSections}}</td>
-                                        <td>
-                                            <a href=""><i class="bi bi-eye-fill"></i></a>
-                                            <a href=""><i class="bi bi-pencil-square"></i></a>
-                                            <a href=""><i class="bi bi-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endif--}}
-
-
                                 </tbody>
                             </table>
-                            <!-- End Table with stripped rows -->
 
                         </div>
                     </div>

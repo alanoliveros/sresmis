@@ -69,63 +69,48 @@ class AdminStudentController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        //        /** Insert User */
-//        $user = User::firstOrNew(['email' => $request->email]);
-//        $user->name = $request->firstName;
-//        $user->role = 3;
-//        $user->middleName = $request->middleName;
-//        $user->lastName = $request->lastName;
-//        $user->suffix = $request->suffix;
-//        $user->gender = $request->gender;
-//        $user->email = $request->email;
-//        $user->password = Hash::make($request->password);
-//        $user->image = 'avatar.png';
-//        $user->save();
-//        $studentId = $user->id;
-//
-//        /** Insert Address */
-//        $address = Address::firstOrNew(['userId' => $studentId]);
-//        $address->userId = $studentId;
-//        $address->purok = $request->purok;
-//        $address->barangay = $request->barangay;
-//        $address->city = $request->city;
-//        $address->province = $request->province;
-//        $address->zipCode = $request->zipCode;
-//        $address->save();
-//
-//        /** Insert Student */
-//        $student = new Student();
-//        $student->adminId = auth()->user()->id;
-//        $student->studentId = $studentId;
-//        $student->school_year = $request->schoolYear;
-//        $student->lrn = $request->lrn;
-//        $student->sectionId = $request->section;
-//        $student->gradeLevelId = $request->gradeLevel;
-//        $student->mothertongue = $request->mothertongue;
-//        $student->ethnicgroup = $request->ethnicgroup;
-//        $student->religion = $request->religion;
-//        $student->learning_modality = $request->learning_modality;
-//        $student->remarks = $request->remarks;
-//        $student->status = $request->status;
-//        $student->save();
-//        $student->id;
-//
-//        return redirect()->back()->with('success_added', 'Successfully added new record');
+        return view('web.backend.admin.users.student.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
 
 
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        //
+
+        // Set enrollment data
+        $enrollment = new Enrollment;
+
+        $enrollment->enrollment_status = $request->input('enrollment_status');
+
+        $enrollment->lrn = $request->input('lrn');
+        $enrollment->first_name = $request->input('first_name');
+        $enrollment->middle_name = $request->input('middle_name');
+        $enrollment->last_name = $request->input('last_name');
+        $enrollment->suffix = $request->input('suffix');
+        $enrollment->ethnic_group = $request->input('ethnic_group');
+        $enrollment->mothertongue = $request->input('mothertongue');
+        $enrollment->religion = $request->input('religion');
+        $enrollment->date_of_birth = $request->input('date_of_birth');
+        $enrollment->gender = $request->input('gender');
+        $enrollment->purok = $request->input('purok');
+        $enrollment->barangay = $request->input('barangay');
+        $enrollment->city = $request->input('city');
+        $enrollment->province = $request->input('province');
+
+        $enrollment->save();
+
+
+        return redirect()->route('student.index')->with('success', 'Student has been added successfully.');
+
+
     }
 
     /**

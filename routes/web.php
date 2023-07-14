@@ -46,6 +46,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+    return redirect('/login');
+});
+Route::get('/homepage', function () {
     return view('welcome');
 });
 
@@ -75,16 +78,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/participation-rate', [IndicatorController::class, 'participationIndex'])->name('admin.participation');
         });
 
-        // Teachers
-        Route::get('/teachers', [AdminTeacherController::class, 'teachers'])->name('admin.teachers');
-        Route::post('/add-teacher', [AdminTeacherController::class, 'addTeacher'])->name('admin.add-teacher');
-
         // Users
         Route::prefix('manage-users')->group(function () {
             Route::post('/getStudents/by-school-year-and-grade-level', [AdminStudentController::class, 'getStudentsBySchoolYearAndGradeLevel']);
             Route::post('/getStudents/by-student-year', [AdminStudentController::class, 'getStudentsFilterBySchoolYear'])->name('admin.student.get_students_by_year');
 
-            Route::resource('teacher', AdminTeacherController::class)->only(['index', 'store', 'update', 'destroy']);
+            Route::resource('teacher', AdminTeacherController::class);
             Route::resource('student', AdminStudentController::class);
             Route::resource('admission', AdmissionController::class);
         });
@@ -107,6 +106,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Academic
         Route::prefix('academic')->group(function () {
+
+
+
             Route::get('/daily-attendance', [DailyAttendanceController::class, 'index'])->name('admin.daily-attendance');
 
             Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
@@ -122,9 +124,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::resource('section', SectionController::class);
             Route::post('/getSection', [SectionController::class, 'getSection']);
 
-            Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
-            Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
-            Route::get('{gradeLevelName}/{id}', [SubjectController::class, 'show'])->name('admin.show.subject');
+//            Route::get('/subject', [SubjectController::class, 'index'])->name('admin.subject');
+//            Route::post('/create-subject', [SubjectController::class, 'create'])->name('admin.create-subject');
+//            Route::get('/subjects/{id}', [SubjectController::class, 'show'])->name('admin.show.subject');
+
+
+            Route::resource('subject', SubjectController::class)->parameters(['subject' => 'subject']);
+
         });
     });
 
@@ -140,7 +146,13 @@ Route::group(['middleware' => 'auth'], function () {
         // Dashboard and Advisory
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
 
-
+        // Class_Schedule
+        Route::prefix('class-schedule')->group(function () {
+            Route::get('/index', [ClassSchedulesController::class, 'index'])->name('teacher.class-schedule.index');
+            Route::post('/filter_sy', [ClassSchedulesController::class, 'filter_sy']);
+            // Route::get('/retention-rate', [IndicatorController::class, 'retentionIndex'])->name('admin.retention');
+            
+        });
 
 
 
@@ -209,7 +221,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/filter-attendance/by-advisory', [StudentAttendance::class, 'filter_attendance']);
         Route::get('/daily-attendance/delete/{id}', [StudentAttendance::class, 'delete']);
         Route::get('/daily-attendance/edit/{id}', [StudentAttendance::class, 'edit']);
-       
+
 
         // Student Crud
         Route::get('/student-delete/{id}', [TeacherController::class, 'delete_student']);

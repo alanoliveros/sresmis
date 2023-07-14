@@ -12,7 +12,7 @@
                     <h1>Dashboard</h1>
                 </div>
                 <div class="col-12 col-md-4">
-                    <h1>School Year {{ $teacher->school_year }}</h1>
+                    <h1>School Year {{ $activeSession->school_year }}</h1>
                 </div>
             </div>
             <nav class="">
@@ -97,15 +97,35 @@
                             <div class="activity">
 
                                 <div class="activity-item d-flex">
-                                    <div class="activite-label">32 min</div>
+                                    <div class="activite-label">status</div>
                                     <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                                     <div class="activity-content">
-                                        Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a>
-                                        beatae
+                                        1st Grading
+                                    </div>
+                                </div><!-- End activity item-->
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">status</div>
+                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                    <div class="activity-content">
+                                        2nd Grading
+                                    </div>
+                                </div><!-- End activity item-->
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">status</div>
+                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                    <div class="activity-content">
+                                        3rd Grading
+                                    </div>
+                                </div><!-- End activity item-->
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">status</div>
+                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                    <div class="activity-content">
+                                        4th Grading
                                     </div>
                                 </div><!-- End activity item-->
 
-                                <div class="activity-item d-flex">
+                                {{-- <div class="activity-item d-flex">
                                     <div class="activite-label">56 min</div>
                                     <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                                     <div class="activity-content">
@@ -144,7 +164,7 @@
                                     <div class="activity-content">
                                         Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
                                     </div>
-                                </div><!-- End activity item-->
+                                </div><!-- End activity item--> --}}
 
                             </div>
 

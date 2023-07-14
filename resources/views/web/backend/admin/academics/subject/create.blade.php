@@ -1,7 +1,7 @@
 <div class="modal fade" id="addSubject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
 
-        <form action="{{route('admin.create-subject')}}" method="POST">
+        <form action="{{route('subject.store')}}" method="POST">
             @csrf
             <div class="modal-content">
                 <div class="modal-header bg-primary">
